@@ -4,6 +4,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
+import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
@@ -63,6 +64,8 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         processCodeFiltered(lunaticQuestionnaire);
         // filter in cell level in dynamicTable/rosterForLoop
         processCellsFiltered(lunaticQuestionnaire);
+        // special cleaning for Pairwise
+        processPairwiseCleaning(lunaticQuestionnaire);
     }
 
     /**
@@ -181,7 +184,7 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
      */
     public List<String> getCollectedVarsInSequence(AbstractSequence abstractSequence) {
         List<String> collectedVarInSequence = new ArrayList<>();
-        abstractSequence.getSequenceStructure().stream().forEach(itemReference -> {
+        abstractSequence.getSequenceStructure().forEach(itemReference -> {
                     if (StructureItemReference.StructureItemType.QUESTION.equals(itemReference.getType())) {
                         collectedVarInSequence.addAll(variablesByQuestion.get(itemReference.getId()));
                     } else {
@@ -234,6 +237,14 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .filter(DynamicTableQuestion.class::isInstance)
                 .map(DynamicTableQuestion.class::cast)
                 .forEach(dynamicTableQuestionCleaning::processCleaningDynamicTableQuestion);
+    }
+
+    public void processPairwiseCleaning(Questionnaire lunaticQuestionnaire){
+        LunaticPairwiseQuestionCleaning pairwiseQuestionCleaning = new LunaticPairwiseQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
+        enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(PairwiseQuestion.class::isInstance)
+                .map(PairwiseQuestion.class::cast)
+                .forEach(pairwiseQuestionCleaning::processCleaningPairwiseQuestion);
     }
 
 }

@@ -2,6 +2,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic;
 
 import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.model.variable.VariableGroup;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
@@ -13,8 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -73,7 +76,7 @@ class LunaticVariableDimensionTest {
         assertEquals("lw4zumyt", lunaticVariables.get("CALC3").getIterationReference());
         assertEquals("lw4zumyt", lunaticVariables.get("EXT3").getIterationReference());
         //
-        assertEquals("lw507epv", lunaticVariables.get("Q4").getIterationReference());
+        assertEquals("lw4zumyt", lunaticVariables.get("Q4").getIterationReference());
     }
 
     @Test
@@ -109,6 +112,23 @@ class LunaticVariableDimensionTest {
         //
         assertInstanceOf(ExternalVariableValue.Array.class,
                 ((ExternalVariableType) lunaticVariables.get("EXT3")).getValue());
+    }
+
+    @Test
+    void testVariableGroupComparator(){
+        VariableGroup variableGroupQuest = new VariableGroup();
+        variableGroupQuest.setType(VariableGroup.Type.QUESTIONNAIRE);
+
+        VariableGroup variableGroupLoop = new VariableGroup();
+        variableGroupLoop.setType(VariableGroup.Type.LOOP);
+
+        VariableGroup variableGroupPairwise = new VariableGroup();
+        variableGroupPairwise.setType(VariableGroup.Type.PAIRWISE_LINKS);
+
+        List<VariableGroup> variableGroupList = List.of(variableGroupPairwise, variableGroupQuest, variableGroupLoop);
+        List<VariableGroup> variableGroupListOrdered = variableGroupList.stream().sorted(LunaticVariablesDimension.variableGroupComparator).toList();
+        assertThat(variableGroupListOrdered).containsExactly(variableGroupQuest, variableGroupLoop, variableGroupPairwise);
+
     }
 
 }
