@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.50.0] - 2025-10-06
+### :sparkles: New Features
+- [`ba8de4f`](https://github.com/InseeFr/Eno/commit/ba8de4fe36e28745b8e92cb43922cf13da60bd17) - add format controls in interview modes (#1278) *(PR [#1278](https://github.com/InseeFr/Eno/pull/1278) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+
 ## [3.49.0] - 2025-06-06
 ### :sparkles: New Features
 - [`5b86f28`](https://github.com/InseeFr/Eno/commit/5b86f2851c7870516b0bb38bb258d0e977592b04) - added isIgnoredByLunatic property to filter result variables *(PR [#1282](https://github.com/InseeFr/Eno/pull/1282) by [@chloe-renaud](https://github.com/chloe-renaud))*
@@ -572,7 +577,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.31.2]: https://github.com/InseeFr/Eno/compare/3.31.1...3.31.2
 [3.31.5]: https://github.com/InseeFr/Eno/compare/3.31.2...3.31.5
 [3.32.1]: https://github.com/InseeFr/Eno/compare/3.31.5...3.32.1
-[3.32.1]: https://github.com/InseeFr/Eno/compare/3.32.1...3.32.2
+[3.32.2]: https://github.com/InseeFr/Eno/compare/3.32.1...3.32.2
 [3.33.0]: https://github.com/InseeFr/Eno/compare/3.32.2...3.33.0
 [3.33.1]: https://github.com/InseeFr/Eno/compare/3.33.0...3.33.1
 [3.33.2]: https://github.com/InseeFr/Eno/compare/3.33.1...3.33.2
@@ -592,3 +597,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.47.0]: https://github.com/InseeFr/Eno/compare/3.43.0...3.47.0
 [3.48.0]: https://github.com/InseeFr/Eno/compare/3.47.0...3.48.0
 [3.49.0]: https://github.com/InseeFr/Eno/compare/3.48.0...3.49.0
+[3.50.0]: https://github.com/InseeFr/Eno/compare/3.49.0...3.50.0
