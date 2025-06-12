@@ -47,6 +47,15 @@ public class VtlSyntaxUtils {
                 + surroundByParenthesis(removeExtraParenthesis(vtlString2));
     }
 
+    /**
+     * @param expression1
+     * @param expression2
+     * @return expression1 = expression2
+     */
+    public static String expressionEqualToOther(String expression1, String expression2){
+        return expression1 + " " + getVTLTokenName(VtlTokens.EQ) + " " + expression2;
+    }
+
     public static String expressionNotEqualToOther(String expression1, String expression2){
         return expression1 + " " +  getVTLTokenName(VtlTokens.NEQ) + " " + expression2;
     }
@@ -55,7 +64,7 @@ public class VtlSyntaxUtils {
      *
      * @param vtlString1
      * @param vtlString2
-     * @return (vtlString1) and (vtlString2)
+     * @return (vtlString1) or (vtlString2)
      */
     public static String joinByORLogicExpression(String vtlString1, String vtlString2){
         return surroundByParenthesis(removeExtraParenthesis(vtlString1))
