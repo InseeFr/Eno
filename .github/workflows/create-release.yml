@@ -10,6 +10,7 @@ on:
       - 'CHANGELOG.md'
       - 'README**.md'
       - 'Dockerfile'
+      - '.github/**'
 
 # TL;DR: Do conventional commits,
 # bump the version before pushing on main, 
@@ -146,7 +147,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_HOST_URL: "https://sonarcloud.io"
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr
+        run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr -Dsonar.branch.name=${{ github.ref_name }}
 
   build-sources:
     needs: [ version, sonar ]
@@ -160,6 +161,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-disabled: true
 
       - uses: actions/checkout@v4
       - name: Build Eno modules
@@ -214,7 +217,6 @@ jobs:
           target_commitish: ${{ github.head_ref || github.ref }}
           name: ${{ needs.version.outputs.release-version }}
           body: ${{ steps.changelog.outputs.changes }}
-          files: eno-ws/build/libs/eno-ws.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -71,4 +71,13 @@ class VtlSyntaxUtilsTest {
                 VtlSyntaxUtils.surroundByParenthesis("NB >= 15")));
     }
 
+    @Test
+    void testNvlDefault(){
+        String expectedExpression1 = "nvl(FIRST_NAME, \"\")";
+        assertEquals(expectedExpression1, VtlSyntaxUtils.nvlDefaultValue("FIRST_NAME", "\"\""));
+
+        String expectedExpression2 = "nvl(AGE, 5)";
+        assertEquals(expectedExpression2, VtlSyntaxUtils.nvlDefaultValue("AGE", "5"));
+    }
+
 }

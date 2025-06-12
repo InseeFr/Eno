@@ -4,6 +4,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
+import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.model.response.CodeResponse;
@@ -72,6 +73,8 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         processCellsFiltered(lunaticQuestionnaire);
         // filter of clarification questions
         processClarificationFiltered(lunaticQuestionnaire);
+        // special cleaning for Pairwise
+        processPairwiseCleaning(lunaticQuestionnaire);
     }
 
 
@@ -263,6 +266,14 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .filter(DynamicTableQuestion.class::isInstance)
                 .map(DynamicTableQuestion.class::cast)
                 .forEach(dynamicTableQuestionCleaning::processCleaningDynamicTableQuestion);
+    }
+
+    public void processPairwiseCleaning(Questionnaire lunaticQuestionnaire){
+        LunaticPairwiseQuestionCleaning pairwiseQuestionCleaning = new LunaticPairwiseQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
+        enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(PairwiseQuestion.class::isInstance)
+                .map(PairwiseQuestion.class::cast)
+                .forEach(pairwiseQuestionCleaning::processCleaningPairwiseQuestion);
     }
 
 }

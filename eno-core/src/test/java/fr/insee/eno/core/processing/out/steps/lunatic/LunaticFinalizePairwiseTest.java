@@ -73,7 +73,9 @@ class LunaticFinalizePairwiseTest {
     void whenFinalizingSubComponentConditionFilterIsSetToNull() {
         lunaticQuestionnaire.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
-        assertNull(radioComponent.getConditionFilter());
+        assertEquals(
+                "(nvl(xAxis, \"\") <> \"\") and (nvl(yAxis, \"\") <> \"\")",
+                radioComponent.getConditionFilter().getValue());
     }
 
     @Test
@@ -91,7 +93,9 @@ class LunaticFinalizePairwiseTest {
         lunaticQuestionnaire.getComponents().add(loop);
         loop.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
-        assertNull(radioComponent.getConditionFilter());
+        assertEquals(
+                "(nvl(xAxis, \"\") <> \"\") and (nvl(yAxis, \"\") <> \"\")",
+                radioComponent.getConditionFilter().getValue());
     }
 
     @Test

@@ -281,14 +281,18 @@ public class LunaticUtils {
         Map<String, List<String>> questionCollectedVarIndex = new HashMap<>();
         lunaticQuestionnaire.getComponents().stream()
                 .map(componentType -> {
-                    if (componentType instanceof Loop loop) return loop.getComponents();
+                    if(componentType instanceof Loop loop) return loop.getComponents();
                     return List.of(componentType);
                 })
                 .flatMap(Collection::stream)
                 .forEach(componentType -> {
                     String questionId = componentType.getId();
-                    List<String> collectedVariables = getCollectedVariablesByComponent(componentType);
-                    questionCollectedVarIndex.put(questionId, collectedVariables);
+                    if(componentType instanceof PairwiseLinks pairwiseLinks){
+                        questionCollectedVarIndex.put(questionId, getCollectedVariablesByComponent(pairwiseLinks.getComponents().getFirst()));
+                    } else {
+                        questionCollectedVarIndex.put(questionId, getCollectedVariablesByComponent(componentType));
+                    }
+
                 });
         return questionCollectedVarIndex;
     }
