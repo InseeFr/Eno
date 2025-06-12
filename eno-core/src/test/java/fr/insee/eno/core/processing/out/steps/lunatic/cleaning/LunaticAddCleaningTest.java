@@ -162,6 +162,32 @@ class LunaticAddCleaningTest {
         assertEquals("PRENOM", cleaningExpression.getShapeFrom());
     }
 
+    @Test
+    void testCleaningOfPairwise() throws ParsingException {
+        // Given
+        mapQuestionnaireToLunatic(
+                "integration/pogues/pogues-pairwise.json", "integration/ddi/ddi-pairwise.xml");
+
+        // When
+        var cleaningProcessing = new LunaticAddCleaning(enoQuestionnaire, enoIndex);
+        cleaningProcessing.preProcessCleaning(lunaticQuestionnaire);
+        cleaningProcessing.processPairwiseCleaning(lunaticQuestionnaire);
+
+        // Then
+        assertThat(lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("PAIRWISE_SOURCE")
+                .getCleanedVariable("PAIRWISE_QUESTION")
+                .getCleaningExpressions())
+                .hasSize(1);
+        CleaningExpression cleaningExpression =  lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("PAIRWISE_SOURCE")
+                .getCleanedVariable("PAIRWISE_QUESTION")
+                .getCleaningExpressions().getFirst();
+
+        assertEquals("nvl(PAIRWISE_SOURCE, \"\") <> \"\"", cleaningExpression.getExpression());
+        assertEquals("PAIRWISE_SOURCE", cleaningExpression.getShapeFrom());
+    }
+
 
     /** Utility test method to map given Pogues & DDI resource files to Lunatic,
      * and apply only processing steps that are required before the cleaning one. */
