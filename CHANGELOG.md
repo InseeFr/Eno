@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.51.0] - 2025-06-12
+### :sparkles: New Features
+- [`8fd2eda`](https://github.com/InseeFr/Eno/commit/8fd2eda49ebc7bdb1cf120b2c3e2db60d55416b5) - pairwise improvments *(PR [#1277](https://github.com/InseeFr/Eno/pull/1277) by [@laurentC35](https://github.com/laurentC35))*
+
+### :construction_worker: Build System
+- [`6ba3688`](https://github.com/InseeFr/Eno/commit/6ba36885c5715beb52d751ae1b3e1d789724d6bb) - don't trigger a release for workflow changes *(commit by [@nsenave](https://github.com/nsenave))*
+- [`d431de4`](https://github.com/InseeFr/Eno/commit/d431de44c7958c62ca138fd97ca3b2d36321ceff) - **sonar**: add main branch name *(commit by [@nsenave](https://github.com/nsenave))*
+- [`978c4cc`](https://github.com/InseeFr/Eno/commit/978c4cc39e902537bf4d876ce6ad31e8d608f056) - remove jar from release 🌿 *(commit by [@nsenave](https://github.com/nsenave))*
+- [`f4adf38`](https://github.com/InseeFr/Eno/commit/f4adf38139ca1d5cf98620b7b66c03eb4c623328) - disable cache where it's not needed *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.50.0] - 2025-10-06
 ### :sparkles: New Features
 - [`ba8de4f`](https://github.com/InseeFr/Eno/commit/ba8de4fe36e28745b8e92cb43922cf13da60bd17) - add format controls in interview modes (#1278) *(PR [#1278](https://github.com/InseeFr/Eno/pull/1278) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -598,3 +609,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.48.0]: https://github.com/InseeFr/Eno/compare/3.47.0...3.48.0
 [3.49.0]: https://github.com/InseeFr/Eno/compare/3.48.0...3.49.0
 [3.50.0]: https://github.com/InseeFr/Eno/compare/3.49.0...3.50.0
+[3.51.0]: https://github.com/InseeFr/Eno/compare/3.50.0...3.51.0
