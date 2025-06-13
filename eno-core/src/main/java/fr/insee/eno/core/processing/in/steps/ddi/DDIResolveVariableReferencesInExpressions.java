@@ -39,7 +39,7 @@ public class DDIResolveVariableReferencesInExpressions implements ProcessingStep
         // Dynamic tables with size expression
         enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(DynamicTableQuestion.class::isInstance).map(DynamicTableQuestion.class::cast)
-                .map(DynamicTableQuestion::getSizeExpression)
+                .map(DynamicTableQuestion::getMaxSizeExpression)
                 .filter(Objects::nonNull)
                 .forEach(this::resolveExpression);
     }

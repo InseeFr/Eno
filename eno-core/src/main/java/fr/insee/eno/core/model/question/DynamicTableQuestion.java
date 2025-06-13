@@ -17,7 +17,7 @@ import fr.insee.eno.core.model.question.table.NoDataCell;
 import fr.insee.eno.core.model.question.table.ResponseCell;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.RosterForLoop;
-import fr.insee.pogues.model.QuestionType;
+import fr.insee.pogues.model.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -68,9 +68,15 @@ public class DynamicTableQuestion extends MultipleResponseQuestion implements En
             ".getRoster().getMaximumAllowed()")
     BigInteger maxLines;
 
-    /** VTL expression that defines the size the dynamic table. */
+    /** VTL expression that defines the minimum number of lines of the dynamic table.
+     * In DDI, this information cannot be implemented so it is missing. */
+    @Pogues("T(fr.insee.eno.core.model.question.DynamicTableQuestion).mapPoguesMin(#this)")
+    CalculatedExpression minSizeExpression;
+
+    /** VTL expression that defines the maximum number of lines of the dynamic table. */
+    @Pogues("T(fr.insee.eno.core.model.question.DynamicTableQuestion).mapPoguesMax(#this)")
     @DDI("T(fr.insee.eno.core.model.question.DynamicTableQuestion).mapDDISizeExpression(#this)")
-    CalculatedExpression sizeExpression;
+    CalculatedExpression maxSizeExpression;
 
     @DDI("getOutParameterList().![#this.getParameterNameArray(0).getStringArray(0).getStringValue()]")
     List<String> variableNames = new ArrayList<>();
@@ -107,6 +113,45 @@ public class DynamicTableQuestion extends MultipleResponseQuestion implements En
                 .orElseThrow(() -> new IllegalDDIElementException(
                         "DDI dynamic table question '" + ddiDynamicTableQuestion.getIDArray(0).getStringValue() +
                                 "' has no rank 1 dimension."));
+    }
+
+    public static TypedValueType mapPoguesMin(QuestionType poguesTableQuestion) {
+        DimensionType firstDimension = poguesTableQuestion.getResponseStructure().getDimension().getFirst();
+        String dynamic = firstDimension.getDynamic();
+        return switch (dynamic) {
+            case "DYNAMIC_FIXED" -> firstDimension.getSize();
+            case "DYNAMIC" -> firstDimension.getMinimum();
+            case "DYNAMIC_LENGTH" -> convert(firstDimension.getMinLines()); // deprecated
+            case "FIXED_LENGTH" -> convert(firstDimension.getFixedLength()); // deprecated
+            default -> throw new IllegalStateException("Unexpected Pogues table dimension type: " + dynamic);
+        };
+    }
+    public static TypedValueType mapPoguesMax(QuestionType poguesTableQuestion) {
+        DimensionType firstDimension = poguesTableQuestion.getResponseStructure().getDimension().getFirst();
+        String dynamic = firstDimension.getDynamic();
+        return switch (dynamic) {
+            case "DYNAMIC_FIXED" -> firstDimension.getSize();
+            case "DYNAMIC" -> firstDimension.getMaximum();
+            case "DYNAMIC_LENGTH" -> convert(firstDimension.getMaxLines()); // deprecated
+            case "FIXED_LENGTH" -> convert(firstDimension.getFixedLength()); // deprecated
+            default -> throw new IllegalStateException("Unexpected Pogues table dimension type: " + dynamic);
+        };
+    }
+    private static TypedValueType convert(ExpressionType poguesExpression) {
+        if (poguesExpression == null)
+            return null;
+        TypedValueType res = new TypedValueType();
+        res.setValue(poguesExpression.getValue());
+        res.setType(ValueTypeEnum.VTL);
+        return res;
+    }
+    private static TypedValueType convert(BigInteger value) {
+        if (value == null)
+            return null;
+        TypedValueType res = new TypedValueType();
+        res.setValue(value.toString());
+        res.setType(ValueTypeEnum.NUMBER);
+        return res;
     }
 
 }

@@ -39,7 +39,7 @@ class LunaticRosterResizingLogicTest {
         CalculatedExpression sizeExpression = new CalculatedExpression();
         sizeExpression.setValue("<foo expression>");
         sizeExpression.getBindingReferences().add(new BindingReference("foo-ref","FOO_COLLECTED_VARIABLE"));
-        enoDynamicTable.setSizeExpression(sizeExpression);
+        enoDynamicTable.setMaxSizeExpression(sizeExpression);
         enoQuestionnaire.getMultipleResponseQuestions().add(enoDynamicTable);
 
         Questionnaire lunaticQuestionnaire = new Questionnaire();

@@ -32,11 +32,11 @@ class DynamicTableQuestionTest {
         //
         assertEquals(BigInteger.valueOf(1), dynamicTableQuestion1.getMinLines());
         assertEquals(BigInteger.valueOf(5), dynamicTableQuestion1.getMaxLines());
-        assertNull(dynamicTableQuestion1.getSizeExpression());
+        assertNull(dynamicTableQuestion1.getMaxSizeExpression());
         //
         assertEquals(BigInteger.valueOf(1), dynamicTableQuestion2.getMinLines());
         assertNull(dynamicTableQuestion2.getMaxLines());
-        assertNotNull(dynamicTableQuestion2.getSizeExpression());
+        assertNotNull(dynamicTableQuestion2.getMaxSizeExpression());
     }
 
 }
