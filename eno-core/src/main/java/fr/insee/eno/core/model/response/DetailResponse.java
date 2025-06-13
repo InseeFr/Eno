@@ -1,6 +1,5 @@
 package fr.insee.eno.core.model.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.insee.ddi.lifecycle33.datacollection.ResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
