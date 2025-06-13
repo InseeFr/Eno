@@ -38,17 +38,17 @@ class VariableGroupTest {
         assertNotNull(loopGroup);
         assertEquals(2, loopGroup.getLoopReferences().size());
         assertThat(loopGroup.getVariables().stream().map(Variable::getName))
-                .containsExactlyInAnyOrderElementsOf(List.of("Q21", "Q22", "CALC2", "EXT2"));
+                .containsExactlyInAnyOrderElementsOf(List.of("Q21", "Q22", "CALC2", "EXT2", "Q4"));
         //
         VariableGroup dynamicTableGroup = findGroupByName(enoQuestionnaire, "Q31");
         assertNotNull(dynamicTableGroup);
         assertEquals(2, dynamicTableGroup.getLoopReferences().size());
         assertThat(dynamicTableGroup.getVariables().stream().map(Variable::getName))
-                .containsExactlyInAnyOrderElementsOf(List.of("Q311", "Q312", "Q32", "CALC3", "EXT3"));
+                .containsExactlyInAnyOrderElementsOf(List.of("Q311", "Q312", "Q32", "CALC3", "EXT3", "Q4"));
         //
         VariableGroup pairwiseLinksGroup = findGroupByType(enoQuestionnaire, VariableGroup.Type.PAIRWISE_LINKS);
         assertNotNull(pairwiseLinksGroup);
-        assertEquals(1, pairwiseLinksGroup.getLoopReferences().size());
+        assertEquals(2, pairwiseLinksGroup.getLoopReferences().size());
         assertThat(pairwiseLinksGroup.getVariables().stream().map(Variable::getName))
                 .containsExactlyInAnyOrderElementsOf(List.of("Q4"));
     }
