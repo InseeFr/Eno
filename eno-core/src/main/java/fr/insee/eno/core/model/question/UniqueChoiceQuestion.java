@@ -96,7 +96,9 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
     /** Detail responses for modalities that have a "please specify" field.
      * In DDI, these are mapped at question level.
-     * In Lunatic, they are inserted in option through a processing. */
+     * In Lunatic, they are inserted in option through a processing.
+     * @see fr.insee.eno.core.processing.out.steps.lunatic.LunaticInsertUniqueChoiceDetails
+     */
     @Pogues("getClarificationQuestion()")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDetailResponses(#this)")
     List<DetailResponse> detailResponses = new ArrayList<>();
