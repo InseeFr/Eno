@@ -526,7 +526,7 @@
                               <r:TypeOfObject>InParameter</r:TypeOfObject>
                            </r:TargetParameterReference>
                         </r:Binding>
-                        <r:CommandContent>cast(mbuqxh9g-DIM1-ITE-IP-1, integer) + 5</r:CommandContent>
+                        <r:CommandContent>cast(mbuqxh9g-DIM1-ITE-IP-1, integer)</r:CommandContent>
                      </r:Command>
                   </d:ConditionForContinuation>
                </d:Roster>

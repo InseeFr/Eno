@@ -63,6 +63,7 @@ class LunaticRosterResizingLogicTest {
         ResizingType lunaticResizing = new ResizingType();
         new LunaticRosterResizingLogic(lunaticQuestionnaire, enoQuestionnaire)
                 .buildResizingEntries(lunaticRoster, lunaticResizing);
+        lunaticQuestionnaire.setResizing(lunaticResizing);
 
         // Then
         assertEquals(1, lunaticResizing.countResizingEntries());
@@ -127,7 +128,7 @@ class LunaticRosterResizingLogicTest {
         assertEquals(1, lunaticResizing.countResizingEntries());
         assertEquals("cast(HOW_MANY, integer)",
                 lunaticResizing.getResizingEntry("HOW_MANY").getSize());
-        assertEquals(List.of("DYNAMIC_TABLE_VTL_SIZE1"),
+        assertEquals(List.of("DYNAMIC_TABLE_VTL_SIZE1", "DYNAMIC_TABLE_VTL_MIN_MAX1"),
                 lunaticResizing.getResizingEntry("HOW_MANY").getVariables());
     }
 

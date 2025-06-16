@@ -309,11 +309,11 @@
                 "dynamic": "DYNAMIC",
                 "minimum": {
                   "type": "VTL",
-                  "value": "cast($HOW_MANY$, integer)"
+                  "value": "1"
                 },
                 "maximum": {
                   "type": "VTL",
-                  "value": "cast($HOW_MANY$, integer) + 5"
+                  "value": "cast($HOW_MANY$, integer)"
                 }
               },
               {

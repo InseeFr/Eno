@@ -72,8 +72,8 @@ class DynamicTableQuestionTest {
         assertEquals("5", table2.getMaxSizeExpression().getValue());
         assertEquals("cast(HOW_MANY, integer)", table3.getMinSizeExpression().getValue());
         assertEquals("cast(HOW_MANY, integer)", table3.getMaxSizeExpression().getValue());
-        assertEquals("cast(HOW_MANY, integer)", table4.getMinSizeExpression().getValue());
-        assertEquals("cast(HOW_MANY, integer) + 5", table4.getMaxSizeExpression().getValue());
+        assertEquals("1", table4.getMinSizeExpression().getValue());
+        assertEquals("cast(HOW_MANY, integer)", table4.getMaxSizeExpression().getValue());
 
         Stream.of(table1, table2).forEach(table -> {
             assertEquals("number", table.getMinSizeExpression().getType());

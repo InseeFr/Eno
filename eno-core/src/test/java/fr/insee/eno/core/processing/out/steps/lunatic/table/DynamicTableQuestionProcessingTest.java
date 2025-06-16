@@ -88,8 +88,8 @@ class DynamicTableQuestionProcessingTest {
         assertEquals("5", lunaticDynamicTable2.getLines().getMax().getValue());
         assertEquals("cast(HOW_MANY, integer)", lunaticDynamicTable3.getLines().getMin().getValue());
         assertEquals("cast(HOW_MANY, integer)", lunaticDynamicTable3.getLines().getMax().getValue());
-        assertEquals("cast(HOW_MANY, integer)", lunaticDynamicTable4.getLines().getMin().getValue());
-        assertEquals("cast(HOW_MANY, integer) + 5", lunaticDynamicTable4.getLines().getMax().getValue());
+        assertEquals("1", lunaticDynamicTable4.getLines().getMin().getValue());
+        assertEquals("cast(HOW_MANY, integer)", lunaticDynamicTable4.getLines().getMax().getValue());
     }
 
 }
