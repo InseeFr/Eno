@@ -7,6 +7,8 @@ import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DetailResponseTest {
@@ -29,12 +31,14 @@ class DetailResponseTest {
         enoDetailResponse.getResponse().setVariableName("FOO_DETAIL");
         enoDetailResponse.setLabel(new Label());
         enoDetailResponse.getLabel().setValue("\"Please specify\"");
+        enoDetailResponse.setMaxLength(BigInteger.valueOf(5));
         //
         lunaticMapper.mapEnoObject(enoDetailResponse, lunaticDetailResponse);
         //
         assertEquals("FOO_DETAIL", lunaticDetailResponse.getResponse().getName());
         assertEquals("\"Please specify\"", lunaticDetailResponse.getLabel().getValue());
         assertEquals(LabelTypeEnum.VTL_MD, lunaticDetailResponse.getLabel().getType());
+        assertEquals(BigInteger.valueOf(5), lunaticDetailResponse.getMaxLength());
     }
 
 }

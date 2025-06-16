@@ -12,6 +12,8 @@ import fr.insee.pogues.model.QuestionType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigInteger;
+
 /**
  * Unique/multiple choice question modalities can have an additional field for a detailed response.
  * ("Other, please specify").
@@ -50,6 +52,12 @@ public class DetailResponse extends EnoObject {
     /** DDI reference of the response name. Can be used to retrieve the response name through DDI bindings. */
     @DDI("getResponseDomain().getOutParameter().getIDArray(0).getStringValue()")
     String responseReference;
+
+    /** Maximum length allowed for the text value, if applicable. */
+    @Pogues("getResponse().getFirst().getDatatype().getMaxLength()")
+    @DDI("getResponseDomain().getMaxLength()")
+    @Lunatic("setMaxLength(#param)")
+    BigInteger maxLength;
 
     @Override
     public String toString() {
