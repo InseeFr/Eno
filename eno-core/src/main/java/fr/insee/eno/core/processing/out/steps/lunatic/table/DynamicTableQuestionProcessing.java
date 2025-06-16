@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.countVariable;
+
 /** Class that holds the conversion logic between model dynamic tables and Lunatic 'roster' tables. */
 @Slf4j
 public class DynamicTableQuestionProcessing {
@@ -47,6 +49,7 @@ public class DynamicTableQuestionProcessing {
             throw new IllegalStateException(
                     "Table question '" + enoTable.getId() + "' has neither a min/max nor an expression size.");
         lunaticRoster.setLines(lines);
+        setIterations(lunaticRoster, enoTable);
     }
 
     private static void setMinMaxProperties(DynamicTableQuestion enoTable, LinesRoster lines) {
@@ -77,6 +80,13 @@ public class DynamicTableQuestionProcessing {
             minSizeLabel.setValue(enoTable.getMaxSizeExpression().getValue());
         lines.setMin(minSizeLabel);
         lines.setMax(maxSizeLabel);
+    }
+
+    private static void setIterations(RosterForLoop lunaticRoster, DynamicTableQuestion enoTable) {
+        LabelType labelType = new LabelType();
+        labelType.setType(LabelTypeEnum.VTL);
+        labelType.setValue(countVariable(enoTable.getResponseCells().getFirst().getResponse().getVariableName()));
+        lunaticRoster.setIterations(labelType);
     }
 
 }

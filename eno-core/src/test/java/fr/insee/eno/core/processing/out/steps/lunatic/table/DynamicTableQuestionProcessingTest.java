@@ -53,6 +53,10 @@ class DynamicTableQuestionProcessingTest {
         assertEquals(ComponentTypeEnum.INPUT, lunaticDynamicTable.getComponents().get(0).getComponentType());
         assertEquals(ComponentTypeEnum.INPUT_NUMBER, lunaticDynamicTable.getComponents().get(1).getComponentType());
         assertEquals(ComponentTypeEnum.RADIO, lunaticDynamicTable.getComponents().get(2).getComponentType());
+        // Iterations
+        assertEquals(LabelTypeEnum.VTL, lunaticDynamicTable.getIterations().getType());
+        assertEquals("count(DYNAMIC_TABLE1)", lunaticDynamicTable.getIterations().getValue());
+
     }
 
     @Test

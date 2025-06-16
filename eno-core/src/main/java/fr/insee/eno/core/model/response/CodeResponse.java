@@ -39,7 +39,10 @@ public class CodeResponse extends EnoIdentifiableObject {
 
     /** Additional "please specify" field of the modality.
      * In DDI, it is inserted here through a processing.
-     * In Pogues, it is mapped at the question level and inserted here in a processing step. */
+     * @see fr.insee.eno.core.processing.in.steps.ddi.DDIInsertDetailResponses
+     * In Pogues, it is mapped at the question level and inserted here in a processing step.
+     * @see fr.insee.eno.core.processing.in.steps.pogues.PoguesCodeResponseDetails
+     */
     @Lunatic("setDetail(#param)")
     DetailResponse detailResponse;
 
