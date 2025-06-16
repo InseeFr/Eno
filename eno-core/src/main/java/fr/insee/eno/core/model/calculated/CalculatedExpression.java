@@ -57,8 +57,8 @@ public class CalculatedExpression extends EnoObject {
      * In Lunatic, all calculated expressions are of VTL type.
      */
     @Pogues("#this instanceof T(fr.insee.pogues.model.TypedValueType) ? getType().value() : 'VTL'")
-    @Lunatic("setType(T(fr.insee.lunatic.model.flat.LabelTypeEnum).fromValue('VTL'))")
-    String type;
+    @Lunatic("setType(T(fr.insee.lunatic.model.flat.LabelTypeEnum).fromValue(#param))")
+    String type = "VTL";
 
     /**
      * In DDI, the expression contains variable references instead of variables names.
