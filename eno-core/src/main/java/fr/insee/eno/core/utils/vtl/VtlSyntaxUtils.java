@@ -203,4 +203,11 @@ public class VtlSyntaxUtils {
         return new VtlParser(new CommonTokenStream(lexer));
     }
 
+    /**
+     * @return count(variableName)
+     */
+    public static String countVariable(String variableName){
+        return getVTLTokenName(VtlTokens.COUNT) + getVTLTokenName(VtlTokens.LPAREN) + variableName + getVTLTokenName(VtlTokens.RPAREN);
+    }
+
 }

@@ -3,6 +3,7 @@ package fr.insee.eno.core.utils.vtl;
 import fr.insee.vtl.parser.VtlTokens;
 import org.junit.jupiter.api.Test;
 
+import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.countVariable;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VtlSyntaxUtilsTest {
@@ -69,6 +70,12 @@ class VtlSyntaxUtilsTest {
         assertEquals(expectedExpression, VtlSyntaxUtils.joinByANDLogicExpression(
                 VtlSyntaxUtils.surroundByParenthesis("FIRST_NAME = \"Laurent\""),
                 VtlSyntaxUtils.surroundByParenthesis("NB >= 15")));
+    }
+
+    @Test
+    void testCountVariable(){
+        String variableName = "AGE";
+        assertEquals("count(AGE)", countVariable(variableName));
     }
 
     @Test
