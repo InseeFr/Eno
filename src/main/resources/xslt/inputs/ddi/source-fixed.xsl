@@ -887,6 +887,23 @@
         <xsl:sequence select="$variable-list"/>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-computated-maximum-lines-variables.</xd:p>
+            <xd:p>Function that returns the list of the variables of the ConditionForContinuation of a dynamic array.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:QuestionGrid | d:StructuredMixedGridResponseDomain" mode="enoddi:get-computated-maximum-lines-variables">
+        <xsl:param name="language" tunnel="yes"/>
+        <xsl:variable name="variable-list" as="xs:string *">
+            <xsl:call-template name="enoddi:variables-from-label">
+                <xsl:with-param name="label" select="eno:serialize(enoddi:get-computated-maximum-lines(.))"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:sequence select="$variable-list"/>
+    </xsl:template>
+    
+
     <xsl:template name="enoddi:variables-from-label">
         <xsl:param name="label"/>
 

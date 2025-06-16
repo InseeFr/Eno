@@ -450,9 +450,67 @@
 		<xsl:variable name="no-border" select="enofo:get-style($source-context)"/>
 		<xsl:variable name="total-max-lines" select="enofo:get-maximum-lines($source-context)"/>
 		<xsl:variable name="maxlines-by-page" as="xs:integer" select="xs:integer($table-defaultsize)"/>
+		<xsl:variable name="maximum-lines-formula" select="enofo:get-computated-maximum-lines($source-context)"/>
+		
+		<!-- Nom de la variable qui permet de personnaliser le nombre de lignes de perso -->
+		<xsl:variable name="personalised-lines-count">
+			<xsl:choose>
+				<xsl:when test="$maximum-lines-formula = ''">
+					<xsl:value-of select="concat($loop-name,'-TotalOccurrenceCount')"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<!-- ¤VAR_TOTAL_LIGNES¤ + nbLignes alors VAR_TOTAL_LIGNES -->
+					<xsl:analyze-string select="$maximum-lines-formula" regex="^{$conditioning-variable-begin}(.*){$conditioning-variable-end} *\+ *([0-9]+)$">
+						<xsl:matching-substring>
+							<xsl:value-of select="enofo:get-variable-business-name($source-context,regex-group(1))"/>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<!-- ¤VAR_TOTAL_LIGNES¤ alors VAR_TOTAL_LIGNES -->
+							<xsl:analyze-string select="$maximum-lines-formula" regex="^{$conditioning-variable-begin}(.*){$conditioning-variable-end}$">
+								<xsl:matching-substring>
+									<xsl:value-of select="enofo:get-variable-business-name($source-context,regex-group(1))"/>
+								</xsl:matching-substring>
+								<xsl:non-matching-substring>
+									<xsl:value-of select="concat($loop-name,'-TotalOccurrenceCount')"/>
+								</xsl:non-matching-substring>
+							</xsl:analyze-string>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
+		<!-- number of empty lines after personalised ones -->
+		<xsl:variable name="empty-lines" as="xs:integer">
+			<xsl:choose>
+				<xsl:when test="$maximum-lines-formula = ''">
+					<xsl:value-of select="$roster-minimum-empty-row"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<!-- ¤VAR_TOTAL_LIGNES¤ + nbLignes  alors nbLignes -->
+					<xsl:analyze-string select="$maximum-lines-formula" regex="^{$conditioning-variable-begin}(.*){$conditioning-variable-end} *\+ *([0-9]+)$">
+						<xsl:matching-substring>
+							<xsl:value-of select="number(regex-group(2))"/>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<!-- ¤VAR_TOTAL_LIGNES¤ + nbLignes alors 0 -->
+							<xsl:analyze-string select="$maximum-lines-formula" regex="^{$conditioning-variable-begin}(.*){$conditioning-variable-end}$">
+								<xsl:matching-substring>
+									<xsl:value-of select="0"/>
+								</xsl:matching-substring>
+								<xsl:non-matching-substring>
+									<xsl:value-of select="$roster-minimum-empty-row"/>
+								</xsl:non-matching-substring>
+							</xsl:analyze-string>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>					
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
 		<xsl:variable name="roster-minimum-lines" as="xs:integer">
 			<xsl:choose>
-				<xsl:when test="$total-max-lines != '' and number($total-max-lines) &lt; $roster-defaultsize">
+				<xsl:when test="$total-max-lines != ''">
 					<xsl:value-of select="$total-max-lines"/>
 				</xsl:when>
 				<xsl:when test="number(enofo:get-minimum-lines($source-context)) &gt; $roster-defaultsize">
@@ -560,13 +618,13 @@
 						<xsl:text>&#xd;</xsl:text>
 					</xsl:if>
 					<!-- empty rows -->
-					<xsl:if test="$roster-minimum-empty-row != 0 or $roster-minimum-lines != 0">
+					<xsl:if test="$empty-lines != 0 or $roster-minimum-lines != 0">
 						<xsl:text>&#xa;#set( $initializeInt = 0)&#xa;</xsl:text>
-						<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$loop-name,'-TotalOccurrenceCount}))')"/>
+						<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$personalised-lines-count,'}))')"/>
 						<xsl:text>&#xa;</xsl:text>
-						<xsl:for-each select="1 to (if ($roster-minimum-empty-row &gt; $roster-minimum-lines) then $roster-minimum-empty-row else $roster-minimum-lines)">
+						<xsl:for-each select="1 to (if ($empty-lines &gt; $roster-minimum-lines) then $empty-lines else $roster-minimum-lines)">
 							<xsl:variable name="empty-position" select="position()"/>
-							<xsl:if test="$empty-position &gt; $roster-minimum-empty-row">
+							<xsl:if test="$empty-position &gt; $empty-lines">
 								<xsl:text>&#xa;</xsl:text>
 								<xsl:value-of select="concat('#if ($',$loop-name,'-TotalOccurrenceInt le ',$roster-minimum-lines - $empty-position,') ')"/>
 								<xsl:text>&#xa;</xsl:text>
@@ -592,7 +650,7 @@
 									</xsl:apply-templates>
 								</fo:table-row>
 							</xsl:for-each>
-							<xsl:if test="$empty-position &gt; $roster-minimum-empty-row">
+							<xsl:if test="$empty-position &gt; $empty-lines">
 								<xsl:text>&#xa;</xsl:text>
 								<xsl:value-of select="'#end '"/>
 								<xsl:text>&#xa;</xsl:text>
