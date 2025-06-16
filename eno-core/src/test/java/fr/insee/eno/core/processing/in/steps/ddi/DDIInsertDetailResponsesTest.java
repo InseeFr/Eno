@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -86,6 +87,8 @@ class DDIInsertDetailResponsesTest {
                 simpleMCQ.getCodeResponses().get(2).getDetailResponse().getLabel().getValue());
         assertEquals("\"Please, specify about option D:\"",
                 simpleMCQ.getCodeResponses().get(3).getDetailResponse().getLabel().getValue());
+        assertEquals(BigInteger.valueOf(20), simpleMCQ.getCodeResponses().get(2).getDetailResponse().getMaxLength());
+        assertEquals(BigInteger.valueOf(30), simpleMCQ.getCodeResponses().get(3).getDetailResponse().getMaxLength());
     }
 
 }

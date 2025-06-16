@@ -52,6 +52,10 @@ public abstract class ModalityAttachment extends EnoObject {
         /** Label displayed, e.g. "Please, specify" for a detail response. */
         @DDI("!getResponseDomain().getLabelList().isEmpty() ? getResponseDomain().getLabelArray(0) : null")
         Label label;
+
+        /** Maximum allowed length of the detail response field. */
+        @DDI("getResponseDomain().getMaxLength()")
+        BigInteger maxLength;
     }
 
 }

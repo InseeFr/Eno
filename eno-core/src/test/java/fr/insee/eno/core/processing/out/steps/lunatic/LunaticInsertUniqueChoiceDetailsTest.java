@@ -13,6 +13,9 @@ import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.Radio;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
+import java.util.stream.Stream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticInsertUniqueChoiceDetailsTest {
@@ -38,19 +41,20 @@ class LunaticInsertUniqueChoiceDetailsTest {
         assertNotNull(radio);
         assertNotNull(checkboxOne);
         //
-        assertNull(radio.getOptions().get(0).getDetail());
-        assertNull(radio.getOptions().get(1).getDetail());
+        Stream.of(radio.getOptions(), checkboxOne.getOptions()).forEach(options -> {
+            assertNull(options.get(0).getDetail());
+            assertNull(options.get(1).getDetail());
+            assertEquals("\"Please, specify about option C:\"", options.get(2).getDetail().getLabel().getValue());
+            assertEquals("\"Please, specify about option D:\"", options.get(3).getDetail().getLabel().getValue());
+            assertEquals(LabelTypeEnum.VTL_MD, options.get(2).getDetail().getLabel().getType());
+            assertEquals(LabelTypeEnum.VTL_MD, options.get(3).getDetail().getLabel().getType());
+            assertEquals(BigInteger.valueOf(20), options.get(2).getDetail().getMaxLength());
+            assertEquals(BigInteger.valueOf(30), options.get(3).getDetail().getMaxLength());
+        });
         assertEquals("UCQ_codeC_RADIO", radio.getOptions().get(2).getDetail().getResponse().getName());
-        assertEquals("\"Please, specify about option C:\"",
-                radio.getOptions().get(2).getDetail().getLabel().getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, radio.getOptions().get(3).getDetail().getLabel().getType());
-        //
-        assertNull(checkboxOne.getOptions().get(0).getDetail());
-        assertNull(checkboxOne.getOptions().get(1).getDetail());
+        assertEquals("UCQ_codeD_RADIO", radio.getOptions().get(3).getDetail().getResponse().getName());
         assertEquals("UCQ_codeC_CHECKBOX", checkboxOne.getOptions().get(2).getDetail().getResponse().getName());
-        assertEquals("\"Please, specify about option C:\"",
-                checkboxOne.getOptions().get(2).getDetail().getLabel().getValue());
-        assertEquals(LabelTypeEnum.VTL_MD, checkboxOne.getOptions().get(3).getDetail().getLabel().getType());
+        assertEquals("UCQ_codeD_CHECKBOX", checkboxOne.getOptions().get(3).getDetail().getResponse().getName());
     }
 
 }
