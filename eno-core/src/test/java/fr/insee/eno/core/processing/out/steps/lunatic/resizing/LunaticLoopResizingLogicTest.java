@@ -43,7 +43,9 @@ class LunaticLoopResizingLogicTest {
         lunaticLoop = new Loop();
         lunaticLoop.setId("loop-id");
         lunaticLoop.setLines(new LinesLoop());
+        lunaticLoop.getLines().setMin(new LabelType());
         lunaticLoop.getLines().setMax(new LabelType());
+        lunaticLoop.getLines().getMin().setValue("nvl(LOOP_SIZE_VAR, 1)");
         lunaticLoop.getLines().getMax().setValue("nvl(LOOP_SIZE_VAR, 1)");
         //
         Sequence lunaticSequence = new Sequence();
@@ -231,7 +233,7 @@ class LunaticLoopResizingLogicTest {
     @Test
     void twoVariablesInLoopExpression_twoResizingEntries() {
         // Adding a second variable in max size expression
-        lunaticLoop.getLines().getMax().setValue("LOOP_SIZE_VAR + LOOP_SIZE_VAR2");
+        lunaticLoop.getLines().getMin().setValue("LOOP_SIZE_VAR + LOOP_SIZE_VAR2");
         //
         VariableType numberVariable = new CollectedVariableType();
         numberVariable.setName("LOOP_SIZE_VAR2");
@@ -292,7 +294,7 @@ class LunaticLoopResizingLogicTest {
     @Test
     void externalVariableInLoopExpression_shouldHaveResizingEntriesForCollectedDependencies() {
         // Adding an external variable
-        lunaticLoop.getLines().getMax().setValue("CALCULATED_VAR");
+        lunaticLoop.getLines().getMin().setValue("CALCULATED_VAR");
         //
         lunaticQuestionnaire.getVariables().clear();
         VariableType calculatedVariable = new CalculatedVariableType();
@@ -326,7 +328,7 @@ class LunaticLoopResizingLogicTest {
     @Test
     void calculatedVariableInLoopExpression_shouldNotAddResizingEntries() {
         // Adding an external variable
-        lunaticLoop.getLines().getMax().setValue("LOOP_SIZE_VAR + EXTERNAL_VAR");
+        lunaticLoop.getLines().getMin().setValue("LOOP_SIZE_VAR + EXTERNAL_VAR");
         //
         VariableType externalVariable = new ExternalVariableType();
         externalVariable.setName("EXTERNAL_VAR");
