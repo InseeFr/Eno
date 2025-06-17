@@ -74,7 +74,7 @@
             <CollectedVariableReference>m72170v3</CollectedVariableReference>
          </Response>
          <ResponseStructure>
-            <Dimension dimensionType="PRIMARY" dynamic="DYNAMIC_LENGTH">
+            <Dimension dimensionType="PRIMARY" dynamic="DYNAMIC">
                <MinLines>1</MinLines>
                <MaxLines>2</MaxLines>
             </Dimension>
