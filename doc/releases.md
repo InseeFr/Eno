@@ -1,5 +1,10 @@
 # Eno Releases note
 
+## [v2.16.0] - 2025-06-17
+### :sparkles: New Features
+- [`c7fc011`](https://github.com/InseeFr/Eno/commit/c7fc0115e5f618aa6de3bc1b65a4932a053f35ab) - **pogues2ddi**: new format for min max in dynamic table *(PR [#1288](https://github.com/InseeFr/Eno/pull/1288) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [v2.15.1] - 2025-06-05
 ### :bug: Bug Fixes
 - [`540660a`](https://github.com/InseeFr/Eno/commit/540660a131e0fce7af41a3712e46a1d804c8e573) - improve invalid parameters error handling *(commit by [@nsenave](https://github.com/nsenave))*
@@ -409,3 +414,4 @@
 [v2.12.4]: https://github.com/InseeFr/Eno/compare/v2.12.3...v2.12.4
 [v2.12.6]: https://github.com/InseeFr/Eno/compare/v2.12.5...v2.12.6
 [v2.15.1]: https://github.com/InseeFr/Eno/compare/v2.15.0...v2.15.1
+[v2.16.0]: https://github.com/InseeFr/Eno/compare/v2.15.2...v2.16.0
