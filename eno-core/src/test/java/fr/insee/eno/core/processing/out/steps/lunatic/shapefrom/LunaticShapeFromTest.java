@@ -1,4 +1,4 @@
-package fr.insee.eno.core.processing.out.steps.lunatic;
+package fr.insee.eno.core.processing.out.steps.lunatic.shapefrom;
 
 import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
@@ -8,6 +8,9 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.processing.out.steps.lunatic.LunaticLoopResolution;
+import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
+import fr.insee.eno.core.processing.out.steps.lunatic.LunaticVariablesDimension;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
