@@ -18,7 +18,7 @@ import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LunaticHierarchyFilterShapeFromTest {
+class LunaticHierarchyFilterShapeFromTest {
 
     @Test
     void integrationTest_fromDDI() throws DDIParsingException {
