@@ -214,13 +214,14 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Response | pogues:Maximum[parent::pogues:Loop] | pogues:Minimum[parent::pogues:Loop] | pogues:Filter[parent::pogues:Loop] | pogues:FixedLength" mode="enopogues:get-ip-id">
+    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Response | pogues:Maximum[parent::pogues:Loop] | pogues:Minimum[parent::pogues:Loop] | pogues:Filter[parent::pogues:Loop] | pogues:FixedLength | pogues:value[../pogues:type='VTL']" mode="enopogues:get-ip-id">
         <xsl:param name="index" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="name() = 'Minimum'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-MIN-IP-', $index)"/></xsl:when>
             <xsl:when test="name() = 'Maximum'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-IP-', $index)"/></xsl:when>
             <xsl:when test="name() = 'Filter'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Loop), '-ITE-IP-', $index)"/></xsl:when>
-            <xsl:when test="name() = 'FixedLength'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Dimension/parent::pogues:ResponseStructure/parent::pogues:Child), '-DIM1-ITE-IP-', $index)"/></xsl:when>
+            <xsl:when test="name() = 'FixedLength'"><xsl:value-of select="concat(enopogues:get-id(parent::pogues:Dimension/parent::pogues:ResponseStructure/parent::pogues:Child), '-DIM1-IP-', $index)"/></xsl:when>
+            <xsl:when test="name() = 'value'"><xsl:value-of select="concat(enopogues:get-id(parent::*/parent::pogues:Dimension/parent::pogues:ResponseStructure/parent::pogues:Child), '-DIM1-IP-', $index)"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="concat(enopogues:get-id(.), '-IP-', $index)"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -236,7 +237,7 @@
         <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
     </xsl:template>
 
-    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:Loop/pogues:Maximum | pogues:Loop/pogues:Minimum | pogues:Loop/pogues:Filter | pogues:OccurrenceLabel | pogues:OccurrenceDescription | pogues:Unit | pogues:FixedLength" mode="enopogues:get-related-variable">
+    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:Loop/pogues:Maximum | pogues:Loop/pogues:Minimum | pogues:Loop/pogues:Filter | pogues:OccurrenceLabel | pogues:OccurrenceDescription | pogues:Unit | pogues:FixedLength | pogues:value[../pogues:type='VTL']" mode="enopogues:get-related-variable">
         <xsl:variable name="expressionVariable" select="tokenize(., '\$')"/>
         <xsl:variable name="variables" select="//pogues:Variables"/>
 
@@ -302,7 +303,7 @@
             select="concat($context/parent::pogues:Child/@id, '-secondDimension-fakeCL-1')"/>
     </xsl:function>
 
-    <xsl:template match="pogues:Declaration/pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:OccurrenceLabel | pogues:OccurrenceDescription | pogues:Unit[../pogues:IsDynamicUnit='true'] | pogues:FixedLength" mode="id-variable">
+    <xsl:template match="pogues:Declaration/pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label | pogues:OccurrenceLabel | pogues:OccurrenceDescription | pogues:Unit[../pogues:IsDynamicUnit='true'] | pogues:FixedLength | pogues:value[../pogues:type='VTL']" mode="id-variable">
         <xsl:variable name="variables" select="enopogues:get-related-variable(.)"/>
         <xsl:choose>
             <xsl:when test="$variables">

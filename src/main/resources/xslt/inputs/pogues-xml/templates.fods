@@ -848,7 +848,7 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
-      <text:p>Returns the minimum lines for a dynamic table (old version)</text:p>
+      <text:p>Returns the minimum lines for a dynamic table (version 0)</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -863,12 +863,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
-      <text:p>Returns the maximum lines for a dynamic table (old version)</text:p>
+      <text:p>Returns the maximum lines for a dynamic table (version 0)</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Dimension[@dynamic=&apos;DYNAMIC_LENGTH&apos;]</text:p>
+      <text:p>pogues:Dimension[@dynamic=&apos;DYNAMIC&apos; and pogues:MinLines]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-minimum-lines</text:p>
@@ -878,12 +878,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
-      <text:p>Returns the minimum lines for a dynamic table (new version)</text:p>
+      <text:p>Returns the minimum lines for a dynamic table (version 1)</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Dimension[@dynamic=&apos;DYNAMIC_LENGTH&apos;]</text:p>
+      <text:p>pogues:Dimension[@dynamic=&apos;DYNAMIC&apos; and pogues:MaxLines]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-maximum-lines</text:p>
@@ -893,7 +893,7 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
-      <text:p>Returns the maximum lines for a dynamic table (new version)</text:p>
+      <text:p>Returns the maximum lines for a dynamic table (version 1)</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -901,7 +901,7 @@
       <text:p>pogues:Dimension[@dynamic=&apos;FIXED_LENGTH&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enopogues:get-fixed-lines</text:p>
+      <text:p>enopogues:get-condition-for-continuation</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:FixedLength</text:p>
@@ -910,7 +910,101 @@
       <text:p>with-tag</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Returns the formula for the fixed number of lines for a dynamic table</text:p>
+      <text:p>Returns the formula for the fixed number of lines for a dynamic table (version 1 ; min = max = formula)</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Dimension[@dynamic=&apos;DYNAMIC&apos; and pogues:minimum/pogues:type=&apos;number&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:get-minimum-lines</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:minimum/pogues:value</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the minimum lines for a dynamic table (version 2)</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Dimension[@dynamic=&apos;DYNAMIC&apos; and pogues:maximum/pogues:type=&apos;number&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:get-maximum-lines</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:maximum/pogues:value</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the maximum lines for a dynamic table (version 2)</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Dimension[@dynamic=&apos;DYNAMIC&apos; and pogues:maximum/pogues:type=&apos;VTL&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:get-condition-for-continuation</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:maximum/pogues:value</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>with-tag</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the formula for the fixed number of lines for a dynamic table (version 2 ; min &lt;&gt; max)</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Dimension[@dynamic=&apos;DYNAMIC_FIXED&apos; and pogues:size/pogues:type=&apos;number&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:get-minimum-lines</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:size/pogues:value</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the minimum lines for a dynamic table (version 2 with min = max)</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Dimension[@dynamic=&apos;DYNAMIC_FIXED&apos; and pogues:size/pogues:type=&apos;number&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:get-maximum-lines</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:size/pogues:value</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the maximum lines for a dynamic table (version 2 with min = max)</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Dimension[@dynamic=&apos;DYNAMIC_FIXED&apos; and pogues:size/pogues:type=&apos;VTL&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:get-condition-for-continuation</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:size/pogues:value</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>with-tag</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the formula for the fixed number of lines for a dynamic table (version 2 ; min = max)</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
