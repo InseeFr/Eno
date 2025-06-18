@@ -108,6 +108,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
      * In DDI, a loop is defined at the questionnaire level.
      * In Lunatic, a loop is a component containing components within its scope.
      */
+    @Pogues("getIterations()?.getIteration()")
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.LoopType)]")
     @Lunatic("getComponents()")

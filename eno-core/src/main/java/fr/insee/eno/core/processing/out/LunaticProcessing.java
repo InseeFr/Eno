@@ -51,7 +51,7 @@ public class LunaticProcessing {
                         new LunaticAddMissingVariables(enoCatalog, lunaticParameters.isMissingVariables()))
                 .then(new LunaticAddResizing(enoQuestionnaire))
                 .thenIf(lunaticParameters.isFilterDescription(), new LunaticAddFilterDescription(enoQuestionnaire.getFilters()))
-                .then(new LunaticAddPageNumbers(lunaticParameters.getLunaticPaginationMode()))
+                .then(new LunaticAddPageNumbers(lunaticParameters.getLunaticPaginationMode(), enoQuestionnaire.getLoops()))
                 .then(new LunaticResponseTimeQuestionPagination())
                 .then(new LunaticAddCleaning(enoQuestionnaire, enoIndex))
                 .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())

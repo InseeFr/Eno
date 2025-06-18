@@ -12,6 +12,7 @@ import fr.insee.eno.core.converter.DDIQuestionGridConversion;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
+import fr.insee.pogues.model.DynamicIterationType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ import java.util.Optional;
 @Getter
 @Setter
 @Slf4j
+@Context(format = Format.POGUES, type = DynamicIterationType.class)
 @Context(format = Format.DDI, type = LoopType.class)
 public class LinkedLoop extends Loop {
 

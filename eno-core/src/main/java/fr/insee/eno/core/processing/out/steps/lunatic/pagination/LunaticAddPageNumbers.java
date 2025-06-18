@@ -1,18 +1,23 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
+import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.lunatic.model.flat.Pagination;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 public class LunaticAddPageNumbers implements ProcessingStep<Questionnaire> {
 
     private final LunaticParameters.LunaticPaginationMode mode;
+    private final List<Loop> enoLoops;
 
-    public LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode mode) {
+    public LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode mode, List<Loop> enoLoops) {
         this.mode = mode;
+        this.enoLoops = enoLoops;
     }
 
     /**
@@ -28,7 +33,7 @@ public class LunaticAddPageNumbers implements ProcessingStep<Questionnaire> {
             case NONE -> log.info("No pagination.");
             case QUESTION -> {
                 log.info("Adding page numbers by question.");
-                new LunaticPaginationQuestionMode().apply(lunaticQuestionnaire);
+                new LunaticPaginationQuestionMode(enoLoops).apply(lunaticQuestionnaire);
             }
             case SEQUENCE -> {
                 log.info("Adding page numbers by sequence.");

@@ -1,15 +1,18 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
+import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.lunatic.model.flat.*;
+
+import java.util.List;
 
 /**
  * Post-processing of a lunatic questionnaire. With this processing, one question is displayed on each page.
  */
 public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
 
-    public LunaticPaginationQuestionMode() {
-        super(true, LunaticParameters.LunaticPaginationMode.QUESTION);
+    public LunaticPaginationQuestionMode(List<fr.insee.eno.core.model.navigation.Loop> enoLoops) {
+        super(true, LunaticParameters.LunaticPaginationMode.QUESTION, enoLoops);
     }
 
     /**
@@ -70,6 +73,16 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
             FilterDescription filterDescription, String numPagePrefix, int pageCount, boolean isParentPaginated) {
         String numPage = isParentPaginated ? numPagePrefix + (pageCount + 1) : numPagePrefix + pageCount;
         filterDescription.setPage(numPage);
+    }
+
+    @Override
+    boolean areOccurrencesPaginated(Loop lunaticLoop) {
+        String lunaticLoopId = lunaticLoop.getId();
+        fr.insee.eno.core.model.navigation.Loop enoLoop = enoLoops.stream()
+                .filter(enoLoop1 -> lunaticLoopId.equals(enoLoop1.getId()))
+                .findAny()
+                .orElseThrow(() -> new MappingException("Cannot find loop with id " + lunaticLoopId));
+        return enoLoop.isOccurrencePagination();
     }
 
     /**

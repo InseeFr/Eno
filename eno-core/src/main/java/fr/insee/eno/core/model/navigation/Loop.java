@@ -6,12 +6,14 @@ import fr.insee.ddi.lifecycle33.reusable.ReferenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.sequence.ItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.DDIIndex;
+import fr.insee.pogues.model.IterationType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,7 @@ import java.util.List;
 @Slf4j
 @Context(format = Format.DDI, type = LoopType.class)
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Loop.class)
+@Context(format = Format.POGUES, type = IterationType.class)
 public abstract class Loop extends EnoIdentifiableObject {
 
     @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
@@ -40,6 +43,9 @@ public abstract class Loop extends EnoIdentifiableObject {
     /** Same principle as sequence items list in sequence objects. */
     @DDI("T(fr.insee.eno.core.model.navigation.Loop).mapLoopItemReferences(#this, #index)")
     private final List<ItemReference> loopItems = new ArrayList<>();
+
+    @Pogues("getShouldSplitIterations() ?: false")
+    private boolean occurrencePagination;
 
     /** The occurrences of a loop can be filtered.
      * This attribute holds the identifier of the occurrence filter object.

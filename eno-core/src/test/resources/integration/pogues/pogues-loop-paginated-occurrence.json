@@ -1,0 +1,406 @@
+{
+  "owner": "DR59-SNDI59",
+  "final": true,
+  "id": "mc0awyip",
+  "Label": [
+    "Eno - Loop paginated by occurrences"
+  ],
+  "Name": "ENOLOOPPAG",
+  "lastUpdatedDate": "Tue Jun 17 2025 11:21:57 GMT+0200 (heure d’été d’Europe centrale)",
+  "DataCollection": [],
+  "genericName": "QUESTIONNAIRE",
+  "ComponentGroup": [
+    {
+      "id": "mc0blkms",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "idendquest",
+        "mc0avuvf",
+        "mc0b59k9",
+        "mc0axwb9",
+        "mc0bg22w",
+        "mc0b477s",
+        "mc0btcyp",
+        "mc0btlom",
+        "mc0bb5eo",
+        "mc0bvibz"
+      ]
+    }
+  ],
+  "agency": "fr.insee",
+  "TargetMode": [
+    "CAPI",
+    "CAWI",
+    "CATI",
+    "PAPI"
+  ],
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "childQuestionnaireRef": [],
+  "Child": [
+    {
+      "id": "mc0avuvf",
+      "depth": 1,
+      "Name": "S1",
+      "Label": [
+        "\"Sequence\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": [
+        {
+          "id": "mc0b59k9",
+          "depth": 2,
+          "Name": "HOW_MANY",
+          "Label": [
+            "\"How many occurrences?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "type": "QuestionType",
+          "questionType": "SIMPLE",
+          "Response": [
+            {
+              "id": "mc0btfgq",
+              "Datatype": {
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Minimum": "1",
+                "Maximum": "10",
+                "Decimals": "",
+                "IsDynamicUnit": false,
+                "Unit": ""
+              },
+              "CollectedVariableReference": "mc0bbng2",
+              "mandatory": false
+            }
+          ]
+        },
+        {
+          "id": "mc0axwb9",
+          "depth": 2,
+          "Name": "SS1",
+          "Label": [
+            "\"Subsequence (loop paginated by occurences)\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "type": "SequenceType",
+          "genericName": "SUBMODULE",
+          "Child": [
+            {
+              "id": "mc0bg22w",
+              "depth": 3,
+              "Name": "Q1",
+              "Label": [
+                "\"Question 1\""
+              ],
+              "Declaration": [],
+              "Control": [],
+              "FlowControl": [],
+              "TargetMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Response": [
+                {
+                  "id": "mc0bkpjj",
+                  "Datatype": {
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  },
+                  "CollectedVariableReference": "mc0bfdqb",
+                  "mandatory": false
+                }
+              ]
+            },
+            {
+              "id": "mc0b477s",
+              "depth": 3,
+              "Name": "Q2",
+              "Label": [
+                "\"Question 2\""
+              ],
+              "Declaration": [],
+              "Control": [],
+              "FlowControl": [],
+              "TargetMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Response": [
+                {
+                  "id": "mc0bgpyj",
+                  "Datatype": {
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  },
+                  "CollectedVariableReference": "mc0baftn",
+                  "mandatory": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mc0btcyp",
+          "depth": 2,
+          "Name": "SS2",
+          "Label": [
+            "\"Other subsequence (fully paginated)\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "type": "SequenceType",
+          "genericName": "SUBMODULE",
+          "Child": [
+            {
+              "id": "mc0btlom",
+              "depth": 3,
+              "Name": "Q3",
+              "Label": [
+                "\"Question 3\""
+              ],
+              "Declaration": [],
+              "Control": [],
+              "FlowControl": [],
+              "TargetMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Response": [
+                {
+                  "id": "mc0bx3eh",
+                  "Datatype": {
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  },
+                  "CollectedVariableReference": "mc0bgomr",
+                  "mandatory": false
+                }
+              ]
+            },
+            {
+              "id": "mc0bb5eo",
+              "depth": 3,
+              "Name": "Q4",
+              "Label": [
+                "\"Question 4\""
+              ],
+              "Declaration": [],
+              "Control": [],
+              "FlowControl": [],
+              "TargetMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "type": "QuestionType",
+              "questionType": "SIMPLE",
+              "Response": [
+                {
+                  "id": "mc0bxx78",
+                  "Datatype": {
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  },
+                  "CollectedVariableReference": "mc0bbmd6",
+                  "mandatory": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mc0bvibz",
+      "depth": 1,
+      "Name": "S_END",
+      "Label": [
+        "\"The end\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "type": "SequenceType",
+      "genericName": "MODULE",
+      "Child": []
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "genericName": "MODULE",
+      "Control": [],
+      "FlowControl": [],
+      "type": "SequenceType",
+      "Child": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "mc0bbng2",
+        "Name": "HOW_MANY",
+        "Label": "HOW_MANY label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Minimum": "1",
+          "Maximum": "10",
+          "Decimals": "",
+          "IsDynamicUnit": false,
+          "Unit": ""
+        }
+      },
+      {
+        "id": "mc0bfdqb",
+        "Name": "Q1",
+        "Label": "Q1 label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Scope": "mc0bkfgf"
+      },
+      {
+        "id": "mc0baftn",
+        "Name": "Q2",
+        "Label": "Q2 label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Scope": "mc0bkfgf"
+      },
+      {
+        "id": "mc0bgomr",
+        "Name": "Q3",
+        "Label": "Q3 label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Scope": "mc0bk28b"
+      },
+      {
+        "id": "mc0bbmd6",
+        "Name": "Q4",
+        "Label": "Q4 label",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Scope": "mc0bk28b"
+      }
+    ]
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "id": "mc0bkfgf",
+        "Name": "LOOP1",
+        "MemberReference": [
+          "mc0axwb9",
+          "mc0axwb9"
+        ],
+        "type": "DynamicIterationType",
+        "Maximum": "$HOW_MANY$",
+        "Step": "1",
+        "Minimum": "$HOW_MANY$"
+      },
+      {
+        "id": "mc0bk28b",
+        "Name": "LOOP2",
+        "MemberReference": [
+          "mc0btcyp",
+          "mc0btcyp"
+        ],
+        "type": "DynamicIterationType",
+        "Maximum": "$HOW_MANY$",
+        "Step": "1",
+        "Minimum": "$HOW_MANY$"
+      }
+    ]
+  },
+  "FlowControl": []
+}

@@ -34,7 +34,7 @@ class LunaticPaginationFunctionalTests {
         new LunaticTableProcessing(enoQuestionnaire).apply(lunaticQuestionnaire);
 
         // When
-        new LunaticAddPageNumbers(enoParameters.getLunaticParameters().getLunaticPaginationMode())
+        new LunaticAddPageNumbers(enoParameters.getLunaticParameters().getLunaticPaginationMode(), enoQuestionnaire.getLoops())
                 .apply(lunaticQuestionnaire);
 
         return lunaticQuestionnaire;

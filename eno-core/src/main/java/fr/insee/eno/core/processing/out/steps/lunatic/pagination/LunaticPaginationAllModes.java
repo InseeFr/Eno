@@ -17,10 +17,16 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
 
     private final LunaticParameters.LunaticPaginationMode paginationMode;
 
+    /** Eno loop objects that contain some required metadata.
+     * Package-private to be accessed in subclasses. */
+    final List<fr.insee.eno.core.model.navigation.Loop> enoLoops;
+
     protected LunaticPaginationAllModes(
-            boolean isQuestionnairePaginated, LunaticParameters.LunaticPaginationMode paginationMode) {
+            boolean isQuestionnairePaginated, LunaticParameters.LunaticPaginationMode paginationMode,
+            List<fr.insee.eno.core.model.navigation.Loop> enoLoops) {
         this.isQuestionnairePaginated = isQuestionnairePaginated;
         this.paginationMode = paginationMode;
+        this.enoLoops = enoLoops;
     }
 
     /**
@@ -120,64 +126,109 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * Apply numpage on a loop
      *
      * @param loop          loop component
-     * @param numPagePrefix numpage prefix (if loop in a loop) (ex "7.4", "5.3.9.")
+     * @param currentPrefix numpage prefix (if loop in a loop) (ex "7.4", "5.3.9.")
      * @param pageCount     page count of the loop in his parent component
      */
-    public void applyNumPageOnLoop(Loop loop, String numPagePrefix, int pageCount) {
-        String numPage = numPagePrefix + pageCount;
-        loop.setPage(numPage);
-        List<ComponentType> loopComponents = loop.getComponents();
-        int loopPageCount = pageCount;
+    public void applyNumPageOnLoop(Loop loop, String currentPrefix, int pageCount) {
+        //rootLevelCheck(currentPrefix, "Nested loops are forbidden");
+
+        // Set the page number on the loop component
+        String loopPageNumber = currentPrefix + pageCount;
+        loop.setPage(loopPageNumber);
 
         applyLoopPaginationProperty(loop);
-        if (loop.getPaginatedLoop() != null && loop.getPaginatedLoop()) {
-            numPagePrefix = loop.getPage() + ".";
-            loopPageCount = 0;
+
+        // Set the page number on the components inside the loop
+        List<ComponentType> loopComponents = loop.getComponents();
+        String innerNumPagePrefix;
+        int innerPageCount;
+        boolean isFullyPaginated = isFullyPaginated(loop);
+        boolean areOccurrencesPaginated = areOccurrencesPaginated(loop);
+        if (isFullyPaginated) {
+            innerNumPagePrefix = loopPageNumber + ".";
+            innerPageCount = 0;
+        } else {
+            if (areOccurrencesPaginated) {
+                innerNumPagePrefix = loopPageNumber + ".";
+                innerPageCount = 1;
+            } else {
+                innerNumPagePrefix = currentPrefix;
+                innerPageCount = pageCount;
+            }
         }
-
         // call to recursive method to regroup questions in the loop components
-        applyNumPageOnComponents(loopComponents, numPagePrefix, loopPageCount, loop.getPaginatedLoop());
+        applyNumPageOnComponents(loopComponents, innerNumPagePrefix, innerPageCount, loop.getPaginatedLoop());
 
-        if (loop.getPaginatedLoop() != null && loop.getPaginatedLoop()) {
+        // Set the max page property on the loop component
+        if (isFullyPaginated) {
             long maxPage = loop.getComponents().stream()
                     .map(ComponentType::getPage)
                     .filter(Objects::nonNull)
                     .distinct()
                     .count();
-
             loop.setMaxPage(Long.toString(maxPage));
-        } // Note: shouldn't be max page equal to "1" if non paginated loop?
+        } else {
+            if (areOccurrencesPaginated) {
+                loop.setMaxPage("1");
+            } else {
+                loop.setMaxPage(null); // Note: shouldn't be max page equal to "1" if non paginated loop?
+            }
+        }
     }
+
+    /** Fully paginated means that each question is on a single page. */
+    private boolean isFullyPaginated(Loop lunaticLoop) {
+        return lunaticLoop.getPaginatedLoop() != null && lunaticLoop.getPaginatedLoop();
+    }
+
+    /** Paginated by occurrence means that each occurrence in the loop has all its questions on the same page.
+     * (When non paginated at all, all questions for all occurrences are displayed on a single page.) */
+    abstract boolean areOccurrencesPaginated(Loop lunaticLoop);
 
     /**
      * Apply numpage on a roundabout
      *
      * @param roundabout    roundabout component
-     * @param numPagePrefix numpage prefix (if roundabout in a roundabout) (ex "7.4", "5.3.9.")
+     * @param currentPrefix numpage prefix (if roundabout in a roundabout) (ex "7.4", "5.3.9.")
      * @param pageCount     page count of the roundabout in his parent component
      */
-    public void applyNumPageOnRoundabout(Roundabout roundabout, String numPagePrefix, int pageCount) {
-        String numPage = numPagePrefix + pageCount;
-        roundabout.setPage(numPage);
+    public void applyNumPageOnRoundabout(Roundabout roundabout, String currentPrefix, int pageCount) {
+        //rootLevelCheck(currentPrefix, "Roundabout are not allowed inside an iteration.");
+
+        // Set the page number on the roundabout component
+        String roundaboutPageNumber = currentPrefix + pageCount;
+        roundabout.setPage(roundaboutPageNumber);
+
+        // Set the page number on the components inside the roundabout
         List<ComponentType> loopComponents = roundabout.getComponents();
-        numPagePrefix = roundabout.getPage() + ".";
-
+        String numPagePrefix = roundaboutPageNumber + ".";
         // call to recursive method to regroup questions in the roundabout components
-        // a roundabout is always paginated
+        // Note: a roundabout is always paginated
         applyNumPageOnComponents(loopComponents, numPagePrefix, 0, true);
-
     }
 
     /**
      * @param links         pairwise link component
-     * @param numPagePrefix numpage prefix (if pairwiselink in a loop) (ex "7.", "5.3.")
+     * @param currentPrefix numpage prefix (if pairwiselink in a loop) (ex "7.", "5.3.")
      * @param pageCount     page count of the pairwise link in his parent component
      */
-    public void applyNumPageOnPairwiseLinks(PairwiseLinks links, String numPagePrefix, int pageCount) {
-        links.setPage(numPagePrefix + pageCount);
+    public void applyNumPageOnPairwiseLinks(PairwiseLinks links, String currentPrefix, int pageCount) {
+        //rootLevelCheck(currentPrefix, "Pairwise are not allowed inside an iteration.");
+
+        // Set the page number on the pairwise component
+        links.setPage(currentPrefix + pageCount);
+
+        // Set the page number on the components inside the pairwise
         List<ComponentType> linksComponents = links.getComponents();
         // call to recursive method to regroup questions in the pairwise link component
-        applyNumPageOnComponents(linksComponents, numPagePrefix, pageCount, false);
+        applyNumPageOnComponents(linksComponents, currentPrefix, pageCount, false);
+    }
+
+    /** Certain kinds of components are authorized to be inside an iteration (e.g. a loop or a roundabout), but not
+     * all. In the Lunatic pagination, being inside an iteration is equivalent to having a prefixed page number.
+     * This method checks that this prefix is actually empty, and throws an exception with message given if not. */
+    private static void rootLevelCheck(String pagePrefix, String errorMessage) {
+        if (!pagePrefix.isEmpty()) throw new IllegalStateException(errorMessage);
     }
 
     /**
