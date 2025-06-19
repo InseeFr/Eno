@@ -18,7 +18,7 @@ import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class LunaticHierarchyFilterShapeFromTest {
+class LunaticHierarchyShapeFromTest {
 
     @Test
     void integrationTest_fromDDI() throws DDIParsingException {
@@ -35,7 +35,7 @@ class LunaticHierarchyFilterShapeFromTest {
         new LunaticVariablesDimension(enoQuestionnaire).apply(lunaticQuestionnaire);
 
         new LunaticShapeFrom().apply(lunaticQuestionnaire);
-        new LunaticHierarchyFilterShapeFrom(enoQuestionnaire).apply(lunaticQuestionnaire);
+        new LunaticHierarchyShapeFrom(enoQuestionnaire).apply(lunaticQuestionnaire);
         //
         assertNotNull(lunaticQuestionnaire);
         ComponentType sequenceWithoutShapeFrom = findComponentById(lunaticQuestionnaire, "lw4zc9jk").get();
@@ -43,15 +43,18 @@ class LunaticHierarchyFilterShapeFromTest {
 
         ComponentType sequenceShapeFrom = findComponentById(lunaticQuestionnaire, "lw4zsbvk").get();
         assertEquals("Q21", sequenceShapeFrom.getConditionFilter().getShapeFrom());
+        assertEquals("Q21", sequenceShapeFrom.getLabel().getShapeFrom());
 
         ComponentType subsequenceShapeFrom = findComponentById(lunaticQuestionnaire, "lw4zph3u").get();
         assertEquals("Q21", subsequenceShapeFrom.getConditionFilter().getShapeFrom());
+        assertEquals("Q21", subsequenceShapeFrom.getLabel().getShapeFrom());
 
         ComponentType loopShapeFrom = findComponentById(lunaticQuestionnaire, "lw4zypq0").get();
         assertEquals("Q21", loopShapeFrom.getConditionFilter().getShapeFrom());
 
         ComponentType subSequenceShapeFromOtherScope = findComponentById(lunaticQuestionnaire, "lw50fbep").get();
         assertEquals("Q311", subSequenceShapeFromOtherScope.getConditionFilter().getShapeFrom());
+        assertEquals("Q311", subSequenceShapeFromOtherScope.getLabel().getShapeFrom());
 
     }
 }
