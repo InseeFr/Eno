@@ -30,7 +30,7 @@ import static fr.insee.eno.core.utils.LunaticUtils.*;
  * </p>
  *  Later: Maybe create overview component to avoid computation at init for Lunatic.
  */
-public class LunaticHierarchyFilterShapeFrom implements ProcessingStep<Questionnaire> {
+public class LunaticHierarchyShapeFrom implements ProcessingStep<Questionnaire> {
 
     private Questionnaire lunaticQuestionnaire;
     private EnoQuestionnaire enoQuestionnaire;
@@ -40,7 +40,7 @@ public class LunaticHierarchyFilterShapeFrom implements ProcessingStep<Questionn
     private Map<String, List<String>> variablesByQuestion;
 
 
-    public LunaticHierarchyFilterShapeFrom(EnoQuestionnaire enoQuestionnaire){
+    public LunaticHierarchyShapeFrom(EnoQuestionnaire enoQuestionnaire){
         this.enoQuestionnaire = enoQuestionnaire;
         this.enoIndex = enoQuestionnaire.getIndex();
     }

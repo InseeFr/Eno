@@ -18,7 +18,7 @@ import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class LunaticHierarchyFilterShapeFromTest {
+class LunaticHierarchyShapeFromTest {
 
     @Test
     void integrationTest_fromDDI() throws DDIParsingException {
@@ -35,7 +35,7 @@ class LunaticHierarchyFilterShapeFromTest {
         new LunaticVariablesDimension(enoQuestionnaire).apply(lunaticQuestionnaire);
 
         new LunaticShapeFrom().apply(lunaticQuestionnaire);
-        new LunaticHierarchyFilterShapeFrom(enoQuestionnaire).apply(lunaticQuestionnaire);
+        new LunaticHierarchyShapeFrom(enoQuestionnaire).apply(lunaticQuestionnaire);
         //
         assertNotNull(lunaticQuestionnaire);
         ComponentType sequenceWithoutShapeFrom = findComponentById(lunaticQuestionnaire, "lw4zc9jk").get();
