@@ -8,7 +8,6 @@ import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.LunaticUtils;
 import fr.insee.lunatic.model.flat.ComponentType;
-import fr.insee.lunatic.model.flat.ConditionFilterType;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 
@@ -110,8 +109,14 @@ public class LunaticHierarchyShapeFrom implements ProcessingStep<Questionnaire> 
     public void setShapeFromLunaticComponent(ComponentType lunaticComponent, List<String> collectedVarsInside){
         if(collectedVarsInside.isEmpty()) return;
         String shapeFrom = variableShapeFromIndex.get(collectedVarsInside.getFirst());
-        ConditionFilterType conditionFilterType = lunaticComponent.getConditionFilter();
-        if(conditionFilterType != null) conditionFilterType.setShapeFrom(shapeFrom);
+        if(lunaticComponent.getLabel() != null) lunaticComponent.getLabel().setShapeFrom(shapeFrom);
+        if(lunaticComponent.getDescription() != null) lunaticComponent.getDescription().setShapeFrom(shapeFrom);
+        if(lunaticComponent.getConditionFilter() != null) lunaticComponent.getConditionFilter().setShapeFrom(shapeFrom);
+        if(lunaticComponent.getDeclarations() != null){
+            lunaticComponent.getDeclarations().forEach(declaration -> {
+                if(declaration.getLabel() != null) declaration.getLabel().setShapeFrom(shapeFrom);
+            });
+        }
     }
 
 }

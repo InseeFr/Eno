@@ -43,15 +43,18 @@ class LunaticHierarchyShapeFromTest {
 
         ComponentType sequenceShapeFrom = findComponentById(lunaticQuestionnaire, "lw4zsbvk").get();
         assertEquals("Q21", sequenceShapeFrom.getConditionFilter().getShapeFrom());
+        assertEquals("Q21", sequenceShapeFrom.getLabel().getShapeFrom());
 
         ComponentType subsequenceShapeFrom = findComponentById(lunaticQuestionnaire, "lw4zph3u").get();
         assertEquals("Q21", subsequenceShapeFrom.getConditionFilter().getShapeFrom());
+        assertEquals("Q21", subsequenceShapeFrom.getLabel().getShapeFrom());
 
         ComponentType loopShapeFrom = findComponentById(lunaticQuestionnaire, "lw4zypq0").get();
         assertEquals("Q21", loopShapeFrom.getConditionFilter().getShapeFrom());
 
         ComponentType subSequenceShapeFromOtherScope = findComponentById(lunaticQuestionnaire, "lw50fbep").get();
         assertEquals("Q311", subSequenceShapeFromOtherScope.getConditionFilter().getShapeFrom());
+        assertEquals("Q311", subSequenceShapeFromOtherScope.getLabel().getShapeFrom());
 
     }
 }
