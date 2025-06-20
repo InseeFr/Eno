@@ -1,6 +1,5 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
-import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,6 @@ class LunaticAddPageNumbersQuestionModeTest {
 
     @BeforeEach
     void init() {
-        List<fr.insee.eno.core.model.navigation.Loop> enoLoops = new ArrayList<>();
 
         questionnaire = new Questionnaire();
 
@@ -48,15 +46,9 @@ class LunaticAddPageNumbersQuestionModeTest {
         n5 = LunaticAddPageNumbersUtils.buildNumber("li1w3tmf", "NB");
         components.add(n5);
 
-        String l6Id = "li1wjxs2";
-        l6 = LunaticAddPageNumbersUtils.buildEmptyLoop(l6Id);
+        l6 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wjxs2");
         // to consider this loop as main loop
         l6.setLines(new LinesLoop());
-
-        fr.insee.eno.core.model.navigation.Loop enoLoop6 = new StandaloneLoop();
-        enoLoop6.setId(l6Id);
-        enoLoop6.setOccurrencePagination(false);
-        enoLoops.add(enoLoop6);
 
         // build loop 6 components
         ss6 = LunaticAddPageNumbersUtils.buildSubsequence("li1wbv47");
@@ -70,15 +62,9 @@ class LunaticAddPageNumbersQuestionModeTest {
         l6.getComponents().addAll(l6Components);
         components.add(l6);
 
-        String l7Id = "li1wsotd";
-        l7 = LunaticAddPageNumbersUtils.buildEmptyLoop(l7Id);
+        l7 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wsotd");
         // to make this loop considered as linked
         l7.setIterations(new LabelType());
-
-        fr.insee.eno.core.model.navigation.Loop enoLoop7 = new StandaloneLoop();
-        enoLoop7.setId(l7Id);
-        enoLoop7.setOccurrencePagination(false);
-        enoLoops.add(enoLoop7);
 
         ss71 = LunaticAddPageNumbersUtils.buildSubsequence("li1wfnbk");
         l7Components.add(ss71);
@@ -113,7 +99,7 @@ class LunaticAddPageNumbersQuestionModeTest {
         questionnaire.getComponents().addAll(components);
 
 
-        LunaticPaginationQuestionMode processing = new LunaticPaginationQuestionMode(enoLoops);
+        LunaticPaginationQuestionMode processing = new LunaticPaginationQuestionMode();
 
         processing.apply(questionnaire);
     }

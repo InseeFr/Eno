@@ -1,13 +1,10 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
-import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +17,6 @@ class LunaticPaginationTest {
     class LoopOnSequence {
 
         private Questionnaire questionnaire;
-        private List<fr.insee.eno.core.model.navigation.Loop> enoLoops;
 
         @BeforeEach
         void createLoopWithSequence() {
@@ -32,24 +28,18 @@ class LunaticPaginationTest {
             Input input2 = new Input();
             input2.setComponentType(ComponentTypeEnum.INPUT);
             Loop loop = new Loop();
-            loop.setId("loop-id");
             loop.setComponentType(ComponentTypeEnum.LOOP);
             loop.setLines(new LinesLoop());
             loop.getComponents().add(sequence);
             loop.getComponents().add(input1);
             loop.getComponents().add(input2);
             questionnaire.getComponents().add(loop);
-
-            fr.insee.eno.core.model.navigation.Loop enoLoop = new StandaloneLoop();
-            enoLoop.setId("loop-id");
-            enoLoop.setOccurrencePagination(false);
-            enoLoops = List.of(enoLoop);
         }
 
         @Test
         void questionMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION, enoLoops).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(questionnaire);
             //
             assertEquals("question", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
@@ -65,7 +55,7 @@ class LunaticPaginationTest {
         @Test
         void sequenceMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE, enoLoops).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE).apply(questionnaire);
             //
             assertEquals("sequence", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
@@ -83,7 +73,6 @@ class LunaticPaginationTest {
     class LoopOnTwoSequences {
 
         private Questionnaire questionnaire;
-        private List<fr.insee.eno.core.model.navigation.Loop> enoLoops;
 
         @BeforeEach
         void createLoopWithTwoSequences() {
@@ -97,7 +86,6 @@ class LunaticPaginationTest {
             Input input2 = new Input();
             input2.setComponentType(ComponentTypeEnum.INPUT);
             Loop loop = new Loop();
-            loop.setId("loop-id");
             loop.setComponentType(ComponentTypeEnum.LOOP);
             loop.setLines(new LinesLoop());
             loop.getComponents().add(sequence1);
@@ -105,17 +93,12 @@ class LunaticPaginationTest {
             loop.getComponents().add(sequence2);
             loop.getComponents().add(input2);
             questionnaire.getComponents().add(loop);
-
-            fr.insee.eno.core.model.navigation.Loop enoLoop = new StandaloneLoop();
-            enoLoop.setId("loop-id");
-            enoLoop.setOccurrencePagination(false);
-            enoLoops = List.of(enoLoop);
         }
 
         @Test
         void questionMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION, enoLoops).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(questionnaire);
             //
             assertEquals("question", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
@@ -131,7 +114,7 @@ class LunaticPaginationTest {
         @Test
         void sequenceMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE, enoLoops).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE).apply(questionnaire);
             //
             assertEquals("sequence", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
@@ -152,7 +135,6 @@ class LunaticPaginationTest {
     class LoopOnSequenceMinMaxEquals {
 
         private Questionnaire questionnaire;
-        private List<fr.insee.eno.core.model.navigation.Loop> enoLoops;
 
         @BeforeEach
         void createLoopWithSequence() {
@@ -162,7 +144,6 @@ class LunaticPaginationTest {
             Input input1 = new Input();
             input1.setComponentType(ComponentTypeEnum.INPUT);
             Loop loop = new Loop();
-            loop.setId("loop-id");
             loop.setComponentType(ComponentTypeEnum.LOOP);
             LinesLoop linesLoop = new LinesLoop();
             LabelType minMax = new LabelType();
@@ -174,17 +155,12 @@ class LunaticPaginationTest {
             loop.getComponents().add(sequence);
             loop.getComponents().add(input1);
             questionnaire.getComponents().add(loop);
-
-            fr.insee.eno.core.model.navigation.Loop enoLoop = new StandaloneLoop();
-            enoLoop.setId("loop-id");
-            enoLoop.setOccurrencePagination(false);
-            enoLoops = List.of(enoLoop);
         }
 
         @Test
         void questionMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION, enoLoops).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(questionnaire);
             //
             assertEquals("question", questionnaire.getPaginationEnum().value());
             Loop loop = (Loop) questionnaire.getComponents().getFirst();
@@ -200,7 +176,7 @@ class LunaticPaginationTest {
         @Test
         void sequenceMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE, enoLoops).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE).apply(questionnaire);
             //
             assertEquals("sequence", questionnaire.getPaginationEnum().value());
             Loop loop = (Loop) questionnaire.getComponents().getFirst();

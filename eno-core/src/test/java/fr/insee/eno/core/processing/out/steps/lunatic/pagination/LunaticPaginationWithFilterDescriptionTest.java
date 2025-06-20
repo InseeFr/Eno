@@ -1,11 +1,8 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
-import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -27,7 +24,6 @@ class LunaticPaginationWithFilterDescriptionTest {
     private Questionnaire lunaticQuestionnaire;
     private Subsequence subsequence;
     private Subsequence loopSubsequence;
-    private List<fr.insee.eno.core.model.navigation.Loop> enoLoops;
 
     @BeforeEach
     void createQuestionnaire() {
@@ -45,7 +41,6 @@ class LunaticPaginationWithFilterDescriptionTest {
         lunaticQuestionnaire.getComponents().add(new Question());
         //
         Loop loop = new Loop(); loop.setComponentType(ComponentTypeEnum.LOOP);
-        loop.setId("loop-id");
         loop.setLines(new LinesLoop()); // current rule for non-linked (=> non-paginated) loops
         loop.getLines().setMin(new LabelType());
         loop.getLines().setMax(new LabelType());
@@ -59,11 +54,6 @@ class LunaticPaginationWithFilterDescriptionTest {
         loop.getComponents().add(new FilterDescription());
         loop.getComponents().add(new Question());
         lunaticQuestionnaire.getComponents().add(loop);
-
-        fr.insee.eno.core.model.navigation.Loop enoLoop = new StandaloneLoop();
-        enoLoop.setId("loop-id");
-        enoLoop.setOccurrencePagination(false);
-        enoLoops = List.of(enoLoop);
     }
 
     @Test
@@ -71,7 +61,7 @@ class LunaticPaginationWithFilterDescriptionTest {
         subsequence.getDeclarations().add(new DeclarationType());
         loopSubsequence.getDeclarations().add(new DeclarationType());
 
-        new LunaticPaginationQuestionMode(enoLoops).apply(lunaticQuestionnaire);
+        new LunaticPaginationQuestionMode().apply(lunaticQuestionnaire);
 
         assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(1).getPage());
@@ -96,7 +86,7 @@ class LunaticPaginationWithFilterDescriptionTest {
     @Test
     void questionMode_nonPaginatedSubsequence() {
 
-        new LunaticPaginationQuestionMode(enoLoops).apply(lunaticQuestionnaire);
+        new LunaticPaginationQuestionMode().apply(lunaticQuestionnaire);
 
         assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(1).getPage());

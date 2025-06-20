@@ -45,6 +45,7 @@ public abstract class Loop extends EnoIdentifiableObject {
     private final List<ItemReference> loopItems = new ArrayList<>();
 
     @Pogues("getShouldSplitIterations() ?: false")
+    @Lunatic("setIsPaginatedByIterations(#param)")
     private boolean occurrencePagination;
 
     /** The occurrences of a loop can be filtered.

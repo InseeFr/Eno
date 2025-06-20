@@ -17,16 +17,10 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
 
     private final LunaticParameters.LunaticPaginationMode paginationMode;
 
-    /** Eno loop objects that contain some required metadata.
-     * Package-private to be accessed in subclasses. */
-    final List<fr.insee.eno.core.model.navigation.Loop> enoLoops;
-
     protected LunaticPaginationAllModes(
-            boolean isQuestionnairePaginated, LunaticParameters.LunaticPaginationMode paginationMode,
-            List<fr.insee.eno.core.model.navigation.Loop> enoLoops) {
+            boolean isQuestionnairePaginated, LunaticParameters.LunaticPaginationMode paginationMode) {
         this.isQuestionnairePaginated = isQuestionnairePaginated;
         this.paginationMode = paginationMode;
-        this.enoLoops = enoLoops;
     }
 
     /**
@@ -130,7 +124,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * @param pageCount     page count of the loop in his parent component
      */
     public void applyNumPageOnLoop(Loop loop, String currentPrefix, int pageCount) {
-        //rootLevelCheck(currentPrefix, "Nested loops are forbidden");
+        rootLevelCheck(currentPrefix, "Nested loops are forbidden");
 
         // Set the page number on the loop component
         String loopPageNumber = currentPrefix + pageCount;
@@ -193,7 +187,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * @param pageCount     page count of the roundabout in his parent component
      */
     public void applyNumPageOnRoundabout(Roundabout roundabout, String currentPrefix, int pageCount) {
-        //rootLevelCheck(currentPrefix, "Roundabout are not allowed inside an iteration.");
+        rootLevelCheck(currentPrefix, "Roundabout are not allowed inside an iteration.");
 
         // Set the page number on the roundabout component
         String roundaboutPageNumber = currentPrefix + pageCount;
@@ -213,7 +207,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * @param pageCount     page count of the pairwise link in his parent component
      */
     public void applyNumPageOnPairwiseLinks(PairwiseLinks links, String currentPrefix, int pageCount) {
-        //rootLevelCheck(currentPrefix, "Pairwise are not allowed inside an iteration.");
+        rootLevelCheck(currentPrefix, "Pairwise are not allowed inside an iteration.");
 
         // Set the page number on the pairwise component
         links.setPage(currentPrefix + pageCount);
@@ -228,7 +222,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * all. In the Lunatic pagination, being inside an iteration is equivalent to having a prefixed page number.
      * This method checks that this prefix is actually empty, and throws an exception with message given if not. */
     private static void rootLevelCheck(String pagePrefix, String errorMessage) {
-        if (!pagePrefix.isEmpty()) throw new IllegalStateException(errorMessage);
+        //if (!pagePrefix.isEmpty()) throw new IllegalStateException(errorMessage);
     }
 
     /**

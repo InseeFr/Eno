@@ -13,7 +13,7 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
 
     public LunaticPaginationSequenceMode() {
         // No need of Eno loops metadata in sequence mode pagination
-        super(false, LunaticParameters.LunaticPaginationMode.SEQUENCE, null);
+        super(false, LunaticParameters.LunaticPaginationMode.SEQUENCE);
     }
 
     /**
