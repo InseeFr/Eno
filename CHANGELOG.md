@@ -4,12 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.53.0] - 2025-06-23
+### :sparkles: New Features
+- [`e46b3d5`](https://github.com/InseeFr/Eno/commit/e46b3d59c8b2e673713ab7747d65fae79017b31a) - **dynamic table**: vtl min/max size expressions *(PR [#1289](https://github.com/InseeFr/Eno/pull/1289) by [@nsenave](https://github.com/nsenave))*
+
+
+## [3.52.1] - 2025-06-23
+### :bug: Bug Fixes
+- [`636d6da`](https://github.com/InseeFr/Eno/commit/636d6dabf65999dc01210a01c16dfe9cefc98274) - **spring**: issue in tomcat embedded dependency *(PR [#1296](https://github.com/InseeFr/Eno/pull/1296) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.52.0] - 2025-16-12
 ### :sparkles: New Features
-- [`19aa239`](https://github.com/InseeFr/Eno/commit/19aa239ea85c97f42755600a7b6a53e181c39afc) - max length please specify *(PR [#1283](https://github.com/InseeFr/Eno/pull/1277) by @RemiVerriez)*
+- [`19aa239`](https://github.com/InseeFr/Eno/commit/19aa239ea85c97f42755600a7b6a53e181c39afc) - max length please specify *(PR [#1283](https://github.com/InseeFr/Eno/pull/1277) by [@RemiVerriez](https://github.com/RemiVerriez))*
 
 ### :bug: Bug Fixes
-- [`f1438cc`](https://github.com/InseeFr/Eno/commit/f1438cc3bac4ed5e2d879dbcd0432e901e38b372) - clarification variable cleaning *(PR #1284](https://github.com/InseeFr/Eno/pull/1284) by [@chloe-renaud](https://github.com/chloe-renaud))*
+- [`f1438cc`](https://github.com/InseeFr/Eno/commit/f1438cc3bac4ed5e2d879dbcd0432e901e38b372) - clarification variable cleaning *(PR [#1284](https://github.com/InseeFr/Eno/pull/1284) by [@chloe-renaud](https://github.com/chloe-renaud))*
 - [`ef8594f`](https://github.com/InseeFr/Eno/commit/ef8594f738b1c3e3c2521a6f9ae01fa26772f580) - **lunatic**: iterations for standalone loops *(PR [#1273](https://github.com/InseeFr/Eno/pull/1273) by [@RemiVerriez](https://github.com/RemiVerriez))*
 - [`38f9e3e`](https://github.com/InseeFr/Eno/commit/38f9e3ebe86e3cf3869f5c162036458e754eb0ab) - update all minor dependencies *(PR [#1279](https://github.com/InseeFr/Eno/pull/1279) by [@renovate[bot]](https://github.com/apps/renovate))*
 
@@ -621,3 +631,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.50.0]: https://github.com/InseeFr/Eno/compare/3.49.0...3.50.0
 [3.51.0]: https://github.com/InseeFr/Eno/compare/3.50.0...3.51.0
 [3.52.0]: https://github.com/InseeFr/Eno/compare/3.51.0...3.52.0
+[3.52.1]: https://github.com/InseeFr/Eno/compare/3.52.0...3.52.1
+[3.53.0]: https://github.com/InseeFr/Eno/compare/3.52.1...3.53.0

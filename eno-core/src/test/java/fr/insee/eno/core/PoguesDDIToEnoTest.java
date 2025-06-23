@@ -10,10 +10,7 @@ import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.mappers.PoguesMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.code.CodeItem;
-import fr.insee.eno.core.model.question.NumericQuestion;
-import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
-import fr.insee.eno.core.model.question.SuggesterQuestion;
-import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
+import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
@@ -175,6 +172,13 @@ class PoguesDDIToEnoTest {
                     question.getCodeResponses()
                             .forEach(codeResponse -> codeResponse.getResponse().setVariableReference(null));
                     question.getDetailResponses().clear();
+                });
+        enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(DynamicTableQuestion.class::isInstance).map(DynamicTableQuestion.class::cast)
+                .forEach(dynamicTable -> {
+                    dynamicTable.setMinSizeExpression(null);
+                    if (dynamicTable.getMaxLines() != null)
+                        dynamicTable.setMaxSizeExpression(null);
                 });
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance).map(UniqueChoiceQuestion.class::cast)
