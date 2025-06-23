@@ -5,7 +5,7 @@
   "final": false,
   "flowLogic": "FILTER",
   "formulasLanguage": "VTL",
-  "lastUpdatedDate": "Mon Jun 23 2025 18:27:37 GMT+0200 (heure d’été d’Europe centrale)",
+  "lastUpdatedDate": "Mon Jun 23 2025 19:02:13 GMT+0200 (heure d’été d’Europe centrale)",
   "owner": "QNONREG",
   "Name": "RESPDESIGN",
   "Label": [
@@ -450,10 +450,11 @@
                   "Datatype": {
                     "typeName": "DURATION",
                     "type": "DurationDatatypeType",
+                    "Minimum": "PT0H0M",
                     "Maximum": "PT200H59M",
                     "Format": "PTnHnM"
                   },
-                  "CollectedVariableReference": "l8iorxhx"
+                  "CollectedVariableReference": "mc9ckmxu"
                 }
               ]
             },
@@ -478,10 +479,11 @@
                   "Datatype": {
                     "typeName": "DURATION",
                     "type": "DurationDatatypeType",
+                    "Minimum": "P0Y0M",
                     "Maximum": "P5Y11M",
                     "Format": "PnYnM"
                   },
-                  "CollectedVariableReference": "l8iownbs"
+                  "CollectedVariableReference": "mc9cp89u"
                 }
               ]
             },
@@ -4229,11 +4231,12 @@
         "Label": "DATEANNEE label"
       },
       {
-        "id": "l8iorxhx",
+        "id": "mc9ckmxu",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "DURATION",
           "type": "DurationDatatypeType",
+          "Minimum": "PT0H0M",
           "Maximum": "PT200H59M",
           "Format": "PTnHnM"
         },
@@ -4241,11 +4244,12 @@
         "Label": "DUREE label"
       },
       {
-        "id": "l8iownbs",
+        "id": "mc9cp89u",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "DURATION",
           "type": "DurationDatatypeType",
+          "Minimum": "P0Y0M",
           "Maximum": "P5Y11M",
           "Format": "PnYnM"
         },
