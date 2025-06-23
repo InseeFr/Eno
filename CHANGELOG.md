@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.53.0] - 2025-06-23
+### :sparkles: New Features
+- [`e46b3d5`](https://github.com/InseeFr/Eno/commit/e46b3d59c8b2e673713ab7747d65fae79017b31a) - **dynamic table**: vtl min/max size expressions *(PR [#1289](https://github.com/InseeFr/Eno/pull/1289) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.52.1] - 2025-06-23
 ### :bug: Bug Fixes
 - [`636d6da`](https://github.com/InseeFr/Eno/commit/636d6dabf65999dc01210a01c16dfe9cefc98274) - **spring**: issue in tomcat embedded dependency *(PR [#1296](https://github.com/InseeFr/Eno/pull/1296) by [@nsenave](https://github.com/nsenave))*
@@ -627,3 +632,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.51.0]: https://github.com/InseeFr/Eno/compare/3.50.0...3.51.0
 [3.52.0]: https://github.com/InseeFr/Eno/compare/3.51.0...3.52.0
 [3.52.1]: https://github.com/InseeFr/Eno/compare/3.52.0...3.52.1
+[3.53.0]: https://github.com/InseeFr/Eno/compare/3.52.1...3.53.0
