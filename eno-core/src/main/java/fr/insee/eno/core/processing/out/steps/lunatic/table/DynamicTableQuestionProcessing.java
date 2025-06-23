@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.countVariable;
+
 /** Class that holds the conversion logic between model dynamic tables and Lunatic 'roster' tables. */
 @Slf4j
 public class DynamicTableQuestionProcessing {
@@ -41,12 +43,13 @@ public class DynamicTableQuestionProcessing {
         LinesRoster lines = new LinesRoster();
         if (enoTable.getMinLines() != null && enoTable.getMaxLines() != null)
             setMinMaxProperties(enoTable, lines);
-        else if (enoTable.getSizeExpression() != null)
+        else if (enoTable.getMaxSizeExpression() != null)
             setSizeExpression(enoTable, lines);
         else
             throw new IllegalStateException(
                     "Table question '" + enoTable.getId() + "' has neither a min/max nor an expression size.");
         lunaticRoster.setLines(lines);
+        setIterations(lunaticRoster, enoTable);
     }
 
     private static void setMinMaxProperties(DynamicTableQuestion enoTable, LinesRoster lines) {
@@ -66,11 +69,24 @@ public class DynamicTableQuestionProcessing {
      * Note: in this case, we could have chosen to create an 'iterations' property in the Lunatic model to have the
      * same property as in loop objects, but the min=max solution does the job. */
     private static void setSizeExpression(DynamicTableQuestion enoTable, LinesRoster lines) {
-        LabelType sizeLabel = new LabelType();
-        sizeLabel.setType(LabelTypeEnum.VTL);
-        sizeLabel.setValue(enoTable.getSizeExpression().getValue());
-        lines.setMin(sizeLabel);
-        lines.setMax(sizeLabel);
+        LabelType maxSizeLabel = new LabelType();
+        maxSizeLabel.setType(LabelTypeEnum.VTL);
+        maxSizeLabel.setValue(enoTable.getMaxSizeExpression().getValue());
+        LabelType minSizeLabel = new LabelType();
+        minSizeLabel.setType(LabelTypeEnum.VTL);
+        if (enoTable.getMinSizeExpression() != null)
+            minSizeLabel.setValue(enoTable.getMinSizeExpression().getValue());
+        else // if missing, its value is the same as the max
+            minSizeLabel.setValue(enoTable.getMaxSizeExpression().getValue());
+        lines.setMin(minSizeLabel);
+        lines.setMax(maxSizeLabel);
+    }
+
+    private static void setIterations(RosterForLoop lunaticRoster, DynamicTableQuestion enoTable) {
+        LabelType labelType = new LabelType();
+        labelType.setType(LabelTypeEnum.VTL);
+        labelType.setValue(countVariable(enoTable.getResponseCells().getFirst().getResponse().getVariableName()));
+        lunaticRoster.setIterations(labelType);
     }
 
 }

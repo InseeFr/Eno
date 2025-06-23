@@ -4,13 +4,13 @@ import fr.insee.ddi.lifecycle33.reusable.CommandType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
-import fr.insee.eno.core.exceptions.business.IllegalPoguesElementException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.VariableIndex;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.pogues.model.ExpressionType;
+import fr.insee.pogues.model.TypedValueType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Getter
 @Setter
 @Slf4j
-@Context(format = Format.POGUES, type = ExpressionType.class)
+@Context(format = Format.POGUES, type = {ExpressionType.class, TypedValueType.class})
 @Context(format = Format.DDI, type = CommandType.class)
 @Context(format = Format.LUNATIC, type = LabelType.class)
 public class CalculatedExpression extends EnoObject {
@@ -53,11 +53,12 @@ public class CalculatedExpression extends EnoObject {
     private String value;
 
     /**
-     * For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.
-     * See labels documentation.
+     * In Pogues, the type can be things like 'number' or 'VTL'.
+     * In Lunatic, all calculated expressions are of VTL type.
      */
+    @Pogues("#this instanceof T(fr.insee.pogues.model.TypedValueType) ? getType().value() : 'VTL'")
     @Lunatic("setType(T(fr.insee.lunatic.model.flat.LabelTypeEnum).fromValue(#param))")
-    String type = LabelTypeEnum.VTL.value();
+    String type = "VTL";
 
     /**
      * In DDI, the expression contains variable references instead of variables names.

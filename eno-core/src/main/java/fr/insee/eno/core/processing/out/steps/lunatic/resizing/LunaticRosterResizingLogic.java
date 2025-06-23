@@ -34,14 +34,14 @@ public class LunaticRosterResizingLogic {
         DynamicTableQuestion enoDynamicTable = getDynamicTable(enoQuestionnaire, lunaticRoster.getId());
 
         // If the dynamic table size is not defined by a VTL expression, nothing to do here
-        if (enoDynamicTable.getSizeExpression() == null)
+        if (enoDynamicTable.getMaxSizeExpression() == null)
             return;
 
         // Variable names that are the keys of the resizing (using a set to make sure there is no duplicates)
         Set<String> resizingVariableNames = findResizingVariablesForRoster(enoDynamicTable);
 
         // Expression that resizes the concerned variables
-        String sizeExpression = enoDynamicTable.getSizeExpression().getValue();
+        String sizeExpression = enoDynamicTable.getMaxSizeExpression().getValue();
 
         // Concerned variables to be resized: responses of the roster component
         List<String> resizedVariableNames = lunaticRoster.getComponents().stream()
@@ -66,7 +66,7 @@ public class LunaticRosterResizingLogic {
     }
 
     private Set<String> findResizingVariablesForRoster(DynamicTableQuestion enoDynamicTable) {
-        List<String> sizeDependencies = enoDynamicTable.getSizeExpression().getBindingReferences().stream()
+        List<String> sizeDependencies = enoDynamicTable.getMaxSizeExpression().getBindingReferences().stream()
                 .map(BindingReference::getVariableName)
                 .toList();
         // Note: we could simply return this dependencies list,

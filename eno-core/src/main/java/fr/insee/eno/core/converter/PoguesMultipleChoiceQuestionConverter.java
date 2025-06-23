@@ -38,7 +38,9 @@ class PoguesMultipleChoiceQuestionConverter {
         String dynamic = poguesQuestion.getResponseStructure().getDimension().getFirst().getDynamic();
         return switch (dynamic) {
             case "NON_DYNAMIC" -> new TableQuestion();
-            case "DYNAMIC_LENGTH", "FIXED_LENGTH" -> new DynamicTableQuestion();
+            case "DYNAMIC_LENGTH", "FIXED_LENGTH", // old ones
+                 "DYNAMIC", "DYNAMIC_FIXED" // new ones
+                    -> new DynamicTableQuestion();
             default -> throw new ConversionException(
                     "Unable to convert Pogues table '" + poguesQuestion.getId() + "'.");
         };

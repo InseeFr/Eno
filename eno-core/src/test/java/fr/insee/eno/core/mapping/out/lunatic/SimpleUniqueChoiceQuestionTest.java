@@ -12,6 +12,7 @@ import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,6 +49,8 @@ class SimpleUniqueChoiceQuestionTest {
         assertEquals(LabelTypeEnum.VTL_MD, checkboxGroup.getResponses().get(3).getDetail().getLabel().getType());
         assertEquals("MCQ_codeC", checkboxGroup.getResponses().get(2).getDetail().getResponse().getName());
         assertEquals("MCQ_codeD", checkboxGroup.getResponses().get(3).getDetail().getResponse().getName());
+        assertEquals(BigInteger.valueOf(20), checkboxGroup.getResponses().get(2).getDetail().getMaxLength());
+        assertEquals(BigInteger.valueOf(30), checkboxGroup.getResponses().get(3).getDetail().getMaxLength());
     }
 
 }

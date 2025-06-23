@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DDIInstance xmlns="ddi:instance:3_3"
+             xmlns:a="ddi:archive:3_3"
              xmlns:d="ddi:datacollection:3_3"
              xmlns:g="ddi:group:3_3"
              xmlns:l="ddi:logicalproduct:3_3"
              xmlns:r="ddi:reusable:3_3"
              xmlns:s="ddi:studyunit:3_3"
+             xmlns:xhtml="http://www.w3.org/1999/xhtml"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.15.0. Generation date : 13/06/2025 - 14:40:06-->
+             isMaintainable="true"><!--Eno version : 2.11.0. Generation date : 04/11/2024 - 16:06:01-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-m332q6bo</r:ID>
    <r:Version>1</r:Version>
@@ -70,12 +73,6 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
             </d:ControlConstructReference>
-            <d:ControlConstructReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqjp9e-QC</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
-            </d:ControlConstructReference>
          </d:Sequence>
          <d:Sequence>
             <r:Agency>fr.insee</r:Agency>
@@ -100,37 +97,17 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
             </d:ControlConstructReference>
-            <d:ControlConstructReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqxh9g-QC</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
-            </d:ControlConstructReference>
          </d:Sequence>
          <d:QuestionConstruct>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>m332raks-QC</r:ID>
             <r:Version>1</r:Version>
             <d:ConstructName>
-               <r:String xml:lang="fr-FR">DYNAMIC_TABLE_FIXED</r:String>
-            </d:ConstructName>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>m332raks</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-         </d:QuestionConstruct>
-         <d:QuestionConstruct>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqjp9e-QC</r:ID>
-            <r:Version>1</r:Version>
-            <d:ConstructName>
                <r:String xml:lang="fr-FR">DYNAMIC_TABLE_MIN_MAX</r:String>
             </d:ConstructName>
             <r:QuestionReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqjp9e</r:ID>
+               <r:ID>m332raks</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
@@ -159,20 +136,6 @@
             <r:QuestionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>m333nmhe</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-         </d:QuestionConstruct>
-         <d:QuestionConstruct>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqxh9g-QC</r:ID>
-            <r:Version>1</r:Version>
-            <d:ConstructName>
-               <r:String xml:lang="fr-FR">DYNAMIC_TABLE_VTL_MIN_MAX</r:String>
-            </d:ConstructName>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqxh9g</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
@@ -237,39 +200,39 @@
             <r:ID>m332raks</r:ID>
             <r:Version>1</r:Version>
             <d:QuestionGridName>
-               <r:String xml:lang="fr-FR">DYNAMIC_TABLE_FIXED</r:String>
+               <r:String xml:lang="fr-FR">DYNAMIC_TABLE_MIN_MAX</r:String>
             </d:QuestionGridName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m332raks-QOP-mbuqwsr2</r:ID>
+               <r:ID>m332raks-QOP-m333hpwf</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="fr-FR">DYNAMIC_TABLE_FIXED1</r:String>
+                  <r:String xml:lang="fr-FR">DYNAMIC_TABLE_MIN_MAX1</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m332raks-RDOP-mbuqwsr2</r:ID>
+                  <r:ID>m332raks-RDOP-m333hpwf</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m332raks-QOP-mbuqwsr2</r:ID>
+                  <r:ID>m332raks-QOP-m333hpwf</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">"Dynamic table with a fixed number of lines."</d:Text>
+                  <d:Text xml:lang="fr-FR">"Regular dynamic table"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
                <d:Roster baseCodeValue="1"
                          codeIterationValue="1"
-                         minimumRequired="5"
+                         minimumRequired="1"
                          maximumAllowed="5"/>
             </d:GridDimension>
             <d:GridDimension displayCode="false" displayLabel="false" rank="2">
@@ -287,76 +250,7 @@
                   <d:TextDomain maxLength="249">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>m332raks-RDOP-mbuqwsr2</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:GridAttachment>
-                     <d:CellCoordinatesAsDefined>
-                        <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
-                        <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
-                     </d:CellCoordinatesAsDefined>
-                  </d:GridAttachment>
-               </d:GridResponseDomainInMixed>
-            </d:StructuredMixedGridResponseDomain>
-         </d:QuestionGrid>
-         <d:QuestionGrid>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqjp9e</r:ID>
-            <r:Version>1</r:Version>
-            <d:QuestionGridName>
-               <r:String xml:lang="fr-FR">DYNAMIC_TABLE_MIN_MAX</r:String>
-            </d:QuestionGridName>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqjp9e-QOP-mbuqouvx</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">DYNAMIC_TABLE_MIN_MAX1</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mbuqjp9e-RDOP-mbuqouvx</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mbuqjp9e-QOP-mbuqouvx</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <d:QuestionText>
-               <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">"Regular dynamic with min/max lines defined by a number."</d:Text>
-               </d:LiteralText>
-            </d:QuestionText>
-            <d:GridDimension displayCode="false" displayLabel="false" rank="1">
-               <d:Roster baseCodeValue="1"
-                         codeIterationValue="1"
-                         minimumRequired="1"
-                         maximumAllowed="5"/>
-            </d:GridDimension>
-            <d:GridDimension displayCode="false" displayLabel="false" rank="2">
-               <d:CodeDomain>
-                  <r:CodeListReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>mbuqjp9e-secondDimension-fakeCL-1</r:ID>
-                     <r:Version>1</r:Version>
-                     <r:TypeOfObject>CodeList</r:TypeOfObject>
-                  </r:CodeListReference>
-               </d:CodeDomain>
-            </d:GridDimension>
-            <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>mbuqjp9e-RDOP-mbuqouvx</r:ID>
+                        <r:ID>m332raks-RDOP-m333hpwf</r:ID>
                         <r:Version>1</r:Version>
                         <r:TextRepresentation maxLength="249"/>
                      </r:OutParameter>
@@ -401,7 +295,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">"Dynamic table with size defined by a VTL expression."</d:Text>
+                  <d:Text xml:lang="fr-FR">"Dynamic table with size defined by a VTL expression"</d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -465,101 +359,6 @@
                </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
          </d:QuestionGrid>
-         <d:QuestionGrid>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqxh9g</r:ID>
-            <r:Version>1</r:Version>
-            <d:QuestionGridName>
-               <r:String xml:lang="fr-FR">DYNAMIC_TABLE_VTL_MIN_MAX</r:String>
-            </d:QuestionGridName>
-            <r:OutParameter isArray="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqxh9g-QOP-mbuqjdcl</r:ID>
-               <r:Version>1</r:Version>
-               <r:ParameterName>
-                  <r:String xml:lang="fr-FR">DYNAMIC_TABLE_VTL_MIN_MAX1</r:String>
-               </r:ParameterName>
-            </r:OutParameter>
-            <r:Binding>
-               <r:SourceParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mbuqxh9g-RDOP-mbuqjdcl</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:SourceParameterReference>
-               <r:TargetParameterReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mbuqxh9g-QOP-mbuqjdcl</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
-               </r:TargetParameterReference>
-            </r:Binding>
-            <d:QuestionText>
-               <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">"Dynamic table with min/max number of lines defined by a VTL expression."</d:Text>
-               </d:LiteralText>
-            </d:QuestionText>
-            <d:GridDimension displayCode="false" displayLabel="false" rank="1">
-               <d:Roster baseCodeValue="1" codeIterationValue="1">
-                  <d:ConditionForContinuation>
-                     <r:Command>
-                        <r:ProgramLanguage>vtl</r:ProgramLanguage>
-                        <r:InParameter isArray="false">
-                           <r:Agency>fr.insee</r:Agency>
-                           <r:ID>mbuqxh9g-DIM1-ITE-IP-1</r:ID>
-                           <r:Version>1</r:Version>
-                           <r:ParameterName>
-                              <r:String xml:lang="fr-FR">HOW_MANY</r:String>
-                           </r:ParameterName>
-                        </r:InParameter>
-                        <r:Binding>
-                           <r:SourceParameterReference>
-                              <r:Agency>fr.insee</r:Agency>
-                              <r:ID>m333cu10-QOP-m333g4uu</r:ID>
-                              <r:Version>1</r:Version>
-                              <r:TypeOfObject>OutParameter</r:TypeOfObject>
-                           </r:SourceParameterReference>
-                           <r:TargetParameterReference>
-                              <r:Agency>fr.insee</r:Agency>
-                              <r:ID>mbuqxh9g-DIM1-ITE-IP-1</r:ID>
-                              <r:Version>1</r:Version>
-                              <r:TypeOfObject>InParameter</r:TypeOfObject>
-                           </r:TargetParameterReference>
-                        </r:Binding>
-                        <r:CommandContent>cast(mbuqxh9g-DIM1-ITE-IP-1, integer)</r:CommandContent>
-                     </r:Command>
-                  </d:ConditionForContinuation>
-               </d:Roster>
-            </d:GridDimension>
-            <d:GridDimension displayCode="false" displayLabel="false" rank="2">
-               <d:CodeDomain>
-                  <r:CodeListReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>mbuqxh9g-secondDimension-fakeCL-1</r:ID>
-                     <r:Version>1</r:Version>
-                     <r:TypeOfObject>CodeList</r:TypeOfObject>
-                  </r:CodeListReference>
-               </d:CodeDomain>
-            </d:GridDimension>
-            <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomainInMixed>
-                  <d:TextDomain maxLength="249">
-                     <r:OutParameter isArray="false">
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>mbuqxh9g-RDOP-mbuqjdcl</r:ID>
-                        <r:Version>1</r:Version>
-                        <r:TextRepresentation maxLength="249"/>
-                     </r:OutParameter>
-                  </d:TextDomain>
-                  <d:GridAttachment>
-                     <d:CellCoordinatesAsDefined>
-                        <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
-                        <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
-                     </d:CellCoordinatesAsDefined>
-                  </d:GridAttachment>
-               </d:GridResponseDomainInMixed>
-            </d:StructuredMixedGridResponseDomain>
-         </d:QuestionGrid>
       </d:QuestionScheme>
       <l:CategoryScheme>
          <r:Agency>fr.insee</r:Agency>
@@ -579,22 +378,6 @@
       </l:CategoryScheme>
       <l:CategoryScheme>
          <r:Agency>fr.insee</r:Agency>
-         <r:ID>CategoryScheme-mbuqjp9e-secondDimension-fakeCL-1</r:ID>
-         <r:Version>1</r:Version>
-         <r:Label>
-            <r:Content xml:lang="fr-FR">FAKE-CODELIST-mbuqjp9e-secondDimension-fakeCL-1</r:Content>
-         </r:Label>
-         <l:Category>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-mbuqjp9e-secondDimension-fakeCL-1-1</r:ID>
-            <r:Version>1</r:Version>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">"Foo"</r:Content>
-            </r:Label>
-         </l:Category>
-      </l:CategoryScheme>
-      <l:CategoryScheme>
-         <r:Agency>fr.insee</r:Agency>
          <r:ID>CategoryScheme-m333nmhe-secondDimension-fakeCL-1</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
@@ -603,22 +386,6 @@
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>CA-m333nmhe-secondDimension-fakeCL-1-1</r:ID>
-            <r:Version>1</r:Version>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">"Bar"</r:Content>
-            </r:Label>
-         </l:Category>
-      </l:CategoryScheme>
-      <l:CategoryScheme>
-         <r:Agency>fr.insee</r:Agency>
-         <r:ID>CategoryScheme-mbuqxh9g-secondDimension-fakeCL-1</r:ID>
-         <r:Version>1</r:Version>
-         <r:Label>
-            <r:Content xml:lang="fr-FR">FAKE-CODELIST-mbuqxh9g-secondDimension-fakeCL-1</r:Content>
-         </r:Label>
-         <l:Category>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-mbuqxh9g-secondDimension-fakeCL-1-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">"Bar"</r:Content>
@@ -674,30 +441,6 @@
          </l:CodeList>
          <l:CodeList>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqjp9e-secondDimension-fakeCL-1</r:ID>
-            <r:Version>1</r:Version>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">FAKE-CODELIST-mbuqjp9e-secondDimension-fakeCL-1</r:Content>
-            </r:Label>
-            <l:HierarchyType>Regular</l:HierarchyType>
-            <l:Level levelNumber="1">
-               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
-            </l:Level>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqjp9e-secondDimension-fakeCL-1-1</r:ID>
-               <r:Version>1</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-mbuqjp9e-secondDimension-fakeCL-1-1</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-         </l:CodeList>
-         <l:CodeList>
-            <r:Agency>fr.insee</r:Agency>
             <r:ID>m333nmhe-secondDimension-fakeCL-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
@@ -714,30 +457,6 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-m333nmhe-secondDimension-fakeCL-1-1</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-         </l:CodeList>
-         <l:CodeList>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqxh9g-secondDimension-fakeCL-1</r:ID>
-            <r:Version>1</r:Version>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">FAKE-CODELIST-mbuqxh9g-secondDimension-fakeCL-1</r:Content>
-            </r:Label>
-            <l:HierarchyType>Regular</l:HierarchyType>
-            <l:Level levelNumber="1">
-               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
-            </l:Level>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqxh9g-secondDimension-fakeCL-1-1</r:ID>
-               <r:Version>1</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-mbuqxh9g-secondDimension-fakeCL-1-1</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -778,33 +497,7 @@
          </r:Label>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqqlrf</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">DYNAMIC_TABLE_FIXED1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">Foo</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>m332raks-QOP-mbuqwsr2</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>m332raks</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
-            </l:VariableRepresentation>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqutel</r:ID>
+            <r:ID>m332noyi</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">DYNAMIC_TABLE_MIN_MAX1</r:String>
@@ -814,13 +507,13 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqjp9e-QOP-mbuqouvx</r:ID>
+               <r:ID>m332raks-QOP-m333hpwf</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
             <r:QuestionReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqjp9e</r:ID>
+               <r:ID>m332raks</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
@@ -886,32 +579,6 @@
                <r:TextRepresentation maxLength="249"/>
             </l:VariableRepresentation>
          </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqnn8u</r:ID>
-            <r:Version>1</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="fr-FR">DYNAMIC_TABLE_VTL_MIN_MAX1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="fr-FR">Bar</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqxh9g-QOP-mbuqjdcl</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqxh9g</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:TextRepresentation maxLength="249"/>
-            </l:VariableRepresentation>
-         </l:Variable>
          <l:VariableGroup>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>m332raks-vg</r:ID>
@@ -926,34 +593,11 @@
             </r:BasedOnObject>
             <l:TypeOfVariableGroup>Loop</l:TypeOfVariableGroup>
             <l:VariableGroupName>
-               <r:String>DYNAMIC_TABLE_FIXED</r:String>
-            </l:VariableGroupName>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqqlrf</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-         </l:VariableGroup>
-         <l:VariableGroup>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqjp9e-vg</r:ID>
-            <r:Version>1</r:Version>
-            <r:BasedOnObject>
-               <r:BasedOnReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mbuqjp9e</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-               </r:BasedOnReference>
-            </r:BasedOnObject>
-            <l:TypeOfVariableGroup>Loop</l:TypeOfVariableGroup>
-            <l:VariableGroupName>
                <r:String>DYNAMIC_TABLE_MIN_MAX</r:String>
             </l:VariableGroupName>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqutel</r:ID>
+               <r:ID>m332noyi</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
@@ -977,29 +621,6 @@
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>m333bep2</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </r:VariableReference>
-         </l:VariableGroup>
-         <l:VariableGroup>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>mbuqxh9g-vg</r:ID>
-            <r:Version>1</r:Version>
-            <r:BasedOnObject>
-               <r:BasedOnReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mbuqxh9g</r:ID>
-                  <r:Version>1</r:Version>
-                  <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-               </r:BasedOnReference>
-            </r:BasedOnObject>
-            <l:TypeOfVariableGroup>Loop</l:TypeOfVariableGroup>
-            <l:VariableGroupName>
-               <r:String>DYNAMIC_TABLE_VTL_MIN_MAX</r:String>
-            </l:VariableGroupName>
-            <r:VariableReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqnn8u</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
@@ -1034,19 +655,7 @@
             </l:VariableGroupReference>
             <l:VariableGroupReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqjp9e-vg</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>VariableGroup</r:TypeOfObject>
-            </l:VariableGroupReference>
-            <l:VariableGroupReference>
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>m333nmhe-vg</r:ID>
-               <r:Version>1</r:Version>
-               <r:TypeOfObject>VariableGroup</r:TypeOfObject>
-            </l:VariableGroupReference>
-            <l:VariableGroupReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>mbuqxh9g-vg</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>VariableGroup</r:TypeOfObject>
             </l:VariableGroupReference>
@@ -1105,8 +714,10 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>InstrumentScheme-m332q6bo</r:ID>
             <r:Version>1</r:Version>
-             <d:Instrument
-             >
+            <d:Instrument xmlns:c="ddi:conceptualcomponent:3_3"
+                          xmlns:cm="ddi:comparative:3_3"
+                          xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
+                          xmlns:pr="ddi:ddiprofile:3_3">
                <r:Agency>fr.insee</r:Agency>
                <r:ID>Instrument-m332q6bo</r:ID>
                <r:Version>1</r:Version>
