@@ -1,6 +1,5 @@
 package fr.insee.eno.treatments;
 
-import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticPaginationQuestionMode;
 import fr.insee.eno.treatments.dto.Regroupement;
 import fr.insee.eno.treatments.dto.Regroupements;
@@ -8,7 +7,6 @@ import fr.insee.lunatic.model.flat.ComponentSimpleResponseType;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.Question;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,8 +21,8 @@ public class LunaticPaginationRegrouping extends LunaticPaginationQuestionMode {
     /**
      * @param regroupements questions regroupements for a questionnaire
      */
-    public LunaticPaginationRegrouping(Regroupements regroupements, List<Loop> enoLoops) {
-        super(enoLoops);
+    public LunaticPaginationRegrouping(Regroupements regroupements) {
+        super();
         this.regroupements = regroupements;
     }
 
