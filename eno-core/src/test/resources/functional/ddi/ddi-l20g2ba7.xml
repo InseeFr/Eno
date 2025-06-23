@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.16.0. Generation date : 20/06/2025 - 13:25:13-->
+             isMaintainable="true"><!--Eno version : 2.16.0. Generation date : 23/06/2025 - 16:27:41-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-l20g2ba7</r:ID>
    <r:Version>1</r:Version>
@@ -2274,7 +2274,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2342,7 +2342,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2476,7 +2476,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2610,7 +2610,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2656,7 +2656,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2746,7 +2746,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2814,7 +2814,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -8792,7 +8792,10 @@ never cared for what they say never cared for games they play never cared for wh
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
-               <d:Roster baseCodeValue="1" codeIterationValue="1"/>
+               <d:Roster baseCodeValue="1"
+                         codeIterationValue="1"
+                         minimumRequired="1"
+                         maximumAllowed="5"/>
             </d:GridDimension>
             <d:GridDimension displayCode="false" displayLabel="false" rank="2">
                <d:CodeDomain>
