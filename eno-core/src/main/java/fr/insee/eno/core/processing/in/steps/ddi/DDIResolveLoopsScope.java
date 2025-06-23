@@ -26,6 +26,7 @@ public class DDIResolveLoopsScope implements ProcessingStep<EnoQuestionnaire> {
     public void apply(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
         for (Loop loop : enoQuestionnaire.getLoops()) {
+            loop.getLoopScope().clear();
             resolveLoopScope(loop);
         }
     }

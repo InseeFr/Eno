@@ -37,6 +37,7 @@ public abstract class Loop extends EnoIdentifiableObject {
 
     /** Loop business name.
      * Unused in Lunatic. */
+    @Pogues("getName()")
     @DDI("getConstructNameArray(0).getStringArray(0).getStringValue()")
     private String name;
 
@@ -44,9 +45,20 @@ public abstract class Loop extends EnoIdentifiableObject {
     @DDI("T(fr.insee.eno.core.model.navigation.Loop).mapLoopItemReferences(#this, #index)")
     private final List<ItemReference> loopItems = new ArrayList<>();
 
-    @Pogues("getShouldSplitIterations() ?: false")
+    // Note: in the current Pogues model, the "member reference" property for loops is a list that should contain
+    // exactly two elements. It is what it is...
+    /** Identifier of the component (sequence or subsequence) on which the loop starts.
+     * Mapped from Pogues and used to compute the loop's scope. */
+    @Pogues("getMemberReference().getFirst()")
+    private String poguesStartReference;
+    /** Identifier of the component (sequence or subsequence) on which the loop starts.
+     * Mapped from Pogues and used to compute the loop's scope. */
+    @Pogues("getMemberReference().getLast()")
+    private String poguesEndReference;
+
+    @Pogues("isShouldSplitIterations()")
     @Lunatic("setIsPaginatedByIterations(#param)")
-    private boolean occurrencePagination;
+    private Boolean occurrencePagination;
 
     /** The occurrences of a loop can be filtered.
      * This attribute holds the identifier of the occurrence filter object.
@@ -58,7 +70,11 @@ public abstract class Loop extends EnoIdentifiableObject {
     /** References of sequences or subsequences that are in the scope of the loop.
      * Note: in Pogues a loop can only be defined on sequence or subsequences.
      * (In other formats, nothing makes it formally impossible to have loops defined directly on questions.)
-     * In DDI, this property is filled by a processing using the "loopItems" property. */
+     * In DDI, this property is filled by a processing using the "loopItems" property.
+     * @see fr.insee.eno.core.processing.in.steps.ddi.DDIResolveLoopsScope
+     * In Poues, it is filled using the "start id" and "end id" properties.
+     * @see fr.insee.eno.core.processing.in.steps.pogues.PoguesResolveLoopScope
+     */
     private final List<StructureItemReference> loopScope = new ArrayList<>();
     
     public static List<ReferenceType> mapLoopItemReferences(LoopType ddiLoop, DDIIndex ddiIndex) {

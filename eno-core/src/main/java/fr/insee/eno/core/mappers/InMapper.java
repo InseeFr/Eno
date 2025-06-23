@@ -257,7 +257,8 @@ public abstract class InMapper extends Mapper {
     private static final List<String> LIST_PROPERTIES_EXCEPTIONS = List.of(
             "codeResponses", // due to DDI modeling of "please specify" fields of MCQ modalities
             "variables", // temporary, due to non-collected cells in tables
-            "bindingReferences" // due to the fact that Pogues allows reference of non-existing variables in expressions
+            "bindingReferences", // due to the fact that Pogues allows reference of non-existing variables in expressions
+            "loops" // dut to the fact that roundabouts are described as loop objects in DDI
     );
 
     /** Returns the condition that determines if the mapper should iterate on existing objects of the Eno collection
@@ -303,7 +304,8 @@ public abstract class InMapper extends Mapper {
 
     private static void checkTypesEquality(EnoObject enoObject2, EnoObject converted) {
         if (! enoObject2.getClass().equals(converted.getClass()))
-            throw new ConversionException("Inconsistent conversion types between inputs.");
+            throw new ConversionException("Inconsistent conversion types between inputs: "
+                    + enoObject2.getClass().getSimpleName() + " and " + converted.getClass().getSimpleName());
     }
 
     private EnoObject convert(Object inObject, Class<?> enoTargetType) {
