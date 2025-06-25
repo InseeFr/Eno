@@ -1,7 +1,7 @@
 import org.sonarqube.gradle.SonarTask
 
 plugins {
-    id("org.springframework.boot") version "3.4.5" apply false
+    id("org.springframework.boot") version "3.5.0" apply false
     id("io.spring.dependency-management") version "1.1.7" apply false
     id("application")
     id("jacoco-report-aggregation")
@@ -16,7 +16,7 @@ java {
 
 allprojects {
     group = "fr.insee.eno"
-    version = "3.48.0"
+    version = "3.52.0"
 }
 
 subprojects {

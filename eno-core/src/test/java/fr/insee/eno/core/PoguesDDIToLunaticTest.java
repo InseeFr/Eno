@@ -86,7 +86,6 @@ class PoguesDDIToLunaticTest {
             "durations-2",
             "dynamic-table",
             "dynamic-table-2",
-            "dynamic-table-size",
             "dynamic-unit",
             "filters-calculated",
             "filters-extended",

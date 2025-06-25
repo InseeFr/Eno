@@ -4,6 +4,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.52.0] - 2025-16-12
+### :sparkles: New Features
+- [`19aa239`](https://github.com/InseeFr/Eno/commit/19aa239ea85c97f42755600a7b6a53e181c39afc) - max length please specify *(PR [#1283](https://github.com/InseeFr/Eno/pull/1277) by @RemiVerriez)*
+
+### :bug: Bug Fixes
+- [`f1438cc`](https://github.com/InseeFr/Eno/commit/f1438cc3bac4ed5e2d879dbcd0432e901e38b372) - clarification variable cleaning *(PR #1284](https://github.com/InseeFr/Eno/pull/1284) by [@chloe-renaud](https://github.com/chloe-renaud))*
+- [`ef8594f`](https://github.com/InseeFr/Eno/commit/ef8594f738b1c3e3c2521a6f9ae01fa26772f580) - **lunatic**: iterations for standalone loops *(PR [#1273](https://github.com/InseeFr/Eno/pull/1273) by [@RemiVerriez](https://github.com/RemiVerriez))*
+- [`38f9e3e`](https://github.com/InseeFr/Eno/commit/38f9e3ebe86e3cf3869f5c162036458e754eb0ab) - update all minor dependencies *(PR [#1279](https://github.com/InseeFr/Eno/pull/1279) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+
+## [3.51.0] - 2025-06-12
+### :sparkles: New Features
+- [`8fd2eda`](https://github.com/InseeFr/Eno/commit/8fd2eda49ebc7bdb1cf120b2c3e2db60d55416b5) - pairwise improvments *(PR [#1277](https://github.com/InseeFr/Eno/pull/1277) by [@laurentC35](https://github.com/laurentC35))*
+
+### :construction_worker: Build System
+- [`6ba3688`](https://github.com/InseeFr/Eno/commit/6ba36885c5715beb52d751ae1b3e1d789724d6bb) - don't trigger a release for workflow changes *(commit by [@nsenave](https://github.com/nsenave))*
+- [`d431de4`](https://github.com/InseeFr/Eno/commit/d431de44c7958c62ca138fd97ca3b2d36321ceff) - **sonar**: add main branch name *(commit by [@nsenave](https://github.com/nsenave))*
+- [`978c4cc`](https://github.com/InseeFr/Eno/commit/978c4cc39e902537bf4d876ce6ad31e8d608f056) - remove jar from release 🌿 *(commit by [@nsenave](https://github.com/nsenave))*
+- [`f4adf38`](https://github.com/InseeFr/Eno/commit/f4adf38139ca1d5cf98620b7b66c03eb4c623328) - disable cache where it's not needed *(commit by [@nsenave](https://github.com/nsenave))*
+
+
+## [3.50.0] - 2025-10-06
+### :sparkles: New Features
+- [`ba8de4f`](https://github.com/InseeFr/Eno/commit/ba8de4fe36e28745b8e92cb43922cf13da60bd17) - add format controls in interview modes (#1278) *(PR [#1278](https://github.com/InseeFr/Eno/pull/1278) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+
+## [3.49.0] - 2025-06-06
+### :sparkles: New Features
+- [`5b86f28`](https://github.com/InseeFr/Eno/commit/5b86f2851c7870516b0bb38bb258d0e977592b04) - added isIgnoredByLunatic property to filter result variables *(PR [#1282](https://github.com/InseeFr/Eno/pull/1282) by [@chloe-renaud](https://github.com/chloe-renaud))*
+
+### :white_check_mark: Tests
+- [`7b743ba`](https://github.com/InseeFr/Eno/commit/7b743ba1f84ce159cb59294549bce0ac29326ed8) - **readonly cells**: pogues and lunatic unit tests *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`0c7b19e`](https://github.com/InseeFr/Eno/commit/0c7b19ef8c3eb91fa81f09afdff2e1eb9fa98f41) - semantic versioning *(PR [#1281](https://github.com/InseeFr/Eno/pull/1281) by [@nsenave](https://github.com/nsenave))*
+- [`5cc00ab`](https://github.com/InseeFr/Eno/commit/5cc00ab0e026881a44672391ce05f66602ec5e8a) - repair release workflow *(PR [#1285](https://github.com/InseeFr/Eno/pull/1285) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.48.0] - 2025-05-21
 ### :sparkles: New Features
 - [`6285bf2`](https://github.com/InseeFr/Eno/commit/6285bf25722b3d14011ea5aee6cbf256b72af38b) - **lunatic**: readonly table cells *(PR [#1267](https://github.com/InseeFr/Eno/pull/1267) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -560,7 +598,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.31.2]: https://github.com/InseeFr/Eno/compare/3.31.1...3.31.2
 [3.31.5]: https://github.com/InseeFr/Eno/compare/3.31.2...3.31.5
 [3.32.1]: https://github.com/InseeFr/Eno/compare/3.31.5...3.32.1
-[3.32.1]: https://github.com/InseeFr/Eno/compare/3.32.1...3.32.2
+[3.32.2]: https://github.com/InseeFr/Eno/compare/3.32.1...3.32.2
 [3.33.0]: https://github.com/InseeFr/Eno/compare/3.32.2...3.33.0
 [3.33.1]: https://github.com/InseeFr/Eno/compare/3.33.0...3.33.1
 [3.33.2]: https://github.com/InseeFr/Eno/compare/3.33.1...3.33.2
@@ -579,3 +617,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.43.0]: https://github.com/InseeFr/Eno/compare/3.41.0...3.43.0
 [3.47.0]: https://github.com/InseeFr/Eno/compare/3.43.0...3.47.0
 [3.48.0]: https://github.com/InseeFr/Eno/compare/3.47.0...3.48.0
+[3.49.0]: https://github.com/InseeFr/Eno/compare/3.48.0...3.49.0
+[3.50.0]: https://github.com/InseeFr/Eno/compare/3.49.0...3.50.0
+[3.51.0]: https://github.com/InseeFr/Eno/compare/3.50.0...3.51.0
+[3.52.0]: https://github.com/InseeFr/Eno/compare/3.51.0...3.52.0
