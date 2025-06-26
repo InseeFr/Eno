@@ -115,9 +115,13 @@ public class EnoCatalog {
         // Controls
         this.getQuestions().forEach(enoQuestion ->
                 labels.addAll(enoQuestion.getControls().stream().map(Control::getMessage).toList()));
-        enoQuestionnaire.getRoundaboutSequences().forEach(roundaboutSequence ->
-                labels.addAll(roundaboutSequence.getControls().stream()
-                        .map(Control::getMessage).filter(Objects::nonNull).toList()));
+        enoQuestionnaire.getRoundaboutSequences().forEach(roundaboutSequence -> {
+            labels.addAll(roundaboutSequence.getControls().stream()
+                    .map(Control::getMessage).filter(Objects::nonNull).toList());
+            labels.add(roundaboutSequence.getOccurrenceLabel());
+            if (roundaboutSequence.getOccurrenceDescription() != null)
+                labels.add(roundaboutSequence.getOccurrenceDescription());
+        });
         // Cell label in no data cells
         enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(question -> question instanceof TableQuestion || question instanceof DynamicTableQuestion)

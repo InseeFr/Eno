@@ -193,6 +193,7 @@ class PoguesDDIToEnoTest {
             loop.setPoguesEndReference(null);
             loop.setOccurrencePagination(null);
         });
+        enoQuestionnaire.getRoundaboutSequences().forEach(roundaboutSequence -> roundaboutSequence.setInnerLoop(null));
     }
     private void removeCodeItemParentValues(CodeItem codeItem) {
         codeItem.setParentValue(null);

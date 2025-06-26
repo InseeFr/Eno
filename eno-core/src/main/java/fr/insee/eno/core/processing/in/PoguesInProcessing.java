@@ -4,10 +4,7 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.processing.ProcessingPipeline;
 import fr.insee.eno.core.processing.in.steps.ddi.DDIInsertCodeLists;
 import fr.insee.eno.core.processing.in.steps.ddi.DDIInsertMultipleChoiceLabels;
-import fr.insee.eno.core.processing.in.steps.pogues.PoguesEditUnitLabelType;
-import fr.insee.eno.core.processing.in.steps.pogues.PoguesNestedCodeLists;
-import fr.insee.eno.core.processing.in.steps.pogues.PoguesResolveLoopScope;
-import fr.insee.eno.core.processing.in.steps.pogues.PoguesSortLoops;
+import fr.insee.eno.core.processing.in.steps.pogues.*;
 
 public class PoguesInProcessing {
 
@@ -21,6 +18,7 @@ public class PoguesInProcessing {
                 .then(new DDIInsertCodeLists())
                 .then(new DDIInsertMultipleChoiceLabels())
                 .then(new PoguesEditUnitLabelType())
+                .then(new PoguesRoundaboutLoops())
                 .then(new PoguesSortLoops()) // this step is required for Pogues+DDI mapping (might be removed when Pogues only)
                 //.then(new PoguesResolveLoopScope()) // Disabled since it isn't implemented yet
                 //.then(new PoguesCodeResponseDetails()) // Disabled since it isn't implemented yet
