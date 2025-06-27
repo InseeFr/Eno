@@ -1,5 +1,11 @@
 # Eno Releases note
 
+## [v2.16.1] - 2025-06-27
+### :bug: Bug Fixes
+- [`4d91c13`](https://github.com/InseeFr/Eno/commit/4d91c13be24414035b6ba853093ecf7a92286664) - **deps**: update all minor dependencies *(PR [#1295](https://github.com/InseeFr/Eno/pull/1295) by [@renovate[bot]](https://github.com/apps/renovate))*
+- [`6031b09`](https://github.com/InseeFr/Eno/commit/6031b0964ab9497024096f55a49d7743f105089d) - **paper**: identifier placeholder in business templates *(PR [#1299](https://github.com/InseeFr/Eno/pull/1299) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [v2.16.0] - 2025-06-17
 ### :sparkles: New Features
 - [`c7fc011`](https://github.com/InseeFr/Eno/commit/c7fc0115e5f618aa6de3bc1b65a4932a053f35ab) - **pogues2ddi**: new format for min max in dynamic table *(PR [#1288](https://github.com/InseeFr/Eno/pull/1288) by [@nsenave](https://github.com/nsenave))*
@@ -415,3 +421,4 @@
 [v2.12.6]: https://github.com/InseeFr/Eno/compare/v2.12.5...v2.12.6
 [v2.15.1]: https://github.com/InseeFr/Eno/compare/v2.15.0...v2.15.1
 [v2.16.0]: https://github.com/InseeFr/Eno/compare/v2.15.2...v2.16.0
+[v2.16.1]: https://github.com/InseeFr/Eno/compare/v2.16.0...v2.16.1
