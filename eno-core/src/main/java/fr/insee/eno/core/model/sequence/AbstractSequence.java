@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.sequence;
 
+import fr.insee.ddi.lifecycle33.datacollection.InstructionType;
 import fr.insee.ddi.lifecycle33.datacollection.SequenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
@@ -12,8 +13,11 @@ import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.reference.DDIIndex;
 import fr.insee.lunatic.model.flat.Sequence;
 import fr.insee.lunatic.model.flat.Subsequence;
+import fr.insee.pogues.model.ComponentType;
+import fr.insee.pogues.model.RoundaboutType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +29,7 @@ import java.util.List;
  * In Lunatic, a sequence is a Sequence object, a subsequence is a Subsequence object. */
 @Getter
 @Setter
-@Context(format = Format.POGUES, type = fr.insee.pogues.model.SequenceType.class)
+@Context(format = Format.POGUES, type = {fr.insee.pogues.model.SequenceType.class, RoundaboutType.class})
 @Context(format = Format.DDI, type = SequenceType.class)
 @Context(format = Format.LUNATIC, type = {Sequence.class, Subsequence.class})
 public abstract class AbstractSequence extends EnoIdentifiableObject implements EnoComponent {
@@ -45,7 +49,7 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
      * In DDI, the SequenceType object contains the list of references to the instructions.
      * In Lunatic, instructions and declarations belongs to the same list. */
     @Pogues("getDeclaration().?[#this.getPosition().value() == 'AFTER_QUESTION_TEXT']")
-    @DDI("getInterviewerInstructionReferenceList().![#index.get(#this.getIDArray(0).getStringValue())]")
+    @DDI("T(fr.insee.eno.core.model.sequence.AbstractSequence).mapDDIInstructions(#this, #index)")
     @Lunatic("getDeclarations()")
     private final List<Instruction> instructions = new ArrayList<>();
 
@@ -75,7 +79,28 @@ public abstract class AbstractSequence extends EnoIdentifiableObject implements 
      * TODO: proper oop to make a difference between subsequences/question, loops/filters and controls/declarations
      * In DDI, this list is filled in a processing class using the 'sequenceItems' list.
      * In Pogues, for now roundabouts are filtered (we'll see how we want to manage these later). */
-    @Pogues("getChild().?[! (#this instanceof T(fr.insee.pogues.model.RoundaboutType))]")
+    @Pogues("T(fr.insee.eno.core.model.sequence.AbstractSequence).mapPoguesStructure(#this)")
     private final List<StructureItemReference> sequenceStructure = new ArrayList<>();
+
+    public static List<ComponentType> mapPoguesStructure(fr.insee.pogues.model.SequenceType poguesSequence) {
+        return poguesSequence.getChild().stream()
+                .filter(child -> !(child instanceof RoundaboutType)).toList();
+    }
+    /** Pogues roundabout sequence objects don't have child components. */
+    public static List<ComponentType> mapPoguesStructure(RoundaboutType poguesRoundabout) {
+        return new ArrayList<>();
+    }
+
+    public static List<InstructionType> mapDDIInstructions(SequenceType ddiSequence, DDIIndex ddiIndex) {
+        return ddiSequence.getInterviewerInstructionReferenceList().stream()
+                .map(instructionReference -> ddiIndex.get(instructionReference.getIDArray(0).getStringValue()))
+                .map(InstructionType.class::cast)
+                .filter(ddiInstruction -> {
+                    String instructionName = ddiInstruction.getInstructionNameArray(0).getStringArray(0).getStringValue();
+                    return ! (RoundaboutSequence.DDI_INSTANCE_LABEL_TYPE.equals(instructionName)
+                            || RoundaboutSequence.DDI_INSTANCE_DESCRIPTION_TYPE.equals(instructionName));
+                })
+                .toList();
+    }
 
 }

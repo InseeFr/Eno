@@ -72,6 +72,12 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
         filterDescription.setPage(numPage);
     }
 
+    @Override
+    boolean areOccurrencesPaginated(Loop lunaticLoop) {
+        Boolean value = lunaticLoop.getIsPaginatedByIterations();
+        return value != null && value;
+    }
+
     /**
      * Checks if the given component has a declaration (one or more) or a description.
      * @param component Lunatic component.

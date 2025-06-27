@@ -15,7 +15,7 @@ La deuxième section est un résumé des éléments de syntaxe SpEL qui sont uti
 
 _Référence:_ 
 
-https://docs.spring.io/spring-framework/docs/current/reference/html/core.html
+https://docs.spring.io/spring-framework/reference/core/expressions/language-ref.html
 
 ### Mot-clés SpEL
 

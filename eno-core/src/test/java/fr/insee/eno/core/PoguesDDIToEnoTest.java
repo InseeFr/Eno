@@ -132,7 +132,6 @@ class PoguesDDIToEnoTest {
 
         // Given Pogues & DDI inputs and Eno parameters
         // (for questionnaires that does not contain features described in Pogues and not in DDI)
-        ClassLoader classLoader = this.getClass().getClassLoader();
         DDIInstanceDocument ddiQuestionnaire = DDIDeserializer.deserialize(classLoader.getResourceAsStream(
                 "integration/ddi/ddi-" + classifier + ".xml"));
         Questionnaire poguesQuestionnaire = PoguesDeserializer.deserialize(classLoader.getResourceAsStream(
@@ -189,6 +188,12 @@ class PoguesDDIToEnoTest {
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(SuggesterQuestion.class::isInstance).map(SuggesterQuestion.class::cast)
                 .forEach(suggesterQuestion -> suggesterQuestion.setArbitraryResponse(null));
+        enoQuestionnaire.getLoops().forEach(loop -> {
+            loop.setPoguesStartReference(null);
+            loop.setPoguesEndReference(null);
+            loop.setOccurrencePagination(null);
+        });
+        enoQuestionnaire.getRoundaboutSequences().forEach(roundaboutSequence -> roundaboutSequence.setInnerLoop(null));
     }
     private void removeCodeItemParentValues(CodeItem codeItem) {
         codeItem.setParentValue(null);

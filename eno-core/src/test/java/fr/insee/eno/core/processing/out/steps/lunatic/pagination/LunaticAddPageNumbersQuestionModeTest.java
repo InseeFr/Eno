@@ -23,7 +23,6 @@ class LunaticAddPageNumbersQuestionModeTest {
 
     @BeforeEach
     void init() {
-        LunaticPaginationQuestionMode processing = new LunaticPaginationQuestionMode();
 
         questionnaire = new Questionnaire();
 
@@ -99,12 +98,15 @@ class LunaticAddPageNumbersQuestionModeTest {
 
         questionnaire.getComponents().addAll(components);
 
+
+        LunaticPaginationQuestionMode processing = new LunaticPaginationQuestionMode();
+
         processing.apply(questionnaire);
     }
 
     @Test
     void shouldQuestionnaireHavePaginationPropertySet() {
-        assertEquals("question", questionnaire.getPagination());
+        assertEquals(Pagination.QUESTION, questionnaire.getPaginationEnum());
     }
 
     @Test
@@ -128,7 +130,7 @@ class LunaticAddPageNumbersQuestionModeTest {
     @Test
     void shouldComponentsInPairwiseLinksToHaveSamePage() {
         assertEquals("7.3", p73.getPage());
-        // components in pairwise links have same page as the paiwise component
+        // components in pairwise links have same page as the pairwise component
         assertEquals("7.3", n73.getPage());
         assertEquals("7.3", co73.getPage());
     }

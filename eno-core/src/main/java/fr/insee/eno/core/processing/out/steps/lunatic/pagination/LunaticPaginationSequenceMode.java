@@ -7,11 +7,12 @@
  import java.util.List;
 
 /**
- * Post processing of a lunatic questionnaire. With this processing, one sequence is displayed on each page.
+ * Post-processing of a Lunatic questionnaire. With this processing, one sequence is displayed on each page.
  */
 public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
 
     public LunaticPaginationSequenceMode() {
+        // No need of Eno loops metadata in sequence mode pagination
         super(false, LunaticParameters.LunaticPaginationMode.SEQUENCE);
     }
 
@@ -54,6 +55,12 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
         if (pageCount == 0) pageCount ++;
         String numPage = numPagePrefix + pageCount;
         filterDescription.setPage(numPage);
+    }
+
+    @Override
+    boolean areOccurrencesPaginated(Loop lunaticLoop) {
+        // For now pagination by occurrence isn't supported in "sequence" mode.
+        return false;
     }
 
     private boolean shouldLoopBePaginated(Loop loop) {
