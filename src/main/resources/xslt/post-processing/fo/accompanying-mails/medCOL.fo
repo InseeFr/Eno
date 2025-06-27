@@ -133,7 +133,7 @@
                         Objet&#160;: Enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddPeriode}!='')) ${BddPeriode}#end ${BddAnneeReference}
                     </fo:block>
                     <fo:block>
-                        Unité enquêtée&#160;: ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee}&#160;: ${IdMetier})
+                        Unité enquêtée&#160;: ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee}&#160;: ${Ue_IdentifiantMetier})
                     </fo:block>
                     
                     <fo:block margin-top="3mm">
