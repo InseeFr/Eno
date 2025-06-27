@@ -164,7 +164,7 @@
                     </fo:block>
                     <fo:block>
                         Unité enquêtée&#160;: ${BddRaisonSociale} (Votre
-                        ${BddLabelUniteEnquetee}&#160;: ${IdMetier})
+                        ${BddLabelUniteEnquetee}&#160;: ${Ue_IdentifiantMetier})
                     </fo:block>
 
                     <fo:block margin-top="3mm"> Identifiant de connexion : <fo:inline

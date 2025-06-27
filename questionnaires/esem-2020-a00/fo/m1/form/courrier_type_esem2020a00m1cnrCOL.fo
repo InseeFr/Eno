@@ -308,7 +308,7 @@
                </fo:block>
                <fo:block font-weight="bold">
                   Ref. ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee} :
-                  ${IdMetier})
+                  ${Ue_IdentifiantMetier})
                </fo:block>
                <fo:block margin-top="5mm" font-weight="bold">
                   Madame la Directrice, Monsieur le Directeur,
@@ -542,7 +542,7 @@
                <fo:block margin-top="3mm" margin-left="1mm">
                   <fo:inline-container>
                      <fo:block font-weight="bold">Unité enquêtée</fo:block>
-                     <fo:block>Identifiant : ${IdMetier}</fo:block>
+                     <fo:block>Identifiant : ${Ue_IdentifiantMetier}</fo:block>
                      <fo:block>Raison sociale : ${BddRaisonSociale}</fo:block>
                   </fo:inline-container>
                </fo:block>

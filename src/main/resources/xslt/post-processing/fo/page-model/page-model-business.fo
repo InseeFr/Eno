@@ -71,7 +71,7 @@
             height="7mm">
             <fo:block>
                <fo:instream-foreign-object>
-                  <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" message="${IdMetier}">
+                  <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" message="${Ue_IdentifiantMetier}">
                      <barcode:code128>
                         <barcode:height>10mm</barcode:height>
                         <barcode:human-readable>
