@@ -163,7 +163,7 @@
                </fo:block>
                <fo:block font-weight="bold">
                   Ref.&#160;${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee}&#160;:
-                  ${IdMetier})
+                  ${Ue_IdentifiantMetier})
                </fo:block>
 
                <fo:block margin-top="3mm">

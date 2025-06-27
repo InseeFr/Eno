@@ -328,7 +328,7 @@
                         Objet : Enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong} ${BddAnneeReference}
                     </fo:block>
                <fo:block>
-                        Unité enquêtée : ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee} : ${IdMetier})
+                        Unité enquêtée : ${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee} : ${Ue_IdentifiantMetier})
                     </fo:block>
                <fo:block margin-top="3mm">
                         Identifiant de connexion : <fo:inline font-weight="bold">${BddIdentifiantContact}</fo:inline> (voir modalités au verso de ce courrier)
@@ -499,7 +499,7 @@
                <fo:block margin-top="3mm" margin-left="1mm">
                   <fo:inline-container>
                      <fo:block font-weight="bold">Unité enquêtée</fo:block>
-                     <fo:block>Identifiant : ${IdMetier}</fo:block>
+                     <fo:block>Identifiant : ${Ue_IdentifiantMetier}</fo:block>
                      <fo:block>Raison sociale :  </fo:block>
                      <fo:block>${BddRaisonSociale}</fo:block>
                   </fo:inline-container>
@@ -705,7 +705,7 @@
                   <fo:block>
                      <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                          message="${IdMetier}"
+                                          message="${Ue_IdentifiantMetier}"
                                           orientation="0">
                            <barcode:code39>
                               <barcode:height>10mm</barcode:height>
@@ -771,7 +771,7 @@
             <fo:block>
                <fo:instream-foreign-object>
                   <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                    message="${IdMetier}">
+                                    message="${Ue_IdentifiantMetier}">
                      <barcode:code128>
                         <barcode:height>10mm</barcode:height>
                         <barcode:human-readable>
