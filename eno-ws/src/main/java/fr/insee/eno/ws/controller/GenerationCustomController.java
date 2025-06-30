@@ -122,7 +122,7 @@ public class GenerationCustomController {
 	public ResponseEntity<byte[]> generateFOCustomParams(
 			@RequestPart(value="in") MultipartFile in,
 			@RequestPart(value="params") MultipartFile params,
-			@RequestPart(value="metadata") MultipartFile metadata,
+			@RequestPart(value="metadata", required=false) MultipartFile metadata,
 			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment)
 			throws EnoControllerException {
 		//
