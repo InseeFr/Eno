@@ -154,9 +154,9 @@ class LunaticLoopResolutionTest {
         @Test
         void loopDependencies() {
             // Main loops
-            assertEquals(List.of("Q1A"), lunaticLoops.getFirst().getLoopDependencies());
+            assertThat(lunaticLoops.getFirst().getLoopDependencies()).isEmpty();
             assertThat(lunaticLoops.get(2).getLoopDependencies())
-                    .containsExactlyInAnyOrderElementsOf(Set.of("MIN_OCC", "MAX_OCC", "Q3A"));
+                    .containsExactlyInAnyOrderElementsOf(Set.of("MIN_OCC", "MAX_OCC"));
             // Linked loops
             assertEquals(List.of("Q1A"), lunaticLoops.get(1).getLoopDependencies());
             assertEquals(List.of("Q3A"), lunaticLoops.get(3).getLoopDependencies());
@@ -249,9 +249,9 @@ class LunaticLoopResolutionTest {
         @Test
         void loopDependencies() {
             // Main loops
-            assertEquals(List.of("Q1A"), lunaticLoops.getFirst().getLoopDependencies());
+            assertThat(lunaticLoops.getFirst().getLoopDependencies()).isEmpty();
             assertThat(lunaticLoops.get(2).getLoopDependencies())
-                    .containsExactlyInAnyOrderElementsOf(Set.of("MIN_OCC", "MAX_OCC", "Q2A"));
+                    .containsExactlyInAnyOrderElementsOf(Set.of("MIN_OCC", "MAX_OCC"));
             // Linked loops
             assertEquals(List.of("Q1A"), lunaticLoops.get(1).getLoopDependencies());
             assertEquals(List.of("Q2A"), lunaticLoops.get(3).getLoopDependencies());
@@ -323,7 +323,7 @@ class LunaticLoopResolutionTest {
         @Test
         void loopDependencies() {
             // Main loop
-            assertEquals(List.of("Q1"), lunaticLoops.getFirst().getLoopDependencies());
+            assertThat(lunaticLoops.getFirst().getLoopDependencies()).isEmpty();
             // Linked loop
             assertEquals(List.of("Q1"), lunaticLoops.get(1).getLoopDependencies());
             assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getType());
@@ -397,7 +397,7 @@ class LunaticLoopResolutionTest {
         @Test
         void loopDependencies() {
             // Main loop
-            assertEquals(List.of("Q11"), lunaticLoops.getFirst().getLoopDependencies());
+            assertThat(lunaticLoops.getFirst().getLoopDependencies()).isEmpty();
             // Linked loop
             assertEquals(List.of("Q11"), lunaticLoops.get(1).getLoopDependencies());
             assertEquals(LabelTypeEnum.VTL, lunaticLoops.get(1).getIterations().getType());

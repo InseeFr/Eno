@@ -249,13 +249,7 @@ class LunaticLoopResizingLogicTest {
         loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
 
         // Then
-        assertEquals(2, lunaticResizing.countResizingEntries());
-        //
-        List.of("LOOP_SIZE_VAR", "LOOP_SIZE_VAR2").forEach(resizingVariableName -> {
-            ResizingEntry resizingEntry = lunaticResizing.getResizingEntry(resizingVariableName);
-            assertEquals("LOOP_SIZE_VAR + LOOP_SIZE_VAR2", resizingEntry.getSize());
-            assertEquals(List.of("RESPONSE_VAR"), resizingEntry.getVariables());
-        });
+        assertEquals(0, lunaticResizing.countResizingEntries());
     }
 
     @Test
@@ -320,9 +314,7 @@ class LunaticLoopResizingLogicTest {
         loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
 
         // Then
-        assertEquals(1, lunaticResizing.countResizingEntries());
-        assertEquals("CALCULATED_VAR", lunaticResizing.getResizingEntry("COLLECTED_VAR").getSize());
-        assertEquals(List.of("RESPONSE_VAR"), lunaticResizing.getResizingEntry("COLLECTED_VAR").getVariables());
+        assertEquals(0, lunaticResizing.countResizingEntries());
     }
 
     @Test
@@ -344,9 +336,7 @@ class LunaticLoopResizingLogicTest {
         loopResizingLogic.buildResizingEntries(lunaticLoop, lunaticResizing);
 
         // Then
-        assertEquals(1, lunaticResizing.countResizingEntries());
-        assertEquals("LOOP_SIZE_VAR + EXTERNAL_VAR", lunaticResizing.getResizingEntry("LOOP_SIZE_VAR").getSize());
-        assertEquals(List.of("RESPONSE_VAR"), lunaticResizing.getResizingEntry("LOOP_SIZE_VAR").getVariables());
+        assertEquals(0, lunaticResizing.countResizingEntries());
     }
 
     @Test

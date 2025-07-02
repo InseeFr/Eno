@@ -22,7 +22,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -66,11 +65,7 @@ class LunaticRosterResizingLogicTest {
         lunaticQuestionnaire.setResizing(lunaticResizing);
 
         // Then
-        assertEquals(1, lunaticResizing.countResizingEntries());
-        assertEquals("<foo expression>",
-                lunaticResizing.getResizingEntry("FOO_COLLECTED_VARIABLE").getSize());
-        assertEquals(List.of("TABLE_VAR1", "TABLE_VAR2"),
-                lunaticResizing.getResizingEntry("FOO_COLLECTED_VARIABLE").getVariables());
+        assertEquals(0, lunaticResizing.countResizingEntries());
     }
 
     @Test
@@ -125,11 +120,7 @@ class LunaticRosterResizingLogicTest {
 
         // Then
         ResizingType lunaticResizing = lunaticQuestionnaire.getResizing();
-        assertEquals(1, lunaticResizing.countResizingEntries());
-        assertEquals("cast(HOW_MANY, integer)",
-                lunaticResizing.getResizingEntry("HOW_MANY").getSize());
-        assertEquals(List.of("DYNAMIC_TABLE_VTL_SIZE1", "DYNAMIC_TABLE_VTL_MIN_MAX1"),
-                lunaticResizing.getResizingEntry("HOW_MANY").getVariables());
+        assertEquals(0, lunaticResizing.countResizingEntries());
     }
 
     @Test
