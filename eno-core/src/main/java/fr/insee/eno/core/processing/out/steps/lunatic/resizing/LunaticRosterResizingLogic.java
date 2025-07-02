@@ -37,7 +37,7 @@ public class LunaticRosterResizingLogic {
         if (enoDynamicTable.getMaxSizeExpression() == null  || enoDynamicTable.getMinSizeExpression() == null)
             return;
         // If the dynamic size min != max -> no resizing
-        if(enoDynamicTable.getMinSizeExpression().getValue().equals(enoDynamicTable.getMaxSizeExpression().getValue())){
+        if(!enoDynamicTable.getMinSizeExpression().getValue().equals(enoDynamicTable.getMaxSizeExpression().getValue())){
             return;
         }
 
