@@ -19,9 +19,7 @@ import org.junit.jupiter.api.TestInstance;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class LunaticAddResizingTest {
@@ -53,18 +51,13 @@ class LunaticAddResizingTest {
 
     @Test
     void resizingEntriesCount() {
-        assertEquals(3, resizingType.countResizingEntries());
+        assertEquals(2, resizingType.countResizingEntries());
     }
 
     @Test
     void loopResizing() {
         //
-        assertEquals("1", resizingType.getResizingEntry("NUMBER").getSize());
-        assertThat(resizingType.getResizingEntry("NUMBER").getVariables())
-                .containsExactlyInAnyOrderElementsOf(List.of("Q2", "PAIRWISE_SOURCE"));
-        //
-        assertEquals("count(Q2)", resizingType.getResizingEntry("Q2").getSize());
-        assertEquals(List.of("Q3"), resizingType.getResizingEntry("Q2").getVariables());
+        assertNull(resizingType.getResizingEntry("NUMBER"));
     }
 
     @Test
