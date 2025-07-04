@@ -133,13 +133,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         setLunaticLoopFilter(lunaticLoop);
         if (enoLoop instanceof LinkedLoop enoLinkedLoop) {
             setLinkedLoopIterations(lunaticLoop, enoLinkedLoop);
-            return;
         }
-        if (enoLoop instanceof StandaloneLoop enoStandaloneLoop) {
-            setStandaloneLoopIterations(lunaticLoop, enoStandaloneLoop);
-            return;
-        }
-        throw new IllegalStateException("Unexpected loop type: " + enoLoop.getClass().getSimpleName());
     }
 
     /** Condition filter of the loop is the same as its first component. */
@@ -183,19 +177,6 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         throw new LunaticLoopException(String.format(
                 "Linked loop '%s' reference object's '%s' is neither a loop nor a dynamic table.",
                 enoLinkedLoop.getId(), reference));
-    }
-
-    /** Lunatic Standalone loops now have an "iterations" property. */
-    private void setStandaloneLoopIterations(Loop lunaticLoop, StandaloneLoop enoStandaloneLoop) {
-        String variableName = findFirstResponseNameOfLoop(
-                enoStandaloneLoop,
-                enoIndex,
-                "Cannot compute 'iterations' for standalone loop '" + enoStandaloneLoop.getId() + "'."
-        );
-        lunaticLoop.setIterations(new LabelType());
-        lunaticLoop.getIterations().setValue(countVariable(variableName));
-        lunaticLoop.getIterations().setType(LabelTypeEnum.VTL);
-        lunaticLoop.getLoopDependencies().add(variableName);
     }
 
     /**
