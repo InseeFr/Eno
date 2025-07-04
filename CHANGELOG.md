@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.54.0] - 2025-07-04
+### :sparkles: New Features
+- [`8bf02a8`](https://github.com/InseeFr/Eno/commit/8bf02a8cd123fc23fac171de4add699723a7dcec) - filter shapeFrom on hierarchy component *(PR [#1291](https://github.com/InseeFr/Eno/pull/1291) by [@laurentC35](https://github.com/laurentC35))*
+- [`c080173`](https://github.com/InseeFr/Eno/commit/c0801730d48d2edc433372fc03474d64bf73ee7b) - generate filter result capi cati *(PR [#1297](https://github.com/InseeFr/Eno/pull/1297) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+### :bug: Bug Fixes
+- [`0667474`](https://github.com/InseeFr/Eno/commit/06674744b9e09b17c60d50201b2f75b04a4c6bb3) - iteration & resising logic *(PR [#1302](https://github.com/InseeFr/Eno/pull/1302) by [@laurentC35](https://github.com/laurentC35))*
+
+
 ## [3.53.0] - 2025-06-23
 ### :sparkles: New Features
 - [`e46b3d5`](https://github.com/InseeFr/Eno/commit/e46b3d59c8b2e673713ab7747d65fae79017b31a) - **dynamic table**: vtl min/max size expressions *(PR [#1289](https://github.com/InseeFr/Eno/pull/1289) by [@nsenave](https://github.com/nsenave))*
@@ -633,3 +642,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.52.0]: https://github.com/InseeFr/Eno/compare/3.51.0...3.52.0
 [3.52.1]: https://github.com/InseeFr/Eno/compare/3.52.0...3.52.1
 [3.53.0]: https://github.com/InseeFr/Eno/compare/3.52.1...3.53.0
+[3.54.0]: https://github.com/InseeFr/Eno/compare/3.53.0...3.54.0
