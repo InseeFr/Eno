@@ -18,6 +18,7 @@ import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -114,7 +115,7 @@ public class GenerationCustomController {
 			summary = "[Eno Xml service] FO questionnaire generation from DDI.",
 			description = "**This endpoint uses the 'Xml' version of Eno.** " +
 					"Generation of a FO questionnaire (for the paper format) from the given DDI, using a " +
-					"custom parameters `xml` file _(required)_, a metadata `xml` file _(required)_ and a specific " +
+					"custom parameters `xml` file _(required)_, a metadata `xml` file _(optional)_ and a specific " +
 					"treatment `xsl` file _(optional)_. " +
 					"You can get a parameters file by using the endpoint `/parameters/xml/{context}/FO`")
 	@PostMapping(value = "ddi-2-fo",
@@ -122,8 +123,8 @@ public class GenerationCustomController {
 	public ResponseEntity<byte[]> generateFOCustomParams(
 			@RequestPart(value="in") MultipartFile in,
 			@RequestPart(value="params") MultipartFile params,
-			@RequestPart(value="metadata", required=false) MultipartFile metadata,
-			@RequestPart(value="specificTreatment", required=false) MultipartFile specificTreatment)
+			@RequestParam(value="metadata", required=false) MultipartFile metadata,
+			@RequestParam(value="specificTreatment", required=false) MultipartFile specificTreatment)
 			throws EnoControllerException {
 		//
 		MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
