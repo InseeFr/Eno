@@ -48,7 +48,7 @@ public class LunaticParameters {
         this.setControls(isWeb || isProcess || isInterview);
         this.setToolTip(isWeb || isProcess);
         this.setFilterDescription(true);
-        this.setFilterResult(isWeb || isProcess);
+        this.setFilterResult(isWeb || isProcess || isInterview);
         this.setMissingVariables(isInterview || isProcess);
         this.setLunaticPaginationMode(paginationValue(context, modeParameter));
         this.setQuestionWrapping(true);
