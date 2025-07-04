@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.15.0. Generation date : 17/06/2025 - 9:22:07-->
+             isMaintainable="true"><!--Eno version : 2.16.1. Generation date : 04/07/2025 - 12:02:02-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-mc0awyip</r:ID>
    <r:Version>1</r:Version>
@@ -167,7 +167,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>mc0b59k9-QOP-mc0brje6</r:ID>
+                        <r:ID>mc0b59k9-QOP-mc0byh2t</r:ID>
                         <r:Version>1</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -195,7 +195,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>mc0b59k9-QOP-mc0brje6</r:ID>
+                        <r:ID>mc0b59k9-QOP-mc0byh2t</r:ID>
                         <r:Version>1</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -255,7 +255,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>mc0b59k9-QOP-mc0brje6</r:ID>
+                        <r:ID>mc0b59k9-QOP-mc0byh2t</r:ID>
                         <r:Version>1</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -283,7 +283,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>mc0b59k9-QOP-mc0brje6</r:ID>
+                        <r:ID>mc0b59k9-QOP-mc0byh2t</r:ID>
                         <r:Version>1</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -409,7 +409,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mc0b59k9-QOP-mc0brje6</r:ID>
+               <r:ID>mc0b59k9-QOP-mc0byh2t</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">HOW_MANY</r:String>
@@ -418,13 +418,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0b59k9-RDOP-mc0brje6</r:ID>
+                  <r:ID>mc0b59k9-RDOP-mc0byh2t</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0b59k9-QOP-mc0brje6</r:ID>
+                  <r:ID>mc0b59k9-QOP-mc0byh2t</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -442,7 +442,7 @@
                <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0b59k9-RDOP-mc0brje6</r:ID>
+                  <r:ID>mc0b59k9-RDOP-mc0byh2t</r:ID>
                   <r:Version>1</r:Version>
                </r:OutParameter>
             </d:NumericDomain>
@@ -456,7 +456,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mc0bg22w-QOP-mc0bqyen</r:ID>
+               <r:ID>mc0bg22w-QOP-mc0bi5uq</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q1</r:String>
@@ -465,13 +465,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0bg22w-RDOP-mc0bqyen</r:ID>
+                  <r:ID>mc0bg22w-RDOP-mc0bi5uq</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0bg22w-QOP-mc0bqyen</r:ID>
+                  <r:ID>mc0bg22w-QOP-mc0bi5uq</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -484,7 +484,7 @@
             <d:TextDomain maxLength="249">
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0bg22w-RDOP-mc0bqyen</r:ID>
+                  <r:ID>mc0bg22w-RDOP-mc0bi5uq</r:ID>
                   <r:Version>1</r:Version>
                   <r:TextRepresentation maxLength="249"/>
                </r:OutParameter>
@@ -499,7 +499,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mc0b477s-QOP-mc0bl0gy</r:ID>
+               <r:ID>mc0b477s-QOP-mc0buxms</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q2</r:String>
@@ -508,13 +508,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0b477s-RDOP-mc0bl0gy</r:ID>
+                  <r:ID>mc0b477s-RDOP-mc0buxms</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0b477s-QOP-mc0bl0gy</r:ID>
+                  <r:ID>mc0b477s-QOP-mc0buxms</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -527,7 +527,7 @@
             <d:TextDomain maxLength="249">
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0b477s-RDOP-mc0bl0gy</r:ID>
+                  <r:ID>mc0b477s-RDOP-mc0buxms</r:ID>
                   <r:Version>1</r:Version>
                   <r:TextRepresentation maxLength="249"/>
                </r:OutParameter>
@@ -542,7 +542,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mc0btlom-QOP-mc0byhzu</r:ID>
+               <r:ID>mc0btlom-QOP-mc0be90b</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q3</r:String>
@@ -551,13 +551,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0btlom-RDOP-mc0byhzu</r:ID>
+                  <r:ID>mc0btlom-RDOP-mc0be90b</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0btlom-QOP-mc0byhzu</r:ID>
+                  <r:ID>mc0btlom-QOP-mc0be90b</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -570,7 +570,7 @@
             <d:TextDomain maxLength="249">
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0btlom-RDOP-mc0byhzu</r:ID>
+                  <r:ID>mc0btlom-RDOP-mc0be90b</r:ID>
                   <r:Version>1</r:Version>
                   <r:TextRepresentation maxLength="249"/>
                </r:OutParameter>
@@ -585,7 +585,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mc0bb5eo-QOP-mc0by6mx</r:ID>
+               <r:ID>mc0bb5eo-QOP-mc0bsj2n</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q4</r:String>
@@ -594,13 +594,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0bb5eo-RDOP-mc0by6mx</r:ID>
+                  <r:ID>mc0bb5eo-RDOP-mc0bsj2n</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0bb5eo-QOP-mc0by6mx</r:ID>
+                  <r:ID>mc0bb5eo-QOP-mc0bsj2n</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -613,7 +613,7 @@
             <d:TextDomain maxLength="249">
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>mc0bb5eo-RDOP-mc0by6mx</r:ID>
+                  <r:ID>mc0bb5eo-RDOP-mc0bsj2n</r:ID>
                   <r:Version>1</r:Version>
                   <r:TextRepresentation maxLength="249"/>
                </r:OutParameter>
@@ -638,10 +638,10 @@
       </l:CategoryScheme>
       <l:CodeListScheme>
          <r:Agency>fr.insee</r:Agency>
-         <r:ID>ENOLOOPPAG-CLS</r:ID>
+         <r:ID>ENO_LOOP_PAGINATED-CLS</r:ID>
          <r:Version>1</r:Version>
          <l:CodeListSchemeName>
-            <r:String xml:lang="en-IE">ENOLOOPPAG</r:String>
+            <r:String xml:lang="en-IE">ENO_LOOP_PAGINATED</r:String>
          </l:CodeListSchemeName>
          <l:CodeList>
             <r:Agency>fr.insee</r:Agency>
@@ -687,7 +687,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mc0b59k9-QOP-mc0brje6</r:ID>
+               <r:ID>mc0b59k9-QOP-mc0byh2t</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -719,7 +719,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mc0bg22w-QOP-mc0bqyen</r:ID>
+               <r:ID>mc0bg22w-QOP-mc0bi5uq</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -745,7 +745,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mc0b477s-QOP-mc0bl0gy</r:ID>
+               <r:ID>mc0b477s-QOP-mc0buxms</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -771,7 +771,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mc0btlom-QOP-mc0byhzu</r:ID>
+               <r:ID>mc0btlom-QOP-mc0be90b</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -797,7 +797,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>mc0bb5eo-QOP-mc0by6mx</r:ID>
+               <r:ID>mc0bb5eo-QOP-mc0bsj2n</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -883,7 +883,7 @@
             </r:BasedOnObject>
             <l:TypeOfVariableGroup>Questionnaire</l:TypeOfVariableGroup>
             <l:VariableGroupName>
-               <r:String>ENOLOOPPAG</r:String>
+               <r:String>ENO_LOOP_PAGINATED</r:String>
             </l:VariableGroupName>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
@@ -966,7 +966,7 @@
                <r:ID>Instrument-mc0awyip</r:ID>
                <r:Version>1</r:Version>
                <d:InstrumentName>
-                  <r:String>ENOLOOPPAG</r:String>
+                  <r:String>ENO_LOOP_PAGINATED</r:String>
                </d:InstrumentName>
                <r:Label>
                   <r:Content xml:lang="fr-FR">Eno - Loop paginated by occurrences questionnaire</r:Content>
