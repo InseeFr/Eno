@@ -246,7 +246,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * This method checks that this prefix is actually empty, and throws an exception with message given if not.
      */
     private static void rootLevelCheck(String pagePrefix, String errorMessage) {
-        //if (!pagePrefix.isEmpty()) throw new IllegalStateException(errorMessage);
+        if (!pagePrefix.isEmpty()) throw new IllegalStateException(errorMessage);
     }
 
     /**
