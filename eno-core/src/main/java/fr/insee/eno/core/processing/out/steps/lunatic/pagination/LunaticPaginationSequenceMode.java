@@ -58,12 +58,6 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
         filterDescription.setPage(numPage);
     }
 
-    @Override
-    boolean areOccurrencesPaginated(Loop lunaticLoop) {
-        // For now pagination by occurrence isn't supported in "sequence" mode.
-        return false;
-    }
-
     private boolean shouldLoopBePaginated(Loop loop) {
         List<ComponentType> loopComponents = loop.getComponents();
         if(loopComponents == null || loopComponents.isEmpty()) {
@@ -79,7 +73,7 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
 
     /**
      * Replace lines by iteration for loop which should be paginated (first child is a sequence) and min = max
-     * @param loop
+     * @param loop Lunatic loop object.
      */
     private void replaceLinesByIterationIfMinEqualsMax(Loop loop){
         if(loop.getLines() != null) {

@@ -40,10 +40,9 @@ class LunaticPaginationQuestionModeTest {
         // When
         new LunaticPaginationQuestionMode().apply(lunaticQuestionnaire);
 
-        // Not the direct purpose of this test, but it's related
-        assertTrue(loop.getIsPaginatedByIterations());
-
         // Then
+        assertTrue(loop.getPaginatedLoop());
+        assertTrue(loop.getIsPaginatedByIterations());
         assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());
         assertEquals("2", lunaticQuestionnaire.getComponents().get(1).getPage());
         assertEquals("3", lunaticQuestionnaire.getComponents().get(2).getPage());
@@ -78,6 +77,8 @@ class LunaticPaginationQuestionModeTest {
         assertEquals("2", lunaticQuestionnaire.getComponents().get(1).getPage());
 
         Loop loop1 = (Loop) lunaticQuestionnaire.getComponents().get(2);
+        assertTrue(loop1.getPaginatedLoop());
+        assertTrue(loop1.getIsPaginatedByIterations());
         assertEquals("3", loop1.getPage());
         assertEquals("3.1", loop1.getComponents().get(0).getPage());
         assertEquals("3.1", loop1.getComponents().get(1).getPage());
@@ -85,6 +86,8 @@ class LunaticPaginationQuestionModeTest {
         assertEquals("1", loop1.getMaxPage());
 
         Loop loop2 = (Loop) lunaticQuestionnaire.getComponents().get(3);
+        assertFalse(loop2.getPaginatedLoop());
+        assertFalse(loop2.getIsPaginatedByIterations());
         assertEquals("4", loop2.getPage());
         assertEquals("4", loop2.getComponents().get(0).getPage());
         assertEquals("4", loop2.getComponents().get(1).getPage());

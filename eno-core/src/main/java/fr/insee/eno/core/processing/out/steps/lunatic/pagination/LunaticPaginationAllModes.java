@@ -134,50 +134,72 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
 
         // Set the page number on the components inside the loop
         List<ComponentType> loopComponents = loop.getComponents();
-        String innerNumPagePrefix;
-        int innerPageCount;
-        boolean isFullyPaginated = isFullyPaginated(loop);
-        boolean areOccurrencesPaginated = areOccurrencesPaginated(loop);
-        if (isFullyPaginated) {
-            innerNumPagePrefix = loopPageNumber + ".";
-            innerPageCount = 0;
-        } else {
-            if (areOccurrencesPaginated) {
+        String innerNumPagePrefix = null;
+        Integer innerPageCount = null;
+        Boolean areSubComponentsPaginated = null;
+        LoopPagination loopPagination = whichLoopPagination(loop);
+        switch (loopPagination) {
+            case FULL -> {
+                innerNumPagePrefix = loopPageNumber + ".";
+                innerPageCount = 0;
+                areSubComponentsPaginated = true;
+            }
+            case ITERATION -> {
                 innerNumPagePrefix = loopPageNumber + ".";
                 innerPageCount = 1;
-            } else {
+                areSubComponentsPaginated = false;
+            }
+            case NO -> {
                 innerNumPagePrefix = currentPrefix;
                 innerPageCount = pageCount;
+                areSubComponentsPaginated = false;
             }
         }
         // call to recursive method to regroup questions in the loop components
-        applyNumPageOnComponents(loopComponents, innerNumPagePrefix, innerPageCount, loop.getPaginatedLoop());
+        applyNumPageOnComponents(loopComponents, innerNumPagePrefix, innerPageCount, areSubComponentsPaginated);
 
         // Set the max page property on the loop component
-        if (isFullyPaginated) {
-            long maxPage = loop.getComponents().stream()
-                    .map(ComponentType::getPage)
-                    .filter(Objects::nonNull)
-                    .distinct()
-                    .count();
-            loop.setMaxPage(Long.toString(maxPage));
-        } else {
-            if (areOccurrencesPaginated) {
-                loop.setMaxPage("1");
-            } else {
-                loop.setMaxPage(null); // Note: shouldn't be max page equal to "1" if non paginated loop?
-            }
+        switch (loopPagination) {
+            case FULL -> loop.setMaxPage(Long.toString(
+                    loop.getComponents().stream()
+                            .map(ComponentType::getPage)
+                            .filter(Objects::nonNull)
+                            .distinct()
+                            .count()
+            ));
+            case ITERATION -> loop.setMaxPage("1");
+            case NO -> loop.setMaxPage(null); // Note: shouldn't be max page equal to "1" if non paginated loop?
         }
     }
 
-    /** Fully paginated means that each question is on a single page. */
-    private boolean isFullyPaginated(Loop lunaticLoop) {
-        return lunaticLoop.getPaginatedLoop() != null && lunaticLoop.getPaginatedLoop();
+    enum LoopPagination {
+        /**
+         * paginated = true, paginatedByIterations = false ("fully" paginated, i.e. 1 page per question)
+         */
+        FULL,
+        /**
+         * paginated = true, paginatedByIterations = true (paginated by occurrences, i.e. 1 page per iteration)
+         */
+        ITERATION,
+        /**
+         * paginated = false, paginatedByIterations = false (non paginated)
+         */
+        NO
     }
 
-    /** Paginated by occurrence means that each occurrence in the loop has all its questions on the same page.
-     * (When non paginated at all, all questions for all occurrences are displayed on a single page.) */
-    abstract boolean areOccurrencesPaginated(Loop lunaticLoop);
+    private LoopPagination whichLoopPagination(Loop lunaticLoop) {
+        boolean paginated = Boolean.TRUE.equals(lunaticLoop.getPaginatedLoop());
+        boolean paginatedByIterations = Boolean.TRUE.equals(lunaticLoop.getIsPaginatedByIterations());
+        if (paginated) {
+            if (paginatedByIterations)
+                return LoopPagination.ITERATION;
+            return LoopPagination.FULL;
+        } else {
+            if (paginatedByIterations)
+                throw new IllegalStateException("A non-paginated loop cannot be paginated by iterations.");
+            return LoopPagination.NO;
+        }
+    }
 
     /**
      * Apply numpage on a roundabout
@@ -218,9 +240,11 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
         applyNumPageOnComponents(linksComponents, currentPrefix, pageCount, false);
     }
 
-    /** Certain kinds of components are authorized to be inside an iteration (e.g. a loop or a roundabout), but not
+    /**
+     * Certain kinds of components are authorized to be inside an iteration (e.g. a loop or a roundabout), but not
      * all. In the Lunatic pagination, being inside an iteration is equivalent to having a prefixed page number.
-     * This method checks that this prefix is actually empty, and throws an exception with message given if not. */
+     * This method checks that this prefix is actually empty, and throws an exception with message given if not.
+     */
     private static void rootLevelCheck(String pagePrefix, String errorMessage) {
         //if (!pagePrefix.isEmpty()) throw new IllegalStateException(errorMessage);
     }

@@ -34,7 +34,8 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
 
     @Override
     public void applyLoopPaginationProperty(Loop loop) {
-        if(isLinkedLoop(loop) || loop.getIsPaginatedByIterations()) {
+        // paginated by iterations => paginated
+        if (isLinkedLoop(loop) || Boolean.TRUE.equals(loop.getIsPaginatedByIterations())) {
             loop.setPaginatedLoop(true);
             return;
         }
@@ -70,12 +71,6 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
             FilterDescription filterDescription, String numPagePrefix, int pageCount, boolean isParentPaginated) {
         String numPage = isParentPaginated ? numPagePrefix + (pageCount + 1) : numPagePrefix + pageCount;
         filterDescription.setPage(numPage);
-    }
-
-    @Override
-    boolean areOccurrencesPaginated(Loop lunaticLoop) {
-        Boolean value = lunaticLoop.getIsPaginatedByIterations();
-        return value != null && value;
     }
 
     /**
