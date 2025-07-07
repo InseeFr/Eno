@@ -34,8 +34,13 @@ public class LunaticRosterResizingLogic {
         DynamicTableQuestion enoDynamicTable = getDynamicTable(enoQuestionnaire, lunaticRoster.getId());
 
         // If the dynamic table size is not defined by a VTL expression, nothing to do here
-        if (enoDynamicTable.getMaxSizeExpression() == null)
+        if (enoDynamicTable.getMaxSizeExpression() == null  || enoDynamicTable.getMinSizeExpression() == null)
             return;
+        // If the dynamic size min != max -> no resizing
+        if(!enoDynamicTable.getMinSizeExpression().getValue().equals(enoDynamicTable.getMaxSizeExpression().getValue())){
+            return;
+        }
+
 
         // Variable names that are the keys of the resizing (using a set to make sure there is no duplicates)
         Set<String> resizingVariableNames = findResizingVariablesForRoster(enoDynamicTable);
