@@ -33,7 +33,8 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
 
     @Override
     public void applyLoopPaginationProperty(Loop loop) {
-        if(shouldLoopBePaginated(loop)) {
+        if(shouldLoopBePaginated(loop)) { // Note: update this condition when loop paginated by occurrences
+                                          // is supported in sequence pagination mode
             loop.setPaginatedLoop(true);
             replaceLinesByIterationIfMinEqualsMax(loop);
             return;

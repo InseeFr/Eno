@@ -34,7 +34,7 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
 
     @Override
     public void applyLoopPaginationProperty(Loop loop) {
-        if(isLinkedLoop(loop)) {
+        if(isLinkedLoop(loop) || loop.getIsPaginatedByIterations()) {
             loop.setPaginatedLoop(true);
             return;
         }
