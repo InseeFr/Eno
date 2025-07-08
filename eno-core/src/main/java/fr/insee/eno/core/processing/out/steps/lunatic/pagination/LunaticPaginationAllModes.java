@@ -25,6 +25,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
 
     /**
      * Converts the Eno parameter pagination value to the corresponding Lunatic-Model value.
+     *
      * @param paginationParameter Lunatic pagination parameter.
      * @return Lunatic-Model pagination.
      */
@@ -43,6 +44,49 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
         applyNumPageOnComponents(components, "", 0, isQuestionnairePaginated);
         String maxPage = components.getLast().getPage();
         questionnaire.setMaxPage(maxPage);
+        paginatedLoopIterations(questionnaire);
+    }
+
+    /**
+     * Loops that are paginated by occurrences are not linked loops, so they have the "lines" property.
+     * Yet, Lunatic wants to have the "iterations" property for this king od loops.
+     * @param questionnaire Lunatic questionnaire.
+     */
+    private void paginatedLoopIterations(Questionnaire questionnaire) {
+        questionnaire.getComponents().stream()
+                .filter(Loop.class::isInstance).map(Loop.class::cast)
+                .filter(loop -> Boolean.TRUE.equals(loop.getIsPaginatedByIterations()))
+                .forEach(loop -> {
+                    String expression = getLoopSize(loop);
+                    String shapeFrom = getLoopShapeFrom(loop);
+                    loop.setLines(null);
+                    loop.setIterations(new LabelType());
+                    loop.getIterations().setValue(expression);
+                    loop.getIterations().setType(LabelTypeEnum.VTL);
+                    loop.getIterations().setShapeFrom(shapeFrom);
+                });
+    }
+    /**
+     * @param loop A loop paginated by iterations.
+     */
+    private static String getLoopSize(Loop loop) {
+        String minExpression = loop.getLines().getMin().getValue();
+        String maxExpression = loop.getLines().getMax().getValue();
+        if (!Objects.equals(minExpression, maxExpression))
+            throw new IllegalStateException(
+                    "A loop paginated by iterations must have the same min and max expression.");
+        return maxExpression;
+    }
+    /**
+     * @param loop A loop paginated by iterations.
+     */
+    private static String getLoopShapeFrom(Loop loop) {
+        String minShapeFrom = loop.getLines().getMin().getShapeFrom();
+        String maxShapeFrom = loop.getLines().getMax().getShapeFrom();
+        if (!Objects.equals(minShapeFrom, maxShapeFrom))
+            throw new IllegalStateException(
+                    "A loop paginated by iterations must have the same min and max 'shape from' property.");
+        return maxShapeFrom;
     }
 
     /**
@@ -103,6 +147,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
 
     /**
      * Apply the numpage of a filter description component
+     *
      * @param filterDescription filter description component
      * @param numPagePrefix     numpage prefix (if subsequence in a loop)
      * @param pageCount         page count of the sequence in his parent component
@@ -165,10 +210,10 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
                             .map(ComponentType::getPage)
                             .filter(Objects::nonNull)
                             .distinct()
-                            .count()
+                            .count() // "maxPage" is actually the page number of the last component, not the count
+                    // Yet, it works
             ));
-            case ITERATION -> loop.setMaxPage("1");
-            case NO -> loop.setMaxPage(null); // Note: shouldn't be max page equal to "1" if non paginated loop?
+            case ITERATION, NO -> loop.setMaxPage(null);
         }
     }
 

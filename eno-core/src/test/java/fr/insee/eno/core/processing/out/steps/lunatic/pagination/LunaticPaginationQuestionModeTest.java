@@ -24,6 +24,8 @@ class LunaticPaginationQuestionModeTest {
         InputNumber inputNumber = new InputNumber();
         Loop loop = new Loop(); loop.setComponentType(ComponentTypeEnum.LOOP);
         loop.setLines(new LinesLoop());
+        loop.getLines().setMin(new LabelType());
+        loop.getLines().setMax(new LabelType());
         loop.setIsPaginatedByIterations(true);
         Subsequence subsequence = new Subsequence(); subsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
         Input input1 = new Input();
@@ -49,7 +51,7 @@ class LunaticPaginationQuestionModeTest {
         assertEquals("3.1", loop.getComponents().get(0).getPage());
         assertEquals("3.1", loop.getComponents().get(1).getPage());
         assertEquals("3.1", loop.getComponents().get(2).getPage());
-        assertEquals("1", loop.getMaxPage());
+        assertNull(loop.getMaxPage());
         assertEquals("4", lunaticQuestionnaire.getComponents().get(3).getPage());
     }
 
@@ -83,7 +85,7 @@ class LunaticPaginationQuestionModeTest {
         assertEquals("3.1", loop1.getComponents().get(0).getPage());
         assertEquals("3.1", loop1.getComponents().get(1).getPage());
         assertEquals("3.1", loop1.getComponents().get(2).getPage());
-        assertEquals("1", loop1.getMaxPage());
+        assertNull(loop1.getMaxPage());
 
         Loop loop2 = (Loop) lunaticQuestionnaire.getComponents().get(3);
         assertFalse(loop2.getPaginatedLoop());
