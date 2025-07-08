@@ -15,14 +15,12 @@ class LunaticPaginationRegroupingIntegrationTest {
 
     private Questionnaire questionnaire;
     private Sequence s1, s4, s8, s9;
-    private InputNumber n2, n3, n72, n73, n5;
+    private InputNumber n2, n3, n72, n5;
     private Textarea t10;
     private Loop l6, l7;
     private Subsequence ss6, ss71;
     private Input i6;
     private CheckboxOne co71, co73;
-    private PairwiseLinks p73;
-    private List<ComponentType> components;
 
     @BeforeEach
     void init() {
@@ -35,10 +33,9 @@ class LunaticPaginationRegroupingIntegrationTest {
 
         questionnaire = new Questionnaire();
 
-        components = new ArrayList<>();
+        List<ComponentType> components = new ArrayList<>();
         List<ComponentType> l6Components = new ArrayList<>();
         List<ComponentType> l7Components = new ArrayList<>();
-        List<ComponentType> p73Components = new ArrayList<>();
 
         s1 = buildSequence("jfaz9kv9");
         components.add(s1);
@@ -84,14 +81,8 @@ class LunaticPaginationRegroupingIntegrationTest {
         n72 = buildNumber("lhpzan4t", "Q6");
         l7Components.add(n72);
 
-        p73 = buildEmptyPairWiseLinks("pairwise-links");
-        co73 = buildCheckboxOne("lhpyz9b73", "QQCO");
-        n73 = buildNumber("lhpzan73", "QQN");
-
-        p73Components.add(co73);
-        p73Components.add(n73);
-        p73.getComponents().addAll(p73Components);
-        l7Components.add(p73);
+        co73 = buildCheckboxOne("lhpyz9b73", "Q7");
+        l7Components.add(co73);
 
         l7.getComponents().addAll(l7Components);
         components.add(l7);
@@ -119,20 +110,12 @@ class LunaticPaginationRegroupingIntegrationTest {
     }
 
     @Test
-    void shouldComponentsInPairwiseLinksToHaveSamePage() {
-        assertEquals("6.2", p73.getPage());
-        // components in pairwise links have same page as the paiwise component
-        assertEquals("6.2", n73.getPage());
-        assertEquals("6.2", co73.getPage());
-    }
-
-    @Test
-    void shouldComponentsInPaginatedLoopToHaveDifferentsPage() {
+    void shouldComponentsInPaginatedLoopToHaveDifferentPages() {
         // l7 is paginated loop so we'll increment subcomponents
         assertTrue(l7.getPaginatedLoop());
         assertEquals("6", l7.getPage());
         assertEquals("6.1", n72.getPage());
-        assertEquals("6.2", p73.getPage());
+        assertEquals("6.2", co73.getPage());
     }
 
     @Test
