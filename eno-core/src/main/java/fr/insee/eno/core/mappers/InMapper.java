@@ -303,7 +303,8 @@ public abstract class InMapper extends Mapper {
 
     private static void checkTypesEquality(EnoObject enoObject2, EnoObject converted) {
         if (! enoObject2.getClass().equals(converted.getClass()))
-            throw new ConversionException("Inconsistent conversion types between inputs.");
+            throw new ConversionException("Inconsistent conversion types between inputs: "
+                    + enoObject2.getClass().getSimpleName() + " and " + converted.getClass().getSimpleName());
     }
 
     private EnoObject convert(Object inObject, Class<?> enoTargetType) {

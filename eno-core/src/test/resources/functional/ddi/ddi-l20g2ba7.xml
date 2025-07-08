@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.4.9. Generation date : 17/08/2023 - 13:08:08-->
+             isMaintainable="true"><!--Eno version : 2.16.0. Generation date : 23/06/2025 - 17:02:20-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-l20g2ba7</r:ID>
    <r:Version>1</r:Version>
@@ -1489,6 +1489,7 @@ never cared for what they say never cared for games they play never cared for wh
             <r:Agency>fr.insee</r:Agency>
             <r:ID>l8uayz0h-SEQ</r:ID>
             <r:Version>1</r:Version>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">loopContent</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l8uaq797</r:ID>
@@ -1514,6 +1515,7 @@ never cared for what they say never cared for games they play never cared for wh
             <r:Agency>fr.insee</r:Agency>
             <r:ID>kfs6ox4i-SEQ</r:ID>
             <r:Version>1</r:Version>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">loopContent</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>kzf9qrnj</r:ID>
@@ -1574,6 +1576,7 @@ never cared for what they say never cared for games they play never cared for wh
             <r:Label>
                <r:Content xml:lang="fr-FR"/>
             </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">filterContent</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>l8u7iy3l-QC</r:ID>
@@ -1634,6 +1637,7 @@ never cared for what they say never cared for games they play never cared for wh
             <r:Label>
                <r:Content xml:lang="fr-FR"/>
             </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">filterContent</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>k6c9b3d2</r:ID>
@@ -1700,6 +1704,7 @@ never cared for what they say never cared for games they play never cared for wh
             <r:Label>
                <r:Content xml:lang="fr-FR"/>
             </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">filterContent</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>k6c971cz</r:ID>
@@ -2269,7 +2274,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2337,7 +2342,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2471,7 +2476,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2605,7 +2610,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2651,7 +2656,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2741,7 +2746,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -2809,7 +2814,7 @@ never cared for what they say never cared for games they play never cared for wh
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>vtl</r:ProgramLanguage>
@@ -12601,7 +12606,7 @@ ligne 3</r:Content>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>l8iorxhx</r:ID>
+            <r:ID>mc9ckmxu</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">DUREE</r:String>
@@ -12634,7 +12639,7 @@ ligne 3</r:Content>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>l8iownbs</r:ID>
+            <r:ID>mc9cp89u</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
                <r:String xml:lang="fr-FR">DUREEANNEEMOIS</r:String>
@@ -12659,7 +12664,7 @@ ligne 3</r:Content>
                   <r:DateFieldFormat>PnYnM</r:DateFieldFormat>
                   <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">duration</r:DateTypeCode>
                   <r:Range>
-                     <r:MinimumValue included="true">PT0H0M</r:MinimumValue>
+                     <r:MinimumValue included="true">P0Y0M</r:MinimumValue>
                      <r:MaximumValue included="true">P5Y11M</r:MaximumValue>
                   </r:Range>
                </r:DateTimeRepresentation>
@@ -16442,13 +16447,13 @@ ligne 3</r:Content>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>l8iorxhx</r:ID>
+               <r:ID>mc9ckmxu</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>l8iownbs</r:ID>
+               <r:ID>mc9cp89u</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
