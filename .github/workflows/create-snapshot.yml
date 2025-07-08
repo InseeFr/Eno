@@ -58,7 +58,7 @@ jobs:
       - name: Get main branch version
         id: main-version
         run: |
-          ./gradlew printVersion # (load the gradle wrapper, required for the get version step)
+          ./gradlew # (load the gradle wrapper, required for the get version step)
           echo "version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
 
       - name: Checkout pull request HEAD
