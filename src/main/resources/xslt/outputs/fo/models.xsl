@@ -496,7 +496,7 @@
 		</xsl:variable>
 		<xsl:variable name="table-split-content">
 			<xsl:value-of select="concat('#if (PositionInTheLoop % ',$maxlines-by-page,' eq 0) ')"/>
-			<xsl:text>&#xd;</xsl:text>
+			<xsl:text>&#xa;</xsl:text>
 			<xsl:value-of select="'&lt;/fo:table-body&gt; '"/>
 			<xsl:value-of select="'&lt;/fo:table&gt;'"/>
 			<xsl:value-of select="'&lt;/fo:block&gt;'"/>
@@ -548,11 +548,11 @@
 				<fo:table-body>
 					<!-- initialized rows -->
 					<xsl:if test="not($empty-occurrence) and $is-dynamic-array-personalised">
-						<xsl:text>&#xd;</xsl:text>
+						<xsl:text>&#xa;</xsl:text>
 						<xsl:value-of select="concat('#foreach( ${',$loop-name,'} in ${',$loop-name,'-Container} ) ')"/>
-						<xsl:text>&#xd;</xsl:text>
+						<xsl:text>&#xa;</xsl:text>
 						<xsl:value-of select="concat('#set( $',$loop-name,'.LoopPosition = $velocityCount)')"/>
-						<xsl:text>&#xd;</xsl:text>
+						<xsl:text>&#xa;</xsl:text>
 						<xsl:if test="$context != 'default'">
 							<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('\$',$loop-name,'.LoopPosition'))" disable-output-escaping="yes"/>							
 						</xsl:if>
@@ -573,32 +573,31 @@
 								</xsl:apply-templates>
 							</fo:table-row>
 						</xsl:for-each>
-						<xsl:text>&#xd;</xsl:text>
+						<xsl:text>&#xa;</xsl:text>
 						<xsl:value-of select="'#end '"/>
-						<xsl:text>&#xd;</xsl:text>
+						<xsl:text>&#xa;</xsl:text>
 					</xsl:if>
 					<!-- empty rows -->
 					<xsl:if test="$empty-lines != 0 or $roster-minimum-lines != 0">
-						<xsl:if test="$is-dynamic-array-personalised">
-							<xsl:choose>
-								<xsl:when test="$is-dynamic-array-personalised">
-									<xsl:text>&#xa;#set( $initializeInt = 0)&#xa;</xsl:text>
-									<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$personalised-lines-count-name,'}))')"/>		
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = 0)')"/>
-								</xsl:otherwise>
-							</xsl:choose>
-							<xsl:text>&#xa;</xsl:text>
-						</xsl:if>
+						<xsl:text>&#xa;</xsl:text>
+						<xsl:choose>
+							<xsl:when test="$is-dynamic-array-personalised">
+								<xsl:text>#set( $initializeInt = 0)&#xa;</xsl:text>
+								<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$personalised-lines-count-name,'}))')"/>
+							</xsl:when>
+							<xsl:when test="$context != 'default'">
+								<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = 0)')"/>
+							</xsl:when>
+						</xsl:choose>
+						<xsl:text>&#xa;</xsl:text>
 						<xsl:for-each select="1 to (if ($empty-lines &gt; $roster-minimum-lines) then $empty-lines else $roster-minimum-lines)">
 							<xsl:variable name="empty-position" select="position()"/>
 							<xsl:if test="$empty-position &gt; $empty-lines">
 								<xsl:text>&#xa;</xsl:text>
 								<xsl:value-of select="concat('#if ($',$loop-name,'-TotalOccurrenceInt le ',$roster-minimum-lines - $empty-position,') ')"/>
-								<xsl:text>&#xa;</xsl:text>
 							</xsl:if>
 							<xsl:if test="$context != 'default'">
+								<xsl:text>&#xa;</xsl:text>
 								<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('(\$',$loop-name,'-TotalOccurrenceInt + ',$empty-position,')'))" disable-output-escaping="yes"/>
 							</xsl:if>
 							<!-- the line to fake-loop on -->
