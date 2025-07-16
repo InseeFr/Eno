@@ -97,29 +97,47 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 
-		<xsl:variable name="label" select="enofo:get-flowcontrol-label($source-context,$languages[1])"/>
-		<xsl:if test="$label != ''">
-			<fo:block page-break-inside="avoid" keep-with-previous="always">
-				<xsl:copy-of select="$style-parameters/filter-block/@*"/>
-				<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
-					<fo:block margin="2pt">
-						<xsl:call-template name="insert-image">
-							<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
-						</xsl:call-template>
+		<xsl:variable name="is-external-filter" select="enofo:is-external-filter($source-context)"/>
+		<xsl:choose>
+			<xsl:when test="enofo:is-external-filter($source-context)">
+				<xsl:text>&#xd;#if (</xsl:text>
+				<!-- Reprendre de XForms : replaceVariablesInFormula pour gérer les formules nécessaires : variable in [...] -->
+				<!-- <xsl:variable name="variable-business-name" select="enofo:get-business-name($source-context)"/>  --> 
+				<xsl:value-of select="enofo:get-relevant($source-context)"/>
+				<xsl:text>)&#xd;</xsl:text>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+				<xsl:text>&#xd;#end&#xd;</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:variable name="label" select="enofo:get-flowcontrol-label($source-context,$languages[1])"/>
+				<xsl:if test="$label != ''">
+					<fo:block page-break-inside="avoid" keep-with-previous="always">
+						<xsl:copy-of select="$style-parameters/filter-block/@*"/>
+						<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
+							<fo:block margin="2pt">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
+								</xsl:call-template>
+							</fo:block>
+						</fo:inline-container>
+						<fo:inline-container>
+							<xsl:copy-of select="$style-parameters/filter-inline-container/@*"/>
+							<fo:block>
+								<xsl:copy-of select="$style-parameters/filter-alternative/@*"/>
+								<xsl:copy-of select="$label"/>
+							</fo:block>
+						</fo:inline-container>
 					</fo:block>
-				</fo:inline-container>
-				<fo:inline-container>
-					<xsl:copy-of select="$style-parameters/filter-inline-container/@*"/>
-					<fo:block>
-						<xsl:copy-of select="$style-parameters/filter-alternative/@*"/>
-						<xsl:copy-of select="$label"/>
-					</fo:block>
-				</fo:inline-container>
-			</fo:block>
-		</xsl:if>
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
+				</xsl:if>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+			</xsl:otherwise>
+		</xsl:choose>
+		
+		
 	</xsl:template>
 
 	<xd:doc>
