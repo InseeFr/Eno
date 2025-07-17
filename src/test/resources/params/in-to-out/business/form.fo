@@ -1585,9 +1585,7 @@
                     margin-bottom="3pt"
                     margin-left="3pt"
                     text-align="justify">Si vous déclarez en euros, la somme des CA ventilés doit être égale au CA total. Sinon, le total doit être égal à 100 %.</fo:block>
-         <fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA"
-                   page-break-after="always">
+         <fo:block page-break-inside="avoid" id="REPARTITION_CA">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
                       width="100%"
@@ -2634,6 +2632,556 @@
             </fo:table>
          </fo:block>
 #set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 10) / 19)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block padding-bottom="0mm"
+                                        padding-top="0mm"
+                                        color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 11) % 19 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 11) / 19)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block padding-bottom="0mm"
+                                        padding-top="0mm"
+                                        color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 12) % 19 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 12) / 19)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block padding-bottom="0mm"
+                                        padding-top="0mm"
+                                        color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 13) % 19 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 13) / 19)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block padding-bottom="0mm"
+                                        padding-top="0mm"
+                                        color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 14) % 19 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 14) / 19)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block padding-bottom="0mm"
+                                        padding-top="0mm"
+                                        color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#if (($REPARTITION_CA-TotalOccurrenceInt + 15) % 19 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = 1 + ($REPARTITION_CA-TotalOccurrenceInt + 15) / 19)
 <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
