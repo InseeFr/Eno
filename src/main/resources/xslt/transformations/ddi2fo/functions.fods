@@ -789,6 +789,18 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enofo:get-hideable-command-variables</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-hideable-command-variables</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofo:get-hideable-command-variables to input function enoddi:get-hideable-command-variables</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enofo:get-readonly</text:p>
      </table:table-cell>
      <table:table-cell/>
