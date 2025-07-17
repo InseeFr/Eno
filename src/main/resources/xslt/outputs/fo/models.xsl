@@ -448,13 +448,14 @@
 		<xsl:variable name="loop-name" select="enofo:get-business-name($source-context)"/>
 		<xsl:variable name="current-match" select="."/>
 		<xsl:variable name="no-border" select="enofo:get-style($source-context)"/>
-		<xsl:variable name="numeric-max-lines" select="enofo:get-maximum-lines($source-context)"/>
 		<xsl:variable name="maxlines-by-page" as="xs:integer" select="xs:integer($table-defaultsize)"/>
+		<xsl:variable name="maximum-lines-number" select="enofo:get-maximum-lines($source-context)"/>
 		<xsl:variable name="maximum-lines-formula" select="enofo:get-computated-maximum-lines($source-context)"/>
+		<xsl:variable name="is-dynamic-array-static" select="$maximum-lines-number != '' and not(enofo:get-external-variables($source-context)//*)"/>
 		<xsl:variable name="roster-minimum-lines" as="xs:integer">
 			<xsl:choose>
-				<xsl:when test="$numeric-max-lines != ''">
-					<xsl:value-of select="$numeric-max-lines"/>
+				<xsl:when test="$maximum-lines-number != ''">
+					<xsl:value-of select="$maximum-lines-number"/>
 				</xsl:when>
 				<xsl:when test="number(enofo:get-minimum-lines($source-context)) &gt; $roster-defaultsize">
 					<xsl:value-of select="enofo:get-minimum-lines($source-context)"/>
@@ -464,7 +465,6 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		<xsl:variable name="is-dynamic-array-personalised" select="enofo:get-external-variables($source-context)//*"/>
 
 		<!-- Nom de la variable qui permet de personnaliser le nombre de lignes de perso -->
 		<xsl:variable name="personalised-lines-count-name" select="concat($loop-name,'-TotalOccurrenceCount')"/>
@@ -472,7 +472,7 @@
 		<!-- number of empty lines after personalised ones -->
 		<xsl:variable name="empty-lines" as="xs:integer">
 			<xsl:choose>
-				<xsl:when test="$maximum-lines-formula = '' and not($is-dynamic-array-personalised)">
+				<xsl:when test="$is-dynamic-array-static">
 					<xsl:value-of select="$roster-minimum-lines"/>
 				</xsl:when>
 				<xsl:otherwise>
@@ -535,7 +535,7 @@
 
 		<fo:block page-break-inside="avoid">
 			<xsl:attribute name="id" select="concat($loop-name,$loop-position)"/>
-			<xsl:if test="$numeric-max-lines = '' or number($numeric-max-lines) &gt;= $maxlines-by-page">
+			<xsl:if test="$maximum-lines-number = '' or number($maximum-lines-number) &gt;= $maxlines-by-page">
 				<xsl:attribute name="page-break-after" select="'always'"/>
 			</xsl:if>
 			<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
@@ -547,7 +547,7 @@
 				</xsl:if>
 				<fo:table-body>
 					<!-- initialized rows -->
-					<xsl:if test="not($empty-occurrence) and $is-dynamic-array-personalised">
+					<xsl:if test="not($empty-occurrence) and not($is-dynamic-array-static)">
 						<xsl:text>&#xa;</xsl:text>
 						<xsl:value-of select="concat('#foreach( ${',$loop-name,'} in ${',$loop-name,'-Container} ) ')"/>
 						<xsl:text>&#xa;</xsl:text>
@@ -581,7 +581,7 @@
 					<xsl:if test="$empty-lines != 0 or $roster-minimum-lines != 0">
 						<xsl:text>&#xa;</xsl:text>
 						<xsl:choose>
-							<xsl:when test="$is-dynamic-array-personalised">
+							<xsl:when test="not($is-dynamic-array-static)">
 								<xsl:text>#set( $initializeInt = 0)&#xa;</xsl:text>
 								<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$personalised-lines-count-name,'}))')"/>
 							</xsl:when>
