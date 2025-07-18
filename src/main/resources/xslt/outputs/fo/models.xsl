@@ -122,7 +122,7 @@
 							</xsl:for-each>
 						</Variables>
 					</xsl:with-param>
-					<xsl:with-param name="loop-navigation" select="$loop-navigation"/>
+					<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
 				</xsl:call-template>
 				<xsl:text>)&#xd;</xsl:text>
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
