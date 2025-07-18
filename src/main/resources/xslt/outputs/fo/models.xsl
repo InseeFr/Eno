@@ -1544,7 +1544,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="formula"/>
 		<xsl:param name="variables" as="node()"/>
-		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()"/>
 		
 		<xsl:choose>
 			<xsl:when test="$variables/Variable">
