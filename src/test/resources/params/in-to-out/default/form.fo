@@ -2847,328 +2847,7 @@
                      </fo:table-cell>
                   </fo:table-row>
                </fo:table-header>
-               <fo:table-body>#foreach( ${FAVOURITE_CHARACTERS} in ${FAVOURITE_CHARACTERS-Container} ) #set( $FAVOURITE_CHARACTERS.LoopPosition = $velocityCount)<fo:table-row border-color="black">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block-container height="40mm">
-                              <fo:block> </fo:block>
-                           </fo:block-container>
-                        </fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block-container height="40mm">
-                              <fo:block> </fo:block>
-                           </fo:block-container>
-                        </fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block-container height="40mm">
-                              <fo:block> </fo:block>
-                           </fo:block-container>
-                        </fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block-container height="40mm">
-                              <fo:block> </fo:block>
-                           </fo:block-container>
-                        </fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block-container height="40mm">
-                              <fo:block> </fo:block>
-                           </fo:block-container>
-                        </fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block-container height="40mm">
-                              <fo:block> </fo:block>
-                           </fo:block-container>
-                        </fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block-container height="40mm">
-                              <fo:block> </fo:block>
-                           </fo:block-container>
-                        </fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block-container height="40mm">
-                              <fo:block> </fo:block>
-                           </fo:block-container>
-                        </fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block-container height="40mm">
-                              <fo:block> </fo:block>
-                           </fo:block-container>
-                        </fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block-container height="40mm">
-                              <fo:block> </fo:block>
-                           </fo:block-container>
-                        </fo:block>
-                     </fo:table-cell>
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>#end 
-#set( $initializeInt = 0)
-#set( $FAVOURITE_CHARACTERS-TotalOccurrenceInt = $initializeInt.parseInt(${FAVOURITE_CHARACTERS-TotalOccurrenceCount}))
+               <fo:table-body>
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -3489,7 +3168,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 8) 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -3810,9 +3488,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
-
-#if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 7) 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -4133,9 +3808,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
-
-#if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 6) 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -4456,9 +4128,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
-
-#if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 5) 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -4779,9 +4448,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
-
-#if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 4) 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -5102,9 +4768,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
-
-#if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 3) 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -5425,9 +5088,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
-
-#if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 2) 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -5748,9 +5408,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
-
-#if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 1) 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -6071,9 +5728,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
-
-#if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 0) 
 <fo:table-row border-color="black">
                      <fo:table-cell text-align="left"
                                     border-color="black"
@@ -6394,7 +6048,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
 </fo:table-body>
             </fo:table>
          </fo:block>
