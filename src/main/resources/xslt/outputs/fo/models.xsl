@@ -96,9 +96,7 @@
 	<xsl:template match="main//xf-group" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:param name="loop-navigation" as="node()" tunnel="yes">
-			<Loops/>
-		</xsl:param>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
 		<xsl:variable name="is-external-filter" select="enofo:is-external-filter($source-context)"/>
 		<xsl:variable name="apos"><xsl:text>'</xsl:text></xsl:variable>
