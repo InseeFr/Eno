@@ -46,7 +46,6 @@
                 margin-bottom="10mm" color="white">
             &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
             </fo:block>
-            >
         </fo:static-content>
 
         <fo:flow flow-name="xsl-region-body">
