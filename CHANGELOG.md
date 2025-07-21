@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.55.0] - 2025-07-21
+### :sparkles: New Features
+- [`12d075d`](https://github.com/InseeFr/Eno/commit/12d075d6a9373d0950e088533bc4cfd086a1543b) - **ws**: delete required metadata ddi to fo *(PR [#1298](https://github.com/InseeFr/Eno/pull/1298) by [@RemiVerriez](https://github.com/RemiVerriez))*
+- [`52bed21`](https://github.com/InseeFr/Eno/commit/52bed217b5ed192e2ad1335f860342a6f64cea3f) - **lunatic**: loop occurrence pagination *(PR [#1292](https://github.com/InseeFr/Eno/pull/1292) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`7baa5ba`](https://github.com/InseeFr/Eno/commit/7baa5bab7994e80f3c088995dc07695116437555) - **deps**: json-schema-validator to 1.5.8 *(PR [#1294](https://github.com/InseeFr/Eno/pull/1294) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+
 ## [3.54.0] - 2025-07-04
 ### :sparkles: New Features
 - [`8bf02a8`](https://github.com/InseeFr/Eno/commit/8bf02a8cd123fc23fac171de4add699723a7dcec) - filter shapeFrom on hierarchy component *(PR [#1291](https://github.com/InseeFr/Eno/pull/1291) by [@laurentC35](https://github.com/laurentC35))*
@@ -643,3 +652,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.52.1]: https://github.com/InseeFr/Eno/compare/3.52.0...3.52.1
 [3.53.0]: https://github.com/InseeFr/Eno/compare/3.52.1...3.53.0
 [3.54.0]: https://github.com/InseeFr/Eno/compare/3.53.0...3.54.0
+[3.55.0]: https://github.com/InseeFr/Eno/compare/3.54.0...3.55.0
