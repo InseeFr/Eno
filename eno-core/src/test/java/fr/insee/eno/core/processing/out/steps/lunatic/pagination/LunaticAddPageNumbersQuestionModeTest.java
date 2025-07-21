@@ -12,25 +12,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class LunaticAddPageNumbersQuestionModeTest {
 
     private Questionnaire questionnaire;
-    private Sequence s1, s4, s8, s9;
-    private InputNumber n2, n3, n72, n73, n5;
-    private Textarea t10;
+    private Sequence s1, s4, s8, s10;
+    private InputNumber n2, n3, n72, n5;
+    private Textarea t11;
     private Loop l6, l7;
     private Subsequence ss6, ss71;
     private Input i6;
-    private CheckboxOne co71, co73;
-    private PairwiseLinks p73;
+    private CheckboxOne co71;
+    private PairwiseLinks p9;
 
     @BeforeEach
     void init() {
-        LunaticPaginationQuestionMode processing = new LunaticPaginationQuestionMode();
 
         questionnaire = new Questionnaire();
 
         List<ComponentType> components = new ArrayList<>();
         List<ComponentType> l6Components = new ArrayList<>();
         List<ComponentType> l7Components = new ArrayList<>();
-        List<ComponentType> p73Components = new ArrayList<>();
 
         s1 = LunaticAddPageNumbersUtils.buildSequence("jfaz9kv9");
         components.add(s1);
@@ -66,45 +64,40 @@ class LunaticAddPageNumbersQuestionModeTest {
         l7 = LunaticAddPageNumbersUtils.buildEmptyLoop("li1wsotd");
         // to make this loop considered as linked
         l7.setIterations(new LabelType());
-
         ss71 = LunaticAddPageNumbersUtils.buildSubsequence("li1wfnbk");
         l7Components.add(ss71);
-
         co71 = LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b0", "Q5");
         l7Components.add(co71);
-
         n72 = LunaticAddPageNumbersUtils.buildNumber("lhpzan4t", "Q6");
         l7Components.add(n72);
-
-        p73 = LunaticAddPageNumbersUtils.buildEmptyPairWiseLinks("pairwise-links");
-        co73 = LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b73", "QQCO");
-        n73 = LunaticAddPageNumbersUtils.buildNumber("lhpzan73", "QQN");
-
-        p73Components.add(co73);
-        p73Components.add(n73);
-        p73.getComponents().addAll(p73Components);
-        l7Components.add(p73);
-
         l7.getComponents().addAll(l7Components);
         components.add(l7);
 
         s8 = LunaticAddPageNumbersUtils.buildSequence("li1wjpqw");
         components.add(s8);
 
-        s9 = LunaticAddPageNumbersUtils.buildSequence("COMMENT-SEQ");
-        components.add(s9);
+        p9 = LunaticAddPageNumbersUtils.buildEmptyPairWiseLinks("pairwise-links");
+        p9.getComponents().add(LunaticAddPageNumbersUtils.buildCheckboxOne("lhpyz9b73", "QQCO"));
+        p9.getComponents().add(LunaticAddPageNumbersUtils.buildNumber("lhpzan73", "QQN"));
+        components.add(p9);
 
-        t10 = LunaticAddPageNumbersUtils.buildTextarea("COMMENT-QUESTION", "COMMENT_QE");
-        components.add(t10);
+        s10 = LunaticAddPageNumbersUtils.buildSequence("COMMENT-SEQ");
+        components.add(s10);
+
+        t11 = LunaticAddPageNumbersUtils.buildTextarea("COMMENT-QUESTION", "COMMENT_QE");
+        components.add(t11);
 
         questionnaire.getComponents().addAll(components);
+
+
+        LunaticPaginationQuestionMode processing = new LunaticPaginationQuestionMode();
 
         processing.apply(questionnaire);
     }
 
     @Test
     void shouldQuestionnaireHavePaginationPropertySet() {
-        assertEquals("question", questionnaire.getPagination());
+        assertEquals(Pagination.QUESTION, questionnaire.getPaginationEnum());
     }
 
     @Test
@@ -127,10 +120,10 @@ class LunaticAddPageNumbersQuestionModeTest {
 
     @Test
     void shouldComponentsInPairwiseLinksToHaveSamePage() {
-        assertEquals("7.3", p73.getPage());
-        // components in pairwise links have same page as the paiwise component
-        assertEquals("7.3", n73.getPage());
-        assertEquals("7.3", co73.getPage());
+        assertEquals("9", p9.getPage());
+        // components in pairwise links have same page as the pairwise component
+        p9.getComponents().forEach(component ->
+                assertEquals("9", component.getPage()));
     }
 
     @Test
@@ -140,7 +133,6 @@ class LunaticAddPageNumbersQuestionModeTest {
         assertEquals("7", l7.getPage());
         assertEquals("7.1", co71.getPage());
         assertEquals("7.2", n72.getPage());
-        assertEquals("7.3", p73.getPage());
     }
 
     @Test
@@ -177,12 +169,12 @@ class LunaticAddPageNumbersQuestionModeTest {
     @Test
     void shouldSetCorrectMaxPageOnPaginatedLoop() {
         assertTrue(l7.getPaginatedLoop());
-        assertEquals("3", l7.getMaxPage());
+        assertEquals("2", l7.getMaxPage());
     }
 
     @Test
     void shouldSetCorrectMaxPageOnQuestionnaire() {
-        assertEquals("10", questionnaire.getMaxPage());
+        assertEquals("11", questionnaire.getMaxPage());
     }
 
     @Test
@@ -195,7 +187,8 @@ class LunaticAddPageNumbersQuestionModeTest {
         assertEquals("6", l6.getPage());
         assertEquals("7", l7.getPage());
         assertEquals("8", s8.getPage());
-        assertEquals("9", s9.getPage());
-        assertEquals("10", t10.getPage());
+        assertEquals("9", p9.getPage());
+        assertEquals("10", s10.getPage());
+        assertEquals("11", t11.getPage());
     }
 }

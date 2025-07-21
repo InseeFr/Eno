@@ -80,7 +80,7 @@ public class LunaticDatepickerControl implements LunaticFormatControl<Datepicker
         Optional<DateFormatter.Result> formattedMaxValue = validateAndConvertDate(maxValue, format);
         if (formattedMaxValue.isPresent() && !formattedMaxValue.get().isValid()) {
             // Due to a bug in the Pogues -> DDI transformation, an invalid max date doesn't throw an exception for now
-            log.warn("Invalid value for max date of question '" + id + "': " + maxValue);
+            log.warn("Invalid value for max date of question '{}': {}", id, maxValue);
         }
 
         boolean generateMin = formattedMinValue.isPresent(); // always valid when reached

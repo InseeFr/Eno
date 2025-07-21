@@ -25,6 +25,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
 
     /**
      * Converts the Eno parameter pagination value to the corresponding Lunatic-Model value.
+     *
      * @param paginationParameter Lunatic pagination parameter.
      * @return Lunatic-Model pagination.
      */
@@ -43,6 +44,49 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
         applyNumPageOnComponents(components, "", 0, isQuestionnairePaginated);
         String maxPage = components.getLast().getPage();
         questionnaire.setMaxPage(maxPage);
+        paginatedLoopIterations(questionnaire);
+    }
+
+    /**
+     * Loops that are paginated by occurrences are not linked loops, so they have the "lines" property.
+     * Yet, Lunatic wants to have the "iterations" property for this king od loops.
+     * @param questionnaire Lunatic questionnaire.
+     */
+    private void paginatedLoopIterations(Questionnaire questionnaire) {
+        questionnaire.getComponents().stream()
+                .filter(Loop.class::isInstance).map(Loop.class::cast)
+                .filter(loop -> Boolean.TRUE.equals(loop.getIsPaginatedByIterations()))
+                .forEach(loop -> {
+                    String expression = getLoopSize(loop);
+                    String shapeFrom = getLoopShapeFrom(loop);
+                    loop.setLines(null);
+                    loop.setIterations(new LabelType());
+                    loop.getIterations().setValue(expression);
+                    loop.getIterations().setType(LabelTypeEnum.VTL);
+                    loop.getIterations().setShapeFrom(shapeFrom);
+                });
+    }
+    /**
+     * @param loop A loop paginated by iterations.
+     */
+    private static String getLoopSize(Loop loop) {
+        String minExpression = loop.getLines().getMin().getValue();
+        String maxExpression = loop.getLines().getMax().getValue();
+        if (!Objects.equals(minExpression, maxExpression))
+            throw new IllegalStateException(
+                    "A loop paginated by iterations must have the same min and max expression.");
+        return maxExpression;
+    }
+    /**
+     * @param loop A loop paginated by iterations.
+     */
+    private static String getLoopShapeFrom(Loop loop) {
+        String minShapeFrom = loop.getLines().getMin().getShapeFrom();
+        String maxShapeFrom = loop.getLines().getMax().getShapeFrom();
+        if (!Objects.equals(minShapeFrom, maxShapeFrom))
+            throw new IllegalStateException(
+                    "A loop paginated by iterations must have the same min and max 'shape from' property.");
+        return maxShapeFrom;
     }
 
     /**
@@ -103,6 +147,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
 
     /**
      * Apply the numpage of a filter description component
+     *
      * @param filterDescription filter description component
      * @param numPagePrefix     numpage prefix (if subsequence in a loop)
      * @param pageCount         page count of the sequence in his parent component
@@ -120,64 +165,133 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * Apply numpage on a loop
      *
      * @param loop          loop component
-     * @param numPagePrefix numpage prefix (if loop in a loop) (ex "7.4", "5.3.9.")
+     * @param currentPrefix numpage prefix (if loop in a loop) (ex "7.4", "5.3.9.")
      * @param pageCount     page count of the loop in his parent component
      */
-    public void applyNumPageOnLoop(Loop loop, String numPagePrefix, int pageCount) {
-        String numPage = numPagePrefix + pageCount;
-        loop.setPage(numPage);
-        List<ComponentType> loopComponents = loop.getComponents();
-        int loopPageCount = pageCount;
+    public void applyNumPageOnLoop(Loop loop, String currentPrefix, int pageCount) {
+        rootLevelCheck(currentPrefix, "Nested loops are forbidden");
+
+        // Set the page number on the loop component
+        String loopPageNumber = currentPrefix + pageCount;
+        loop.setPage(loopPageNumber);
 
         applyLoopPaginationProperty(loop);
-        if (loop.getPaginatedLoop() != null && loop.getPaginatedLoop()) {
-            numPagePrefix = loop.getPage() + ".";
-            loopPageCount = 0;
+
+        // Set the page number on the components inside the loop
+        List<ComponentType> loopComponents = loop.getComponents();
+        String innerNumPagePrefix = null;
+        Integer innerPageCount = null;
+        Boolean areSubComponentsPaginated = null;
+        LoopPagination loopPagination = whichLoopPagination(loop);
+        switch (loopPagination) {
+            case FULL -> {
+                innerNumPagePrefix = loopPageNumber + ".";
+                innerPageCount = 0;
+                areSubComponentsPaginated = true;
+            }
+            case ITERATION -> {
+                innerNumPagePrefix = loopPageNumber + ".";
+                innerPageCount = 1;
+                areSubComponentsPaginated = false;
+            }
+            case NO -> {
+                innerNumPagePrefix = currentPrefix;
+                innerPageCount = pageCount;
+                areSubComponentsPaginated = false;
+            }
         }
-
         // call to recursive method to regroup questions in the loop components
-        applyNumPageOnComponents(loopComponents, numPagePrefix, loopPageCount, loop.getPaginatedLoop());
+        applyNumPageOnComponents(loopComponents, innerNumPagePrefix, innerPageCount, areSubComponentsPaginated);
 
-        if (loop.getPaginatedLoop() != null && loop.getPaginatedLoop()) {
-            long maxPage = loop.getComponents().stream()
-                    .map(ComponentType::getPage)
-                    .filter(Objects::nonNull)
-                    .distinct()
-                    .count();
+        // Set the max page property on the loop component
+        switch (loopPagination) {
+            case FULL -> loop.setMaxPage(Long.toString(
+                    loop.getComponents().stream()
+                            .map(ComponentType::getPage)
+                            .filter(Objects::nonNull)
+                            .distinct()
+                            .count() // "maxPage" is actually the page number of the last component, not the count
+                    // Yet, it works
+            ));
+            case ITERATION, NO -> loop.setMaxPage(null);
+        }
+    }
 
-            loop.setMaxPage(Long.toString(maxPage));
-        } // Note: shouldn't be max page equal to "1" if non paginated loop?
+    enum LoopPagination {
+        /**
+         * paginated = true, paginatedByIterations = false ("fully" paginated, i.e. 1 page per question)
+         */
+        FULL,
+        /**
+         * paginated = true, paginatedByIterations = true (paginated by occurrences, i.e. 1 page per iteration)
+         */
+        ITERATION,
+        /**
+         * paginated = false, paginatedByIterations = false (non paginated)
+         */
+        NO
+    }
+
+    private LoopPagination whichLoopPagination(Loop lunaticLoop) {
+        boolean paginated = Boolean.TRUE.equals(lunaticLoop.getPaginatedLoop());
+        boolean paginatedByIterations = Boolean.TRUE.equals(lunaticLoop.getIsPaginatedByIterations());
+        if (paginated) {
+            if (paginatedByIterations)
+                return LoopPagination.ITERATION;
+            return LoopPagination.FULL;
+        } else {
+            if (paginatedByIterations)
+                throw new IllegalStateException("A non-paginated loop cannot be paginated by iterations.");
+            return LoopPagination.NO;
+        }
     }
 
     /**
      * Apply numpage on a roundabout
      *
      * @param roundabout    roundabout component
-     * @param numPagePrefix numpage prefix (if roundabout in a roundabout) (ex "7.4", "5.3.9.")
+     * @param currentPrefix numpage prefix (if roundabout in a roundabout) (ex "7.4", "5.3.9.")
      * @param pageCount     page count of the roundabout in his parent component
      */
-    public void applyNumPageOnRoundabout(Roundabout roundabout, String numPagePrefix, int pageCount) {
-        String numPage = numPagePrefix + pageCount;
-        roundabout.setPage(numPage);
+    public void applyNumPageOnRoundabout(Roundabout roundabout, String currentPrefix, int pageCount) {
+        rootLevelCheck(currentPrefix, "Roundabout are not allowed inside an iteration.");
+
+        // Set the page number on the roundabout component
+        String roundaboutPageNumber = currentPrefix + pageCount;
+        roundabout.setPage(roundaboutPageNumber);
+
+        // Set the page number on the components inside the roundabout
         List<ComponentType> loopComponents = roundabout.getComponents();
-        numPagePrefix = roundabout.getPage() + ".";
-
+        String numPagePrefix = roundaboutPageNumber + ".";
         // call to recursive method to regroup questions in the roundabout components
-        // a roundabout is always paginated
+        // Note: a roundabout is always paginated
         applyNumPageOnComponents(loopComponents, numPagePrefix, 0, true);
-
     }
 
     /**
      * @param links         pairwise link component
-     * @param numPagePrefix numpage prefix (if pairwiselink in a loop) (ex "7.", "5.3.")
+     * @param currentPrefix numpage prefix (if pairwiselink in a loop) (ex "7.", "5.3.")
      * @param pageCount     page count of the pairwise link in his parent component
      */
-    public void applyNumPageOnPairwiseLinks(PairwiseLinks links, String numPagePrefix, int pageCount) {
-        links.setPage(numPagePrefix + pageCount);
+    public void applyNumPageOnPairwiseLinks(PairwiseLinks links, String currentPrefix, int pageCount) {
+        rootLevelCheck(currentPrefix, "Pairwise are not allowed inside an iteration.");
+
+        // Set the page number on the pairwise component
+        links.setPage(currentPrefix + pageCount);
+
+        // Set the page number on the components inside the pairwise
         List<ComponentType> linksComponents = links.getComponents();
         // call to recursive method to regroup questions in the pairwise link component
-        applyNumPageOnComponents(linksComponents, numPagePrefix, pageCount, false);
+        applyNumPageOnComponents(linksComponents, currentPrefix, pageCount, false);
+    }
+
+    /**
+     * Certain kinds of components are authorized to be inside an iteration (e.g. a loop or a roundabout), but not
+     * all. In the Lunatic pagination, being inside an iteration is equivalent to having a prefixed page number.
+     * This method checks that this prefix is actually empty, and throws an exception with message given if not.
+     */
+    private static void rootLevelCheck(String pagePrefix, String errorMessage) {
+        if (!pagePrefix.isEmpty()) throw new IllegalStateException(errorMessage);
     }
 
     /**

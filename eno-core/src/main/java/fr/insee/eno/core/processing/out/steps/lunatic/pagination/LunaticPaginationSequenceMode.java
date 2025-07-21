@@ -7,11 +7,12 @@
  import java.util.List;
 
 /**
- * Post processing of a lunatic questionnaire. With this processing, one sequence is displayed on each page.
+ * Post-processing of a Lunatic questionnaire. With this processing, one sequence is displayed on each page.
  */
 public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
 
     public LunaticPaginationSequenceMode() {
+        // No need of Eno loops metadata in sequence mode pagination
         super(false, LunaticParameters.LunaticPaginationMode.SEQUENCE);
     }
 
@@ -32,7 +33,8 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
 
     @Override
     public void applyLoopPaginationProperty(Loop loop) {
-        if(shouldLoopBePaginated(loop)) {
+        if(shouldLoopBePaginated(loop)) { // Note: update this condition when loop paginated by occurrences
+                                          // is supported in sequence pagination mode
             loop.setPaginatedLoop(true);
             replaceLinesByIterationIfMinEqualsMax(loop);
             return;
@@ -71,7 +73,7 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
 
     /**
      * Replace lines by iteration for loop which should be paginated (first child is a sequence) and min = max
-     * @param loop
+     * @param loop Lunatic loop object.
      */
     private void replaceLinesByIterationIfMinEqualsMax(Loop loop){
         if(loop.getLines() != null) {

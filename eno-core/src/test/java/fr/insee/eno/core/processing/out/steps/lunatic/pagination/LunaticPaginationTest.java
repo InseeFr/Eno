@@ -43,7 +43,7 @@ class LunaticPaginationTest {
             //
             assertEquals("question", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
-            Loop loop = (Loop) questionnaire.getComponents().get(0);
+            Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertFalse(loop.getPaginatedLoop());
             // Non paginated loops don't have a "max page" property
             assertNull(loop.getMaxPage());
@@ -59,7 +59,7 @@ class LunaticPaginationTest {
             //
             assertEquals("sequence", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
-            Loop loop = (Loop) questionnaire.getComponents().get(0);
+            Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertTrue(loop.getPaginatedLoop());
             // Paginated loops have a "max page"
             assertEquals("1", loop.getMaxPage());
@@ -102,7 +102,7 @@ class LunaticPaginationTest {
             //
             assertEquals("question", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
-            Loop loop = (Loop) questionnaire.getComponents().get(0);
+            Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertFalse(loop.getPaginatedLoop());
             // Non paginated loops don't have a "max page" property
             assertNull(loop.getMaxPage());
@@ -118,7 +118,7 @@ class LunaticPaginationTest {
             //
             assertEquals("sequence", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
-            Loop loop = (Loop) questionnaire.getComponents().get(0);
+            Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertTrue(loop.getPaginatedLoop());
             // Paginated loops have a "max page"
             assertEquals("2", loop.getMaxPage());
@@ -163,7 +163,7 @@ class LunaticPaginationTest {
             new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(questionnaire);
             //
             assertEquals("question", questionnaire.getPaginationEnum().value());
-            Loop loop = (Loop) questionnaire.getComponents().get(0);
+            Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertFalse(loop.getPaginatedLoop());
             assertNotNull(loop.getLines());
             assertNull(loop.getIterations());
@@ -179,7 +179,7 @@ class LunaticPaginationTest {
             new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE).apply(questionnaire);
             //
             assertEquals("sequence", questionnaire.getPaginationEnum().value());
-            Loop loop = (Loop) questionnaire.getComponents().get(0);
+            Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertTrue(loop.getPaginatedLoop());
             // Paginated loops have a "max page"
             assertNull(loop.getLines());
