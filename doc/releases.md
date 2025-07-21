@@ -1,5 +1,15 @@
 # Eno Releases note
 
+## [v2.17.0] - 2025-07-21
+### :sparkles: New Features
+- [`cb017f3`](https://github.com/InseeFr/Eno/commit/cb017f3509033598c851ccd50d4b487932f653a6) - **loops**: minimum, maximum and size instead of Minimum and Maximum *(commit by [@BulotF](https://github.com/BulotF))*
+- [`743b9d9`](https://github.com/InseeFr/Eno/commit/743b9d9a8ab2030505bb8680a5359c675d27806c) - clarify filter / loop overlap error message *(PR [#1309](https://github.com/InseeFr/Eno/pull/1309) by [@BulotF](https://github.com/BulotF))*
+
+### :bug: Bug Fixes
+- [`998154a`](https://github.com/InseeFr/Eno/commit/998154a091793449c04c386da88228c6cfa976b5) - **fo**: dynamic array min max *(PR [#1306](https://github.com/InseeFr/Eno/pull/1306) by [@BulotF](https://github.com/BulotF))*
+- [`67fd9ba`](https://github.com/InseeFr/Eno/commit/67fd9bafa42d736c38ee6e27dd4d43c46fd1a38d) - **deps**: update all minor dependencies *(PR [#1305](https://github.com/InseeFr/Eno/pull/1305) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+
 ## [v2.16.1] - 2025-06-27
 ### :bug: Bug Fixes
 - [`4d91c13`](https://github.com/InseeFr/Eno/commit/4d91c13be24414035b6ba853093ecf7a92286664) - **deps**: update all minor dependencies *(PR [#1295](https://github.com/InseeFr/Eno/pull/1295) by [@renovate[bot]](https://github.com/apps/renovate))*
@@ -422,3 +432,4 @@
 [v2.15.1]: https://github.com/InseeFr/Eno/compare/v2.15.0...v2.15.1
 [v2.16.0]: https://github.com/InseeFr/Eno/compare/v2.15.2...v2.16.0
 [v2.16.1]: https://github.com/InseeFr/Eno/compare/v2.16.0...v2.16.1
+[v2.17.0]: https://github.com/InseeFr/Eno/compare/v2.16.1...v2.17.0
