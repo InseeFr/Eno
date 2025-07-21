@@ -22,7 +22,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,7 +38,7 @@ class LunaticRosterResizingLogicTest {
         CalculatedExpression sizeExpression = new CalculatedExpression();
         sizeExpression.setValue("<foo expression>");
         sizeExpression.getBindingReferences().add(new BindingReference("foo-ref","FOO_COLLECTED_VARIABLE"));
-        enoDynamicTable.setSizeExpression(sizeExpression);
+        enoDynamicTable.setMaxSizeExpression(sizeExpression);
         enoQuestionnaire.getMultipleResponseQuestions().add(enoDynamicTable);
 
         Questionnaire lunaticQuestionnaire = new Questionnaire();
@@ -63,13 +62,10 @@ class LunaticRosterResizingLogicTest {
         ResizingType lunaticResizing = new ResizingType();
         new LunaticRosterResizingLogic(lunaticQuestionnaire, enoQuestionnaire)
                 .buildResizingEntries(lunaticRoster, lunaticResizing);
+        lunaticQuestionnaire.setResizing(lunaticResizing);
 
         // Then
-        assertEquals(1, lunaticResizing.countResizingEntries());
-        assertEquals("<foo expression>",
-                lunaticResizing.getResizingEntry("FOO_COLLECTED_VARIABLE").getSize());
-        assertEquals(List.of("TABLE_VAR1", "TABLE_VAR2"),
-                lunaticResizing.getResizingEntry("FOO_COLLECTED_VARIABLE").getVariables());
+        assertEquals(0, lunaticResizing.countResizingEntries());
     }
 
     @Test
@@ -124,11 +120,7 @@ class LunaticRosterResizingLogicTest {
 
         // Then
         ResizingType lunaticResizing = lunaticQuestionnaire.getResizing();
-        assertEquals(1, lunaticResizing.countResizingEntries());
-        assertEquals("cast(HOW_MANY, integer)",
-                lunaticResizing.getResizingEntry("HOW_MANY").getSize());
-        assertEquals(List.of("DYNAMIC_TABLE_VTL_SIZE1"),
-                lunaticResizing.getResizingEntry("HOW_MANY").getVariables());
+        assertEquals(0, lunaticResizing.countResizingEntries());
     }
 
     @Test

@@ -45,10 +45,10 @@ public class LunaticParameters {
         boolean isInterview = EnoParameters.ModeParameter.CAPI.equals(modeParameter) || EnoParameters.ModeParameter.CATI.equals(modeParameter);
         boolean isWeb = EnoParameters.ModeParameter.CAWI.equals(modeParameter);
         boolean isProcess = EnoParameters.ModeParameter.PROCESS.equals(modeParameter);
-        this.setControls(isWeb || isProcess);
+        this.setControls(isWeb || isProcess || isInterview);
         this.setToolTip(isWeb || isProcess);
         this.setFilterDescription(true);
-        this.setFilterResult(isWeb || isProcess);
+        this.setFilterResult(isWeb || isProcess || isInterview);
         this.setMissingVariables(isInterview || isProcess);
         this.setLunaticPaginationMode(paginationValue(context, modeParameter));
         this.setQuestionWrapping(true);

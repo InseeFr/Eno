@@ -54,7 +54,11 @@ public class LunaticLoopResizingLogic {
 
         if (enoLoop instanceof StandaloneLoop enoStandaloneLoop) {
             resizingVariableNames.addAll(findResizingVariablesForLoop(enoStandaloneLoop));
-            sizeExpression = lunaticLoop.getLines().getMax().getValue();
+            String min = lunaticLoop.getLines().getMin().getValue();
+            String max = lunaticLoop.getLines().getMax().getValue();
+            // if min != max, no resizing for Loop
+            if(!min.equals(max)) return;
+            sizeExpression = max;
         }
         if (enoLoop instanceof LinkedLoop enoLinkedLoop) {
             resizingVariableNames.add(findResizingVariableForLinkedLoop(enoLinkedLoop));

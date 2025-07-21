@@ -2,6 +2,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
@@ -44,6 +45,20 @@ public class LunaticUniqueChoiceQuestionCleaning {
             checkboxOne.getOptions().forEach(option -> processCleaningOption(option, checkboxOne.getResponse().getName()));
         if (uniqueChoiceQuestion.get() instanceof Dropdown dropdown)
             dropdown.getOptions().forEach(option -> processCleaningOption(option, dropdown.getResponse().getName()));
+    }
+
+    /** Add a cleaning for clarification question that are displayed only when a specific option is checked. */
+    public void processCleaningUniqueChoiceQuestionClarification(UniqueChoiceQuestion enoUniqueChoiceQuestion){
+        enoUniqueChoiceQuestion.getDetailResponses().forEach(detailResponse -> {
+            String responseVariable = enoUniqueChoiceQuestion.getResponse().getVariableName();
+            String clarificationVariable = detailResponse.getResponse().getVariableName();
+            String clarificationValue = detailResponse.getValue();
+
+            processCleaningForFilterExpression(lunaticQuestionnaire.getCleaning(), variableIndex, variableShapeFromIndex,
+                VtlSyntaxUtils.expressionEqualToOther(responseVariable, VtlSyntaxUtils.surroundByDoubleQuotes(clarificationValue)),
+                List.of(responseVariable),
+                List.of(clarificationVariable));
+            });
     }
 
 

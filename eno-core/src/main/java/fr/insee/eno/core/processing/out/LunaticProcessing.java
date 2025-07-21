@@ -8,6 +8,8 @@ import fr.insee.eno.core.processing.out.steps.lunatic.*;
 import fr.insee.eno.core.processing.out.steps.lunatic.cleaning.LunaticAddCleaning;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticAddPageNumbers;
 import fr.insee.eno.core.processing.out.steps.lunatic.resizing.LunaticAddResizing;
+import fr.insee.eno.core.processing.out.steps.lunatic.shapefrom.LunaticHierarchyShapeFrom;
+import fr.insee.eno.core.processing.out.steps.lunatic.shapefrom.LunaticShapeFrom;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.eno.core.reference.EnoCatalog;
 import fr.insee.eno.core.reference.EnoIndex;
@@ -53,13 +55,14 @@ public class LunaticProcessing {
                 .thenIf(lunaticParameters.isFilterDescription(), new LunaticAddFilterDescription(enoQuestionnaire.getFilters()))
                 .then(new LunaticAddPageNumbers(lunaticParameters.getLunaticPaginationMode()))
                 .then(new LunaticResponseTimeQuestionPagination())
-                .then(new LunaticAddCleaning(enoQuestionnaire))
+                .then(new LunaticAddCleaning(enoQuestionnaire, enoIndex))
                 .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())
                 .thenIf(lunaticParameters.isMandatoryControls(), new LunaticAddControlMandatory())
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
                 .thenIf(lunaticParameters.isFilterResult(), new LunaticFilterResult(enoIndex))
                 .then(new LunaticShapeFrom())
+                .then(new LunaticHierarchyShapeFrom(enoQuestionnaire))
                 .thenIf(enoParameters.getModeParameter().equals(EnoParameters.ModeParameter.CAWI), new LunaticSequenceDescription())
                 .then(new LunaticInputNumberDescription(enoParameters.getLanguage()))
                 .then(new LunaticDurationDescription())

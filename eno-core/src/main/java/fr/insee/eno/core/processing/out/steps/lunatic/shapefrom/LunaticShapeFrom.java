@@ -1,4 +1,4 @@
-package fr.insee.eno.core.processing.out.steps.lunatic;
+package fr.insee.eno.core.processing.out.steps.lunatic.shapefrom;
 
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.processing.ProcessingStep;
@@ -44,5 +44,6 @@ public class LunaticShapeFrom implements ProcessingStep<Questionnaire> {
         List<String> responseNames = LunaticUtils.getResponseNames(iterationComponent.get());
         calculatedVariable.setShapeFrom(responseNames);
     }
+
 
 }
