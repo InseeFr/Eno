@@ -26,6 +26,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static fr.insee.eno.core.annotations.Contexts.Context;
 
@@ -97,17 +98,20 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     private final List<Subsequence> subsequences = new ArrayList<>();
 
     /** Roundabouts are described as a special type of sequence in DDI.
+     * In Pogues, roundabouts are described kind of like a sequence.
      * These are resolved in Lunatic through a dedicated processing step. */
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.SequenceType) " +
             "and not #this.getTypeOfSequenceList().isEmpty()]" +
             ".?[#this.getTypeOfSequenceArray(0).getStringValue() == 'roundabout']")
+    @Pogues("T(fr.insee.eno.core.model.EnoQuestionnaire).mapPoguesRoundabouts(#this)")
     private final List<RoundaboutSequence> roundaboutSequences = new ArrayList<>();
 
     /** Loops defined in the questionnaire.
      * In DDI, a loop is defined at the questionnaire level.
      * In Lunatic, a loop is a component containing components within its scope.
      */
+    @Pogues("getIterations()?.getIteration()")
     @DDI("getResourcePackageArray(0).getControlConstructSchemeArray(0).getControlConstructList()" +
             ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.LoopType)]")
     @Lunatic("getComponents()")
@@ -171,9 +175,19 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
             ".?[#this.getIDArray(0).getStringValue().contains('secondDimension-fakeCL')]")
     List<CodeList> fakeCodeLists = new ArrayList<>();
 
+    public static List<RoundaboutType> mapPoguesRoundabouts(Questionnaire poguesQuestionnaire) {
+        // Sequence-level roundabouts
+        Stream<RoundaboutType> stream1 = poguesQuestionnaire.getChild().stream()
+                .filter(RoundaboutType.class::isInstance).map(RoundaboutType.class::cast);
+        // Subsequence-level roundabouts
+        Stream<RoundaboutType> stream2 = PoguesUtils.poguesSequenceStream(poguesQuestionnaire)
+                .flatMap(poguesSequence -> poguesSequence.getChild().stream()
+                        .filter(RoundaboutType.class::isInstance).map(RoundaboutType.class::cast));
+        return Stream.concat(stream1, stream2).toList();
+    }
+
     public static List<SequenceType> mapPoguesSequences(Questionnaire poguesQuestionnaire) {
-        List<SequenceType> poguesSequences = poguesQuestionnaire.getChild().stream()
-                .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
+        List<SequenceType> poguesSequences = PoguesUtils.poguesSequenceStream(poguesQuestionnaire)
                 .filter(poguesComponent -> !Sequence.POGUES_FAKE_END_SEQUENCE_ID.equals(poguesComponent.getId()))
                 .toList();
         poguesSequences.forEach(poguesComponent -> { // safety check
@@ -193,8 +207,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     }
 
     public static List<QuestionType> mapPoguesSingleResponseQuestions(Questionnaire poguesQuestionnaire) {
-        return poguesQuestionnaire.getChild().stream()
-                .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
+        return PoguesUtils.poguesSequenceStream(poguesQuestionnaire)
                 .flatMap(poguesSequence -> {
                     // Get questions within the sequence
                     List<QuestionType> sequenceQuestions = new ArrayList<>(PoguesUtils.poguesQuestionStream(poguesSequence)
@@ -216,8 +229,7 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     }
 
     public static List<QuestionType> mapPoguesMultipleResponseQuestions(Questionnaire poguesQuestionnaire) {
-        return poguesQuestionnaire.getChild().stream()
-                .filter(SequenceType.class::isInstance).map(SequenceType.class::cast)
+        return PoguesUtils.poguesSequenceStream(poguesQuestionnaire)
                 .flatMap(poguesSequence -> {
                     // Get questions within the sequence
                     List<QuestionType> sequenceQuestions = new ArrayList<>(PoguesUtils.poguesQuestionStream(poguesSequence)

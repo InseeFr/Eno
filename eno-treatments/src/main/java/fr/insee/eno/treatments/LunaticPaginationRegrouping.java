@@ -3,13 +3,15 @@ package fr.insee.eno.treatments;
 import fr.insee.eno.core.processing.out.steps.lunatic.pagination.LunaticPaginationQuestionMode;
 import fr.insee.eno.treatments.dto.Regroupement;
 import fr.insee.eno.treatments.dto.Regroupements;
-import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.ComponentSimpleResponseType;
+import fr.insee.lunatic.model.flat.ComponentType;
+import fr.insee.lunatic.model.flat.Question;
 
-import java.util.*;
+import java.util.Optional;
 
 /**
- * Post processing of a lunatic questionnaire. Without this processing, one question is displayed on each page.
- * This post processing permits to regroup questions of a questionnaire in same pages
+ * Post-processing of a lunatic questionnaire. Without this processing, one question is displayed on each page.
+ * This post-processing permits to regroup questions of a questionnaire in same pages
  * /!\ We assume variables defined in a regroupement are consecutive and in the same order as their
  * corresponding components in the questionnaire
  */

@@ -122,11 +122,16 @@ public class EnoResolveBindingReferences implements ProcessingStep<EnoQuestionna
 
     /** Update the binding references of the "min" and "max" expressions of the given loop. */
     private void updateStandaloneLoopReferences(StandaloneLoop standaloneLoop) {
-        List<BindingReference> references = resolveBindingReferences(standaloneLoop.getMinIteration().getBindingReferences());
-        standaloneLoop.getMinIteration().setBindingReferences(references);
+        List<BindingReference> references = null;
+        if (standaloneLoop.getMinIteration() != null) {
+            references = resolveBindingReferences(standaloneLoop.getMinIteration().getBindingReferences());
+            standaloneLoop.getMinIteration().setBindingReferences(references);
+        }
 
-        references = resolveBindingReferences(standaloneLoop.getMaxIteration().getBindingReferences());
-        standaloneLoop.getMaxIteration().setBindingReferences(references);
+        if (standaloneLoop.getMaxIteration() != null) {
+            references = resolveBindingReferences(standaloneLoop.getMaxIteration().getBindingReferences());
+            standaloneLoop.getMaxIteration().setBindingReferences(references);
+        }
     }
 
     /**
