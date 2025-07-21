@@ -10,6 +10,7 @@ import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.serialize.LunaticSerializer;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
+import fr.insee.lunatic.model.flat.Loop;
 import fr.insee.pogues.model.Questionnaire;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
@@ -133,6 +134,11 @@ class PoguesDDIToLunaticTest {
         // generating date could differ by a few seconds
         fromDDI.setGeneratingDate(null);
         fromPoguesDDI.setGeneratingDate(null);
+
+        // Remove Pogues-only props
+        fromPoguesDDI.getComponents().stream().filter(Loop.class::isInstance).map(Loop.class::cast)
+                .forEach(loop -> loop.setIsPaginatedByIterations(null));
+
         //
         String serializedFromDDI = LunaticSerializer.serializeToJson(fromDDI);
         String serializedFromPoguesDDI = LunaticSerializer.serializeToJson(fromPoguesDDI);

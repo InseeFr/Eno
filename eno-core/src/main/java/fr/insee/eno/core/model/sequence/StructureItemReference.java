@@ -21,7 +21,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Context(format = Format.POGUES, type = SequenceType.class)
+@Context(format = Format.POGUES, type = ComponentType.class)
 public class StructureItemReference extends EnoObject {
 
     /** Represents a kind of component that is a part of questionnaire's structure.

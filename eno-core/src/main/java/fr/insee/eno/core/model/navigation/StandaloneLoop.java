@@ -9,6 +9,7 @@ import fr.insee.eno.core.model.calculated.BindingReference;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.pogues.model.DynamicIterationType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,7 @@ import java.util.Set;
  * Standalone loop, in opposition to "linked" loop.
  * Loop defined with a minimum value and a maximum value (that are calculated expressions).
  * */
+@Context(format = Format.POGUES, type = DynamicIterationType.class)
 @Context(format = Format.DDI, type = LoopType.class)
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Loop.class)
 public class StandaloneLoop extends Loop {
