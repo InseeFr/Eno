@@ -96,30 +96,68 @@
 	<xsl:template match="main//xf-group" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
-		<xsl:variable name="label" select="enofo:get-flowcontrol-label($source-context,$languages[1])"/>
-		<xsl:if test="$label != ''">
-			<fo:block page-break-inside="avoid" keep-with-previous="always">
-				<xsl:copy-of select="$style-parameters/filter-block/@*"/>
-				<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
-					<fo:block margin="2pt">
-						<xsl:call-template name="insert-image">
-							<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
-						</xsl:call-template>
+		<xsl:variable name="is-external-filter" select="enofo:is-external-filter($source-context)"/>
+		<xsl:variable name="apos"><xsl:text>'</xsl:text></xsl:variable>
+		<xsl:choose>
+			<xsl:when test="enofo:is-external-filter($source-context)">
+				<xsl:text>&#xd;#if (</xsl:text>
+				<xsl:call-template name="replaceVariablesInFormula">
+					<xsl:with-param name="formula" select="normalize-space(
+						replace(replace(replace(replace(replace(replace(replace(
+							enofo:get-relevant($source-context)
+						,'&quot;',$apos)
+						,'&lt;&gt;',' ne ')
+						,'&lt;=',' le ')
+						,'&gt;=',' ge ')
+						,'&lt;',' lt ')
+						,'&gt;',' gt ')
+						,'=',' eq '))"/>
+					<xsl:with-param name="variables" as="node()">
+						<Variables>
+							<xsl:for-each select="tokenize(enofo:get-hideable-command-variables($source-context),' ')">
+								<xsl:sort select="string-length(.)" order="descending"/>
+								<Variable><xsl:value-of select="."/></Variable>
+							</xsl:for-each>
+						</Variables>
+					</xsl:with-param>
+					<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
+				</xsl:call-template>
+				<xsl:text>)&#xd;</xsl:text>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+				<xsl:text>&#xd;#end&#xd;</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:variable name="label" select="enofo:get-flowcontrol-label($source-context,$languages[1])"/>
+				<xsl:if test="$label != ''">
+					<fo:block page-break-inside="avoid" keep-with-previous="always">
+						<xsl:copy-of select="$style-parameters/filter-block/@*"/>
+						<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
+							<fo:block margin="2pt">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
+								</xsl:call-template>
+							</fo:block>
+						</fo:inline-container>
+						<fo:inline-container>
+							<xsl:copy-of select="$style-parameters/filter-inline-container/@*"/>
+							<fo:block>
+								<xsl:copy-of select="$style-parameters/filter-alternative/@*"/>
+								<xsl:copy-of select="$label"/>
+							</fo:block>
+						</fo:inline-container>
 					</fo:block>
-				</fo:inline-container>
-				<fo:inline-container>
-					<xsl:copy-of select="$style-parameters/filter-inline-container/@*"/>
-					<fo:block>
-						<xsl:copy-of select="$style-parameters/filter-alternative/@*"/>
-						<xsl:copy-of select="$label"/>
-					</fo:block>
-				</fo:inline-container>
-			</fo:block>
-		</xsl:if>
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
+				</xsl:if>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+			</xsl:otherwise>
+		</xsl:choose>
+		
+		
 	</xsl:template>
 
 	<xd:doc>
@@ -1497,6 +1535,60 @@
 		</fo:external-graphic>
 	</xsl:template>
 
+	<xd:doc>
+		<xd:desc>replace VTL code with VELOCITY code</xd:desc>
+	</xd:doc>
+	<xsl:template name="replaceVariablesInFormula">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="formula"/>
+		<xsl:param name="variables" as="node()"/>
+		<xsl:param name="loop-navigation" as="node()"/>
+		
+		<xsl:choose>
+			<xsl:when test="$variables/Variable">
+				<xsl:variable name="current-variable" select="$variables/Variable[1]"/>
+				<xsl:variable name="variable-initial-name" select="concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end)"/>
+				<xsl:variable name="variable-business-name">
+					<xsl:call-template name="variable-velocity-name">
+						<xsl:with-param name="variable" select="enofo:get-variable-business-name($source-context,$current-variable)"/>
+						<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
+					</xsl:call-template>
+				</xsl:variable>
+				<!-- blabla¤var_id¤ in {'a','b','c)blibli
+				becomes:
+				blabla (${var_name} eq 'a' or ${var_name} eq 'b' or ${var_name} eq 'c') blibli-->
+					<xsl:analyze-string select="$formula" regex="^(.*){$variable-initial-name} *in *\{{(.+)\}}(.*)$">
+					<xsl:matching-substring>
+						<xsl:call-template name="replaceVariablesInFormula">
+							<xsl:with-param name="formula">
+								<xsl:value-of select="concat(regex-group(1),' (',$variable-business-name,' eq ')"/>
+								<xsl:value-of select="string-join(tokenize(regex-group(2),','),concat(' or ',$variable-business-name,' eq '))"/>
+								<xsl:value-of select="concat(') ',regex-group(3))"/>
+							</xsl:with-param>
+							<xsl:with-param name="variables" select="$variables"/>
+							<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
+						</xsl:call-template>
+					</xsl:matching-substring>
+					<xsl:non-matching-substring>
+						<xsl:call-template name="replaceVariablesInFormula">
+							<xsl:with-param name="formula" select="replace($formula,$variable-initial-name,concat('\',$variable-business-name))"/>
+							<xsl:with-param name="variables">
+								<Variables>
+									<xsl:copy-of select="$variables/Variable[position() != 1 ]"/>
+								</Variables>
+							</xsl:with-param>
+							<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
+						</xsl:call-template>
+					</xsl:non-matching-substring>
+				</xsl:analyze-string>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$formula"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		
+	</xsl:template>
+	
 	<xd:doc>
 		<xd:desc>the name of a variable</xd:desc>
 	</xd:doc>
