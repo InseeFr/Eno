@@ -1841,7 +1841,19 @@
       <text:p>Function that returns the configuration for a suggester</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1" table:number-rows-repeated="1048466">
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:is-external-filter</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>xs:boolean</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Function that returns true if the filter only depends on external variables</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1" table:number-rows-repeated="1048463">
      <table:table-cell table:number-columns-repeated="4"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
