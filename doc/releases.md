@@ -1,5 +1,10 @@
 # Eno Releases note
 
+## [v2.18.0] - 2025-07-22
+### :sparkles: New Features
+- [`9d5448b`](https://github.com/InseeFr/Eno/commit/9d5448b6ef7b73f9daae82eed1337401b2fd2dd4) - **fo**: vtl (velocity) filter *(PR [#1310](https://github.com/InseeFr/Eno/pull/1310) by [@BulotF](https://github.com/BulotF))*
+
+
 ## [v2.17.0] - 2025-07-21
 ### :sparkles: New Features
 - [`cb017f3`](https://github.com/InseeFr/Eno/commit/cb017f3509033598c851ccd50d4b487932f653a6) - **loops**: minimum, maximum and size instead of Minimum and Maximum *(commit by [@BulotF](https://github.com/BulotF))*
@@ -433,3 +438,4 @@
 [v2.16.0]: https://github.com/InseeFr/Eno/compare/v2.15.2...v2.16.0
 [v2.16.1]: https://github.com/InseeFr/Eno/compare/v2.16.0...v2.16.1
 [v2.17.0]: https://github.com/InseeFr/Eno/compare/v2.16.1...v2.17.0
+[v2.18.0]: https://github.com/InseeFr/Eno/compare/v2.17.1...v2.18.0
