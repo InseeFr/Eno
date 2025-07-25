@@ -8,6 +8,7 @@ on:
       - 'docs/**'
       - 'doc/**'
       - 'README.md'
+      - '.github/**'
 
 env:
   JAVA_VERSION: '17'
@@ -116,24 +117,25 @@ jobs:
           commit_message: 'docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]'
           file_pattern: 'doc/releases.md'
 
-  deploy-maven-repo:
-    needs: check-version
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Maven Central Repository
-        uses: actions/setup-java@v4
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'temurin'
-          server-id: ossrh
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
-      - name: Build and deploy with Maven
-        run: mvn --batch-mode clean process-classes deploy -Prelease -DskipTests=true --no-transfer-progress
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+  # # Deploy maven step disabled since this lib will be migrated within the Eno-WS repo
+  # deploy-maven-repo:
+  #   needs: check-version
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Set up Maven Central Repository
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         java-version: ${{ env.JAVA_VERSION }}
+  #         distribution: 'temurin'
+  #         server-id: ossrh
+  #         server-username: MAVEN_USERNAME
+  #         server-password: MAVEN_PASSWORD
+  #         gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+  #         gpg-passphrase: MAVEN_GPG_PASSPHRASE
+  #     - name: Build and deploy with Maven
+  #       run: mvn --batch-mode clean process-classes deploy -Prelease -DskipTests=true --no-transfer-progress
+  #       env:
+  #         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+  #         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+  #         MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
