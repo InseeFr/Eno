@@ -1,5 +1,13 @@
 # Eno Releases note
 
+## [v2.18.2] - 2025-08-06
+### :sparkles: New Features
+- [`ccc6fca`](https://github.com/InseeFr/Eno/commit/ccc6fcaf2e493ec403a4d1bf89c7e423ff60cbb8) - default value of InitializeAllVariables set to `true` *(PR [#1320](https://github.com/InseeFr/Eno/pull/1320) by [@laurentC35](https://github.com/laurentC35))*
+
+### :construction_worker: Build System
+- [`8a412f5`](https://github.com/InseeFr/Eno/commit/8a412f5e8aab90f884aa56cfe569b07d2713261c) - disable maven release deploy *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [v2.18.1] - 2025-07-25
 ### :bug: Bug Fixes
 - [`6614366`](https://github.com/InseeFr/Eno/commit/66143665b9d666d4551db103934e1aa067669514) - **pogues2ddi**: min max loop props *(PR [#1317](https://github.com/InseeFr/Eno/pull/1317) by [@nsenave](https://github.com/nsenave))*
@@ -445,3 +453,4 @@
 [v2.17.0]: https://github.com/InseeFr/Eno/compare/v2.16.1...v2.17.0
 [v2.18.0]: https://github.com/InseeFr/Eno/compare/v2.17.1...v2.18.0
 [v2.18.1]: https://github.com/InseeFr/Eno/compare/v2.18.0...v2.18.1
+[v2.18.2]: https://github.com/InseeFr/Eno/compare/v2.18.1...v2.18.2
