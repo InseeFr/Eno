@@ -33,7 +33,7 @@
         </xforms-parameters>
 
         <fo-parameters>
-            <InitializeAllVariables>false</InitializeAllVariables>
+            <InitializeAllVariables>true</InitializeAllVariables>
             <Format>
                 <Orientation>0</Orientation>
                 <Columns>1</Columns>

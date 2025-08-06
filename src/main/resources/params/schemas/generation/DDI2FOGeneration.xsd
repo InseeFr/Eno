@@ -5,7 +5,7 @@
     <xs:complexType name="FOParameters">
         <xs:all>
             <xs:element name="InitializeAllVariables" type="xs:boolean" minOccurs="0" maxOccurs="1"
-                default="false"/>
+                default="true"/>
             <xs:element name="Format" type="Format" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Roster" type="Roster" minOccurs="0" maxOccurs="1"/>
             <xs:element name="TextArea" type="TextArea" minOccurs="0" maxOccurs="1"/>
