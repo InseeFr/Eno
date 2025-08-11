@@ -178,6 +178,40 @@
         </xsl:copy>
         <perso />
     </xsl:template>
+    
+    <!-- Filling the <perso> tag of stromae at every save -->
+    <xsl:template match="xf:action[@ev:event='page-change-done']/xf:toggle">
+        <xsl:variable name="donnees-pilotage-content">
+            <Pilotage>
+                <Element label="DateRetourSouhaitee" address=""/>
+                <Element label="Logo" address=""/>
+                <Element label="Nom" address="Contact/"/>
+                <Element label="Mel" address="Contact/"/>
+                <Element label="Telephone" address="Contact/"/>
+                <Element label="LibellePays" address="Contact/Adresse/"/>
+                <Element label="ComplementAdresse" address="Contact/Adresse/"/>
+                <Element label="MentionSpeciale" address="Contact/Adresse/"/>
+                <Element label="InformationsVoie" address="Contact/Adresse/"/>
+                <Element label="Ville" address="Contact/Adresse/"/>
+                <Element label="Identifiant" address="UniteEnquetee/"/>
+                <Element label="Siren" address="UniteEnquetee/"/>
+                <Element label="RaisonSociale" address="UniteEnquetee/"/>
+                <Element label="LabelUniteEnquetee" address="UniteEnquetee/"/>
+            </Pilotage>
+        </xsl:variable>
+        <xsl:variable name="apos"><xsl:text>'</xsl:text></xsl:variable>
+        <xsl:variable name="insert-content">
+            <xsl:for-each select="$donnees-pilotage-content//Element">
+                <xsl:value-of select="concat(' ',$apos,'µ',@label,'µ',$apos,',instance(',$apos,'donnees-pilotage',$apos,')//',@address,@label,'/text(),')"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xf:setvalue ref="instance('fr-form-instance')/stromae/perso">
+            <xsl:attribute name="value" select="concat('concat(',$apos,substring($insert-content,4,string-length($insert-content) -4),' )')"/>
+        </xf:setvalue>
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*"/>
+        </xsl:copy>        
+    </xsl:template>
 
     <!-- Overloads the registration resource for both submissions used in eno-core. -->
     <xsl:template match="xf:submission[@id='save' or @id='submit']">
