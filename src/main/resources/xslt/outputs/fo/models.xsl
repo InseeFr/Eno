@@ -492,7 +492,7 @@
 		<xsl:variable name="is-dynamic-array-static" select="$maximum-lines-number != '' and not(enofo:get-external-variables($source-context)//*)"/>
 		<xsl:variable name="roster-minimum-lines" as="xs:integer">
 			<xsl:choose>
-				<xsl:when test="$maximum-lines-number != ''">
+				<xsl:when test="$is-dynamic-array-static">
 					<xsl:value-of select="$maximum-lines-number"/>
 				</xsl:when>
 				<xsl:when test="number(enofo:get-minimum-lines($source-context)) &gt; $roster-defaultsize">
