@@ -1071,7 +1071,9 @@
 								<xsl:copy-of select="$style-parameters/label-cell/@*"/>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
-										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end}')"/>
+										<xsl:value-of select="$variable-personalization-begin"/>
+										<xsl:copy-of select="$manual-content"/>
+										<xsl:value-of select="'#{end}'"/>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:copy-of select="$manual-content"/>
@@ -1085,7 +1087,9 @@
 								<xsl:copy-of select="$style-parameters/general-style/@*"/>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
-										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end}')"/>
+										<xsl:value-of select="$variable-personalization-begin"/>
+										<xsl:copy-of select="$manual-content"/>
+										<xsl:value-of select="'#{end}'"/>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:copy-of select="$manual-content"/>
@@ -1205,7 +1209,6 @@
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
 			</xsl:call-template>
 		</xsl:variable>
-		<xsl:variable name="variable-personalization-begin" select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
 
 		<fo:inline>
 			<xsl:variable name="duration-content" as="node() *">

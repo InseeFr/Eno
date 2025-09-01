@@ -1107,9 +1107,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{EFF3112})$!{EFF3112}#{else}
+                         text-align="justify">#{if}($!{EFF3112})$!{EFF3112}#{else}<fo:inline-container width="16mm">
+                     <fo:block-container height="8mm"
+                                         width="16mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1139,9 +1146,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{EFF_ETP})$!{EFF_ETP}#{else}
+                         text-align="justify">#{if}($!{EFF_ETP})$!{EFF_ETP}#{else}<fo:inline-container width="28mm">
+                     <fo:block-container height="8mm"
+                                         width="28mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1200,9 +1214,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{DUREE_EXERCICE})$!{DUREE_EXERCICE}#{else}
+                         text-align="justify">#{if}($!{DUREE_EXERCICE})$!{DUREE_EXERCICE}#{else}<fo:inline-container width="8mm">
+                     <fo:block-container height="8mm"
+                                         width="8mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1254,9 +1275,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{CA})$!{CA}#{else}
+                         text-align="justify">#{if}($!{CA})$!{CA}#{else}<fo:inline-container width="40mm">
+                     <fo:block-container height="8mm"
+                                         width="40mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1277,9 +1305,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{CA_MARCHANDISES})$!{CA_MARCHANDISES}#{else}
+                         text-align="justify">#{if}($!{CA_MARCHANDISES})$!{CA_MARCHANDISES}#{else}<fo:inline-container width="40mm">
+                     <fo:block-container height="8mm"
+                                         width="40mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1309,9 +1344,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{PROD_STOCKEE_ET_EN_COURS})$!{PROD_STOCKEE_ET_EN_COURS}#{else}
+                         text-align="justify">#{if}($!{PROD_STOCKEE_ET_EN_COURS})$!{PROD_STOCKEE_ET_EN_COURS}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1341,9 +1383,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{PRODUCTION_IMMOBILISEE})$!{PRODUCTION_IMMOBILISEE}#{else}
+                         text-align="justify">#{if}($!{PRODUCTION_IMMOBILISEE})$!{PRODUCTION_IMMOBILISEE}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1373,9 +1422,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{SUBVENTIONS_EXPLOITATION})$!{SUBVENTIONS_EXPLOITATION}#{else}
+                         text-align="justify">#{if}($!{SUBVENTIONS_EXPLOITATION})$!{SUBVENTIONS_EXPLOITATION}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1405,9 +1461,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{AUTRES_PRODUITS})$!{AUTRES_PRODUITS}#{else}
+                         text-align="justify">#{if}($!{AUTRES_PRODUITS})$!{AUTRES_PRODUITS}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1634,9 +1697,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -1738,9 +1805,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -1842,9 +1913,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -1946,9 +2021,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2050,9 +2129,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2154,9 +2237,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2258,9 +2345,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2362,9 +2453,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2466,9 +2561,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2570,9 +2669,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2674,9 +2777,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2778,9 +2885,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2882,9 +2993,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2986,9 +3101,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3090,9 +3209,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}
+                                        padding="1mm">#{if}($!{REPARTITION_CA-0-REPARTITION_CA3})$!{REPARTITION_CA-0-REPARTITION_CA3}#{else}<fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3140,9 +3263,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{SALAIRES_TRAITEMENTS})$!{SALAIRES_TRAITEMENTS}#{else}
+                         text-align="justify">#{if}($!{SALAIRES_TRAITEMENTS})$!{SALAIRES_TRAITEMENTS}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3172,9 +3302,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{CHARGES_SOCIALES})$!{CHARGES_SOCIALES}#{else}
+                         text-align="justify">#{if}($!{CHARGES_SOCIALES})$!{CHARGES_SOCIALES}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3204,9 +3341,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{COTISATIONS_SOCIALES_EXPLOITANT})$!{COTISATIONS_SOCIALES_EXPLOITANT}#{else}
+                         text-align="justify">#{if}($!{COTISATIONS_SOCIALES_EXPLOITANT})$!{COTISATIONS_SOCIALES_EXPLOITANT}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3251,9 +3395,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{ACQUSITIONS_CORPORELLES})$!{ACQUSITIONS_CORPORELLES}#{else}
+                         text-align="justify">#{if}($!{ACQUSITIONS_CORPORELLES})$!{ACQUSITIONS_CORPORELLES}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3274,9 +3425,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{ACQUSITIONS_TERRAINS})$!{ACQUSITIONS_TERRAINS}#{else}
+                         text-align="justify">#{if}($!{ACQUSITIONS_TERRAINS})$!{ACQUSITIONS_TERRAINS}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3297,9 +3455,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{ACQUISITIONS_INCORP_BDD})$!{ACQUISITIONS_INCORP_BDD}#{else}
+                         text-align="justify">#{if}($!{ACQUISITIONS_INCORP_BDD})$!{ACQUISITIONS_INCORP_BDD}#{else}<fo:inline-container width="40mm">
+                     <fo:block-container height="8mm"
+                                         width="40mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3342,9 +3507,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{CESSIONS_CORPORELLES})$!{CESSIONS_CORPORELLES}#{else}
+                         text-align="justify">#{if}($!{CESSIONS_CORPORELLES})$!{CESSIONS_CORPORELLES}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3365,9 +3537,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{CESSIONS_TERRAINS})$!{CESSIONS_TERRAINS}#{else}
+                         text-align="justify">#{if}($!{CESSIONS_TERRAINS})$!{CESSIONS_TERRAINS}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3388,9 +3567,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{CESSIONS_INCORPORELLES_BDD})$!{CESSIONS_INCORPORELLES_BDD}#{else}
+                         text-align="justify">#{if}($!{CESSIONS_INCORPORELLES_BDD})$!{CESSIONS_INCORPORELLES_BDD}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3435,9 +3621,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{ACHAT_MARCHANDISES})$!{ACHAT_MARCHANDISES}#{else}
+                         text-align="justify">#{if}($!{ACHAT_MARCHANDISES})$!{ACHAT_MARCHANDISES}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3458,9 +3651,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{ACHATS_MATIERES_PREMIERES})$!{ACHATS_MATIERES_PREMIERES}#{else}
+                         text-align="justify">#{if}($!{ACHATS_MATIERES_PREMIERES})$!{ACHATS_MATIERES_PREMIERES}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3490,9 +3690,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{CHARGES_EXTERNES})$!{CHARGES_EXTERNES}#{else}
+                         text-align="justify">#{if}($!{CHARGES_EXTERNES})$!{CHARGES_EXTERNES}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3522,9 +3729,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{IMPOTS})$!{IMPOTS}#{else}
+                         text-align="justify">#{if}($!{IMPOTS})$!{IMPOTS}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3554,9 +3768,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{AUTRES_CHARGES})$!{AUTRES_CHARGES}#{else}
+                         text-align="justify">#{if}($!{AUTRES_CHARGES})$!{AUTRES_CHARGES}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3607,9 +3828,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{VARIATION_STOCK_MARCHANDISES})$!{VARIATION_STOCK_MARCHANDISES}#{else}
+                         text-align="justify">#{if}($!{VARIATION_STOCK_MARCHANDISES})$!{VARIATION_STOCK_MARCHANDISES}#{else}<fo:inline-container width="28mm">
+                     <fo:block-container height="8mm"
+                                         width="28mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3630,9 +3858,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{VARIATION_STOCK_MATIERES_PREMIERES})$!{VARIATION_STOCK_MATIERES_PREMIERES}#{else}
+                         text-align="justify">#{if}($!{VARIATION_STOCK_MATIERES_PREMIERES})$!{VARIATION_STOCK_MATIERES_PREMIERES}#{else}<fo:inline-container width="32mm">
+                     <fo:block-container height="8mm"
+                                         width="32mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3675,9 +3910,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{EXPORTATIONS})$!{EXPORTATIONS}#{else}
+                         text-align="justify">#{if}($!{EXPORTATIONS})$!{EXPORTATIONS}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3707,9 +3949,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{IMPORTATIONS})$!{IMPORTATIONS}#{else}
+                         text-align="justify">#{if}($!{IMPORTATIONS})$!{IMPORTATIONS}#{else}<fo:inline-container width="36mm">
+                     <fo:block-container height="8mm"
+                                         width="36mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3743,9 +3992,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{INTERETS_VERSES})$!{INTERETS_VERSES}#{else}
+                         text-align="justify">#{if}($!{INTERETS_VERSES})$!{INTERETS_VERSES}#{else}<fo:inline-container width="32mm">
+                     <fo:block-container height="8mm"
+                                         width="32mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3766,9 +4022,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{INTERETS_PERCUS})$!{INTERETS_PERCUS}#{else}
+                         text-align="justify">#{if}($!{INTERETS_PERCUS})$!{INTERETS_PERCUS}#{else}<fo:inline-container width="32mm">
+                     <fo:block-container height="8mm"
+                                         width="32mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3789,9 +4052,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{DIVIDENDES})$!{DIVIDENDES}#{else}
+                         text-align="justify">#{if}($!{DIVIDENDES})$!{DIVIDENDES}#{else}<fo:inline-container width="40mm">
+                     <fo:block-container height="8mm"
+                                         width="40mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline>€</fo:inline>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline>€</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
