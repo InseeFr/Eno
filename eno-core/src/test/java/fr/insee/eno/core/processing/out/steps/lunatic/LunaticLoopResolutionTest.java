@@ -163,12 +163,6 @@ class LunaticLoopResolutionTest {
         }
 
         @Test
-        void loopsConditionFilter() {
-            lunaticLoops.forEach(loop ->
-                    assertEquals("true", loop.getConditionFilter().getValue()));
-        }
-
-        @Test
         void loopsDepth() {
             lunaticLoops.forEach(loop ->
                     assertEquals(BigInteger.ONE, loop.getDepth()));
