@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.55.1] - 2025-09-02
+### :bug: Bug Fixes
+- [`bd3d758`](https://github.com/InseeFr/Eno/commit/bd3d758710b91046df7424616c41859a3eb6a172) - **deps**: update all minor dependencies *(PR [#1319](https://github.com/InseeFr/Eno/pull/1319) by [@renovate[bot]](https://github.com/apps/renovate))*
+- [`6f5f959`](https://github.com/InseeFr/Eno/commit/6f5f959222d0b6f89d4e481ebedfdced51309d57) - **deps**: update all minor dependencies *(PR [#1324](https://github.com/InseeFr/Eno/pull/1324) by [@renovate[bot]](https://github.com/apps/renovate))*
+- [`afacfee`](https://github.com/InseeFr/Eno/commit/afacfee5d125721a03678698dc6b55f4020d0fb1) - remove useless conditionFilter of loop *(PR [#1327](https://github.com/InseeFr/Eno/pull/1327) by [@laurentC35](https://github.com/laurentC35))*
+
+
 ## [3.55.0] - 2025-07-21
 ### :sparkles: New Features
 - [`12d075d`](https://github.com/InseeFr/Eno/commit/12d075d6a9373d0950e088533bc4cfd086a1543b) - **ws**: delete required metadata ddi to fo *(PR [#1298](https://github.com/InseeFr/Eno/pull/1298) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -653,3 +660,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.53.0]: https://github.com/InseeFr/Eno/compare/3.52.1...3.53.0
 [3.54.0]: https://github.com/InseeFr/Eno/compare/3.53.0...3.54.0
 [3.55.0]: https://github.com/InseeFr/Eno/compare/3.54.0...3.55.0
+[3.55.1]: https://github.com/InseeFr/Eno/compare/3.55.0...3.55.1
