@@ -99,21 +99,11 @@
 		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
 		<xsl:variable name="is-external-filter" select="enofo:is-external-filter($source-context)"/>
-		<xsl:variable name="apos"><xsl:text>'</xsl:text></xsl:variable>
 		<xsl:choose>
 			<xsl:when test="enofo:is-external-filter($source-context)">
 				<xsl:text>&#xd;#if (</xsl:text>
 				<xsl:call-template name="replaceVariablesInFormula">
-					<xsl:with-param name="formula" select="normalize-space(
-						replace(replace(replace(replace(replace(replace(replace(
-							enofo:get-relevant($source-context)
-						,'&quot;',$apos)
-						,'&lt;&gt;',' ne ')
-						,'&lt;=',' le ')
-						,'&gt;=',' ge ')
-						,'&lt;',' lt ')
-						,'&gt;',' gt ')
-						,'=',' eq '))"/>
+					<xsl:with-param name="formula" select="enofo:get-relevant($source-context)"/>
 					<xsl:with-param name="variables" as="node()">
 						<Variables>
 							<xsl:for-each select="tokenize(enofo:get-hideable-command-variables($source-context),' ')">
@@ -1081,7 +1071,9 @@
 								<xsl:copy-of select="$style-parameters/label-cell/@*"/>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
-										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end}')"/>
+										<xsl:value-of select="$variable-personalization-begin"/>
+										<xsl:copy-of select="$manual-content"/>
+										<xsl:value-of select="'#{end}'"/>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:copy-of select="$manual-content"/>
@@ -1095,7 +1087,9 @@
 								<xsl:copy-of select="$style-parameters/general-style/@*"/>
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
-										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end}')"/>
+										<xsl:value-of select="$variable-personalization-begin"/>
+										<xsl:copy-of select="$manual-content"/>
+										<xsl:value-of select="'#{end}'"/>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:copy-of select="$manual-content"/>
@@ -1215,7 +1209,6 @@
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
 			</xsl:call-template>
 		</xsl:variable>
-		<xsl:variable name="variable-personalization-begin" select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
 
 		<fo:inline>
 			<xsl:variable name="duration-content" as="node() *">
@@ -1554,15 +1547,16 @@
 						<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
 					</xsl:call-template>
 				</xsl:variable>
-				<!-- blabla¤var_id¤ in {'a','b','c)blibli
+				<!-- blabla¤var_id¤ in {"a","b","c")blibli
 				becomes:
 				blabla (${var_name} eq 'a' or ${var_name} eq 'b' or ${var_name} eq 'c') blibli-->
 					<xsl:analyze-string select="$formula" regex="^(.*){$variable-initial-name} *in *\{{(.+)\}}(.*)$">
 					<xsl:matching-substring>
+						<xsl:variable name="apos"><xsl:text>'</xsl:text></xsl:variable>
 						<xsl:call-template name="replaceVariablesInFormula">
 							<xsl:with-param name="formula">
 								<xsl:value-of select="concat(regex-group(1),' (',$variable-business-name,' eq ')"/>
-								<xsl:value-of select="string-join(tokenize(regex-group(2),','),concat(' or ',$variable-business-name,' eq '))"/>
+								<xsl:value-of select="string-join(tokenize(replace(regex-group(2),'&quot;',$apos),','),concat(' or ',$variable-business-name,' eq '))"/>
 								<xsl:value-of select="concat(') ',regex-group(3))"/>
 							</xsl:with-param>
 							<xsl:with-param name="variables" select="$variables"/>
@@ -1583,7 +1577,14 @@
 				</xsl:analyze-string>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="$formula"/>
+				<xsl:value-of select="normalize-space(
+					replace(replace(replace(replace(replace(replace($formula
+					,'&lt;&gt;',' ne ')
+					,'&lt;=',' le ')
+					,'&gt;=',' ge ')
+					,'&lt;',' lt ')
+					,'&gt;',' gt ')
+					,'=',' eq '))"/>
 			</xsl:otherwise>
 		</xsl:choose>
 		
