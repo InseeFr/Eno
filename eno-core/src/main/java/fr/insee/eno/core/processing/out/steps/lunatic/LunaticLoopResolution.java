@@ -130,20 +130,9 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
 
     private void setOtherLoopProperties(Loop lunaticLoop, @NonNull fr.insee.eno.core.model.navigation.Loop enoLoop) {
         lunaticLoop.setDepth(BigInteger.ONE);
-        setLunaticLoopFilter(lunaticLoop);
         if (enoLoop instanceof LinkedLoop enoLinkedLoop) {
             setLinkedLoopIterations(lunaticLoop, enoLinkedLoop);
         }
-    }
-
-    /** Condition filter of the loop is the same as its first component. */
-    private static void setLunaticLoopFilter(Loop lunaticLoop) {
-        if (lunaticLoop.getComponents().isEmpty()) {
-            throw new MappingException(String.format(
-                    "Loop '%s' is empty. This means something went wrong during the mapping or loop resolution.",
-                    lunaticLoop.getId()));
-        }
-        lunaticLoop.setConditionFilter(lunaticLoop.getComponents().getFirst().getConditionFilter());
     }
 
     /** Lunatic linked loops have an "iterations" property.
