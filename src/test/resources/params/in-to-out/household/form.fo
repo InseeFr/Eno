@@ -663,9 +663,9 @@
             </fo:block>
          </fo:block-container>
          <fo:block-container margin-left="10mm"
-                              margin-top="28mm"
-                              width="150mm"
-                              height="10mm">
+                             margin-top="28mm"
+                             width="150mm"
+                             height="10mm">
             <fo:block font-family="Liberation Sans"
                       font-size="16pt"
                       font-weight="bold"
@@ -682,9 +682,9 @@
                         <fo:table-cell width="20mm">
                            <fo:block>
                               <fo:external-graphic src="coleman/COLEM_EnveloppeQuestionnaire.jpg"
-                                                    content-width="scale-to-fit"
-                                                    width="15mm"
-                                                    scaling="uniform"/>
+                                                   content-width="scale-to-fit"
+                                                   width="15mm"
+                                                   scaling="uniform"/>
                            </fo:block>
                         </fo:table-cell>
                         <fo:table-cell display-align="center">
@@ -727,9 +727,9 @@
                         <fo:table-cell width="20mm">
                            <fo:block>
                               <fo:external-graphic src="coleman/COLEM_QuiRepondQuestionnaire.jpg"
-                                                    content-width="scale-to-fit"
-                                                    width="15mm"
-                                                    scaling="uniform"/>
+                                                   content-width="scale-to-fit"
+                                                   width="15mm"
+                                                   scaling="uniform"/>
                            </fo:block>
                         </fo:table-cell>
                         <fo:table-cell display-align="center">
@@ -762,9 +762,9 @@
                         <fo:table-cell width="20mm">
                            <fo:block>
                               <fo:external-graphic src="coleman/COLEM_RemplirQuestionnaire.jpg"
-                                                    content-width="scale-to-fit"
-                                                    width="15mm"
-                                                    scaling="uniform"/>
+                                                   content-width="scale-to-fit"
+                                                   width="15mm"
+                                                   scaling="uniform"/>
                            </fo:block>
                         </fo:table-cell>
                         <fo:table-cell display-align="center" width="80mm">
@@ -776,10 +776,10 @@
             </fo:block>
          </fo:block-container>
          <fo:block-container margin-left="15mm"
-                              margin-right="5mm"
-                              font-family="Liberation Sans"
-                              font-size="10pt"
-                              text-align="justify">
+                             margin-right="5mm"
+                             font-family="Liberation Sans"
+                             font-size="10pt"
+                             text-align="justify">
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label start-indent="5mm" line-height="5mm">
@@ -807,11 +807,11 @@
                   <fo:list-item-body start-indent="10mm" line-height="5mm">
                      <fo:block>Utilisez les cases prévues pour les réponses écrites. Exemple :
                                 <fo:external-graphic src="year_example.png"
-                                              padding-right="3pt"
-                                              padding-left="3pt"
-                                              vertical-align="middle"
-                                              content-width="5mm"
-                                              content-height="10mm"/>
+                                             padding-right="3pt"
+                                             padding-left="3pt"
+                                             vertical-align="middle"
+                                             content-width="5mm"
+                                             content-height="10mm"/>
                      </fo:block>
                   </fo:list-item-body>
                </fo:list-item>
@@ -837,11 +837,11 @@
          </fo:block-container>
          <!--    Bloc Consignes spécifiques enquête  -->
          <fo:block-container margin-top="0mm"
-                              margin-left="10mm"
-                              margin-right="5mm"
-                              font-family="Liberation Sans"
-                              font-size="10pt"
-                              text-align="justify">
+                             margin-left="10mm"
+                             margin-right="5mm"
+                             font-family="Liberation Sans"
+                             font-size="10pt"
+                             text-align="justify">
             <fo:block>
                     #if (${Enq_Consigne1} != '')
                     <fo:inline-container margin="0mm">
@@ -1110,9 +1110,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{ACTADMIN} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1124,9 +1122,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{ACTADMIN} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1190,9 +1186,7 @@
                       font-weight="normal"
                       font-size="10pt"
                       padding="1mm"
-                      text-align="justify">
-               <fo:external-graphic src="date-o-fr-YYYYMM.png"/>
-            </fo:block>
+                      text-align="justify">#{if}($!{DATEDEP})$!{DATEDEP}#{else}<fo:external-graphic src="date-o-fr-YYYYMM.png"/>#{end}</fo:block>
          </fo:block>
          <fo:block page-break-inside="avoid"
                    keep-with-next="always"
@@ -1218,9 +1212,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{RAISONDEP} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1232,9 +1224,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{RAISONDEP} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1246,9 +1236,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{RAISONDEP} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1260,9 +1248,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{RAISONDEP} eq '4') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1274,9 +1260,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{RAISONDEP} eq '5') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1326,9 +1310,7 @@
                       font-weight="normal"
                       font-size="10pt"
                       padding="1mm"
-                      text-align="justify">
-               <fo:external-graphic src="date-o-fr-YYYY.png"/>
-            </fo:block>
+                      text-align="justify">#{if}($!{ANNEEFORM})$!{ANNEEFORM}#{else}<fo:external-graphic src="date-o-fr-YYYY.png"/>#{end}</fo:block>
          </fo:block>
          <fo:block page-break-inside="avoid"
                    keep-with-next="always"
@@ -1365,9 +1347,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{DIPL} eq 'DIP_AUC') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1380,9 +1360,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{DIPL} eq 'DIP_BRE') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1395,9 +1373,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{DIPL} eq 'DIP_CAP') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1410,9 +1386,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{DIPL} eq 'DIP_BAC') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1425,9 +1399,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{DIPL} eq 'DIP_BTS') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1440,9 +1412,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{DIPL} eq 'DIP_LIC') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1455,9 +1425,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{DIPL} eq 'DIP_MAST') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1470,9 +1438,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{DIPL} eq 'DIP_DOCT') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1542,9 +1508,7 @@
                       font-weight="normal"
                       font-size="10pt"
                       padding="1mm"
-                      text-align="justify">
-               <fo:external-graphic src="date-o-fr-YYYY.png"/>
-            </fo:block>
+                      text-align="justify">#{if}($!{ANNEEREM})$!{ANNEEREM}#{else}<fo:external-graphic src="date-o-fr-YYYY.png"/>#{end}</fo:block>
          </fo:block>
          <fo:block page-break-inside="avoid"
                    keep-with-next="always"
@@ -1559,9 +1523,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{SECTEUR} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1573,9 +1535,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{SECTEUR} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1631,10 +1591,8 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline/>
+                         text-align="justify">#{if}($!{NBEMPL})$!{NBEMPL}#{else}<fo:external-graphic src="mask_number.png"/>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1664,14 +1622,12 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{DUREEPRIV})$!{DUREEPRIV}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline padding-start="1mm" padding-end="3mm">an(s)</fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>
-               </fo:block>
+                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>#{end}</fo:block>
             </fo:inline>
          </fo:block>
          <fo:block page-break-inside="avoid"
@@ -1698,9 +1654,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{PERIODCHOM} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1712,9 +1666,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{PERIODCHOM} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1770,10 +1722,8 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline/>
+                         text-align="justify">#{if}($!{NBCHOM})$!{NBCHOM}#{else}<fo:external-graphic src="mask_number.png"/>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1805,11 +1755,9 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
+                         text-align="justify">#{if}($!{DUREECHOM})$!{DUREECHOM}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>mois</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>mois</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1859,9 +1807,7 @@
                       font-weight="normal"
                       font-size="10pt"
                       padding="1mm"
-                      text-align="justify">
-               <fo:external-graphic src="date-o-fr-YYYY.png"/>
-            </fo:block>
+                      text-align="justify">#{if}($!{ANNEEFP})$!{ANNEEFP}#{else}<fo:external-graphic src="date-o-fr-YYYY.png"/>#{end}</fo:block>
          </fo:block>
          <fo:block page-break-inside="avoid"
                    keep-with-next="always"
@@ -1876,9 +1822,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{FPDEBUT} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1890,9 +1834,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{FPDEBUT} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1904,9 +1846,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{FPDEBUT} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1942,9 +1882,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{MOYENENTREE} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1956,9 +1894,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{MOYENENTREE} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1970,9 +1906,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{MOYENENTREE} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -1984,9 +1918,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{MOYENENTREE} eq '4') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2022,9 +1954,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{STATUTPP} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2036,9 +1966,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{STATUTPP} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2050,9 +1978,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{STATUTPP} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2104,9 +2030,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TITUL} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2118,9 +2042,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TITUL} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2172,9 +2094,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{MOYTIT} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2186,9 +2106,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{MOYTIT} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2200,9 +2118,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{MOYTIT} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2228,7 +2144,7 @@
                                             border-color="black"
                                             border-style="solid"
                                             width="100%">
-                           <fo:block> </fo:block>
+                           <fo:block>#{if}($!{MOYTIT_AUTRE})$!{MOYTIT_AUTRE}#{else} #{end}</fo:block>
                         </fo:block-container>
                      </fo:block>
                   </fo:list-item-body>
@@ -2249,9 +2165,7 @@
                       font-weight="normal"
                       font-size="10pt"
                       padding="1mm"
-                      text-align="justify">
-               <fo:external-graphic src="date-o-fr-YYYY.png"/>
-            </fo:block>
+                      text-align="justify">#{if}($!{ANNEE_FONC})$!{ANNEE_FONC}#{else}<fo:external-graphic src="date-o-fr-YYYY.png"/>#{end}</fo:block>
          </fo:block>
          <fo:block page-break-inside="avoid"
                    keep-with-next="always"
@@ -2277,9 +2191,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{CATPP} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2291,9 +2203,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{CATPP} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2305,9 +2215,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{CATPP} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2319,9 +2227,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{CATPP} eq '4') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2357,9 +2263,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{LIEUFP} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2371,9 +2275,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{LIEUFP} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2499,9 +2401,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{CATDEC} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2513,9 +2413,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{CATDEC} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2527,9 +2425,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{CATDEC} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2554,9 +2450,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{MINPOSTE} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2568,9 +2462,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{MINPOSTE} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2595,9 +2487,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{FILIEREPOSTE} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2609,9 +2499,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{FILIEREPOSTE} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2636,9 +2524,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{AUTRE_ACT} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2650,9 +2536,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{AUTRE_ACT} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2713,10 +2597,8 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline/>
+                         text-align="justify">#{if}($!{NBDPT})$!{NBDPT}#{else}<fo:external-graphic src="mask_number.png"/>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -2764,10 +2646,8 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline/>
+                         text-align="justify">#{if}($!{CHGMT_SOUHAIT})$!{CHGMT_SOUHAIT}#{else}<fo:external-graphic src="mask_number.png"/>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -2788,10 +2668,8 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline/>
+                         text-align="justify">#{if}($!{CHGMT_SUIVI})$!{CHGMT_SUIVI}#{else}<fo:external-graphic src="mask_number.png"/>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -2819,9 +2697,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{PROMOTION} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2833,9 +2709,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{PROMOTION} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2898,9 +2772,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{RAISPROMO_1} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2914,9 +2786,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{RAISPROMO_2} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2930,9 +2800,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{RAISPROMO_3} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2946,9 +2814,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{RAISPROMO_4} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2962,9 +2828,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{RAISPROMO_A} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -2988,7 +2852,7 @@
                                             border-color="black"
                                             border-style="solid"
                                             width="100%">
-                           <fo:block> </fo:block>
+                           <fo:block>#{if}($!{RAISONPROMO_A_LIB})$!{RAISONPROMO_A_LIB}#{else} #{end}</fo:block>
                         </fo:block-container>
                      </fo:block>
                   </fo:list-item-body>
@@ -3019,9 +2883,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TPSPART} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3033,9 +2895,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TPSPART} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3098,9 +2958,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TP_CHOISI} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3114,9 +2972,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TP_SUBI} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3154,14 +3010,12 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{DUREETP})$!{DUREETP}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline padding-start="1mm" padding-end="3mm">an(s)</fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>
-               </fo:block>
+                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>#{end}</fo:block>
             </fo:inline>
          </fo:block>
          <fo:block page-break-inside="avoid"
@@ -3188,9 +3042,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TELETRAV} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3202,9 +3054,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TELETRAV} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3216,9 +3066,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TELETRAV} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3230,9 +3078,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TELETRAV} eq '4') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3244,9 +3090,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TELETRAV} eq '5') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3304,18 +3148,14 @@
                                     padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
-                              <fo:inline>
-                                 <fo:external-graphic src="check_case.png"/>
-                              </fo:inline>
+                              <fo:inline>#{if}($!{INTERR_1} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
                                          padding="1mm">Oui</fo:inline>
                            </fo:inline>
                            <fo:inline>
-                              <fo:inline>
-                                 <fo:external-graphic src="check_case.png"/>
-                              </fo:inline>
+                              <fo:inline>#{if}($!{INTERR_1} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
@@ -3349,18 +3189,14 @@
                                     padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
-                              <fo:inline>
-                                 <fo:external-graphic src="check_case.png"/>
-                              </fo:inline>
+                              <fo:inline>#{if}($!{INTERR_2} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
                                          padding="1mm">Oui</fo:inline>
                            </fo:inline>
                            <fo:inline>
-                              <fo:inline>
-                                 <fo:external-graphic src="check_case.png"/>
-                              </fo:inline>
+                              <fo:inline>#{if}($!{INTERR_2} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
@@ -3394,18 +3230,14 @@
                                     padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
-                              <fo:inline>
-                                 <fo:external-graphic src="check_case.png"/>
-                              </fo:inline>
+                              <fo:inline>#{if}($!{INTERR_3} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
                                          padding="1mm">Oui</fo:inline>
                            </fo:inline>
                            <fo:inline>
-                              <fo:inline>
-                                 <fo:external-graphic src="check_case.png"/>
-                              </fo:inline>
+                              <fo:inline>#{if}($!{INTERR_3} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
@@ -3469,14 +3301,12 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{DUREEINTERR_1})$!{DUREEINTERR_1}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline padding-start="1mm" padding-end="3mm">an(s)</fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>
-               </fo:block>
+                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>#{end}</fo:block>
             </fo:inline>
          </fo:block>
          <fo:block page-break-inside="avoid"
@@ -3505,14 +3335,12 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{DUREEINTERR_2})$!{DUREEINTERR_2}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline padding-start="1mm" padding-end="3mm">an(s)</fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>
-               </fo:block>
+                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>#{end}</fo:block>
             </fo:inline>
          </fo:block>
          <fo:block page-break-inside="avoid"
@@ -3541,14 +3369,12 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{DUREEINTERR_3})$!{DUREEINTERR_3}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline padding-start="1mm" padding-end="3mm">an(s)</fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>
-               </fo:block>
+                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>#{end}</fo:block>
             </fo:inline>
          </fo:block>
          <fo:block page-break-inside="avoid"
@@ -3577,9 +3403,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{INDIC_ENSEIGN} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3591,9 +3415,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{INDIC_ENSEIGN} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3605,9 +3427,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{INDIC_ENSEIGN} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3679,9 +3499,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{PLS_ETAB} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3693,9 +3511,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{PLS_ETAB} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3720,9 +3536,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TPS_TRAV} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3734,9 +3548,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{TPS_TRAV} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -3774,14 +3586,12 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBHEURPROF})$!{NBHEURPROF}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline padding-start="1mm" padding-end="3mm">heure(s)</fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline padding-start="1mm" padding-end="3mm">minute(s)</fo:inline>
-               </fo:block>
+                  <fo:inline padding-start="1mm" padding-end="3mm">minute(s)</fo:inline>#{end}</fo:block>
             </fo:inline>
          </fo:block>
          <fo:block page-break-inside="avoid"
@@ -3799,14 +3609,12 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBHEURPREP})$!{NBHEURPREP}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline padding-start="1mm" padding-end="3mm">heure(s)</fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline padding-start="1mm" padding-end="3mm">minute(s)</fo:inline>
-               </fo:block>
+                  <fo:inline padding-start="1mm" padding-end="3mm">minute(s)</fo:inline>#{end}</fo:block>
             </fo:inline>
          </fo:block>
          <fo:block page-break-inside="avoid"
@@ -3824,14 +3632,12 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBHEURAUTRE})$!{NBHEURAUTRE}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline padding-start="1mm" padding-end="3mm">heure(s)</fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline padding-start="1mm" padding-end="3mm">minute(s)</fo:inline>
-               </fo:block>
+                  <fo:inline padding-start="1mm" padding-end="3mm">minute(s)</fo:inline>#{end}</fo:block>
             </fo:inline>
          </fo:block>
          <fo:block page-break-inside="avoid"
@@ -3873,11 +3679,9 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{TPS_PREP_VAC})$!{TPS_PREP_VAC}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -3909,12 +3713,10 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{TPS_PREP_ETE})$!{TPS_PREP_ETE}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4004,14 +3806,12 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBHEURHEBDO})$!{NBHEURHEBDO}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline padding-start="1mm" padding-end="3mm">heure(s)</fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline padding-start="1mm" padding-end="3mm">minute(s)</fo:inline>
-               </fo:block>
+                  <fo:inline padding-start="1mm" padding-end="3mm">minute(s)</fo:inline>#{end}</fo:block>
             </fo:inline>
          </fo:block>
          <fo:block page-break-inside="avoid"
@@ -4040,11 +3840,9 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBJOURHEBDO})$!{NBJOURHEBDO}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4116,13 +3914,11 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBCGE})$!{NBCGE}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4153,12 +3949,10 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBRTT})$!{NBRTT}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4200,13 +3994,11 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBCONGPRIS})$!{NBCONGPRIS}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4237,12 +4029,10 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBCET})$!{NBCET}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4274,13 +4064,11 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBCET_PRIS})$!{NBCET_PRIS}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4322,13 +4110,11 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{STOCK_CET})$!{STOCK_CET}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4359,12 +4145,10 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{JOURSRECUP})$!{JOURSRECUP}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4418,13 +4202,11 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{NBJOURSABS})$!{NBJOURSABS}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline> , </fo:inline>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>jour(s)</fo:inline>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline>jour(s)</fo:inline>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4454,9 +4236,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{FORMATION} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4468,9 +4248,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{FORMATION} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4522,9 +4300,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{FORMRAISON} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4536,9 +4312,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{FORMRAISON} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4603,14 +4377,12 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
+                         text-align="justify">#{if}($!{DUREEFORM})$!{DUREEFORM}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline padding-start="1mm" padding-end="3mm">an(s)</fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>
-               </fo:block>
+                  <fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>#{end}</fo:block>
             </fo:inline>
          </fo:block>
          <fo:block page-break-inside="avoid"
@@ -4639,9 +4411,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{COUPLE} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4653,9 +4423,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{COUPLE} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4707,9 +4475,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{EMPLOI_CONJ} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4721,9 +4487,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{EMPLOI_CONJ} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4735,9 +4499,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{EMPLOI_CONJ} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4762,9 +4524,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{ENFANTS} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4776,9 +4536,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{ENFANTS} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4834,10 +4592,8 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline/>
+                         text-align="justify">#{if}($!{NBENFANTS})$!{NBENFANTS}#{else}<fo:external-graphic src="mask_number.png"/>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4858,12 +4614,10 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
+                         text-align="justify">#{if}($!{ANNEEJEUNE})$!{ANNEEJEUNE}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline/>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4911,12 +4665,10 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">
+                         text-align="justify">#{if}($!{ANNEEAINE})$!{ANNEEAINE}#{else}<fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline/>
+                  <fo:external-graphic src="mask_number.png"/>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -4938,15 +4690,13 @@
                    margin-bottom="3pt"
                    margin-left="3pt"
                    text-align="justify">
-            <fo:inline font-style="italic">Une seule réponse possible. En cas de double nationalité, cochez en priorité "né français" ou "devenu français".</fo:inline>
+            <fo:inline font-style="italic">Une seule réponse possible. En cas de double nationalité, cochez en priorité né français ou devenu français.</fo:inline>
          </fo:block>
          <fo:block id="NATIONALITE" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{NATIONALITE} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4958,9 +4708,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{NATIONALITE} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -4972,9 +4720,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{NATIONALITE} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -5081,9 +4827,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{LIEUNAISS} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -5095,9 +4839,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{LIEUNAISS} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -5109,9 +4851,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{LIEUNAISS} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -5218,9 +4958,7 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{LIEUNAISSPAR} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -5232,9 +4970,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{LIEUNAISSPAR} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -5246,9 +4982,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{LIEUNAISSPAR} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -5260,9 +4994,7 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block text-align="right">
-                        <fo:external-graphic src="check_case.png"/>
-                     </fo:block>
+                     <fo:block text-align="right">#{if}($!{LIEUNAISSPAR} eq '4') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
                      <fo:block color="black"
@@ -5321,9 +5053,7 @@
                         <fo:block>
                            <fo:block>
                               <fo:inline>
-                                 <fo:inline>
-                                    <fo:external-graphic src="check_case.png"/>
-                                 </fo:inline>
+                                 <fo:inline>#{if}($!{PERE} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
@@ -5332,9 +5062,7 @@
                            </fo:block>
                            <fo:block>
                               <fo:inline>
-                                 <fo:inline>
-                                    <fo:external-graphic src="check_case.png"/>
-                                 </fo:inline>
+                                 <fo:inline>#{if}($!{PERE} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
@@ -5343,9 +5071,7 @@
                            </fo:block>
                            <fo:block>
                               <fo:inline>
-                                 <fo:inline>
-                                    <fo:external-graphic src="check_case.png"/>
-                                 </fo:inline>
+                                 <fo:inline>#{if}($!{PERE} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
@@ -5382,9 +5108,7 @@
                         <fo:block>
                            <fo:block>
                               <fo:inline>
-                                 <fo:inline>
-                                    <fo:external-graphic src="check_case.png"/>
-                                 </fo:inline>
+                                 <fo:inline>#{if}($!{MERE} eq '1') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
@@ -5393,9 +5117,7 @@
                            </fo:block>
                            <fo:block>
                               <fo:inline>
-                                 <fo:inline>
-                                    <fo:external-graphic src="check_case.png"/>
-                                 </fo:inline>
+                                 <fo:inline>#{if}($!{MERE} eq '2') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
@@ -5404,9 +5126,7 @@
                            </fo:block>
                            <fo:block>
                               <fo:inline>
-                                 <fo:inline>
-                                    <fo:external-graphic src="check_case.png"/>
-                                 </fo:inline>
+                                 <fo:inline>#{if}($!{MERE} eq '3') <fo:external-graphic src="checkbox_selected.png"/>#{else}<fo:external-graphic src="check_case.png"/>#{end}</fo:inline>
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
