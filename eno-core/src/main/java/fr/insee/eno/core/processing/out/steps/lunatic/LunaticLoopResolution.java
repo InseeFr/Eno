@@ -154,11 +154,14 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
         }
 
         ConditionFilterType firstComponentOfLoopFilter = lunaticLoop.getComponents().getFirst().getConditionFilter();
+        lunaticLoop.setConditionFilter(firstComponentOfLoopFilter);
 
         String filterId = enoLoop.getOccurrenceFilterId();
-        Filter occurrenceFilter = (Filter) enoIndex.get(filterId);
-        if(occurrenceFilter != null){
-            String occurrenceFilterValue = occurrenceFilter.getExpression().getValue();
+        if (filterId == null) return;
+        EnoIdentifiableObject occurrenceFilter = enoIndex.get(filterId);
+        // overload conditionFilter of loop by removing occurrenceFilter condition
+        if (occurrenceFilter instanceof Filter) {
+            String occurrenceFilterValue = ((Filter) occurrenceFilter).getExpression().getValue();
             ConditionFilterType finalFilter = new ConditionFilterType();
             finalFilter.setShapeFrom(firstComponentOfLoopFilter.getShapeFrom());
             finalFilter.setType(firstComponentOfLoopFilter.getType());
@@ -166,10 +169,8 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
             finalFilter.setValue(VtlSyntaxUtils.replaceByTrue(firstComponentOfLoopFilter.getValue(), occurrenceFilterValue));
             lunaticLoop.setConditionFilter(finalFilter);
         } else {
-            lunaticLoop.setConditionFilter(firstComponentOfLoopFilter);
+            log.warn("Item if id {} should be a Filter object and not a {}", filterId, occurrenceFilter != null ? occurrenceFilter.getClass().getName() : null);
         }
-
-
     }
 
     /** Lunatic linked loops have an "iterations" property.
