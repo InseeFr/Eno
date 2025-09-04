@@ -1,0 +1,254 @@
+{
+  "id" : "mf5f1cfv",
+  "genericName" : "QUESTIONNAIRE",
+  "agency" : "fr.insee",
+  "final" : true,
+  "flowLogic" : "FILTER",
+  "formulasLanguage" : "VTL",
+  "lastUpdatedDate" : "Thu Sep 04 2025 14:56:44 GMT+0200 (heure d’été d’Europe centrale)",
+  "owner" : "DR59-SNDI59",
+  "Name" : "INTEGRATIO",
+  "Label" : [ "Integration Eno" ],
+  "Control" : [ ],
+  "FlowControl" : [ {
+    "id" : "mf5f286m",
+    "Description" : "Si filtre",
+    "Expression" : "not($FILTRE$)",
+    "IfTrue" : "mf5f3vpu-mf5faaef"
+  } ],
+  "TargetMode" : [ "CAWI", "CAPI" ],
+  "Child" : [ {
+    "id" : "mf5f4ida",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S1",
+    "Label" : [ "S1" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI" ],
+    "Child" : [ {
+      "id" : "mf5erc7y",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "COMBIEN",
+      "Label" : [ "\"Combien ?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI" ],
+      "Response" : [ {
+        "id" : "mf5fbimz",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "NUMERIC",
+          "type" : "NumericDatatypeType",
+          "Minimum" : 1,
+          "Maximum" : 5,
+          "IsDynamicUnit" : false,
+          "Unit" : ""
+        },
+        "CollectedVariableReference" : "mf5f00nf"
+      } ]
+    }, {
+      "id" : "mf5f1qxy",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "FILTRE",
+      "Label" : [ "\"Filtré ?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI" ],
+      "Response" : [ {
+        "id" : "mf5f9gmk",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "BOOLEAN",
+          "type" : "BooleanDatatypeType"
+        },
+        "CollectedVariableReference" : "mf5exhg2"
+      } ]
+    } ]
+  }, {
+    "id" : "mf5f3vpu",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S2LOOPOVER",
+    "Label" : [ "S2 loop over" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI" ],
+    "Child" : [ {
+      "id" : "mf5f47qh",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "AGES2",
+      "Label" : [ "\"Age s2 ?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI" ],
+      "Response" : [ {
+        "id" : "mf5fdbpp",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "NUMERIC",
+          "type" : "NumericDatatypeType",
+          "Minimum" : 0,
+          "Maximum" : 100,
+          "IsDynamicUnit" : false,
+          "Unit" : "http://id.insee.fr/unit/an"
+        },
+        "CollectedVariableReference" : "mf5fcdqt"
+      } ]
+    } ]
+  }, {
+    "id" : "mf5faaef",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S3LOOPOVER",
+    "Label" : [ "S3 Loop over" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI" ],
+    "Child" : [ {
+      "id" : "mf5et8wj",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "AGES3",
+      "Label" : [ "\"Age S3 ?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI" ],
+      "Response" : [ {
+        "id" : "mf5esx6t",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "NUMERIC",
+          "type" : "NumericDatatypeType",
+          "Minimum" : 0,
+          "Maximum" : 100,
+          "IsDynamicUnit" : false,
+          "Unit" : "http://id.insee.fr/unit/an"
+        },
+        "CollectedVariableReference" : "mf5ezurh"
+      } ]
+    } ]
+  }, {
+    "id" : "mf5eyeyk",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "FIN",
+    "Label" : [ "Fin" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI" ],
+    "Child" : [ ]
+  }, {
+    "id" : "idendquest",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "QUESTIONNAIRE_END",
+    "Label" : [ "QUESTIONNAIRE_END" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI" ],
+    "Child" : [ ]
+  } ],
+  "DataCollection" : [ ],
+  "ComponentGroup" : [ {
+    "id" : "mf5fddaa",
+    "Name" : "PAGE_1",
+    "Label" : [ "Components for page 1" ],
+    "MemberReference" : [ "idendquest", "mf5f4ida", "mf5erc7y", "mf5f1qxy", "mf5f3vpu", "mf5f47qh", "mf5faaef", "mf5et8wj", "mf5eyeyk" ]
+  } ],
+  "CodeLists" : {
+    "CodeList" : [ ]
+  },
+  "Variables" : {
+    "Variable" : [ {
+      "id" : "mf5exhg2",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "BOOLEAN",
+        "type" : "BooleanDatatypeType"
+      },
+      "Name" : "FILTRE",
+      "Label" : "FILTRE label"
+    }, {
+      "id" : "mf5f00nf",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 1,
+        "Maximum" : 5,
+        "IsDynamicUnit" : false,
+        "Unit" : ""
+      },
+      "Name" : "COMBIEN",
+      "Label" : "COMBIEN label"
+    }, {
+      "id" : "mf5fcdqt",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 0,
+        "Maximum" : 100,
+        "IsDynamicUnit" : false,
+        "Unit" : "http://id.insee.fr/unit/an"
+      },
+      "Name" : "AGES2",
+      "Label" : "AGES2 label",
+      "Scope" : "mf5etm57"
+    }, {
+      "id" : "mf5ezurh",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 0,
+        "Maximum" : 100,
+        "IsDynamicUnit" : false,
+        "Unit" : "http://id.insee.fr/unit/an"
+      },
+      "Name" : "AGES3",
+      "Label" : "AGES3 label",
+      "Scope" : "mf5etm57"
+    } ]
+  },
+  "Iterations" : {
+    "Iteration" : [ {
+      "id" : "mf5etm57",
+      "type" : "DynamicIterationType",
+      "Name" : "LOOP_COMBIEN",
+      "MemberReference" : [ "mf5f3vpu", "mf5f3vpu" ],
+      "Minimum" : "$COMBIEN$ ",
+      "Maximum" : "$COMBIEN$ ",
+      "isFixedLength" : true,
+      "size" : "$COMBIEN$ ",
+      "shouldSplitIterations" : false,
+      "Step" : 1
+    }, {
+      "id" : "mf5evs8l",
+      "type" : "DynamicIterationType",
+      "Name" : "boucle-s3",
+      "MemberReference" : [ "mf5faaef", "mf5faaef" ],
+      "IterableReference" : "mf5etm57",
+      "Filter" : "$AGES2$ <> 10"
+    } ]
+  },
+  "childQuestionnaireRef" : [ ]
+}

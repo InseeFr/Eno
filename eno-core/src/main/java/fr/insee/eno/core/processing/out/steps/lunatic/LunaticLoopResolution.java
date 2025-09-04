@@ -5,6 +5,7 @@ import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
@@ -14,6 +15,7 @@ import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -130,9 +132,44 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
 
     private void setOtherLoopProperties(Loop lunaticLoop, @NonNull fr.insee.eno.core.model.navigation.Loop enoLoop) {
         lunaticLoop.setDepth(BigInteger.ONE);
+        setLunaticLoopFilter(lunaticLoop, enoLoop);
         if (enoLoop instanceof LinkedLoop enoLinkedLoop) {
             setLinkedLoopIterations(lunaticLoop, enoLinkedLoop);
         }
+    }
+
+    /** Condition filter of the loop is the same as its first component where we remove occurenceFilter.
+     * Dirty: we replace the occurrenceFilter by 'true' ....
+     * TODO: change logic of computing LoopFilter
+     * step1: loop over child components
+     * step2: for each child compute it's filter (not resolved filter -> enoFilter (with filterScope)
+     * step3: if this found filter is not the occurrenceFilter i.e "SAUF" condition, add it to the list (if not present)
+     * step4: concatenate all found filters
+     * */
+    private void setLunaticLoopFilter(Loop lunaticLoop, fr.insee.eno.core.model.navigation.Loop enoLoop) {
+        if (lunaticLoop.getComponents().isEmpty()) {
+            throw new MappingException(String.format(
+                    "Loop '%s' is empty. This means something went wrong during the mapping or loop resolution.",
+                    lunaticLoop.getId()));
+        }
+
+        ConditionFilterType firstComponentOfLoopFilter = lunaticLoop.getComponents().getFirst().getConditionFilter();
+
+        String filterId = enoLoop.getOccurrenceFilterId();
+        Filter occurrenceFilter = (Filter) enoIndex.get(filterId);
+        if(occurrenceFilter != null){
+            String occurrenceFilterValue = occurrenceFilter.getExpression().getValue();
+            ConditionFilterType finalFilter = new ConditionFilterType();
+            finalFilter.setShapeFrom(firstComponentOfLoopFilter.getShapeFrom());
+            finalFilter.setType(firstComponentOfLoopFilter.getType());
+            finalFilter.setBindingDependencies(firstComponentOfLoopFilter.getBindingDependencies());
+            finalFilter.setValue(VtlSyntaxUtils.replaceByTrue(firstComponentOfLoopFilter.getValue(), occurrenceFilterValue));
+            lunaticLoop.setConditionFilter(finalFilter);
+        } else {
+            lunaticLoop.setConditionFilter(firstComponentOfLoopFilter);
+        }
+
+
     }
 
     /** Lunatic linked loops have an "iterations" property.
