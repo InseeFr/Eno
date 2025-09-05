@@ -87,4 +87,11 @@ class VtlSyntaxUtilsTest {
         assertEquals(expectedExpression2, VtlSyntaxUtils.nvlDefaultValue("AGE", "5"));
     }
 
+    @Test
+    void testReplaceByTrue(){
+        String expression = "(DUMMY <> TOTO) and true or (DUMMY <> TOTO)";
+        String expectedExpression = "true and true or true";
+        assertEquals(expectedExpression, VtlSyntaxUtils.replaceByTrue(expression, "(DUMMY <> TOTO)"));
+    }
+
 }

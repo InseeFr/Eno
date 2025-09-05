@@ -121,6 +121,15 @@ public class VtlSyntaxUtils {
         return getVTLTokenName(VtlTokens.NOT) + surroundByParenthesis(expression);
     }
 
+    /**
+     * Replace expression by true VTL
+     * @param expression VTL boolean expression.
+     * @return VTL expression updated
+     */
+    public static String replaceByTrue(String expression, String expressionToReplace) {
+        return expression.replace(expressionToReplace, "true");
+    }
+
     /** List of Trevas token ids for VTL aggregation operators. */
     private static final List<Integer> VTL_AGR_FUNCTIONS_ID = List.of(
             // Simple aggregator functions
