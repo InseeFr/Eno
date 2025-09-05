@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.55.2] - 2025-09-05
+### :bug: Bug Fixes
+- [`d836f19`](https://github.com/InseeFr/Eno/commit/d836f197ad69e45f0ad40eaef6576e24f6f1136b) - loop condition *(PR [#1330](https://github.com/InseeFr/Eno/pull/1330) by [@laurentC35](https://github.com/laurentC35))*
+
+
 ## [3.55.1] - 2025-09-02
 ### :bug: Bug Fixes
 - [`bd3d758`](https://github.com/InseeFr/Eno/commit/bd3d758710b91046df7424616c41859a3eb6a172) - **deps**: update all minor dependencies *(PR [#1319](https://github.com/InseeFr/Eno/pull/1319) by [@renovate[bot]](https://github.com/apps/renovate))*
@@ -661,3 +666,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.54.0]: https://github.com/InseeFr/Eno/compare/3.53.0...3.54.0
 [3.55.0]: https://github.com/InseeFr/Eno/compare/3.54.0...3.55.0
 [3.55.1]: https://github.com/InseeFr/Eno/compare/3.55.0...3.55.1
+[3.55.2]: https://github.com/InseeFr/Eno/compare/3.55.1...3.55.2
