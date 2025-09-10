@@ -1,11 +1,10 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
 import fr.insee.ddi.lifecycle33.instance.DDIInstanceDocument;
+import fr.insee.eno.core.EnoToLunatic;
 import fr.insee.eno.core.InToEno;
 import fr.insee.eno.core.PoguesDDIToEno;
-import fr.insee.eno.core.PoguesToEno;
 import fr.insee.eno.core.exceptions.business.ParsingException;
-import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
@@ -35,8 +34,8 @@ class ArticulationIntegrationTest {
         DDIInstanceDocument ddiQuestionnaire = DDIDeserializer.deserialize(
                 classLoader.getResourceAsStream("integration/ddi/ddi-articulation.xml"));
         return Stream.of(
-                Arguments.of(PoguesDDIToEno.fromObjects(poguesQuestionnaire, ddiQuestionnaire)),
-                Arguments.of(PoguesToEno.fromObject(poguesQuestionnaire))
+                Arguments.of(PoguesDDIToEno.fromObjects(poguesQuestionnaire, ddiQuestionnaire))
+                //, Arguments.of(PoguesToEno.fromObject(poguesQuestionnaire)) // (roundabout is not mapped in Pogues yet)
         );
     }
 
@@ -46,10 +45,8 @@ class ArticulationIntegrationTest {
         EnoParameters enoParameters = EnoParameters.of(Context.DEFAULT, ModeParameter.CAWI, Format.LUNATIC);
 
         // When
-        EnoQuestionnaire enoQuestionnaire = inToEno.transform(
-                enoParameters);
-        Questionnaire lunaticQuestionnaire = new Questionnaire();
-        new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
+        EnoQuestionnaire enoQuestionnaire = inToEno.transform(enoParameters);
+        Questionnaire lunaticQuestionnaire = new EnoToLunatic().transform(enoQuestionnaire, enoParameters);
 
         // Then
         assertNotNull(lunaticQuestionnaire.getArticulation());
@@ -63,7 +60,7 @@ class ArticulationIntegrationTest {
         assertEquals("Sexe", item2.getLabel());
         assertEquals("GENDER", item2.getValue());
         assertEquals("Age", item3.getLabel());
-        assertEquals("cast(AGE_NVL, string)", item3.getValue());
+        assertEquals("cast(AGE_NVL, string) || \" years old\"", item3.getValue());
         lunaticQuestionnaire.getArticulation().getItems().forEach(item ->
                 assertEquals(LabelTypeEnum.VTL, item.getType()));
     }
