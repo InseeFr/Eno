@@ -14,7 +14,6 @@ import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import fr.insee.lunatic.model.flat.articulation.ArticulationItem;
 import fr.insee.lunatic.model.flat.multimode.Multimode;
 import fr.insee.lunatic.model.flat.multimode.MultimodeRule;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -62,7 +61,7 @@ class MultimodeIntegrationTest {
 
         assertNotNull(lunaticMultimode.getLeaf());
         assertEquals("mff5q24e", lunaticMultimode.getLeaf().getSource());
-        MultimodeRule leafIsMovedRule = lunaticMultimode.getQuestionnaire().getRules().get("IS_MOVED");
+        MultimodeRule leafIsMovedRule = lunaticMultimode.getLeaf().getRules().get("IS_MOVED");
         assertNotNull(leafIsMovedRule);
         assertEquals(LabelTypeEnum.VTL, leafIsMovedRule.getType());
         assertEquals("HAS_MOVED", leafIsMovedRule.getValue());

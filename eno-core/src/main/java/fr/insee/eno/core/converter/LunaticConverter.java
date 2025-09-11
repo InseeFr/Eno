@@ -8,6 +8,10 @@ import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
+import fr.insee.eno.core.model.multimode.EnoLeafRules;
+import fr.insee.eno.core.model.multimode.EnoMultimode;
+import fr.insee.eno.core.model.multimode.EnoMultimodeRules;
+import fr.insee.eno.core.model.multimode.EnoQuestionnaireRules;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.navigation.Loop;
@@ -26,6 +30,9 @@ import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.ExternalVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.multimode.Multimode;
+import fr.insee.lunatic.model.flat.multimode.MultimodeLeaf;
+import fr.insee.lunatic.model.flat.multimode.MultimodeQuestionnaire;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.ExternalVariableType;
@@ -63,6 +70,10 @@ public class LunaticConverter {
             return new fr.insee.lunatic.model.flat.Loop();
         if (enoObject instanceof StandaloneLoop.LoopIterations)
             return new LinesLoop();
+        if (enoObject instanceof EnoMultimode)
+            return new Multimode();
+        if (enoObject instanceof EnoMultimodeRules enoMultimodeRules)
+            return instantiateFrom(enoMultimodeRules);
         if (enoObject instanceof SingleResponseQuestion singleResponseQuestion)
             return instantiateFrom(singleResponseQuestion);
         if (enoObject instanceof MultipleResponseQuestion multipleResponseQuestion)
@@ -94,6 +105,14 @@ public class LunaticConverter {
         return enoObject instanceof Label || enoObject instanceof QuestionnaireLabel
                 || enoObject instanceof DynamicLabel || enoObject instanceof CellLabel
                 || enoObject instanceof CalculatedExpression;
+    }
+
+    private static Object instantiateFrom(EnoMultimodeRules enoMultimodeRules) {
+        if (enoMultimodeRules instanceof EnoQuestionnaireRules)
+            return new MultimodeQuestionnaire();
+        if (enoMultimodeRules instanceof EnoLeafRules)
+            return new MultimodeLeaf();
+        throw new ConversionException("Unknown multimode rules type " + enoMultimodeRules.getClass().getSimpleName());
     }
 
     private static Object instantiateFrom(SingleResponseQuestion enoQuestion) {

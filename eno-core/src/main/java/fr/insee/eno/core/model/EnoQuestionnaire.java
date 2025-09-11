@@ -8,6 +8,7 @@ import fr.insee.eno.core.exceptions.business.IllegalPoguesElementException;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
+import fr.insee.eno.core.model.multimode.EnoMultimode;
 import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.Loop;
@@ -116,6 +117,11 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
             ".?[#this instanceof T(fr.insee.ddi.lifecycle33.datacollection.LoopType)]")
     @Lunatic("getComponents()")
     private final List<Loop> loops = new ArrayList<>();
+
+    /** {@link EnoMultimode} */
+    @Pogues("getMultimode()")
+    @Lunatic("setMultimode(#param)")
+    private EnoMultimode enoMultimode;
 
     /** In DDI, all filters are mapped at the questionnaire level.
      * They are inserted in the objects they belong to through a DDI processing.
