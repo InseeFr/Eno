@@ -52,30 +52,8 @@ jobs:
             exit 1
           fi
 
-  deploy-maven-repo:
-    needs: check-version
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Maven Central Repository
-        uses: actions/setup-java@v4
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'temurin'
-          server-id: ossrh
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
-      - name: Build and deploy with Maven
-        run: mvn --batch-mode clean process-classes deploy -Prelease -DskipTests=true --no-transfer-progress
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
-
   create-tag:
-    needs: [ check-version, deploy-maven-repo ]
+    needs: check-version
     runs-on: ubuntu-latest
     steps:
       - name: Create tag
@@ -89,16 +67,38 @@ jobs:
               sha: context.sha
             })
 
-  deploy-comment:
-    needs: [ check-version, deploy-maven-repo ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '👋 Version ${{ needs.check-version.outputs.snapshot-version }} deployed on maven central repository'
-            })
+#  deploy-maven-repo:
+#    needs: check-version
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#      - name: Set up Maven Central Repository
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: ${{ env.JAVA_VERSION }}
+#          distribution: 'temurin'
+#          server-id: ossrh
+#          server-username: MAVEN_USERNAME
+#          server-password: MAVEN_PASSWORD
+#          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+#          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+#      - name: Build and deploy with Maven
+#        run: mvn --batch-mode clean process-classes deploy -Prelease -DskipTests=true --no-transfer-progress
+#        env:
+#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+#  deploy-comment:
+#    needs: [ check-version, deploy-maven-repo ]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/github-script@v7
+#        with:
+#          script: |
+#            github.rest.issues.createComment({
+#              issue_number: context.issue.number,
+#              owner: context.repo.owner,
+#              repo: context.repo.repo,
+#              body: '👋 Version ${{ needs.check-version.outputs.snapshot-version }} deployed on maven central repository'
+#            })

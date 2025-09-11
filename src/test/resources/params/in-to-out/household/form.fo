@@ -4690,7 +4690,7 @@
                    margin-bottom="3pt"
                    margin-left="3pt"
                    text-align="justify">
-            <fo:inline font-style="italic">Une seule réponse possible. En cas de double nationalité, cochez en priorité "né français" ou "devenu français".</fo:inline>
+            <fo:inline font-style="italic">Une seule réponse possible. En cas de double nationalité, cochez en priorité né français ou devenu français.</fo:inline>
          </fo:block>
          <fo:block id="NATIONALITE" page-break-inside="avoid">
             <fo:list-block>

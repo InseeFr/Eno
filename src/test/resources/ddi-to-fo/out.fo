@@ -348,9 +348,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{SEASON_NUMBER})$!{SEASON_NUMBER}#{else}
+                         text-align="justify">#{if}($!{SEASON_NUMBER})$!{SEASON_NUMBER}#{else}<fo:inline-container width="8mm">
+                     <fo:block-container height="8mm"
+                                         width="8mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -396,9 +403,16 @@
                          font-weight="normal"
                          font-size="10pt"
                          padding="1mm"
-                         text-align="justify">#{if}($!{AUDIENCE_SHARE})$!{AUDIENCE_SHARE}#{else}
+                         text-align="justify">#{if}($!{AUDIENCE_SHARE})$!{AUDIENCE_SHARE}#{else}<fo:inline-container width="16mm">
+                     <fo:block-container height="8mm"
+                                         width="16mm"
+                                         border-color="black"
+                                         border-style="solid">
+                        <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                     </fo:block-container>
+                  </fo:inline-container>#{end}<fo:inline/>
                </fo:block>
             </fo:block>
          </fo:block>
@@ -1447,9 +1461,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES11})$!{PERCENTAGE_EXPENSES11}#{else}
+                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES11})$!{PERCENTAGE_EXPENSES11}#{else}<fo:inline-container width="15mm">
+                                    <fo:block-container height="8mm" width="15mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline>%</fo:inline>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -1480,9 +1498,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES21})$!{PERCENTAGE_EXPENSES21}#{else}
+                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES21})$!{PERCENTAGE_EXPENSES21}#{else}<fo:inline-container width="15mm">
+                                    <fo:block-container height="8mm" width="15mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline>%</fo:inline>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -1526,9 +1548,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES31})$!{PERCENTAGE_EXPENSES31}#{else}
+                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES31})$!{PERCENTAGE_EXPENSES31}#{else}<fo:inline-container width="15mm">
+                                    <fo:block-container height="8mm" width="15mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline>%</fo:inline>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -1559,9 +1585,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES41})$!{PERCENTAGE_EXPENSES41}#{else}
+                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES41})$!{PERCENTAGE_EXPENSES41}#{else}<fo:inline-container width="15mm">
+                                    <fo:block-container height="8mm" width="15mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline>%</fo:inline>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -1592,9 +1622,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES51})$!{PERCENTAGE_EXPENSES51}#{else}
+                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES51})$!{PERCENTAGE_EXPENSES51}#{else}<fo:inline-container width="15mm">
+                                    <fo:block-container height="8mm" width="15mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline>%</fo:inline>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -1638,9 +1672,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES61})$!{PERCENTAGE_EXPENSES61}#{else}
+                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES61})$!{PERCENTAGE_EXPENSES61}#{else}<fo:inline-container width="15mm">
+                                    <fo:block-container height="8mm" width="15mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline>%</fo:inline>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -1671,9 +1709,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES71})$!{PERCENTAGE_EXPENSES71}#{else}
+                                        padding="1mm">#{if}($!{PERCENTAGE_EXPENSES71})$!{PERCENTAGE_EXPENSES71}#{else}<fo:inline-container width="15mm">
+                                    <fo:block-container height="8mm" width="15mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline>%</fo:inline>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2699,9 +2741,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2729,9 +2775,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2759,9 +2809,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2789,9 +2843,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2819,9 +2877,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2849,9 +2911,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2879,9 +2945,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2909,9 +2979,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2939,9 +3013,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2969,9 +3047,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -2999,9 +3081,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3029,9 +3115,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3059,9 +3149,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3089,9 +3183,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3119,9 +3217,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3149,9 +3251,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3179,9 +3285,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3209,9 +3319,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3239,9 +3353,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3269,9 +3387,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3299,9 +3421,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3329,9 +3455,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3359,9 +3489,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3389,9 +3523,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3419,9 +3557,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3449,9 +3591,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3479,9 +3625,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3509,9 +3659,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3539,9 +3693,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3569,9 +3727,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3599,9 +3761,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3629,9 +3795,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3659,9 +3829,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3689,9 +3863,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3719,9 +3897,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3749,9 +3931,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3779,9 +3965,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3809,9 +3999,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3839,9 +4033,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3869,9 +4067,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3899,9 +4101,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3929,9 +4135,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3959,9 +4169,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -3989,9 +4203,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4019,9 +4237,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4049,9 +4271,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4079,9 +4305,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4109,9 +4339,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4139,9 +4373,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4169,9 +4407,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4199,9 +4441,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4229,9 +4475,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4259,9 +4509,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4289,9 +4543,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4319,9 +4577,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4349,9 +4611,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4379,9 +4645,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4409,9 +4679,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4439,9 +4713,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4469,9 +4747,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4499,9 +4781,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4529,9 +4815,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4559,9 +4849,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4589,9 +4883,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4619,9 +4917,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4649,9 +4951,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4679,9 +4985,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4709,9 +5019,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4739,9 +5053,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4769,9 +5087,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4799,9 +5121,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4829,9 +5155,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4859,9 +5189,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4889,9 +5223,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4919,9 +5257,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4949,9 +5291,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -4979,9 +5325,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5009,9 +5359,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5039,9 +5393,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5069,9 +5427,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5099,9 +5461,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5129,9 +5495,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5159,9 +5529,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5189,9 +5563,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5219,9 +5597,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5249,9 +5631,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5279,9 +5665,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5309,9 +5699,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5339,9 +5733,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5369,9 +5767,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5399,9 +5801,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS12}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5429,9 +5835,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS22}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5459,9 +5869,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS32}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5489,9 +5903,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS42}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5519,9 +5937,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS52}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5549,9 +5971,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS62}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5579,9 +6005,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS72}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5609,9 +6039,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS82}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5639,9 +6073,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS92}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
@@ -5669,9 +6107,13 @@
                                         color="black"
                                         font-weight="normal"
                                         font-size="10pt"
-                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}
+                                        padding="1mm">#{if}($!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102})$!{FAVOURITE_CHARACTERS-0-FAVOURITE_CHARACTERS102}#{else}<fo:inline-container width="9mm">
+                                    <fo:block-container height="8mm" width="9mm">
+                                       <fo:block>
 									 
-								#{end}<fo:inline/>
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>#{end}<fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>

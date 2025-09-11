@@ -380,10 +380,21 @@
         <xsl:param name="label"/>
         <xsl:param name="variables"/>
         <xsl:param name="loop-navigation" as="node()"/>
+
+        <xsl:variable name="quot"><xsl:text>"</xsl:text></xsl:variable>
         
         <xsl:choose>
             <xsl:when test="contains($label,$conditioning-variable-begin) and contains(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)">
-                <xsl:value-of select="substring-before($label,$conditioning-variable-begin)"/>
+                <!-- gestion de cast(variable,string) : début -->
+                <xsl:analyze-string select="$label" regex="^([^{$conditioning-variable-begin}]*)(cast\( *){$conditioning-variable-begin}(.*)$">
+                    <xsl:matching-substring>
+                        <!-- suppression des | et des guillemets -->
+                        <xsl:value-of select="replace(replace(replace(replace(regex-group(1),' \|',''),'\| ',''),'\|',''),$quot,'')"/>
+                    </xsl:matching-substring>
+                    <xsl:non-matching-substring>
+                        <xsl:value-of select="replace(replace(replace(replace(substring-before($label,$conditioning-variable-begin),' \|',''),'\| ',''),'\|',''),$quot,'')"/>
+                    </xsl:non-matching-substring>
+                </xsl:analyze-string>
                 <xsl:variable name="variable-name" select="substring-before(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
                 <xsl:variable name="variable-type">
                     <xsl:call-template name="enoddi:get-variable-type">
@@ -421,14 +432,27 @@
                     <xsl:with-param name="variable" select="$variable-name"/>
                 </xsl:call-template>
                 <xsl:value-of select="'}'"/>
+                <!-- gestion de cast(variable,string) : fin -->
+                <xsl:variable name="after-variable">
+                    <xsl:analyze-string select="substring-after(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"
+                        regex="^( *, *string *(, *&quot;YYYY&quot; *)?\))(.*)$">
+                        <xsl:matching-substring>
+                            <xsl:value-of select="regex-group(3)"/>
+                        </xsl:matching-substring>
+                        <xsl:non-matching-substring>
+                            <xsl:value-of select="substring-after(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                        </xsl:non-matching-substring>
+                    </xsl:analyze-string>
+                </xsl:variable>
                 <xsl:call-template name="velocity-label">
-                    <xsl:with-param name="label" select="substring-after(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                    <xsl:with-param name="label" select="$after-variable"/>
                     <xsl:with-param name="variables" select="$variables"/>
                     <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$label"/>
+                <!-- suppression des | et des guillemets -->
+                <xsl:value-of select="replace(replace(replace(replace($label,' \|',''),'\| ',''),'\|',''),$quot,'')"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
