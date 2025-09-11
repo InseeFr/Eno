@@ -1,5 +1,16 @@
 # Eno Releases note
 
+## [v2.19.0] - 2025-09-11
+### :sparkles: New Features
+- [`0d61cfb`](https://github.com/InseeFr/Eno/commit/0d61cfb9223e0aa08e6d316b310d7e27e6573573) - **paper**: remove VTL from labels *(PR [#1325](https://github.com/InseeFr/Eno/pull/1325) by [@BulotF](https://github.com/BulotF))*
+
+### :bug: Bug Fixes
+- [`9f942b1`](https://github.com/InseeFr/Eno/commit/9f942b106bc9014233398eb379cdce58499319d9) - **paper**: mise en forme des nombres potentiellement à personnaliser *(PR [#1326](https://github.com/InseeFr/Eno/pull/1326) by [@BulotF](https://github.com/BulotF))*
+
+### :construction_worker: Build System
+- [`6bbfe12`](https://github.com/InseeFr/Eno/commit/6bbfe1238fa6b24df1432627fa982e688b958bd0) - remove maven snapshot deploy *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [v2.18.2] - 2025-08-06
 ### :sparkles: New Features
 - [`ccc6fca`](https://github.com/InseeFr/Eno/commit/ccc6fcaf2e493ec403a4d1bf89c7e423ff60cbb8) - default value of InitializeAllVariables set to `true` *(PR [#1320](https://github.com/InseeFr/Eno/pull/1320) by [@laurentC35](https://github.com/laurentC35))*
@@ -454,3 +465,4 @@
 [v2.18.0]: https://github.com/InseeFr/Eno/compare/v2.17.1...v2.18.0
 [v2.18.1]: https://github.com/InseeFr/Eno/compare/v2.18.0...v2.18.1
 [v2.18.2]: https://github.com/InseeFr/Eno/compare/v2.18.1...v2.18.2
+[v2.19.0]: https://github.com/InseeFr/Eno/compare/v2.18.3...v2.19.0
