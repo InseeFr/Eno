@@ -28,6 +28,7 @@ public class EnoMultimodeRule {
 
     private Map<String, MultimodeRule> convertToLunaticRules(Rules poguesRules){
         Map<String, MultimodeRule> rules = new HashMap<>();
+        return rules;
+    }
 
-    };
 }
