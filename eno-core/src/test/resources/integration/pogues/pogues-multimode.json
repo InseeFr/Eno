@@ -6,8 +6,8 @@
   "flowLogic": "FILTER",
   "formulasLanguage": "VTL",
   "lastUpdatedDate": "Thu Sep 11 2025 10:31:32 GMT+0200 (heure d’été d’Europe centrale)",
-  "owner": "DR59-SNDI59",
-  "Name": "ENOMULTIMO",
+  "owner": "ENO-INTEGRATION-TESTS",
+  "Name": "ENO_MULTIMODE",
   "Label": [
     "Eno - Multimode"
   ],
