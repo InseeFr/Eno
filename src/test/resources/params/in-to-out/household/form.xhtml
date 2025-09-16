@@ -6165,6 +6165,8 @@
                          value="count(instance('fr-form-util')/Pages/*[following-sibling::*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]]) +1"/>
             <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
                          value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
+            <xf:setvalue ref="instance('fr-form-instance')/stromae/perso"
+               value="concat('DateRetourSouhaiteeµ',instance('donnees-pilotage')//DateRetourSouhaitee/text(), 'µLogoµ',instance('donnees-pilotage')//Logo/text(), 'µNomµ',instance('donnees-pilotage')//Contact/Nom/text(), 'µMelµ',instance('donnees-pilotage')//Contact/Mel/text(), 'µTelephoneµ',instance('donnees-pilotage')//Contact/Telephone/text(), 'µLibellePaysµ',instance('donnees-pilotage')//Contact/Adresse/LibellePays/text(), 'µComplementAdresseµ',instance('donnees-pilotage')//Contact/Adresse/ComplementAdresse/text(), 'µMentionSpecialeµ',instance('donnees-pilotage')//Contact/Adresse/MentionSpeciale/text(), 'µInformationsVoieµ',instance('donnees-pilotage')//Contact/Adresse/InformationsVoie/text(), 'µVilleµ',instance('donnees-pilotage')//Contact/Adresse/Ville/text(), 'µIdentifiantµ',instance('donnees-pilotage')//UniteEnquetee/Identifiant/text(), 'µSirenµ',instance('donnees-pilotage')//UniteEnquetee/Siren/text(), 'µRaisonSocialeµ',instance('donnees-pilotage')//UniteEnquetee/RaisonSociale/text(), 'µLabelUniteEnqueteeµ',instance('donnees-pilotage')//UniteEnquetee/LabelUniteEnquetee/text() )"/>
             <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
             <xf:send submission="enregistrer"/>
             <xf:setfocus control="page-top-control"/>
