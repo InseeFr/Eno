@@ -14,8 +14,8 @@ import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.model.sequence.StructureItemReference.StructureItemType;
 import fr.insee.eno.core.processing.ProcessingStep;
+import fr.insee.eno.core.processing.out.steps.lunatic.loop.LunaticLoopFilter;
 import fr.insee.eno.core.reference.EnoIndex;
-import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -152,25 +152,19 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                     "Loop '%s' is empty. This means something went wrong during the mapping or loop resolution.",
                     lunaticLoop.getId()));
         }
+        LunaticLoopFilter.computeAndSetConditionFilter(lunaticLoop, occurrenceFilterExpression(enoLoop));
+    }
 
-        ConditionFilterType firstComponentOfLoopFilter = lunaticLoop.getComponents().getFirst().getConditionFilter();
-        lunaticLoop.setConditionFilter(firstComponentOfLoopFilter);
-
+    private Optional<String> occurrenceFilterExpression(fr.insee.eno.core.model.navigation.Loop enoLoop) {
         String filterId = enoLoop.getOccurrenceFilterId();
-        if (filterId == null) return;
+        if (filterId == null)
+            return Optional.empty();
         EnoIdentifiableObject occurrenceFilter = enoIndex.get(filterId);
-        // overload conditionFilter of loop by removing occurrenceFilter condition
-        if (occurrenceFilter instanceof Filter) {
-            String occurrenceFilterValue = ((Filter) occurrenceFilter).getExpression().getValue();
-            ConditionFilterType finalFilter = new ConditionFilterType();
-            finalFilter.setShapeFrom(firstComponentOfLoopFilter.getShapeFrom());
-            finalFilter.setType(firstComponentOfLoopFilter.getType());
-            finalFilter.setBindingDependencies(firstComponentOfLoopFilter.getBindingDependencies());
-            finalFilter.setValue(VtlSyntaxUtils.replaceByTrue(firstComponentOfLoopFilter.getValue(), occurrenceFilterValue));
-            lunaticLoop.setConditionFilter(finalFilter);
-        } else {
+        if (!(occurrenceFilter instanceof Filter)) {
             log.warn("Item if id {} should be a Filter object and not a {}", filterId, occurrenceFilter != null ? occurrenceFilter.getClass().getName() : null);
+            return Optional.empty();
         }
+        return Optional.of(((Filter) occurrenceFilter).getExpression().getValue());
     }
 
     /** Lunatic linked loops have an "iterations" property.
