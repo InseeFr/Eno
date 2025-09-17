@@ -68,7 +68,7 @@ public class LunaticConverter {
             return new ControlType();
         if (enoObject instanceof ComponentFilter)
             return new ConditionFilterType();
-        if (enoObject instanceof Loop)
+        if (enoObject instanceof fr.insee.eno.core.model.navigation.Loop)
             return new fr.insee.lunatic.model.flat.Loop();
         if (enoObject instanceof StandaloneLoop.LoopIterations)
             return new LinesLoop();
