@@ -1,0 +1,50 @@
+<ENOParameters>
+
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>fo</OutFormat>
+
+		<PreProcessing>ddi-multimodal-selection</PreProcessing>
+        <PreProcessing>ddi-markdownToXhtml</PreProcessing>
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+
+        <PostProcessing>fo-mailing</PostProcessing>
+        <PostProcessing>fo-tableColumn</PostProcessing>
+        <PostProcessing>fo-insertEndQuestion</PostProcessing>
+        <PostProcessing>fo-editStructurePages</PostProcessing>
+        <PostProcessing>fo-specificTreatment</PostProcessing>
+        <PostProcessing>fo-insertCoverPage</PostProcessing>
+        <PostProcessing>fo-insertAccompanyingMails</PostProcessing>
+    </Pipeline>
+    <Mode>papi</Mode>
+    <Parameters>
+
+        <Context>business</Context>
+        
+
+
+        <Languages>
+            <Language>fr</Language>
+        </Languages>
+
+        <BeginQuestion>
+            <Identification>true</Identification>
+        </BeginQuestion>
+
+        <EndQuestion>
+            <ResponseTimeQuestion>true</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+
+        <fo-parameters>
+            <Capture>
+                <Numeric>manual</Numeric>
+            </Capture>
+        </fo-parameters>
+
+
+    </Parameters>
+
+</ENOParameters>

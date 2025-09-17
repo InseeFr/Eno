@@ -11,16 +11,15 @@
   <properties>
     <eno.version>2.20.1</eno.version>
     <java.version>17</java.version>
-  </properties>
+    <project.encoding>UTF-8</project.encoding>
+  </properties>  
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+	<!-- Spring Boot parent -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.5</version>
+	</parent>
   <modules>
     <module>eno-core</module>
     <module>eno-ws</module>

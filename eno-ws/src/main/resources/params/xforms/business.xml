@@ -1,0 +1,45 @@
+<ENOParameters>
+
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>xforms</OutFormat>
+
+		<PreProcessing>ddi-multimodal-selection</PreProcessing>
+        <PreProcessing>ddi-markdownToXhtml</PreProcessing>
+        <PreProcessing>ddi-mapping</PreProcessing>
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+
+        <PostProcessing>xforms-insert-generic-questions</PostProcessing>
+        <PostProcessing>xforms-browsing</PostProcessing>
+        <PostProcessing>xforms-insee-model</PostProcessing>
+        <PostProcessing>xforms-insee-pattern</PostProcessing>
+        <PostProcessing>xforms-identification</PostProcessing>
+        <PostProcessing>xforms-insert-welcome</PostProcessing>
+        <PostProcessing>xforms-insert-end</PostProcessing>
+        <PostProcessing>xforms-specificTreatment</PostProcessing>
+        <PostProcessing>xforms-fix-adherence</PostProcessing>
+    </Pipeline>
+    <Mode>cawi</Mode>
+    <Parameters>
+
+
+        
+        <Context>business</Context>
+
+        <Languages>
+            <Language>fr</Language>
+        </Languages>
+
+        <BeginQuestion>
+            <Identification>true</Identification>
+        </BeginQuestion>
+
+        <EndQuestion>
+            <ResponseTimeQuestion>true</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+    </Parameters>
+
+</ENOParameters>
