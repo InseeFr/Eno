@@ -1,5 +1,10 @@
 # Eno Releases note
 
+## [v2.20.1] - 2025-09-17
+### :bug: Bug Fixes
+- [`b57cad1`](https://github.com/InseeFr/Eno/commit/b57cad16a4e278e72d0ed12d470a9a0aa3348482) - **deps**: update all minor dependencies *(PR [#1335](https://github.com/InseeFr/Eno/pull/1335) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+
 ## [v2.19.0] - 2025-09-11
 ### :sparkles: New Features
 - [`0d61cfb`](https://github.com/InseeFr/Eno/commit/0d61cfb9223e0aa08e6d316b310d7e27e6573573) - **paper**: remove VTL from labels *(PR [#1325](https://github.com/InseeFr/Eno/pull/1325) by [@BulotF](https://github.com/BulotF))*
@@ -466,3 +471,4 @@
 [v2.18.1]: https://github.com/InseeFr/Eno/compare/v2.18.0...v2.18.1
 [v2.18.2]: https://github.com/InseeFr/Eno/compare/v2.18.1...v2.18.2
 [v2.19.0]: https://github.com/InseeFr/Eno/compare/v2.18.3...v2.19.0
+[v2.20.1]: https://github.com/InseeFr/Eno/compare/v2.20.0...v2.20.1
