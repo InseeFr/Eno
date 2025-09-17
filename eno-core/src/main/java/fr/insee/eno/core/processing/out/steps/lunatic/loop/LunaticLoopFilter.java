@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
 
 public class LunaticLoopFilter {
 
-    public static void computeAndSetConditionFilter(Loop lunaticLoop, Optional<String> occurrenceFilterExpression) {
-        // First: compute loop filter by concatenating its sequence/subsequence filters
+    public static void computeAndSetConditionFilter(Loop lunaticLoop) {
         Class<? extends ComponentType> loopStructureType = determineLoopStructure(lunaticLoop);
         List<ConditionFilterType> loopStructureFilters = lunaticLoop.getComponents().stream()
                 .filter(loopStructureType::isInstance)
@@ -23,13 +22,14 @@ public class LunaticLoopFilter {
         if (computedFilter.isEmpty())
             return;
         lunaticLoop.setConditionFilter(computedFilter.get());
+    }
 
-        // Second: remove the occurrence filter expression (if any) in the expression
+    public static void removeOccurrenceFilterExpression(Loop lunaticLoop, String occurrenceFilterExpression) {
         if (occurrenceFilterExpression.isEmpty())
             return;
         String expression = lunaticLoop.getConditionFilter().getValue();
         lunaticLoop.getConditionFilter().setValue(
-                VtlSyntaxUtils.replaceByTrue(expression, occurrenceFilterExpression.get())
+                VtlSyntaxUtils.replaceByTrue(expression, occurrenceFilterExpression)
         );
     }
 

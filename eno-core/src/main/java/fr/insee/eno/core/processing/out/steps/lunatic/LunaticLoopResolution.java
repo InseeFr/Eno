@@ -145,6 +145,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
      * step2: for each child compute it's filter (not resolved filter -> enoFilter (with filterScope)
      * step3: if this found filter is not the occurrenceFilter i.e "SAUF" condition, add it to the list (if not present)
      * step4: concatenate all found filters
+     * @see LunaticLoopFilter
      * */
     private void setLunaticLoopFilter(Loop lunaticLoop, fr.insee.eno.core.model.navigation.Loop enoLoop) {
         if (lunaticLoop.getComponents().isEmpty()) {
@@ -152,7 +153,10 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                     "Loop '%s' is empty. This means something went wrong during the mapping or loop resolution.",
                     lunaticLoop.getId()));
         }
-        LunaticLoopFilter.computeAndSetConditionFilter(lunaticLoop, occurrenceFilterExpression(enoLoop));
+        LunaticLoopFilter.computeAndSetConditionFilter(lunaticLoop);
+        Optional<String> occurrenceFilterExpression = occurrenceFilterExpression(enoLoop);
+        occurrenceFilterExpression.ifPresent(value ->
+                LunaticLoopFilter.removeOccurrenceFilterExpression(lunaticLoop, value));
     }
 
     private Optional<String> occurrenceFilterExpression(fr.insee.eno.core.model.navigation.Loop enoLoop) {
