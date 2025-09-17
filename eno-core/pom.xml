@@ -103,7 +103,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<!-- Source encoding -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
 
 		<!-- Main dependencies -->
 		<saxon.version>12.9</saxon.version>
@@ -115,7 +115,6 @@
 		<!-- Logging API -->
 		<slf4j.version>2.0.17</slf4j.version>
 		<!-- Test dependencies -->
-		<junit.version>5.13.4</junit.version>
 		<xmlunit.version>2.10.4</xmlunit.version>
 		<apache-commons.version>3.18.0</apache-commons.version>
 		<log4j-slf4j2.version>2.25.1</log4j-slf4j2.version>
@@ -198,7 +197,6 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
-			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -239,7 +237,7 @@
 						</goals>
 						<configuration>
 							<packageName>fr.insee.eno.parameters</packageName>
-							<encoding>UTF-8</encoding>
+							<encoding>${project.encoding}</encoding>
 							<xjbSources>
 								<xjbSource>src/main/resources/params/schemas/jaxb/bindings.xjb</xjbSource>
 							</xjbSources>
@@ -256,7 +254,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.5.4</version>
 				<configuration>
-					<encoding>UTF-8</encoding>
+					<encoding>${project.encoding}</encoding>
 					<argLine>-Dfile.encoding=UTF-8
 						-Djavax.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.JAXBContextFactory</argLine>
 				</configuration>
@@ -265,7 +263,7 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.3.1</version>
 				<configuration>
-					<encoding>UTF-8</encoding>
+					<encoding>${project.encoding}</encoding>
 				</configuration>
 				<executions>
 					<execution>

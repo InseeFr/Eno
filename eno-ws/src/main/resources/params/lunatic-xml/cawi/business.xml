@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ENOParameters>
+
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>lunatic-xml</OutFormat>
+
+        <PreProcessing>ddi-multimodal-selection</PreProcessing>
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+
+        <PostProcessing>lunatic-xml-sortComponents</PostProcessing>
+        <PostProcessing>lunatic-xml-insert-generic-questions</PostProcessing>
+        <PostProcessing>lunatic-xml-externalizeVariables</PostProcessing>
+        <PostProcessing>lunatic-xml-insertCleaningBlock</PostProcessing>
+        <PostProcessing>lunatic-xml-pagination</PostProcessing>
+        <PostProcessing>lunatic-xml-specificTreatment</PostProcessing>
+
+    </Pipeline>
+    <Mode>cawi</Mode>
+    <Parameters>
+        <Context>business</Context>
+
+        <Languages>
+            <Language>fr</Language>
+        </Languages>
+
+        <BeginQuestion>
+            <Identification>true</Identification>
+        </BeginQuestion>
+
+        <EndQuestion>
+            <ResponseTimeQuestion>true</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+        
+        <lunatic-xml-parameters>
+            <Pagination>sequence</Pagination>
+            <UnusedVars>true</UnusedVars>
+        </lunatic-xml-parameters>
+    </Parameters>
+
+</ENOParameters>

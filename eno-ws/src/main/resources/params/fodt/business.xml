@@ -1,0 +1,16 @@
+<ENOParameters>
+
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>fodt</OutFormat>
+
+		<PreProcessing>ddi-multimodal-selection</PreProcessing>
+        <PreProcessing>ddi-markdownToXhtml</PreProcessing>
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+    </Pipeline>
+    <Mode>none</Mode>
+    <Parameters/>
+    
+</ENOParameters>
