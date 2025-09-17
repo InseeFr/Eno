@@ -8,10 +8,8 @@ import fr.insee.eno.core.model.declaration.Instruction;
 import fr.insee.eno.core.model.label.DynamicLabel;
 import fr.insee.eno.core.model.label.Label;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
-import fr.insee.eno.core.model.navigation.ComponentFilter;
-import fr.insee.eno.core.model.navigation.Control;
+import fr.insee.eno.core.model.navigation.*;
 import fr.insee.eno.core.model.navigation.Loop;
-import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.question.table.CellLabel;
 import fr.insee.eno.core.model.question.table.TableCell;
@@ -26,6 +24,8 @@ import fr.insee.eno.core.model.variable.CollectedVariable;
 import fr.insee.eno.core.model.variable.ExternalVariable;
 import fr.insee.eno.core.model.variable.Variable;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.articulation.Articulation;
+import fr.insee.lunatic.model.flat.articulation.ArticulationItem;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.ExternalVariableType;
@@ -63,6 +63,10 @@ public class LunaticConverter {
             return new fr.insee.lunatic.model.flat.Loop();
         if (enoObject instanceof StandaloneLoop.LoopIterations)
             return new LinesLoop();
+        if (enoObject instanceof EnoArticulation)
+            return new Articulation();
+        if (enoObject instanceof EnoArticulation.Item)
+            return new ArticulationItem();
         if (enoObject instanceof SingleResponseQuestion singleResponseQuestion)
             return instantiateFrom(singleResponseQuestion);
         if (enoObject instanceof MultipleResponseQuestion multipleResponseQuestion)
