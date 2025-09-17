@@ -70,6 +70,7 @@ public class LunaticProcessing {
                 .thenIf(lunaticParameters.isQuestionWrapping(), new LunaticQuestionComponent())
                 .then(new LunaticRoundaboutLoops(enoQuestionnaire))
                 .then(new LunaticMultimodeRules(enoQuestionnaire.getEnoMultimode()))
+                .then(new LunaticArticulationSource())
         ;
     }
 

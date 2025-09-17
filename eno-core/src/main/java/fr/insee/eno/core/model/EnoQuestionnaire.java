@@ -10,6 +10,7 @@ import fr.insee.eno.core.model.declaration.Declaration;
 import fr.insee.eno.core.model.label.QuestionnaireLabel;
 import fr.insee.eno.core.model.multimode.EnoMultimode;
 import fr.insee.eno.core.model.navigation.Control;
+import fr.insee.eno.core.model.navigation.EnoArticulation;
 import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.Loop;
 import fr.insee.eno.core.model.question.MultipleResponseQuestion;
@@ -122,6 +123,11 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Pogues("getMultimode()")
     @Lunatic("setMultimode(#param)")
     private EnoMultimode enoMultimode;
+
+    /** {@link fr.insee.eno.core.model.navigation.EnoArticulation} */
+    @Pogues("getArticulation()")
+    @Lunatic("setArticulation(#param)")
+    private EnoArticulation enoArticulation;
 
     /** In DDI, all filters are mapped at the questionnaire level.
      * They are inserted in the objects they belong to through a DDI processing.

@@ -12,10 +12,7 @@ import fr.insee.eno.core.model.multimode.EnoLeafRules;
 import fr.insee.eno.core.model.multimode.EnoMultimode;
 import fr.insee.eno.core.model.multimode.EnoMultimodeRules;
 import fr.insee.eno.core.model.multimode.EnoQuestionnaireRules;
-import fr.insee.eno.core.model.navigation.ComponentFilter;
-import fr.insee.eno.core.model.navigation.Control;
-import fr.insee.eno.core.model.navigation.Loop;
-import fr.insee.eno.core.model.navigation.StandaloneLoop;
+import fr.insee.eno.core.model.navigation.*;
 import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.question.table.CellLabel;
 import fr.insee.eno.core.model.question.table.TableCell;
@@ -33,6 +30,8 @@ import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.multimode.Multimode;
 import fr.insee.lunatic.model.flat.multimode.MultimodeLeaf;
 import fr.insee.lunatic.model.flat.multimode.MultimodeQuestionnaire;
+import fr.insee.lunatic.model.flat.articulation.Articulation;
+import fr.insee.lunatic.model.flat.articulation.ArticulationItem;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 import fr.insee.lunatic.model.flat.variable.CollectedVariableType;
 import fr.insee.lunatic.model.flat.variable.ExternalVariableType;
@@ -74,6 +73,10 @@ public class LunaticConverter {
             return new Multimode();
         if (enoObject instanceof EnoMultimodeRules enoMultimodeRules)
             return instantiateFrom(enoMultimodeRules);
+        if (enoObject instanceof EnoArticulation)
+            return new Articulation();
+        if (enoObject instanceof EnoArticulation.Item)
+            return new ArticulationItem();
         if (enoObject instanceof SingleResponseQuestion singleResponseQuestion)
             return instantiateFrom(singleResponseQuestion);
         if (enoObject instanceof MultipleResponseQuestion multipleResponseQuestion)
