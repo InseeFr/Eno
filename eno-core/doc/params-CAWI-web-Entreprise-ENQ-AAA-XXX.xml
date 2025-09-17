@@ -1,0 +1,30 @@
+<ENOParameters>
+   <Parameters>
+      <Context>business</Context>
+      <Campagne>eacei-2023-x00</Campagne>
+      <Languages>
+         <Language>fr</Language>
+      </Languages>
+      <BeginQuestion>
+         <Identification>true</Identification>                        
+      </BeginQuestion>
+      <EndQuestion>
+         <ResponseTimeQuestion>true</ResponseTimeQuestion>
+         <CommentQuestion>true</CommentQuestion>
+      </EndQuestion>
+      <lunatic-xml-parameters>
+	     <Control>true</Control>
+         <Tooltip>true</Tooltip>
+         <FilterDescription>false</FilterDescription>            
+         <AddFilterResult>false</AddFilterResult>
+		 <MissingVar>false</MissingVar>
+         <Pagination>sequence</Pagination>
+		 <UnusedVars>false</UnusedVars>							
+      </lunatic-xml-parameters>
+      <Numerotation>
+         <QuestNum>module</QuestNum>							
+         <SeqNum>true</SeqNum>						         	
+         <PreQuestSymbol>true</PreQuestSymbol>					
+      </Numerotation>
+   </Parameters>
+</ENOParameters>
