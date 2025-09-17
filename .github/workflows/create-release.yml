@@ -1,0 +1,140 @@
+name: Eno-WS XML release
+
+on:
+  push:
+    branches:
+      - "main"
+    paths-ignore:
+      - "docs/**"
+      - "doc/**"
+      - "README.md"
+      - ".github/**"
+
+env:
+  JAVA_VERSION: "17"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Build Eno with Maven
+        run: mvn clean process-classes package install --no-transfer-progress -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
+      - name: Run test with Maven
+        run: mvn test --no-transfer-progress
+
+  check-version:
+    needs: test
+    runs-on: ubuntu-latest
+    outputs:
+      release-version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get version
+        id: version
+        run: echo "version=$(mvn -f pom.xml help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+
+      - name: Print version
+        run: echo ${{ steps.version.outputs.version }}
+
+      - name: Check tag existence
+        id: check-tag-exists
+        uses: mukunku/tag-exists-action@v1.6.0
+        with:
+          tag: "v${{ steps.version.outputs.version }}"
+
+      - name: Tag verification
+        id: check-tag
+        run: |
+          if ! [[ "${{ steps.version.outputs.version }}" =~ ^2.[0-9]+.[0-9]+$ ]]; then
+            echo "Version on v2-main ${{ steps.version.outputs.version }} branch does not match the format 2.Y.Z"
+            exit 1
+          fi
+
+          if [[ "${{ steps.check-tag-exists.outputs.exists }}" == "true" ]]; then
+            echo "Nothing to tag/release, the tag v${{ steps.version.outputs.version }} already exists"
+            exit 1
+          fi
+
+  publish-docker:
+    needs: [check-version]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Build Eno-WS
+        run: mvn --batch-mode clean package --no-transfer-progress
+
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: inseefr/eno-ws
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          tags: ${{ needs.check-version.outputs.release-version }}
+
+  create-release:
+    needs: check-version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get previous v2 release tag
+        id: previousTag
+        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^v2\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
+
+      - name: Print previous tag version
+        run: echo ${{ steps.previousTag.outputs.previousTag }}
+
+      - name: Create tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "v${{ needs.check-version.outputs.release-version }}"
+
+      - name: Print new tag version
+        run: echo ${{ needs.check-version.outputs.release-version }}
+
+      - name: Create release note
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          fromTag: "v${{ needs.check-version.outputs.release-version }}"
+          toTag: ${{ steps.previousTag.outputs.previousTag }}
+          excludeTypes: docs,style,chore,other
+          token: ${{ secrets.GITHUB_TOKEN }}
+          writeToFile: true
+          changelogFilePath: "doc/releases.md"
+
+      - name: Create release
+        uses: ncipollo/release-action@v1 # This action allows to publish non 'latest' releases
+        with:
+          tag: "v${{ needs.check-version.outputs.release-version }}"
+          commit: ${{ github.head_ref || github.ref }}
+          name: "v${{ needs.check-version.outputs.release-version }}"
+          body: ${{steps.changelog.outputs.changes}}
+          makeLatest: "false"
+
+      - name: Commit changelog file
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: "v2-main"
+          commit_message: "docs(changelog): ${{ needs.check-version.outputs.release-version }} update [skip ci]"
+          file_pattern: "doc/releases.md"
