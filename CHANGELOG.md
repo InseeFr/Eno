@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.56.0] - 2025-09-17
+### :sparkles: New Features
+- [`4d54b97`](https://github.com/InseeFr/Eno/commit/4d54b978d5e2130974c12aa3f20345486793a185) - articulation *(PR [#1333](https://github.com/InseeFr/Eno/pull/1333) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`c9b0686`](https://github.com/InseeFr/Eno/commit/c9b06860390090c8d1db07a2bf1b4594f4a92a31) - **deps**: update dependency org.springdoc:springdoc-openapi-starter-webmvc-ui to v2.8.13 *(PR [#1331](https://github.com/InseeFr/Eno/pull/1331) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+
 ## [3.55.2] - 2025-09-05
 ### :bug: Bug Fixes
 - [`d836f19`](https://github.com/InseeFr/Eno/commit/d836f197ad69e45f0ad40eaef6576e24f6f1136b) - loop condition *(PR [#1330](https://github.com/InseeFr/Eno/pull/1330) by [@laurentC35](https://github.com/laurentC35))*
@@ -667,3 +675,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.55.0]: https://github.com/InseeFr/Eno/compare/3.54.0...3.55.0
 [3.55.1]: https://github.com/InseeFr/Eno/compare/3.55.0...3.55.1
 [3.55.2]: https://github.com/InseeFr/Eno/compare/3.55.1...3.55.2
+[3.56.0]: https://github.com/InseeFr/Eno/compare/3.55.2...3.56.0
