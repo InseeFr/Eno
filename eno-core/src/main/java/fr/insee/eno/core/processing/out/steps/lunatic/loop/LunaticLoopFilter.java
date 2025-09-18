@@ -67,6 +67,7 @@ public class LunaticLoopFilter {
         String expression = loopStructureFilters.stream()// concatenate VTL expressions
                 .map(LabelType::getValue)
                 .distinct() // don't put the same expression twice
+                .map(VtlSyntaxUtils::surroundByParenthesis)
                 .collect(Collectors.joining(" " + VtlSyntaxUtils.AND_KEYWORD + " "));
         loopFilter.setValue(expression);
         loopFilter.setType(LabelTypeEnum.VTL);
