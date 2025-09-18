@@ -45,11 +45,11 @@ public class LunaticLoopFilter {
     }
 
     private static boolean isLoopOfSequence(Loop lunaticLoop) {
-        return ComponentTypeEnum.SEQUENCE.equals(lunaticLoop.getComponents().getFirst().getComponentType());
+        return lunaticLoop.getComponents().getFirst() instanceof Sequence;
     }
 
     private static boolean isLoopOfSubsequence(Loop lunaticLoop) {
-        return ComponentTypeEnum.SUBSEQUENCE.equals(lunaticLoop.getComponents().getFirst().getComponentType());
+        return lunaticLoop.getComponents().getFirst() instanceof Subsequence;
     }
 
     private static void safetyCheck(Loop lunaticLoop) {
