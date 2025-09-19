@@ -73,7 +73,7 @@ public class LunaticLoopFilter {
         loopFilter.setValue(expression);
         loopFilter.setType(LabelTypeEnum.VTL);
         loopFilter.setShapeFrom(loopStructureFilters.getFirst().getShapeFrom());
-        List<String> bindingDependencies = loopStructureFilters.stream() // concatenate bonding dependencies
+        List<String> bindingDependencies = loopStructureFilters.stream() // concatenate binding dependencies
                 .flatMap(filter -> filter.getBindingDependencies().stream())
                 .distinct()
                 .toList();
