@@ -69,7 +69,7 @@ public class LunaticLoopFilter {
                 .distinct() // don't put the same expression twice
                 .map(VtlSyntaxUtils::removeExtraParenthesis) // to not have double parentheses
                 .map(VtlSyntaxUtils::surroundByParenthesis)
-                .collect(Collectors.joining(" " + VtlSyntaxUtils.AND_KEYWORD + " "));
+                .collect(Collectors.joining(" " + VtlSyntaxUtils.OR_KEYWORD + " "));
         loopFilter.setValue(expression);
         loopFilter.setType(LabelTypeEnum.VTL);
         loopFilter.setShapeFrom(loopStructureFilters.getFirst().getShapeFrom());

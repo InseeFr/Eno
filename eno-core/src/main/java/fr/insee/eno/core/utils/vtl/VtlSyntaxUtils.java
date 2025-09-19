@@ -22,7 +22,7 @@ public class VtlSyntaxUtils {
 
     public static final String LEFT_JOIN_OPERATOR = getVTLTokenName(VtlTokens.LEFT_JOIN);
     public static final String USING_KEYWORD = getVTLTokenName(VtlTokens.USING);
-    public static final String AND_KEYWORD = getVTLTokenName(VtlTokens.AND);
+    public static final String OR_KEYWORD = getVTLTokenName(VtlTokens.OR);
 
     // ----- VTL syntax methods used in Eno
 
