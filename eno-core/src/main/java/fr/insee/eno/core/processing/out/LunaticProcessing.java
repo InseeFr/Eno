@@ -68,7 +68,9 @@ public class LunaticProcessing {
                 .then(new LunaticDurationDescription())
                 .then(new LunaticDateDescription(enoParameters.getLanguage()))
                 .thenIf(lunaticParameters.isQuestionWrapping(), new LunaticQuestionComponent())
-                .then(new LunaticRoundaboutLoops(enoQuestionnaire));
+                .then(new LunaticRoundaboutLoops(enoQuestionnaire))
+                .then(new LunaticArticulationSource())
+        ;
     }
 
 }

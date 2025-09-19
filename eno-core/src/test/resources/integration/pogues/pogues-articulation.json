@@ -1,0 +1,365 @@
+{
+  "id" : "mfdr00nd",
+  "genericName" : "QUESTIONNAIRE",
+  "agency" : "fr.insee",
+  "final" : false,
+  "flowLogic" : "FILTER",
+  "formulasLanguage" : "VTL",
+  "lastUpdatedDate" : "2025-09-10T11:08:46.671+0200",
+  "owner" : "ENO-INTEGRATION-TESTS",
+  "Name" : "ENO_ARTICULATION",
+  "Label" : [ "Eno - Articulation" ],
+  "Control" : [ ],
+  "FlowControl" : [ ],
+  "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+  "Child" : [ {
+    "id" : "mfdqxgiv",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S1",
+    "Label" : [ "\"First sequence\"" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+    "Child" : [ {
+      "id" : "mfdqj0pk",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "HOW_MANY",
+      "Label" : [ "\"How many people?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "mfdr67rf",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "NUMERIC",
+          "type" : "NumericDatatypeType",
+          "Minimum" : 1,
+          "Maximum" : 10,
+          "IsDynamicUnit" : false,
+          "Unit" : ""
+        },
+        "CollectedVariableReference" : "mfdqv06q"
+      } ]
+    } ]
+  }, {
+    "id" : "mfdqyt3w",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S2",
+    "Label" : [ "\"People (\" || cast(GLOBAL_ITERATION_INDEX, string) || \"/\" || cast($HOW_MANY_NVL$, string) || \")\"" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+    "Child" : [ {
+      "id" : "mfdqnx8e",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "FIRST_NAME",
+      "Label" : [ "\"What is your first name?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "mfdqw402",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 249
+        },
+        "CollectedVariableReference" : "mfdqvgsn"
+      } ]
+    }, {
+      "id" : "mfdqwqpv",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "LAST_NAME",
+      "Label" : [ "\"What is your last name?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "mfdrasv1",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 249
+        },
+        "CollectedVariableReference" : "mfdqvsa5"
+      } ]
+    }, {
+      "id" : "mfdqyv2m",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "GENDER",
+      "Label" : [ "\"What is your gender?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "mfdredce",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 249
+        },
+        "CollectedVariableReference" : "mfdr6ugy"
+      } ]
+    }, {
+      "id" : "mfdr6898",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "AGE",
+      "Label" : [ "\"How old are you now?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "mfdr5a48",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "NUMERIC",
+          "type" : "NumericDatatypeType",
+          "Minimum" : 0,
+          "Maximum" : 140,
+          "IsDynamicUnit" : false,
+          "Unit" : ""
+        },
+        "CollectedVariableReference" : "mfdr70h0"
+      } ]
+    } ]
+  }, {
+    "id" : "mfdr4hlz",
+    "type" : "RoundaboutType",
+    "Name" : "ROUNDABOUT",
+    "Label" : [ "\"Roundabout\"" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+    "OccurrenceLabel" : "\"Questions for \" || $FIRST_NAME$",
+    "OccurrenceDescription" : "",
+    "Locked" : false,
+    "Loop" : {
+      "Name" : "LOOP2",
+      "MemberReference" : [ "mfdqvakb", "mfdqvakb" ],
+      "IterableReference" : "mfdqrd1y"
+    }
+  }, {
+    "id" : "mfdqvakb",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S3",
+    "Label" : [ "\"Questions\"" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+    "Child" : [ {
+      "id" : "mfdqpuda",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "Q1",
+      "Label" : [ "\"Question for \" || $FIRST_NAME$" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "mfdr555a",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 249
+        },
+        "CollectedVariableReference" : "mfdqwhtv"
+      } ]
+    } ]
+  }, {
+    "id" : "mfdqzt4d",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S_END",
+    "Label" : [ "\"The end\"" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+    "Child" : [ ]
+  }, {
+    "id" : "idendquest",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "QUESTIONNAIRE_END",
+    "Label" : [ "QUESTIONNAIRE_END" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI", "CATI" ],
+    "Child" : [ ]
+  } ],
+  "DataCollection" : [ {
+    "id" : "s2193-dc",
+    "uri" : "http://ddi:fr.insee:DataCollection.s2193-dc"
+  } ],
+  "ComponentGroup" : [ {
+    "id" : "mfdr1n4u",
+    "Name" : "PAGE_1",
+    "Label" : [ "Components for page 1" ],
+    "MemberReference" : [ "mfdqxgiv", "mfdqj0pk", "mfdqyt3w", "mfdqnx8e", "mfdqwqpv", "mfdqyv2m", "mfdr6898", "mfdqvakb", "mfdqpuda", "mfdqzt4d", "idendquest" ]
+  } ],
+  "CodeLists" : {
+    "CodeList" : [ ]
+  },
+  "Variables" : {
+    "Variable" : [ {
+      "id" : "mfdrblks",
+      "type" : "CalculatedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 1,
+        "Maximum" : 10,
+        "IsDynamicUnit" : false,
+        "Unit" : ""
+      },
+      "Name" : "HOW_MANY_NVL",
+      "Label" : "How many (default = 1)",
+      "Formula" : "nvl($HOW_MANY$, 1)"
+    }, {
+      "id" : "mfdrmo9x",
+      "type" : "CalculatedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 0,
+        "Maximum" : 140,
+        "IsDynamicUnit" : false,
+        "Unit" : ""
+      },
+      "Name" : "AGE_NVL",
+      "Label" : "Age (default = 0)",
+      "Scope" : "mfdqrd1y",
+      "Formula" : "nvl($AGE$, 0)"
+    }, {
+      "id" : "mfdqv06q",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 1,
+        "Maximum" : 10,
+        "IsDynamicUnit" : false,
+        "Unit" : ""
+      },
+      "Name" : "HOW_MANY",
+      "Label" : "HOW_MANY label"
+    }, {
+      "id" : "mfdqvgsn",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "FIRST_NAME",
+      "Label" : "FIRST_NAME label",
+      "Scope" : "mfdqrd1y"
+    }, {
+      "id" : "mfdqvsa5",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "LAST_NAME",
+      "Label" : "LAST_NAME label",
+      "Scope" : "mfdqrd1y"
+    }, {
+      "id" : "mfdr6ugy",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "GENDER",
+      "Label" : "GENDER label",
+      "Scope" : "mfdqrd1y"
+    }, {
+      "id" : "mfdr70h0",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 0,
+        "Maximum" : 140,
+        "IsDynamicUnit" : false,
+        "Unit" : ""
+      },
+      "Name" : "AGE",
+      "Label" : "AGE label",
+      "Scope" : "mfdqrd1y"
+    }, {
+      "id" : "mfdqwhtv",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "Q1",
+      "Label" : "Q1 label",
+      "Scope" : "mfdqrd1y"
+    } ]
+  },
+  "Iterations" : {
+    "Iteration" : [ {
+      "id" : "mfdqrd1y",
+      "type" : "DynamicIterationType",
+      "Name" : "LOOP1",
+      "MemberReference" : [ "mfdqyt3w", "mfdqyt3w" ],
+      "Minimum" : "$HOW_MANY_NVL$",
+      "Maximum" : "$HOW_MANY_NVL$",
+      "isFixedLength" : true,
+      "size" : "$HOW_MANY_NVL$",
+      "shouldSplitIterations" : true,
+      "Step" : 1
+    } ]
+  },
+  "childQuestionnaireRef" : [ ],
+  "articulation" : {
+    "items" : [ {
+      "label" : "Prénom",
+      "type" : "VTL",
+      "value" : "$FIRST_NAME$"
+    }, {
+      "label" : "Sexe",
+      "type" : "VTL",
+      "value" : "$GENDER$"
+    }, {
+      "label" : "Age",
+      "type" : "VTL",
+      "value" : "cast($AGE_NVL$, string) || \" years old\""
+    } ]
+  }
+}
