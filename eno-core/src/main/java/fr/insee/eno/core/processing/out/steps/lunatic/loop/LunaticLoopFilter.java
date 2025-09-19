@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
 
 public class LunaticLoopFilter {
 
+    private LunaticLoopFilter(){
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void computeAndSetConditionFilter(Loop lunaticLoop) {
         Class<? extends ComponentType> loopStructureType = determineLoopStructure(lunaticLoop);
         List<ConditionFilterType> loopStructureFilters = lunaticLoop.getComponents().stream()
