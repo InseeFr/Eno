@@ -165,7 +165,7 @@ class LunaticLoopResolutionTest {
         @Test
         void loopsConditionFilter() {
             lunaticLoops.forEach(loop ->
-                    assertEquals("true", loop.getConditionFilter().getValue()));
+                    assertEquals("(true)", loop.getConditionFilter().getValue()));
         }
 
         @Test

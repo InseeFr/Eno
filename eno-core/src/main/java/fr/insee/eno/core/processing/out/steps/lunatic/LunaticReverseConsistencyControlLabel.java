@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Processing reversing the VTL expression  value of controls. The VTL expression needs to be reversed in lunatic format
+ * Processing reversing the VTL expression  value of controls.
+ * The VTL expression needs to be reversed in lunatic format
  */
 public class LunaticReverseConsistencyControlLabel implements ProcessingStep<Questionnaire> {
     /**
