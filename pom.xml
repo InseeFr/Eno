@@ -5,7 +5,7 @@
 
 	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
-	<version>2.20.1</version>
+	<version>2.20.2</version>
 	<packaging>jar</packaging>
 
 	<name>Eno – Questionnaire generator</name>
@@ -113,15 +113,15 @@
 		<!-- Logging API -->
 		<slf4j.version>2.0.17</slf4j.version>
 		<!-- Test dependencies -->
-		<junit.version>5.13.4</junit.version>
+		<junit.version>5.14.0</junit.version>
 		<xmlunit.version>2.10.4</xmlunit.version>
-		<apache-commons.version>3.18.0</apache-commons.version>
-		<log4j-slf4j2.version>2.25.1</log4j-slf4j2.version>
+		<apache-commons.version>3.19.0</apache-commons.version>
+		<log4j-slf4j2.version>2.25.2</log4j-slf4j2.version>
 		<!-- Build plugins -->
 		<source.plugin.version>3.3.1</source.plugin.version>
-		<javadoc.plugin.version>3.11.3</javadoc.plugin.version>
+		<javadoc.plugin.version>3.12.0</javadoc.plugin.version>
 		<!-- Sonar -->
-		<jacoco.version>0.8.13</jacoco.version>	
+		<jacoco.version>0.8.14</jacoco.version>	
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
@@ -218,7 +218,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.14.0</version>
+				<version>3.14.1</version>
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
@@ -310,7 +310,7 @@
 			<plugin> <!-- Replace this plugin? -->
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>3.5.1</version>
+				<version>3.6.1</version>
 				<executions>
 					<execution>
 						<phase>process-classes</phase>
