@@ -155,6 +155,7 @@ public class LunaticRoundaboutLoops implements ProcessingStep<Questionnaire> {
         lunaticRoundabout.setPage(lunaticLoop.getPage());
         lunaticRoundabout.setConditionFilter(lunaticLoop.getConditionFilter());
         lunaticRoundabout.setIterations(lunaticLoop.getIterations());
+        lunaticRoundabout.setLoopDependencies(lunaticLoop.getLoopDependencies());
         lunaticRoundabout.getComponents().addAll(lunaticLoop.getComponents());
         //
         lunaticRoundabout.setLocked(roundaboutSequence.getLocked());
