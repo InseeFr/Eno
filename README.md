@@ -30,12 +30,6 @@ V3 "Eno Java" project: change of technology from XSLT to Java.
 
 JDK 21+ is required.
 
-### Make sustainable clones!
-
-The base branch for Eno "Java" is the `v3-main` orphan branch. If you are not interested in the legacy xslt version of Eno, you can clone the project like this:
-
-`git clone --no-tags --single-branch --depth=1  --branch=v3-main https://github.com/InseeFr/Eno.git`
-
 ### Gradle
 
 The project is build using [Gradle](https://gradle.org/). 

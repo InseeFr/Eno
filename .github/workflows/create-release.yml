@@ -3,7 +3,7 @@ name: Build release
 on:
   push:
     branches:
-      - 'v3-main'
+      - 'main'
     paths-ignore:
       - 'logo/**'
       - 'docs/**'
@@ -247,7 +247,7 @@ jobs:
       - name: Commit changelog file
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          branch: 'v3-main'
+          branch: 'main'
           commit_message: 'docs(changelog): ${{ needs.version.outputs.release-version }} update [skip ci]'
           file_pattern: 'CHANGELOG.md'
 
