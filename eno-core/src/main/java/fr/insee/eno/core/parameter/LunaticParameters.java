@@ -27,7 +27,7 @@ public class LunaticParameters {
 
     /** Parameter to include or exclude the question component (temporary modification) */
     @JsonProperty("questionWrapping")
-    private boolean questionWrapping;
+    private boolean questionWrapping = true;
 
     private LunaticParameters() {}
 
