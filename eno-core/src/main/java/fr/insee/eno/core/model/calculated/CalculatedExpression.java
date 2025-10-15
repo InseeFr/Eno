@@ -29,7 +29,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
 @Getter
 @Setter
 @Slf4j
-@Context(format = Format.POGUES, type = {ExpressionType.class, TypedValueType.class})
+@Context(format = Format.POGUES, type = {ExpressionType.class, TypedValueType.class, String.class})
 @Context(format = Format.DDI, type = CommandType.class)
 @Context(format = Format.LUNATIC, type = LabelType.class)
 public class CalculatedExpression extends EnoObject {
@@ -46,8 +46,9 @@ public class CalculatedExpression extends EnoObject {
     /**
      * Expression.
      */
-    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).removeSurroundingDollarSigns(" +
-            "getValue())")
+    @Pogues("#this instanceof T(java.lang.String) ? " +
+            "T(fr.insee.eno.core.model.calculated.CalculatedExpression).removeSurroundingDollarSigns(#this) : " +
+            "T(fr.insee.eno.core.model.calculated.CalculatedExpression).removeSurroundingDollarSigns(getValue())")
     @DDI("getCommandContent()")
     @Lunatic("setValue(#param)")
     private String value;
@@ -64,8 +65,9 @@ public class CalculatedExpression extends EnoObject {
      * In DDI, the expression contains variable references instead of variables names.
      * This list contains the references of these variables.
      */
-    @Pogues("T(fr.insee.eno.core.model.calculated.CalculatedExpression).extractBindingReferences(" +
-            "getValue(), #poguesIndex)")
+    @Pogues("#this instanceof T(java.lang.String) ? " +
+            "T(fr.insee.eno.core.model.calculated.CalculatedExpression).extractBindingReferences(#this, #poguesIndex) : " +
+            "T(fr.insee.eno.core.model.calculated.CalculatedExpression).extractBindingReferences(getValue(), #poguesIndex)")
     @DDI("getInParameterList()")
     private List<BindingReference> bindingReferences = new ArrayList<>();
 

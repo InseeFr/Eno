@@ -6,6 +6,7 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoObjectWithId;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
@@ -49,6 +50,6 @@ public abstract class ResponseCell extends EnoObject implements TableCell, EnoOb
     /** Table response cells can be dynamically marked as "read only", based on a VTL expression. */
     @Pogues("getConditionReadOnly()")
     @Lunatic("setConditionReadOnly(#param)")
-    private ComponentFilter componentReadOnly;
+    private CalculatedExpression componentReadOnly;
 
 }
