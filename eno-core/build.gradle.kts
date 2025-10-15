@@ -20,7 +20,7 @@ tasks.named<Jar>("jar") {
 }
 
 val ddiJavaLibVersion = "1.1.0"
-val trevasVersion = "1.9.0"
+val trevasVersion = "1.12.0"
 
 dependencies {
     // DDI

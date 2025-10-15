@@ -50,7 +50,7 @@ class LunaticHierarchyShapeFromTest {
         assertEquals("Q21", subsequenceShapeFrom.getLabel().getShapeFrom());
 
         ComponentType loopShapeFrom = findComponentById(lunaticQuestionnaire, "lw4zypq0").get();
-        assertEquals("Q21", loopShapeFrom.getConditionFilter().getShapeFrom());
+        assertNull(loopShapeFrom.getConditionFilter().getShapeFrom());
 
         ComponentType subSequenceShapeFromOtherScope = findComponentById(lunaticQuestionnaire, "lw50fbep").get();
         assertEquals("Q311", subSequenceShapeFromOtherScope.getConditionFilter().getShapeFrom());

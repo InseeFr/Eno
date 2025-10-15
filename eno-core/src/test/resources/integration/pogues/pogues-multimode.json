@@ -1,0 +1,460 @@
+{
+  "id": "mff4wbg4",
+  "genericName": "QUESTIONNAIRE",
+  "agency": "fr.insee",
+  "final": true,
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "lastUpdatedDate": "Thu Sep 11 2025 10:31:32 GMT+0200 (heure d’été d’Europe centrale)",
+  "owner": "ENO-INTEGRATION-TESTS",
+  "Name": "ENO_MULTIMODE",
+  "Label": [
+    "Eno - Multimode"
+  ],
+  "Control": [],
+  "FlowControl": [],
+  "TargetMode": [
+    "CAPI",
+    "CAWI",
+    "CATI",
+    "PAPI"
+  ],
+  "Child": [
+    {
+      "id": "mff4xzc8",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S1",
+      "Label": [
+        "\"First sequence\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": [
+        {
+          "id": "mff4wzfj",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "HAS_ADDRESS_CHANGED",
+          "Label": [
+            "\"Has your address changed?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mff5tn39",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "mff52w2v"
+            }
+          ]
+        },
+        {
+          "id": "mff5bj30",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "HOW_MANY",
+          "Label": [
+            "\"How many people used to live here?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mff5sasw",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Minimum": 1,
+                "Maximum": 10,
+                "IsDynamicUnit": false,
+                "Unit": ""
+              },
+              "CollectedVariableReference": "mff5j3gi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mff5bs5y",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S2",
+      "Label": [
+        "\"People who used to live here\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": [
+        {
+          "id": "mff54i48",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "NAME",
+          "Label": [
+            "\"What's your name? (\" || cast(GLOBAL_ITERATION_INDEX, string) || \"/\" || cast($HOW_MANY_NVL$, string) || \")\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mff5zsb1",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "mff5ad02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mff5q24e",
+      "type": "RoundaboutType",
+      "Name": "ROUNDABOUT",
+      "Label": [
+        "\"Roundabout\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "OccurrenceLabel": "\"Questions for \" || $NAME$",
+      "OccurrenceDescription": "",
+      "Locked": false,
+      "Loop": {
+        "Name": "LOOP2",
+        "MemberReference": [
+          "mff58yc0",
+          "mff58yc0"
+        ],
+        "IterableReference": "mff5s057"
+      }
+    },
+    {
+      "id": "mff58yc0",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S3",
+      "Label": [
+        "\"Questions\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": [
+        {
+          "id": "mff5twtu",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "HAS_MOVED",
+          "Label": [
+            "\"Does \" || $NAME$ || \" still live here?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mff5ww6x",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "mff5gdfz"
+            }
+          ]
+        },
+        {
+          "id": "mff5now8",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "Q1",
+          "Label": [
+            "\"A question for \" || $NAME$"
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mff5xlxb",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "mff5n840"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mff5l1w6",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S_END",
+      "Label": [
+        "\"The end\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": []
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": []
+    }
+  ],
+  "DataCollection": [],
+  "ComponentGroup": [
+    {
+      "id": "mff619sh",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "idendquest",
+        "mff4xzc8",
+        "mff4wzfj",
+        "mff5bj30",
+        "mff5bs5y",
+        "mff54i48",
+        "mff58yc0",
+        "mff5twtu",
+        "mff5now8",
+        "mff5l1w6"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "mff5ewg9",
+        "type": "CalculatedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "HAS_ADDRESS_CHANGED_NVL",
+        "Label": "Address changed (default = false)",
+        "Formula": "nvl($HAS_ADDRESS_CHANGED$, false)"
+      },
+      {
+        "id": "mff5h6gc",
+        "type": "CalculatedVariableType",
+        "Datatype": {
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Minimum": 1,
+          "Maximum": 10,
+          "IsDynamicUnit": false,
+          "Unit": ""
+        },
+        "Name": "HOW_MANY_NVL",
+        "Label": "How many (default = 1)",
+        "Formula": "nvl($HOW_MANY$, 1)"
+      },
+      {
+        "id": "mff52w2v",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "HAS_ADDRESS_CHANGED",
+        "Label": "HAS_ADDRESS_CHANGED label"
+      },
+      {
+        "id": "mff5j3gi",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Minimum": 1,
+          "Maximum": 10,
+          "IsDynamicUnit": false,
+          "Unit": ""
+        },
+        "Name": "HOW_MANY",
+        "Label": "HOW_MANY label"
+      },
+      {
+        "id": "mff5ad02",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Name": "NAME",
+        "Label": "NAME label",
+        "Scope": "mff5s057"
+      },
+      {
+        "id": "mff5gdfz",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "HAS_MOVED",
+        "Label": "HAS_MOVED label",
+        "Scope": "mff5s057"
+      },
+      {
+        "id": "mff5n840",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Name": "Q1",
+        "Label": "Q1 label",
+        "Scope": "mff5s057"
+      }
+    ]
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "id": "mff5s057",
+        "type": "DynamicIterationType",
+        "Name": "LOOP1",
+        "MemberReference": [
+          "mff5bs5y",
+          "mff5bs5y"
+        ],
+        "Minimum": "$HOW_MANY_NVL$",
+        "Maximum": "$HOW_MANY_NVL$",
+        "isFixedLength": true,
+        "size": "$HOW_MANY_NVL$",
+        "shouldSplitIterations": true,
+        "Step": 1
+      }
+    ]
+  },
+  "multimode": {
+    "questionnaire": {
+      "rules": [
+        {
+          "name": "IS_MOVED",
+          "type": "VTL",
+          "value": "$HAS_ADDRESS_CHANGED_NVL$"
+        }
+      ]
+    },
+    "leaf": {
+      "rules": [
+        {
+          "name": "IS_MOVED",
+          "type": "VTL",
+          "value": "$HAS_MOVED$"
+        }
+      ]
+    }
+  },
+  "childQuestionnaireRef": []
+}

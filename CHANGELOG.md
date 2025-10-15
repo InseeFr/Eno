@@ -4,6 +4,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.57.0] - 2025-10-14
+### :sparkles: New Features
+- [`6c2db27`](https://github.com/InseeFr/Eno/commit/6c2db27303d8d63a8e1b493087458ba55e87da2b) - multimode *(PR [#1332](https://github.com/InseeFr/Eno/pull/1332) by [@nsenave](https://github.com/nsenave))*
+
+
+## [3.56.1] - 2025-09-19
+### :bug: Bug Fixes
+- [`8ecd094`](https://github.com/InseeFr/Eno/commit/8ecd094eac4dab31e3da8aaab1ac49442b4e7537) - **deps**: update all minor dependencies *(PR [#1334](https://github.com/InseeFr/Eno/pull/1334) by [@renovate[bot]](https://github.com/apps/renovate))*
+- [`8c72c7b`](https://github.com/InseeFr/Eno/commit/8c72c7b6f4d3ff66b219d191152b9dcac2a7c986) - lunatic loop filter *(PR [#1339](https://github.com/InseeFr/Eno/pull/1339) by [@nsenave](https://github.com/nsenave))*
+
+
+## [3.56.0] - 2025-09-17
+### :sparkles: New Features
+- [`4d54b97`](https://github.com/InseeFr/Eno/commit/4d54b978d5e2130974c12aa3f20345486793a185) - articulation *(PR [#1333](https://github.com/InseeFr/Eno/pull/1333) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`c9b0686`](https://github.com/InseeFr/Eno/commit/c9b06860390090c8d1db07a2bf1b4594f4a92a31) - **deps**: update dependency org.springdoc:springdoc-openapi-starter-webmvc-ui to v2.8.13 *(PR [#1331](https://github.com/InseeFr/Eno/pull/1331) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+
+## [3.55.2] - 2025-09-05
+### :bug: Bug Fixes
+- [`d836f19`](https://github.com/InseeFr/Eno/commit/d836f197ad69e45f0ad40eaef6576e24f6f1136b) - loop condition *(PR [#1330](https://github.com/InseeFr/Eno/pull/1330) by [@laurentC35](https://github.com/laurentC35))*
+
+
+## [3.55.1] - 2025-09-02
+### :bug: Bug Fixes
+- [`bd3d758`](https://github.com/InseeFr/Eno/commit/bd3d758710b91046df7424616c41859a3eb6a172) - **deps**: update all minor dependencies *(PR [#1319](https://github.com/InseeFr/Eno/pull/1319) by [@renovate[bot]](https://github.com/apps/renovate))*
+- [`6f5f959`](https://github.com/InseeFr/Eno/commit/6f5f959222d0b6f89d4e481ebedfdced51309d57) - **deps**: update all minor dependencies *(PR [#1324](https://github.com/InseeFr/Eno/pull/1324) by [@renovate[bot]](https://github.com/apps/renovate))*
+- [`afacfee`](https://github.com/InseeFr/Eno/commit/afacfee5d125721a03678698dc6b55f4020d0fb1) - remove useless conditionFilter of loop *(PR [#1327](https://github.com/InseeFr/Eno/pull/1327) by [@laurentC35](https://github.com/laurentC35))*
+
+
 ## [3.55.0] - 2025-07-21
 ### :sparkles: New Features
 - [`12d075d`](https://github.com/InseeFr/Eno/commit/12d075d6a9373d0950e088533bc4cfd086a1543b) - **ws**: delete required metadata ddi to fo *(PR [#1298](https://github.com/InseeFr/Eno/pull/1298) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -653,3 +684,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.53.0]: https://github.com/InseeFr/Eno/compare/3.52.1...3.53.0
 [3.54.0]: https://github.com/InseeFr/Eno/compare/3.53.0...3.54.0
 [3.55.0]: https://github.com/InseeFr/Eno/compare/3.54.0...3.55.0
+[3.55.1]: https://github.com/InseeFr/Eno/compare/3.55.0...3.55.1
+[3.55.2]: https://github.com/InseeFr/Eno/compare/3.55.1...3.55.2
+[3.56.0]: https://github.com/InseeFr/Eno/compare/3.55.2...3.56.0
+[3.56.1]: https://github.com/InseeFr/Eno/compare/3.56.0...3.56.1
+[3.57.0]: https://github.com/InseeFr/Eno/compare/3.56.1...3.57.0

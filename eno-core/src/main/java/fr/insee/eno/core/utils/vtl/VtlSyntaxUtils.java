@@ -22,6 +22,7 @@ public class VtlSyntaxUtils {
 
     public static final String LEFT_JOIN_OPERATOR = getVTLTokenName(VtlTokens.LEFT_JOIN);
     public static final String USING_KEYWORD = getVTLTokenName(VtlTokens.USING);
+    public static final String OR_KEYWORD = getVTLTokenName(VtlTokens.OR);
 
     // ----- VTL syntax methods used in Eno
 
@@ -78,7 +79,7 @@ public class VtlSyntaxUtils {
      * @return vtlExpression without parenthesis
      * example: `(nvl(TEST, "") <> "")` should return `nvl(TEST, "") <> ""`
      */
-    static String removeExtraParenthesis(String expression){ // method is package-private to be tested in isolation
+    public static String removeExtraParenthesis(String expression){ // method is package-private to be tested in isolation
         if (expression.startsWith(getVTLTokenName(VtlTokens.LPAREN)) && expression.endsWith(getVTLTokenName(VtlTokens.RPAREN)))
             return expression.substring(1, expression.length() - 1);
         return expression;
@@ -119,6 +120,15 @@ public class VtlSyntaxUtils {
      */
     public static String invertBooleanExpression(String expression) {
         return getVTLTokenName(VtlTokens.NOT) + surroundByParenthesis(expression);
+    }
+
+    /**
+     * Replace expression by true VTL
+     * @param expression VTL boolean expression.
+     * @return VTL expression updated
+     */
+    public static String replaceByTrue(String expression, String expressionToReplace) {
+        return expression.replace(expressionToReplace, "true");
     }
 
     /** List of Trevas token ids for VTL aggregation operators. */
