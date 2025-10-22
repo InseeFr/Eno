@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.58.0] - 2025-10-22
+### :sparkles: New Features
+- [`00a30d7`](https://github.com/InseeFr/Eno/commit/00a30d7c4f2f7f03be8c7684a5c8271bd7431cfb) - **lunatic**: roundabout loop dependencies prop *(PR [#1341](https://github.com/InseeFr/Eno/pull/1341) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`7c090e0`](https://github.com/InseeFr/Eno/commit/7c090e0680494f57e243b9a9644dda66c32a3162) - **parameters**: true default value for question wrapping *(PR [#1316](https://github.com/InseeFr/Eno/pull/1316) by [@nsenave](https://github.com/nsenave))*
+
+### :recycle: Refactors
+- [`75e1c7c`](https://github.com/InseeFr/Eno/commit/75e1c7cdf4c39a812c74d9ad4c3550b5a8387a18) - **lunatic**: use expression for readonly *(PR [#1342](https://github.com/InseeFr/Eno/pull/1342) by [@nsenave](https://github.com/nsenave))*
+
+### :construction_worker: Build System
+- [`d075bb6`](https://github.com/InseeFr/Eno/commit/d075bb67d59d19323cc3660e02be06e8e164c339) - update main branch reference *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.57.0] - 2025-10-14
 ### :sparkles: New Features
 - [`6c2db27`](https://github.com/InseeFr/Eno/commit/6c2db27303d8d63a8e1b493087458ba55e87da2b) - multimode *(PR [#1332](https://github.com/InseeFr/Eno/pull/1332) by [@nsenave](https://github.com/nsenave))*
@@ -689,3 +703,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.56.0]: https://github.com/InseeFr/Eno/compare/3.55.2...3.56.0
 [3.56.1]: https://github.com/InseeFr/Eno/compare/3.56.0...3.56.1
 [3.57.0]: https://github.com/InseeFr/Eno/compare/3.56.1...3.57.0
+[3.58.0]: https://github.com/InseeFr/Eno/compare/3.57.0...3.58.0
