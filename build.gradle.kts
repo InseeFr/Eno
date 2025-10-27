@@ -34,8 +34,13 @@ subprojects {
         properties {
             property("sonar.sources", "src/main/java")
             property("sonar.tests", "src/test/java")
-            property("sonar.java.binaries", "build/classes/java/main")
+            property("sonar.java.binaries",
+                layout.buildDirectory.dir("classes/java/main").get().asFile.absolutePath)
         }
+    }
+    tasks.named<SonarTask>("sonar") {
+        // ensure Sonar runs only after classes exist
+        dependsOn("build")
     }
 }
 
