@@ -30,22 +30,14 @@ subprojects {
         }
         mavenLocal()
     }
-    sonar {
-        properties {
-            property("sonar.sources", "src/main/java")
-            property("sonar.tests", "src/test/java")
-            property("sonar.java.binaries",
-                layout.buildDirectory.dir("classes/java/main").get().asFile.absolutePath)
-        }
-    }
-    tasks.named<SonarTask>("sonar") {
-        // ensure Sonar runs only after classes exist
-        dependsOn("build")
-    }
 }
 
 sonar {
     properties {
+        property("sonar.sources", "src/main/java")
+        property("sonar.tests", "src/test/java")
+        property("sonar.java.binaries",
+            layout.buildDirectory.dir("classes/java/main").get().asFile.absolutePath)
         // The Jacoco coverage report is aggregated in the eno-ws module
         val codeCoveragePath = "$projectDir/eno-ws/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml"
         println("Aggregated code coverage report location:$codeCoveragePath")
