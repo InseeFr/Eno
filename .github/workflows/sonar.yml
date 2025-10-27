@@ -48,4 +48,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_HOST_URL: "https://sonarcloud.io"
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr
+        run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr --stacktrace
