@@ -30,6 +30,13 @@ subprojects {
         }
         mavenLocal()
     }
+    sonar {
+        properties {
+            property("sonar.sources", "src/main/java")
+            property("sonar.tests", "src/test/java")
+            property("sonar.java.binaries", "build/classes/java/main")
+        }
+    }
 }
 
 sonar {
@@ -40,18 +47,9 @@ sonar {
         property("sonar.coverage.jacoco.xmlReportPaths", codeCoveragePath)
     }
 }
-subprojects {
-    sonar {
-        properties {
-            property("sonar.sources", "src/main/java")
-            property("sonar.tests", "src/test/java")
-            property("sonar.java.binaries", "build/classes/java/main")
-        }
-    }
-}
 
 tasks.named<SonarTask>("sonar") {
-    dependsOn(tasks.named("testCodeCoverageReport"))
+    dependsOn(tasks.named("build"), tasks.named("testCodeCoverageReport"))
 }
 
 tasks.register("printVersion") {
