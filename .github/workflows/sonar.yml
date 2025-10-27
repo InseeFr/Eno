@@ -9,7 +9,6 @@ on:
       - 'CHANGELOG.md'
       - 'README**.md'
       - 'Dockerfile'
-      - '.github/**'
 
 jobs:
   build:
