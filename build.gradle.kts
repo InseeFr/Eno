@@ -40,6 +40,14 @@ sonar {
         property("sonar.coverage.jacoco.xmlReportPaths", codeCoveragePath)
     }
 }
+subprojects {
+    sonar {
+        properties {
+            property("sonar.sources", "src/main/java")
+            property("sonar.tests", "src/test/java")
+        }
+    }
+}
 
 tasks.named<SonarTask>("sonar") {
     dependsOn(tasks.named("testCodeCoverageReport"))
