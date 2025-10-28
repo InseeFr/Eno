@@ -3,21 +3,18 @@ package fr.insee.eno.ws.service;
 import fr.insee.eno.core.PoguesDDIToLunatic;
 import fr.insee.eno.core.PoguesToLunatic;
 import fr.insee.eno.core.parameter.EnoParameters;
-import fr.insee.eno.ws.controller.utils.ResponseUtils;
 import fr.insee.eno.ws.dto.FileDto;
 import fr.insee.eno.ws.exception.PoguesToLunaticException;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 @Service
-@PropertySource("classpath:/version.properties")
 @RequiredArgsConstructor
 @Slf4j
 public class PoguesToLunaticService extends LunaticGenerationService {
