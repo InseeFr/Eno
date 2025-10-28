@@ -52,7 +52,9 @@ jobs:
       - name: Get main branch version
         id: main-version
         run: |
-          echo "version=$(mvn -f pom.xml help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+          ./gradlew # (load the gradle wrapper, required for the get version step)
+          echo "version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
+          #echo "version=$(mvn -f pom.xml help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
 
       - name: Checkout pull request HEAD
         uses: actions/checkout@v4
