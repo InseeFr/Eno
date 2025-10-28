@@ -2,7 +2,7 @@ FROM eclipse-temurin:21.0.8_9-jre
 
 ENV PATH_TO_JAR=/opt/eno-ws/eno-ws.jar
 WORKDIR /opt/eno-ws/
-ADD ./eno-ws/build/libs/*.jar $PATH_TO_JAR
+COPY ./eno-ws/target/eno-ws-*.jar $PATH_TO_JAR
 
 ENV JAVA_TOOL_OPTIONS_DEFAULT \
     -XX:MaxRAMPercentage=75 \

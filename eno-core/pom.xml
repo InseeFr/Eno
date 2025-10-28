@@ -1,0 +1,131 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>fr.insee.eno</groupId>
+        <artifactId>eno</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>eno-core</artifactId>
+    <name>Eno core</name>
+
+    <properties>
+        <ddiLib.version>1.1.0</ddiLib.version>
+        <poguesModel.version>1.11.0</poguesModel.version>
+        <lunaticModel.version>5.9.1</lunaticModel.version>
+        <trevas.version>1.12.0</trevas.version>
+    </properties>
+
+    <dependencies>
+        <!-- Models -->
+        <dependency>
+            <groupId>fr.insee.ddi</groupId>
+            <artifactId>ddi-lifecycle</artifactId>
+            <version>${ddiLib.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.insee.pogues</groupId>
+            <artifactId>pogues-model</artifactId>
+            <version>${poguesModel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.insee.lunatic</groupId>
+            <artifactId>lunatic-model</artifactId>
+            <version>${lunaticModel.version}</version>
+        </dependency>
+
+        <!-- VTL parser -->
+        <dependency>
+            <groupId>fr.insee.trevas</groupId>
+            <artifactId>vtl-parser</artifactId>
+            <version>${trevas.version}</version>
+        </dependency>
+
+        <!-- Spring libs -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+        </dependency>
+
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <!-- imported for DDI "CDATA" suggester -->
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -44,12 +44,6 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          cache-disabled: true # actually slows down the process due to timeouts
-        # https://github.com/gradle/actions/blob/main/setup-gradle/README.md
-
       - name: Checkout main branch
         uses: actions/checkout@v4
         with:
@@ -58,8 +52,7 @@ jobs:
       - name: Get main branch version
         id: main-version
         run: |
-          ./gradlew # (load the gradle wrapper, required for the get version step)
-          echo "version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
+          echo "version=$(mvn -f pom.xml help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
 
       - name: Checkout pull request HEAD
         uses: actions/checkout@v4
@@ -69,7 +62,7 @@ jobs:
       - name: Get PR branch version
         id: branch-version
         run: |
-          echo "version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
+          echo "version=$(mvn -f pom.xml help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
 
       - name: Check version
         run: |
@@ -105,13 +98,8 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          cache-disabled: true
-
       - name: Build Eno modules
-        run: ./gradlew build
+        run: mvn package --no-transfer-progress
 
       - name: Publish to Docker Hub
         uses: elgohr/Publish-Docker-Github-Action@v5

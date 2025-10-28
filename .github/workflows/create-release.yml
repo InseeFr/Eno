@@ -44,16 +44,10 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          cache-disabled: true # actually slows down the process due to timeouts
-
       - name: Get Eno Version
         id: version-step
         run: |
-          ./gradlew # (load the gradle wrapper, required for the get version step)
-          echo "version=$(./gradlew printVersion --console=plain -q)" >> $GITHUB_OUTPUT
+          echo "version=$(mvn -f pom.xml help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
 
       - name: Get previous final release tag
         id: previousTag
@@ -131,23 +125,19 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-
-      - name: Cache Gradle packages
+      - name: Cache Maven packages
         uses: actions/cache@v4
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
       - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_HOST_URL: "https://sonarcloud.io"
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr -Dsonar.branch.name=${{ github.ref_name }}
+        run: mvn clean verify -Pcoverage sonar:sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr --no-transfer-progress
 
   build-sources:
     needs: [ version, sonar ]
@@ -159,22 +149,16 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          cache-disabled: true
-
       - uses: actions/checkout@v4
       - name: Build Eno modules
         run: |
-          ./gradlew build -x test
-          mv ./eno-ws/build/libs/*.jar ./eno-ws/build/libs/eno-ws.jar
+          mvn package -DskipTests --no-transfer-progress
 
       - name: Upload Eno-WS jar
         uses: actions/upload-artifact@v4
         with:
           name: eno-ws-jar
-          path: ./eno-ws/build/libs/eno-ws.jar
+          path: ./eno-ws/target/eno-ws-${{ needs.version.outputs.release-version }}.jar
 
   create-release:
     needs: [ version, build-sources ]
@@ -208,7 +192,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: eno-ws-jar
-          path: eno-ws/build/libs/
+          path: eno-ws/target/
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
@@ -261,7 +245,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: eno-ws-jar
-          path: ./eno-ws/build/libs
+          path: ./eno-ws/target
 
       - name: Publish to Docker Hub
         uses: elgohr/Publish-Docker-Github-Action@v5

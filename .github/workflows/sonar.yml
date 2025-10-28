@@ -9,7 +9,9 @@ on:
       - 'CHANGELOG.md'
       - 'README**.md'
       - 'Dockerfile'
-      - '.github/**'
+
+env:
+  JAVA_VERSION: '21'
 
 jobs:
   build:
@@ -17,10 +19,10 @@ jobs:
     name: Build and analyze
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 21
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 21
+          java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
 
       - uses: actions/checkout@v4
@@ -33,20 +35,16 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-
-      - name: Cache Gradle packages
+      - name: Cache Maven packages
         uses: actions/cache@v4
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_HOST_URL: "https://sonarcloud.io"
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew clean build sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr
+        run: mvn clean verify -Pcoverage sonar:sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr --no-transfer-progress

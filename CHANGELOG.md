@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.58.1] - 2025-10-28
+### :construction_worker: Build System
+- [`980ec08`](https://github.com/InseeFr/Eno/commit/980ec0872fec5e0987ea276d45fe3106bfbf27d3) - switch to maven *(PR [#1345](https://github.com/InseeFr/Eno/pull/1345) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.58.0] - 2025-10-22
 ### :sparkles: New Features
 - [`00a30d7`](https://github.com/InseeFr/Eno/commit/00a30d7c4f2f7f03be8c7684a5c8271bd7431cfb) - **lunatic**: roundabout loop dependencies prop *(PR [#1341](https://github.com/InseeFr/Eno/pull/1341) by [@nsenave](https://github.com/nsenave))*
@@ -704,3 +709,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.56.1]: https://github.com/InseeFr/Eno/compare/3.56.0...3.56.1
 [3.57.0]: https://github.com/InseeFr/Eno/compare/3.56.1...3.57.0
 [3.58.0]: https://github.com/InseeFr/Eno/compare/3.57.0...3.58.0
+[3.58.1]: https://github.com/InseeFr/Eno/compare/3.58.0...3.58.1

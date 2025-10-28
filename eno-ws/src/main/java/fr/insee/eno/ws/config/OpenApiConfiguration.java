@@ -7,23 +7,21 @@ import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:version.properties")
 public class OpenApiConfiguration {
 
     @Value("${eno.ws.url}")
     private String enoUrl;
     @Value("${eno.legacy.ws.url}")
     private String enoLegacyUrl;
-    @Value("${version.eno}")
+    @Value("${eno.version}")
     private String enoVersion;
     @Value("${eno.release.note.url}")
     private String releaseNoteUrl;
-    @Value("${version.pogues.model}")
+    @Value("${eno.pogues.model.version}")
     private String poguesModelVersion;
-    @Value("${version.lunatic.model}")
+    @Value("${eno.lunatic.model.version}")
     private String lunaticModelVersion;
 
     @Bean
