@@ -15,10 +15,10 @@ public abstract class LunaticGenerationService {
 
     private static final String LUNATIC_JSON_FILE_NAME = "lunatic-form.json";
 
-    @Value("${version.eno}")
+    @Value("${eno.version}")
     String enoVersion;
 
-    @Value("${version.lunatic.model}")
+    @Value("${eno.lunatic.model.version}")
     String lunaticModelVersion;
 
     /**

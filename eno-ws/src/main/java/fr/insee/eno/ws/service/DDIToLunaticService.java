@@ -4,13 +4,11 @@ import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.ws.exception.DDIToLunaticException;
 import fr.insee.lunatic.model.flat.Questionnaire;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 
 @Service
-@PropertySource("classpath:/version.properties")
 public class DDIToLunaticService extends LunaticGenerationService {
 
     @Override
