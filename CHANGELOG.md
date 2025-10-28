@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.58.2] - 2025-10-28
+### :bug: Bug Fixes
+- [`6816372`](https://github.com/InseeFr/Eno/commit/681637257799a1c063310dace70587b8dee0340f) - **spring**: update spring boot to 3.5.7 *(PR [#1344](https://github.com/InseeFr/Eno/pull/1344) by [@renovate[bot]](https://github.com/apps/renovate))*
+
+### :construction_worker: Build System
+- [`1357812`](https://github.com/InseeFr/Eno/commit/1357812d830818d0f53c026bb077b8ad224c823a) - fix docker publish paths *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.58.1] - 2025-10-28
 ### :construction_worker: Build System
 - [`980ec08`](https://github.com/InseeFr/Eno/commit/980ec0872fec5e0987ea276d45fe3106bfbf27d3) - switch to maven *(PR [#1345](https://github.com/InseeFr/Eno/pull/1345) by [@nsenave](https://github.com/nsenave))*
@@ -710,3 +718,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.57.0]: https://github.com/InseeFr/Eno/compare/3.56.1...3.57.0
 [3.58.0]: https://github.com/InseeFr/Eno/compare/3.57.0...3.58.0
 [3.58.1]: https://github.com/InseeFr/Eno/compare/3.58.0...3.58.1
+[3.58.2]: https://github.com/InseeFr/Eno/compare/3.58.1...3.58.2
