@@ -192,7 +192,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: eno-ws-jar
-          path: eno-ws/build/libs/
+          path: eno-ws/target/
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
@@ -245,7 +245,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: eno-ws-jar
-          path: ./eno-ws/build/libs
+          path: ./eno-ws/target
 
       - name: Publish to Docker Hub
         uses: elgohr/Publish-Docker-Github-Action@v5
