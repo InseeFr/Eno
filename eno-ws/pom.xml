@@ -14,8 +14,6 @@
     <name>Eno web-service app</name>
 
     <properties>
-        <poguesModel.version>1.11.0</poguesModel.version>
-        <lunaticModel.version>5.9.1</lunaticModel.version>
         <springDoc.version>2.8.13</springDoc.version>
     </properties>
 
