@@ -3,6 +3,8 @@
 # Eno
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=InseeFr_Eno&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=InseeFr_Eno)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=InseeFr_Eno&metric=coverage)](https://sonarcloud.io/summary/overall?id=InseeFr_Eno)
 
 Eno is a tool designed to transform questionnaires from their formal description in [DDI](https://ddialliance.org/) to different formats for data collection operations.
 
