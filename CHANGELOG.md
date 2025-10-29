@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.58.3] - 2025-10-29
+### :recycle: Refactors
+- [`bc14aa3`](https://github.com/InseeFr/Eno/commit/bc14aa3958aaa3f3119c378737a7eac9ed87f525) - **lunatic**: simplify shape from hierarchy step *(PR [#1347](https://github.com/InseeFr/Eno/pull/1347) by [@nsenave](https://github.com/nsenave))*
+- [`74adfb5`](https://github.com/InseeFr/Eno/commit/74adfb503031909e7c8b8749a60e552ac13eeaf9) - **build**: clean up jacoco config *(commit by [@nsenave](https://github.com/nsenave))*
+- [`383f88e`](https://github.com/InseeFr/Eno/commit/383f88e7ccd5721cbe7f7e4ad9a5da97d4a14c88) - **build**: model versions in parent pom *(commit by [@nsenave](https://github.com/nsenave))*
+- [`9f68fd6`](https://github.com/InseeFr/Eno/commit/9f68fd689429173f875c2c5db7d3054dc68c2684) - safer dynamic cast *(commit by [@nsenave](https://github.com/nsenave))*
+
+### :white_check_mark: Tests
+- [`06ce8e2`](https://github.com/InseeFr/Eno/commit/06ce8e2cdbf000cec0034de21c8cc91d08857726) - remove lunatic sandbox *(commit by [@nsenave](https://github.com/nsenave))*
+- [`770692b`](https://github.com/InseeFr/Eno/commit/770692b04c231b99368f9b8cd22b177bbd93c6fd) - **chores**: sandbox clean up *(commit by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.58.2] - 2025-10-28
 ### :bug: Bug Fixes
 - [`6816372`](https://github.com/InseeFr/Eno/commit/681637257799a1c063310dace70587b8dee0340f) - **spring**: update spring boot to 3.5.7 *(PR [#1344](https://github.com/InseeFr/Eno/pull/1344) by [@renovate[bot]](https://github.com/apps/renovate))*
@@ -719,3 +731,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.58.0]: https://github.com/InseeFr/Eno/compare/3.57.0...3.58.0
 [3.58.1]: https://github.com/InseeFr/Eno/compare/3.58.0...3.58.1
 [3.58.2]: https://github.com/InseeFr/Eno/compare/3.58.1...3.58.2
+[3.58.3]: https://github.com/InseeFr/Eno/compare/3.58.2...3.58.3
