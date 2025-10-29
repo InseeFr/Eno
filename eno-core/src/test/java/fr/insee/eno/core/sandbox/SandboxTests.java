@@ -40,7 +40,7 @@ class SandboxTests {
         assertEquals(2L, propertyCount);
         // Property values
         assertEquals(1, foo.a);
-        assertEquals(1, foo.b);
+        assertEquals(7, foo.b);
 
         // Get superclass
         assertEquals(FooAbstract.class, foo.getClass().getSuperclass());
