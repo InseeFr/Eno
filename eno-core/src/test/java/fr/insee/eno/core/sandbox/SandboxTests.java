@@ -2,6 +2,7 @@ package fr.insee.eno.core.sandbox;
 
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.model.navigation.Filter;
+import lombok.Setter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -13,18 +14,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SandboxTests {
 
-    static abstract class FooAbstract {
+    @Setter
+    abstract static class FooAbstract {
         @DDI("hello")
         int a;
-        public void setA(int a) {
-            this.a = a;
-        }
     }
+    @Setter
     static class FooChild extends FooAbstract {
         int b;
-        public void setB(int b) {
-            this.b = b;
-        }
     }
     @Test
     void propertyInheritanceWithAbstractClass() {
@@ -41,6 +38,9 @@ class SandboxTests {
                 .filter(propertyDescriptor -> !propertyDescriptor.getName().equals("class"))
                 .count();
         assertEquals(2L, propertyCount);
+        // Property values
+        assertEquals(1, foo.a);
+        assertEquals(1, foo.b);
 
         // Get superclass
         assertEquals(FooAbstract.class, foo.getClass().getSuperclass());

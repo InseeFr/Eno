@@ -2,14 +2,18 @@ package fr.insee.eno.core;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
- * Sandbox
+ * Hello
  */
-public class HelloTest {
+class HelloTest {
 
     @Test
-    public void hello() {
+    void hello() {
         System.out.println("Hello !");
+        int hello = 1;
+        assertEquals(1, hello);
     }
 
 }
