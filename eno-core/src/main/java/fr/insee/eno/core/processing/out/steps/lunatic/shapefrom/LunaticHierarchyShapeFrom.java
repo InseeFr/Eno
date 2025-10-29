@@ -10,13 +10,16 @@ import fr.insee.eno.core.utils.LunaticUtils;
 import fr.insee.lunatic.model.flat.ComponentType;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.variable.VariableType;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
-
-import static fr.insee.eno.core.utils.LunaticUtils.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
- * This processing steps add shapeFrom on conditionFilter Lunatic object only in hierarchy component:
+ * This processing steps adds the "shapeFrom" property in conditionFilter (and also dynamic labels) of Lunatic
+ * "hierarchy" components:
  * <ul>
  *  <li>Sequence</li>
  *  <li>Subsequence</li>
@@ -24,100 +27,119 @@ import static fr.insee.eno.core.utils.LunaticUtils.*;
  *  </ul>
  *  i.e: all component which appears in Lunatic overview (based on Sequence, Subsequence and Loop) kind of summary.
  * <p>
- *  The goal is to improved performances for calculation of overview (on every change in form, all conditionFilter are calculated for overview)
- *  Lunatic put the result in cache if expression has the "shapeFrom" properties
+ *  The goal is to improve performances for overview computation (on every change in form, all conditionFilters are
+ *  calculated for the overview).
+ *  Lunatic puts the result in cache if expression has the "shapeFrom" properties.
  * </p>
- *  Later: Maybe create overview component to avoid computation at init for Lunatic.
+ * Later: Maybe create a Lunatic overview component to avoid computation at initialization.
  */
+@Slf4j
 public class LunaticHierarchyShapeFrom implements ProcessingStep<Questionnaire> {
 
-    private Questionnaire lunaticQuestionnaire;
-    private EnoQuestionnaire enoQuestionnaire;
+    private final EnoQuestionnaire enoQuestionnaire;
     private final EnoIndex enoIndex;
-    private final Map<String, VariableType> variableIndex = new LinkedHashMap<>();
-    private final Map<String, String> variableShapeFromIndex = new LinkedHashMap<>();
-    private Map<String, List<String>> variablesByQuestion;
 
+    private Questionnaire lunaticQuestionnaire;
+    private Map<String, String> variableShapeFromIndex;
 
-    public LunaticHierarchyShapeFrom(EnoQuestionnaire enoQuestionnaire){
+    public LunaticHierarchyShapeFrom(EnoQuestionnaire enoQuestionnaire) {
         this.enoQuestionnaire = enoQuestionnaire;
         this.enoIndex = enoQuestionnaire.getIndex();
     }
+
     /**
-     * Sets the "shape from" property on calculated variables of the current questionaire.
+     * Sets the "shape from" property in condition filters and dynamic labels of "hierarchy" components of the given
+     * questionnaire, using the value defined in calculated variables.
+     * Note: only sequences, subsequences and loops are used for overview.
+     * According to the Lunatic loop resolution step, the conditionFilter for a loop contains its first component
+     * (which is either a sequence or subsequence) conditionFilter.
+     * So we don't need to set the "shape from" property on loop components.
+     *
      * @param lunaticQuestionnaire A Lunatic questionnaire.
+     * @see fr.insee.eno.core.processing.out.steps.lunatic.loop.LunaticLoopFilter
      */
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
         this.lunaticQuestionnaire = lunaticQuestionnaire;
-        this.preProcessVariablesAndShapeFrom(lunaticQuestionnaire);
-        //
-        // only Sequence, Subsequence & loop is used for overview
-        // According to LunaticLoopResolution, conditionFilter for Loop is the same as first component (seq or subseq)
-        // So we don't need to have a step for Loop (already did in Seq or Subseq)
+        this.indexVariablesAndShapeFrom();
         enoQuestionnaire.getSequences().forEach(this::setShapeFromSequence);
         enoQuestionnaire.getSubsequences().forEach(this::setShapeFromSequence);
     }
 
-    private void preProcessVariablesAndShapeFrom(Questionnaire lunaticQuestionnaire){
-        variablesByQuestion = getCollectedVariablesByQuestion(lunaticQuestionnaire);
-        // Create filter shapeFrom index based on filterHierarchyIndex and loop
-        lunaticQuestionnaire.getVariables()
-                .forEach(lunaticVariable -> {
-                    variableIndex.put(lunaticVariable.getName(), lunaticVariable);
-                    variableShapeFromIndex.put(lunaticVariable.getName(), getShapeFromOfVariable(lunaticQuestionnaire, lunaticVariable.getName()));
-                });
-    }
-    /**
-     *
-     * @param variableName
-     * @return ShapeFrom: the variable Name of filter scope
-     */
-    public String getShapeFromOfVariable(Questionnaire lunaticQuestionnaire, String variableName){
-        VariableType variableType = variableIndex.get(variableName);
-        Optional<ComponentType> iterationComponent = lunaticQuestionnaire.getComponents().stream()
-                .filter(component -> variableType.getIterationReference() != null
-                        && variableType.getIterationReference().equals(component.getId()))
-                .findAny();
-        if (iterationComponent.isEmpty()) return null;
-        return LunaticUtils.getResponseNames(iterationComponent.get()).getFirst();
-    }
 
-    public List<String> getCollectedVarsInSequence(AbstractSequence abstractSequence) {
-        List<String> collectedVarInSequence = new ArrayList<>();
-        abstractSequence.getSequenceStructure().forEach(itemReference -> {
-                    if (StructureItemReference.StructureItemType.QUESTION.equals(itemReference.getType())) {
-                        collectedVarInSequence.addAll(variablesByQuestion.get(itemReference.getId()));
-                    } else {
-                        collectedVarInSequence.addAll(getCollectedVarsInSequence((AbstractSequence) enoIndex.get(itemReference.getId())));
-                    }
-                }
+    // Part I: Gather shapeFrom values by variable
+
+    private void indexVariablesAndShapeFrom() {
+        variableShapeFromIndex = new LinkedHashMap<>();
+        lunaticQuestionnaire.getVariables().forEach(lunaticVariable ->
+                variableShapeFromIndex.put(lunaticVariable.getName(), getShapeFromOfVariable(lunaticVariable))
         );
-        return collectedVarInSequence;
     }
 
-    public void setShapeFromSequence(AbstractSequence enoAbstractSequence){
-        Optional<ComponentType> lunaticComponent = findComponentById(lunaticQuestionnaire, enoAbstractSequence.getId());
-        if(lunaticComponent.isEmpty()){
-            throw new MappingException("Cannot find Lunatic component for " + lunaticComponent + ".");
+    private String getShapeFromOfVariable(VariableType lunaticVariable) {
+        Optional<ComponentType> iterationComponent = findIterationComponent(lunaticVariable);
+        return iterationComponent
+                .map(LunaticHierarchyShapeFrom::getFirstResponseName)
+                .orElse(null);
+    }
+
+    private Optional<ComponentType> findIterationComponent(VariableType lunaticVariable) {
+        return lunaticQuestionnaire.getComponents().stream()
+                .filter(component -> lunaticVariable.getIterationReference() != null
+                        && lunaticVariable.getIterationReference().equals(component.getId()))
+                .findAny();
+    }
+
+    private static String getFirstResponseName(ComponentType componentType) {
+        return LunaticUtils.getResponseNames(componentType).getFirst();
+    }
+
+
+    // Part II: Set the shapeFrom property on condition filter and labels within Lunatic sequences
+
+    private void setShapeFromSequence(AbstractSequence enoAbstractSequence) {
+        Optional<ComponentType> lunaticComponent = LunaticUtils.findComponentById(lunaticQuestionnaire, enoAbstractSequence.getId());
+        if (lunaticComponent.isEmpty())
+            throw new MappingException("Cannot find Lunatic component with id '" + enoAbstractSequence.getId() + "'.");
+        Optional<String> firstVariableOfSequence = findFirstCollectedVariable(enoAbstractSequence);
+        firstVariableOfSequence.ifPresent(variableName ->
+                setShapeFromLunaticComponent(lunaticComponent.get(), variableName));
+    }
+
+    private Optional<String> findFirstCollectedVariable(AbstractSequence abstractSequence) {
+        Map<String, List<String>> variablesByQuestion = LunaticUtils.getCollectedVariablesByQuestion(lunaticQuestionnaire);
+        for (StructureItemReference itemReference : abstractSequence.getSequenceStructure()) {
+            // If not questions, then it's a sequence or subsequence => recursive call
+            if (! StructureItemReference.StructureItemType.QUESTION.equals(itemReference.getType())) {
+                return findFirstCollectedVariable((AbstractSequence) enoIndex.get(itemReference.getId()));
+            }
+            // Otherwise return first collected variable of question
+            List<String> questionVariables = variablesByQuestion.get(itemReference.getId());
+            if (questionVariables.isEmpty()) { // (should not happen)
+                log.warn("Question <ith id '{}' has no collected variable.", itemReference.getId());
+                continue;
+            }
+            return Optional.of(questionVariables.getFirst());
         }
-
-        List<String> varsInSeq = getCollectedVarsInSequence(enoAbstractSequence);
-        setShapeFromLunaticComponent(lunaticComponent.get(), varsInSeq);
+        return Optional.empty();
     }
 
-    public void setShapeFromLunaticComponent(ComponentType lunaticComponent, List<String> collectedVarsInside){
-        if(collectedVarsInside.isEmpty()) return;
-        String shapeFrom = variableShapeFromIndex.get(collectedVarsInside.getFirst());
-        if(lunaticComponent.getLabel() != null) lunaticComponent.getLabel().setShapeFrom(shapeFrom);
-        if(lunaticComponent.getDescription() != null) lunaticComponent.getDescription().setShapeFrom(shapeFrom);
-        if(lunaticComponent.getConditionFilter() != null) lunaticComponent.getConditionFilter().setShapeFrom(shapeFrom);
-        if(lunaticComponent.getDeclarations() != null){
+    private void setShapeFromLunaticComponent(ComponentType lunaticComponent, String variableName) {
+        assert lunaticComponent instanceof fr.insee.lunatic.model.flat.Sequence
+                || lunaticComponent instanceof fr.insee.lunatic.model.flat.Subsequence;
+        String shapeFrom = variableShapeFromIndex.get(variableName);
+        if (lunaticComponent.getLabel() != null)
+            lunaticComponent.getLabel().setShapeFrom(shapeFrom);
+        if (lunaticComponent.getDescription() != null)
+            lunaticComponent.getDescription().setShapeFrom(shapeFrom);
+        if (lunaticComponent.getConditionFilter() != null)
+            lunaticComponent.getConditionFilter().setShapeFrom(shapeFrom);
+        if (lunaticComponent.getDeclarations() != null) {
             lunaticComponent.getDeclarations().forEach(declaration -> {
-                if(declaration.getLabel() != null) declaration.getLabel().setShapeFrom(shapeFrom);
+                if (declaration.getLabel() != null)
+                    declaration.getLabel().setShapeFrom(shapeFrom);
             });
         }
     }
 
 }
-
