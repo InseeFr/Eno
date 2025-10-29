@@ -121,10 +121,8 @@ class DDITests {
         // Content type of instructionType.getInstructionTextList()
         DynamicTextType instructionText = DynamicTextType.Factory.newInstance();
         // Content types of instructionText.getTextContentList()
-        //TextContentType textContent = TextContentType.Factory.newInstance();
         LiteralTextType literalText = LiteralTextType.Factory.newInstance();
         // Content type of literalText.getText()
-        //TextType text = TextType.Factory.newInstance();
         TextTypeImpl textImpl = (TextTypeImpl) TextType.Factory.newInstance();
         // Note: for weird reason, TextType objects doesn't have a string value
         textImpl.setStringValue(fooLabel);
@@ -149,10 +147,8 @@ class DDITests {
         // Content type of statementItemType.getDisplayTextList()
         DynamicTextType statementItemText = DynamicTextType.Factory.newInstance();
         // Content types of instructionText.getTextContentList()
-        //TextContentType textContent = TextContentType.Factory.newInstance();
         LiteralTextType literalText = LiteralTextType.Factory.newInstance();
         // Content type of literalText.getText()
-        //TextType text = TextType.Factory.newInstance();
         TextTypeImpl textImpl = (TextTypeImpl) TextType.Factory.newInstance();
         // Note: for weird reason, TextType objects doesn't have a string value
         textImpl.setStringValue(fooLabel);
@@ -177,10 +173,8 @@ class DDITests {
         // Content type of questionItemType.getQuestionTextList()
         DynamicTextType questionText = DynamicTextType.Factory.newInstance();
         // Content types of instructionText.getTextContentList()
-        //TextContentType textContent = TextContentType.Factory.newInstance();
         LiteralTextType literalText = LiteralTextType.Factory.newInstance();
         // Content type of literalText.getText()
-        //TextType text = TextType.Factory.newInstance();
         TextTypeImpl textImpl = (TextTypeImpl) TextType.Factory.newInstance();
         // Note: for weird reason, TextType objects doesn't have a string value
         textImpl.setStringValue(fooLabel);
