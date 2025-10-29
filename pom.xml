@@ -35,8 +35,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- Sonar props -->
         <sonar.java.binaries>target</sonar.java.binaries>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../queen-application/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-        <!-- Dependencies version -->
+        <!-- Plugin versions -->
         <jacoco.version>0.8.14</jacoco.version>
     </properties>
 
@@ -62,10 +61,9 @@
                             </goals>
                         </execution>
                         <execution>
-                            <id>report-aggregate</id>
-                            <phase>verify</phase>
+                            <id>report</id>
                             <goals>
-                                <goal>report-aggregate</goal>
+                                <goal>report</goal>
                             </goals>
                         </execution>
                     </executions>
