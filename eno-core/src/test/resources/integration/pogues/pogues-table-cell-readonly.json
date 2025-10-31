@@ -1,15 +1,15 @@
 {
-  "id": "mhev5ojy",
+  "id": "m92r208h",
   "genericName": "QUESTIONNAIRE",
   "agency": "fr.insee",
   "final": false,
   "flowLogic": "FILTER",
   "formulasLanguage": "VTL",
-  "lastUpdatedDate": "Fri Oct 31 2025 14:31:03 GMT+0100 (heure normale d’Europe centrale)",
+  "lastUpdatedDate": "Fri Oct 31 2025 14:02:33 GMT+0100 (heure normale d’Europe centrale)",
   "owner": "ENO-INTEGRATION-TESTS",
-  "Name": "ENO_FILTER_CELLS",
+  "Name": "ENO_READONLY_CELLS",
   "Label": [
-    "Eno - Table with filtered cells"
+    "Eno - Table with readonly cells"
   ],
   "Control": [],
   "FlowControl": [],
@@ -42,7 +42,7 @@
           "type": "QuestionType",
           "Name": "DYNAMIC_TABLE",
           "Label": [
-            "\"Dynamic table with filtered cells\""
+            "\"Dynamic table with readonly cells\""
           ],
           "Declaration": [],
           "Control": [],
@@ -52,22 +52,22 @@
           ],
           "Response": [
             {
-              "id": "m9a0yg48",
+              "id": "mhevgvsj",
               "Datatype": {
                 "typeName": "BOOLEAN",
                 "type": "BooleanDatatypeType"
               },
-              "CollectedVariableReference": "m9a1cl40"
+              "CollectedVariableReference": "mhevinxq"
             },
             {
-              "id": "m9a1bk2k",
+              "id": "mhev9mzq",
               "Datatype": {
                 "typeName": "TEXT",
                 "type": "TextDatatypeType",
                 "MaxLength": 249
               },
-              "CollectedVariableReference": "m9a19zj8",
-              "conditionFilter": "$DYNAMIC_TABLE1$"
+              "CollectedVariableReference": "mhevnar9",
+              "conditionReadOnly": "$DYNAMIC_TABLE1$"
             }
           ],
           "ResponseStructure": {
@@ -86,21 +86,21 @@
               },
               {
                 "dimensionType": "MEASURE",
-                "Label": "\"Display next column?\""
+                "Label": "\"Should next column be readonly?\""
               },
               {
                 "dimensionType": "MEASURE",
-                "Label": "\"Filtered column\""
+                "Label": "\"Readonly column\""
               }
             ],
             "Attribute": [],
             "Mapping": [
               {
-                "MappingSource": "m9a0yg48",
+                "MappingSource": "mhevgvsj",
                 "MappingTarget": "1 1"
               },
               {
-                "MappingSource": "m9a1bk2k",
+                "MappingSource": "mhev9mzq",
                 "MappingTarget": "1 2"
               }
             ]
@@ -156,18 +156,18 @@
   "Variables": {
     "Variable": [
       {
-        "id": "m9a1cl40",
+        "id": "mhevinxq",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "BOOLEAN",
           "type": "BooleanDatatypeType"
         },
         "Name": "DYNAMIC_TABLE1",
-        "Label": "Display next column?",
+        "Label": "Should next column be readonly?",
         "Scope": "m92rg22g"
       },
       {
-        "id": "m9a19zj8",
+        "id": "mhevnar9",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "TEXT",
@@ -175,7 +175,7 @@
           "MaxLength": 249
         },
         "Name": "DYNAMIC_TABLE2",
-        "Label": "Filtered column",
+        "Label": "Readonly column",
         "Scope": "m92rg22g"
       }
     ]

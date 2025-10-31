@@ -18,10 +18,23 @@ import lombok.Setter;
 @Context(format = Format.LUNATIC, type = LabelType.class)
 public class CellLabel extends EnoObject implements EnoLabel {
 
+    /** Label associated with a DDI NoDataByDefinition (non-collected cell).
+     * Note: other value exist:
+     * <ul>
+     *     <li>"filteredcell": Filter condition of a cell.</li>
+     *     <li>"readonlyresponsecell": Readonly condition of a cell.</li>
+     * </ul>
+     * But these have no use in DDI to Lunatic mapping.
+     */
+    public static final String DDI_FIXED_CELL = "fixedcell";
+
     /** Label to be displayed. */
     @DDI("getContentArray(0).getStringValue()")
     @Lunatic("setValue(#param)")
     String value;
+
+    @DDI("getTypeOfLabel().getStringValue()")
+    String ddiCellType;
 
     /** Property that is specific to Lunatic.
      * For now, Lunatic type in label objects does not come from metadata, but is hardcoded here in Eno.

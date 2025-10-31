@@ -18,6 +18,8 @@ import fr.insee.lunatic.model.flat.cleaning.CleaningExpression;
 import fr.insee.lunatic.model.flat.cleaning.CleaningVariableEntry;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -139,8 +141,8 @@ class LunaticAddCleaningTest {
     void testCleaningOfCellsFiltered() throws ParsingException {
         // Given
         mapQuestionnaireToLunatic(
-                "functional/pogues/cells-filtered/pogues-m92r209h.json",
-                "functional/ddi/cells-filtered/ddi-m92r209h.xml");
+                "integration/pogues/pogues-table-cell-filter.json",
+                "integration/ddi/ddi-table-cell-filter.xml");
 
         // When
         var cleaningProcessing = new LunaticAddCleaning(enoQuestionnaire, enoIndex);
@@ -148,18 +150,16 @@ class LunaticAddCleaningTest {
         cleaningProcessing.processCellsFiltered(lunaticQuestionnaire);
 
         // Then
-        assertNotNull(lunaticQuestionnaire.getCleaning().getCleaningEntry("AGE"));
-        assertThat(lunaticQuestionnaire.getCleaning()
-                .getCleaningEntry("AGE")
-                .getCleanedVariable("NB_BOULOT")
-                .getCleaningExpressions())
-                .hasSize(1);
-        CleaningExpression cleaningExpression =  lunaticQuestionnaire.getCleaning()
-                .getCleaningEntry("AGE")
-                .getCleanedVariable("NB_BOULOT")
-                .getCleaningExpressions().getFirst();
-        assertEquals("AGE >= 18", cleaningExpression.getExpression());
-        assertEquals("PRENOM", cleaningExpression.getShapeFrom());
+        CleaningVariableEntry cleaningEntry = lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("DYNAMIC_TABLE1");
+        assertNotNull(cleaningEntry);
+        List<CleaningExpression> cleaningExpressions = cleaningEntry
+                .getCleanedVariable("DYNAMIC_TABLE2")
+                .getCleaningExpressions();
+        assertThat(cleaningExpressions).hasSize(1);
+        CleaningExpression cleaningExpression =  cleaningExpressions.getFirst();
+        assertEquals("DYNAMIC_TABLE1", cleaningExpression.getExpression());
+        assertEquals("DYNAMIC_TABLE1", cleaningExpression.getShapeFrom());
     }
 
     @Test

@@ -14,27 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TableCellsFilterTest {
 
-    private final ClassLoader classLoader = this.getClass().getClassLoader();
-
-    /** Same Eno parameters for all tests. */
-    private final EnoParameters enoParameters = EnoParameters.of(
-            EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
-
-    @Test
-    @DisplayName("Component filter for InputNumber in RosterForLoop.")
-    void functionalTest_fromPoguesPlusDDI() throws ParsingException {
-        Questionnaire lunaticQuestionnaire = PoguesDDIToLunatic
-                .fromInputStreams(
-                        classLoader.getResourceAsStream("functional/pogues/cells-filtered/pogues-m92r209h.json"),
-                        classLoader.getResourceAsStream("functional/ddi/cells-filtered/ddi-m92r209h.xml"))
-                .transform(enoParameters);
-        RosterForLoop rosterForLoop = (RosterForLoop) ((Question) lunaticQuestionnaire.getComponents().get(1)).getComponents().getFirst();
-        assertEquals("AGE >= 18", rosterForLoop.getComponents().get(2).getConditionFilter().getValue());
-    }
-
     @Test
     @DisplayName("Dynamic table with filtered column.")
     void integrationTest_fromPoguesPlusDDI() throws ParsingException {
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        EnoParameters enoParameters = EnoParameters.of(
+                EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         Questionnaire lunaticQuestionnaire = PoguesDDIToLunatic
                 .fromInputStreams(
                         classLoader.getResourceAsStream("integration/pogues/pogues-table-cell-filter.json"),

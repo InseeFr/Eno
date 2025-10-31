@@ -10,9 +10,9 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.12.6. Generation date : 10/04/2025 - 12:33:47-->
+             isMaintainable="true"><!--Eno version : ${project.version}. Generation date : 31/10/2025 - 13:36:27-->
    <r:Agency>fr.insee</r:Agency>
-   <r:ID>INSEE-m92r208h</r:ID>
+   <r:ID>INSEE-mhev5ojy</r:ID>
    <r:Version>1</r:Version>
    <r:Citation>
       <r:Title>
@@ -21,11 +21,11 @@
    </r:Citation>
    <g:ResourcePackage isMaintainable="true" versionDate="2018-01-25+01:00">
       <r:Agency>fr.insee</r:Agency>
-      <r:ID>RessourcePackage-m92r208h</r:ID>
+      <r:ID>RessourcePackage-mhev5ojy</r:ID>
       <r:Version>1</r:Version>
       <d:InterviewerInstructionScheme>
          <r:Agency>fr.insee</r:Agency>
-         <r:ID>InterviewerInstructionScheme-m92r208h</r:ID>
+         <r:ID>InterviewerInstructionScheme-mhev5ojy</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
             <r:Content xml:lang="fr-FR">A définir</r:Content>
@@ -33,11 +33,11 @@
       </d:InterviewerInstructionScheme>
       <d:ControlConstructScheme>
          <r:Agency>fr.insee</r:Agency>
-         <r:ID>ControlConstructScheme-m92r208h</r:ID>
+         <r:ID>ControlConstructScheme-mhev5ojy</r:ID>
          <r:Version>1</r:Version>
          <d:Sequence>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>Sequence-m92r208h</r:ID>
+            <r:ID>Sequence-mhev5ojy</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Eno - Table with filtered cells</r:Content>
@@ -85,7 +85,7 @@
       </d:ControlConstructScheme>
       <d:QuestionScheme>
          <r:Agency>fr.insee</r:Agency>
-         <r:ID>QuestionScheme-m92r208h</r:ID>
+         <r:ID>QuestionScheme-mhev5ojy</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
             <r:Content xml:lang="fr-FR">A définir</r:Content>
@@ -209,6 +209,16 @@
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
+            <d:CellLabel>
+               <r:Content xml:lang="fr-FR">¤m92rg22g-QOP-m9a0yg48¤ </r:Content>
+               <r:TypeOfLabel>filteredcell</r:TypeOfLabel>
+               <d:GridAttachment>
+                  <d:CellCoordinatesAsDefined>
+                     <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+                     <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
+                  </d:CellCoordinatesAsDefined>
+               </d:GridAttachment>
+            </d:CellLabel>
          </d:QuestionGrid>
       </d:QuestionScheme>
       <l:CategoryScheme>
@@ -237,7 +247,7 @@
       </l:CategoryScheme>
       <l:CategoryScheme>
          <r:Agency>fr.insee</r:Agency>
-         <r:ID>CategoryScheme-m92r208h</r:ID>
+         <r:ID>CategoryScheme-mhev5ojy</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
             <r:Content xml:lang="fr-FR">A définir</r:Content>
@@ -321,7 +331,7 @@
       </l:CodeListScheme>
       <l:VariableScheme>
          <r:Agency>fr.insee</r:Agency>
-         <r:ID>VariableScheme-m92r208h</r:ID>
+         <r:ID>VariableScheme-mhev5ojy</r:ID>
          <r:Version>1</r:Version>
          <r:Label>
             <r:Content xml:lang="fr-FR">Variable Scheme for the survey</r:Content>
@@ -420,12 +430,12 @@
          </l:VariableGroup>
          <l:VariableGroup>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-Instrument-m92r208h-vg</r:ID>
+            <r:ID>INSEE-Instrument-mhev5ojy-vg</r:ID>
             <r:Version>1</r:Version>
             <r:BasedOnObject>
                <r:BasedOnReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>Instrument-m92r208h</r:ID>
+                  <r:ID>Instrument-mhev5ojy</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>Instrument</r:TypeOfObject>
                </r:BasedOnReference>
@@ -466,41 +476,41 @@
    </g:ResourcePackage>
    <s:StudyUnit>
       <r:Agency>fr.insee</r:Agency>
-      <r:ID>StudyUnit-m92r208h</r:ID>
+      <r:ID>StudyUnit-mhev5ojy</r:ID>
       <r:Version>1</r:Version>
       <r:ExPostEvaluation/>
       <d:DataCollection>
          <r:Agency>fr.insee</r:Agency>
-         <r:ID>DataCollection-m92r208h</r:ID>
+         <r:ID>DataCollection-mhev5ojy</r:ID>
          <r:Version>1</r:Version>
          <r:QuestionSchemeReference>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>QuestionScheme-m92r208h</r:ID>
+            <r:ID>QuestionScheme-mhev5ojy</r:ID>
             <r:Version>1</r:Version>
             <r:TypeOfObject>QuestionScheme</r:TypeOfObject>
          </r:QuestionSchemeReference>
          <r:ControlConstructSchemeReference>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>ControlConstructScheme-m92r208h</r:ID>
+            <r:ID>ControlConstructScheme-mhev5ojy</r:ID>
             <r:Version>1</r:Version>
             <r:TypeOfObject>ControlConstructScheme</r:TypeOfObject>
          </r:ControlConstructSchemeReference>
          <r:InterviewerInstructionSchemeReference>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>InterviewerInstructionScheme-m92r208h</r:ID>
+            <r:ID>InterviewerInstructionScheme-mhev5ojy</r:ID>
             <r:Version>1</r:Version>
             <r:TypeOfObject>InterviewerInstructionScheme</r:TypeOfObject>
          </r:InterviewerInstructionSchemeReference>
          <d:InstrumentScheme xml:lang="fr-FR">
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>InstrumentScheme-m92r208h</r:ID>
+            <r:ID>InstrumentScheme-mhev5ojy</r:ID>
             <r:Version>1</r:Version>
             <d:Instrument xmlns:c="ddi:conceptualcomponent:3_3"
                           xmlns:cm="ddi:comparative:3_3"
                           xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
                           xmlns:pr="ddi:ddiprofile:3_3">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>Instrument-m92r208h</r:ID>
+               <r:ID>Instrument-mhev5ojy</r:ID>
                <r:Version>1</r:Version>
                <d:InstrumentName>
                   <r:String>ENO_FILTER_CELLS</r:String>
@@ -511,7 +521,7 @@
                <d:TypeOfInstrument>A définir</d:TypeOfInstrument>
                <d:ControlConstructReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>Sequence-m92r208h</r:ID>
+                  <r:ID>Sequence-mhev5ojy</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>Sequence</r:TypeOfObject>
                </d:ControlConstructReference>

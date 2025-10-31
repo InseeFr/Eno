@@ -27,6 +27,8 @@ public class DDIInsertNoDataCellLabels implements ProcessingStep<EnoQuestionnair
     private void insertNoDataCellLabels(EnoTable enoTable) {
         for (Iterator<CellLabel> iterator = enoTable.getCellLabels().iterator(); iterator.hasNext();) {
             CellLabel cellLabel = iterator.next();
+            if (! CellLabel.DDI_FIXED_CELL.equals(cellLabel.getDdiCellType()))
+                continue;
             NoDataCell noDataCell = findNoDataCell(cellLabel.getRowNumber(), cellLabel.getColumnNumber(), enoTable);
             noDataCell.setCellLabel(cellLabel);
             iterator.remove();

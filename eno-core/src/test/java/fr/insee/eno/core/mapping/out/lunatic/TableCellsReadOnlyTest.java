@@ -29,22 +29,19 @@ class TableCellsReadOnlyTest {
         assertEquals(LabelTypeEnum.VTL, lunaticCell.getConditionReadOnly().getType());
     }
 
-    private final ClassLoader classLoader = this.getClass().getClassLoader();
-
-    /** Same Eno parameters for all tests. */
-    private final EnoParameters enoParameters = EnoParameters.of(
-            EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
-
     @Test
-    @DisplayName("Dynamic table with ReadOnly")
+    @DisplayName("Dynamic table with readonly column.")
     void integrationTest_fromPoguesPlusDDI() throws ParsingException {
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        EnoParameters enoParameters = EnoParameters.of(
+                EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
         Questionnaire lunaticQuestionnaire = PoguesDDIToLunatic
                 .fromInputStreams(
-                        classLoader.getResourceAsStream("integration/pogues/pogues-dynamic-table-read-only.json"),
-                        classLoader.getResourceAsStream("integration/ddi/ddi-dynamic-table-read-only.xml"))
+                        classLoader.getResourceAsStream("integration/pogues/pogues-table-cell-readonly.json"),
+                        classLoader.getResourceAsStream("integration/ddi/ddi-table-cell-readonly.xml"))
                 .transform(enoParameters);
         RosterForLoop rosterForLoop = (RosterForLoop) ((Question) lunaticQuestionnaire.getComponents().get(1)).getComponents().getFirst();
-        assertEquals("TABLEAUDYN1 = \"bob\"", rosterForLoop.getComponents().get(2).getConditionReadOnly().getValue());
+        assertEquals("DYNAMIC_TABLE1", rosterForLoop.getComponents().get(1).getConditionReadOnly().getValue());
     }
 
 }
