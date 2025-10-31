@@ -74,9 +74,15 @@
             "Dimension": [
               {
                 "dimensionType": "PRIMARY",
-                "dynamic": "DYNAMIC_LENGTH",
-                "MinLines": 1,
-                "MaxLines": 10
+                "dynamic": "DYNAMIC",
+                "minimum": {
+                  "type": "number",
+                  "value": "1"
+                },
+                "maximum": {
+                  "type": "number",
+                  "value": "10"
+                }
               },
               {
                 "dimensionType": "MEASURE",

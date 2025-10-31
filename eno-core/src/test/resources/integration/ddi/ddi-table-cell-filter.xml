@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.12.6. Generation date : 10/04/2025 - 12:33:47-->
+             isMaintainable="true"><!--Eno version : ${project.version}. Generation date : 31/10/2025 - 9:58:18-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-m92r208h</r:ID>
    <r:Version>1</r:Version>
@@ -209,6 +209,16 @@
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
+            <d:CellLabel>
+               <r:Content xml:lang="fr-FR">¤m92rg22g-QOP-m9a0yg48¤ </r:Content>
+               <r:TypeOfLabel>filteredcell</r:TypeOfLabel>
+               <d:GridAttachment>
+                  <d:CellCoordinatesAsDefined>
+                     <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+                     <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
+                  </d:CellCoordinatesAsDefined>
+               </d:GridAttachment>
+            </d:CellLabel>
          </d:QuestionGrid>
       </d:QuestionScheme>
       <l:CategoryScheme>
