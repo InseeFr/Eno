@@ -28,4 +28,27 @@ class PaginationSequenceFilterDescriptionTest {
         assertEquals("2", lunaticQuestionnaire.getComponents().get(4).getPage());
     }
 
+    @Test
+    void sequenceModeSequenceFilterDescriptionInLoop() {
+        //
+        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        Loop loop = new Loop();
+        loop.getComponents().add(new Sequence());
+        loop.getComponents().getLast().setComponentType(ComponentTypeEnum.SEQUENCE);
+        loop.getComponents().add(new Input());
+        loop.getComponents().add(new FilterDescription());
+        loop.getComponents().add(new Sequence());
+        loop.getComponents().getLast().setComponentType(ComponentTypeEnum.SEQUENCE);
+        loop.getComponents().add(new Input());
+        lunaticQuestionnaire.getComponents().add(loop);
+        //
+        new LunaticPaginationSequenceMode().apply(lunaticQuestionnaire);
+        //
+        assertEquals("1.1", loop.getComponents().get(0).getPage());
+        assertEquals("1.1", loop.getComponents().get(1).getPage());
+        assertEquals("1.2", loop.getComponents().get(2).getPage());
+        assertEquals("1.2", loop.getComponents().get(3).getPage());
+        assertEquals("1.2", loop.getComponents().get(4).getPage());
+    }
+
 }
