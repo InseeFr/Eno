@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.58.4] - 2025-11-06
+### :bug: Bug Fixes
+- [`cc98976`](https://github.com/InseeFr/Eno/commit/cc98976ce89eb2e414e401f76bb98251d85eee87) - **ddi**: update cell specifications *(PR [#1349](https://github.com/InseeFr/Eno/pull/1349) by [@nsenave](https://github.com/nsenave))*
+- [`0cb930d`](https://github.com/InseeFr/Eno/commit/0cb930d13735ae7729aaf25dd012da82aef220cf) - **lunatic**: filter description page in sequence mode *(PR [#1350](https://github.com/InseeFr/Eno/pull/1350) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.58.3] - 2025-10-29
 ### :recycle: Refactors
 - [`bc14aa3`](https://github.com/InseeFr/Eno/commit/bc14aa3958aaa3f3119c378737a7eac9ed87f525) - **lunatic**: simplify shape from hierarchy step *(PR [#1347](https://github.com/InseeFr/Eno/pull/1347) by [@nsenave](https://github.com/nsenave))*
@@ -732,3 +738,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.58.1]: https://github.com/InseeFr/Eno/compare/3.58.0...3.58.1
 [3.58.2]: https://github.com/InseeFr/Eno/compare/3.58.1...3.58.2
 [3.58.3]: https://github.com/InseeFr/Eno/compare/3.58.2...3.58.3
+[3.58.4]: https://github.com/InseeFr/Eno/compare/3.58.3...3.58.4
