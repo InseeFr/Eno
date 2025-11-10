@@ -16,6 +16,35 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
         super(false, LunaticParameters.LunaticPaginationMode.SEQUENCE);
     }
 
+    @Override
+    public void apply(Questionnaire lunaticQuestionnaire) {
+        super.apply(lunaticQuestionnaire);
+        /* Note:
+        Pagination implementation is getting too complex with current implementation.
+        The factorized code in parent class induces complexity due to the number of edge cases to manage.
+        We should consider to re-write the pagination implementations entirely to make it easier to maintain.
+        It should be okay since it is well covered by tests.
+        Yet, warning: there is also an implementation for the "regrouping" specific processing.
+         */
+        patchFilterDescriptionNumbers(lunaticQuestionnaire.getComponents());
+    }
+
+    /** Filter description components that are placed before a sequence should have the same page number as the
+     * sequence. */
+    private void patchFilterDescriptionNumbers(List<ComponentType> lunaticComponents) {
+        int size = lunaticComponents.size();
+        for (int i = 0; i < size; i ++) {
+            ComponentType current = lunaticComponents.get(i);
+            if (current instanceof Loop loop)
+                patchFilterDescriptionNumbers(loop.getComponents());
+            if (i == size - 1)
+                break;
+            ComponentType next = lunaticComponents.get(i + 1);
+            if (current instanceof FilterDescription filterDescription && next instanceof Sequence sequence)
+                filterDescription.setPage(sequence.getPage());
+        }
+    }
+
     /**
      * Check if the page attribute for a component can be incremented
      * @param component component to check
