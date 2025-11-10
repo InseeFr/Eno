@@ -1,19 +1,609 @@
 {
-  "owner": "ENO-INTEGRATION-TESTS",
-  "final": false,
   "id": "m9in873b",
+  "genericName": "QUESTIONNAIRE",
+  "agency": "fr.insee",
+  "final": false,
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "lastUpdatedDate": "Fri Nov 07 2025 14:49:28 GMT+0100 (heure normale d’Europe centrale)",
+  "owner": "ENO-INTEGRATION-TESTS",
+  "Name": "ENO_MANDATORY_QUESTIONS",
   "Label": [
     "Eno - Mandatory question"
   ],
-  "Name": "ENO_MANDATORY_QUESTIONS",
-  "lastUpdatedDate": "Wed Apr 16 2025 10:39:22 GMT+0200 (heure d’été d’Europe centrale)",
+  "Control": [],
+  "FlowControl": [],
+  "TargetMode": [
+    "CAPI",
+    "CAWI",
+    "CATI",
+    "PAPI"
+  ],
+  "Child": [
+    {
+      "id": "m9imr8z2",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S1",
+      "Label": [
+        "\"Sequence\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": [
+        {
+          "id": "m9jobuny",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "CHECK_MANDATORY",
+          "Label": [
+            "\"Please check this checkbox (it's mandatory)\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "m9jon2n5",
+              "mandatory": true,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "m9jonnr1"
+            }
+          ]
+        },
+        {
+          "id": "m9ims2z4",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "Q_TEXT",
+          "Label": [
+            "\"Text question\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "m9imyc69",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m9joh4f9"
+            }
+          ]
+        },
+        {
+          "id": "m9ina0zi",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "Q_TEXT1_MANDATORY",
+          "Label": [
+            "\"Mandatory text question (short)\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "m9in4cvq",
+              "mandatory": true,
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "m9johnha"
+            }
+          ]
+        },
+        {
+          "id": "m9jodzpb",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "Q_TEXT2_MANDATORY",
+          "Label": [
+            "\"Mandatory text question (long)\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "m9joap68",
+              "mandatory": true,
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 250
+              },
+              "CollectedVariableReference": "m9jo1zo7"
+            }
+          ]
+        },
+        {
+          "id": "m9joc1p8",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "Q_NUMBER_MANDATORY",
+          "Label": [
+            "\"Mandatory number question\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "m9jonmvd",
+              "mandatory": true,
+              "Datatype": {
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Minimum": 0,
+                "Maximum": 100,
+                "IsDynamicUnit": false,
+                "Unit": "http://id.insee.fr/unit/percent"
+              },
+              "CollectedVariableReference": "m9jo4dlb"
+            }
+          ]
+        },
+        {
+          "id": "m9joc216",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "Q_DATE_MANDATORY",
+          "Label": [
+            "\"Mandatory date question\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "m9jo6fc0",
+              "mandatory": true,
+              "Datatype": {
+                "typeName": "DATE",
+                "type": "DateDatatypeType",
+                "Minimum": "1900",
+                "Maximum": "2100",
+                "Format": "YYYY"
+              },
+              "CollectedVariableReference": "m9joldio"
+            }
+          ]
+        },
+        {
+          "id": "m9jo28zy",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "Q_DURATION_MANDATORY",
+          "Label": [
+            "\"Mandatory duration question\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "m9jo94jp",
+              "mandatory": true,
+              "Datatype": {
+                "typeName": "DURATION",
+                "type": "DurationDatatypeType",
+                "Minimum": "PT0H0M",
+                "Maximum": "PT23H59M",
+                "Format": "PTnHnM"
+              },
+              "CollectedVariableReference": "m9jog9bv"
+            }
+          ]
+        },
+        {
+          "id": "m9joa7yo",
+          "questionType": "SINGLE_CHOICE",
+          "type": "QuestionType",
+          "Name": "Q_RADIO_MANDATORY",
+          "Label": [
+            "\"Mandatory unique choice question (radio)\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "m9jorr1u",
+              "mandatory": true,
+              "CodeListReference": "m9joihim",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "m9joev4j"
+            }
+          ],
+          "ClarificationQuestion": [],
+          "codeFilters": []
+        },
+        {
+          "id": "makxe3yi",
+          "questionType": "SINGLE_CHOICE",
+          "type": "QuestionType",
+          "Name": "Q_RADIO_MANDATORY_DETAIL",
+          "Label": [
+            "\"Mandatory unique choice question (radio), with 'please specify'\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [
+            {
+              "id": "makxvo6l",
+              "flowControlType": "CLARIFICATION",
+              "Description": "$Q_RADIO_MANDATORY_DETAIL$ = '3' : Q_RADIO_MANDATORY_DETAIL3CL",
+              "Expression": "$Q_RADIO_MANDATORY_DETAIL$ = '3'",
+              "IfTrue": "makxvp2s"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "makxlt9f",
+              "mandatory": true,
+              "CodeListReference": "m9joihim",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "makxgnhr"
+            }
+          ],
+          "ClarificationQuestion": [
+            {
+              "id": "makxvp2s",
+              "questionType": "SIMPLE",
+              "Name": "Q_RADIO_MANDATORY_DETAIL3CL",
+              "Label": [
+                "\"Please specify: \""
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "Response": [
+                {
+                  "id": "makxt8yr",
+                  "mandatory": false,
+                  "Datatype": {
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  },
+                  "CollectedVariableReference": "makxh1t8"
+                }
+              ]
+            }
+          ],
+          "codeFilters": []
+        },
+        {
+          "id": "m9jojxfa",
+          "questionType": "SINGLE_CHOICE",
+          "type": "QuestionType",
+          "Name": "Q_DROPDOWN_MANDATORY",
+          "Label": [
+            "\"Mandatory unique choice question (dropdown)\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "m9joo13m",
+              "mandatory": true,
+              "CodeListReference": "m9joihim",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "m9jom50t"
+            }
+          ],
+          "ClarificationQuestion": [],
+          "codeFilters": []
+        },
+        {
+          "id": "mhopzm84",
+          "questionType": "MULTIPLE_CHOICE",
+          "type": "QuestionType",
+          "mandatory": true,
+          "Name": "MCQ_MANDATORY",
+          "Label": [
+            "\"Mandatory multiple choice question\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mhoq84xh",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "mhoqid4k"
+            },
+            {
+              "id": "mhoqiip3",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "mhoqc4t7"
+            },
+            {
+              "id": "mhoqd2n6",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "mhoqdmfm"
+            }
+          ],
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "NON_DYNAMIC",
+                "CodeListReference": "m9joihim"
+              },
+              {
+                "dimensionType": "MEASURE"
+              }
+            ],
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "mhoq84xh",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "mhoqiip3",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "mhoqd2n6",
+                "MappingTarget": "3"
+              }
+            ]
+          },
+          "ClarificationQuestion": [],
+          "codeFilters": []
+        },
+        {
+          "id": "mhowjfg4",
+          "questionType": "MULTIPLE_CHOICE",
+          "type": "QuestionType",
+          "mandatory": true,
+          "Name": "MCQ_MANDATORY_DETAIL",
+          "Label": [
+            "\"Mandatory multiple choice question, with 'please specify'\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [
+            {
+              "id": "mhoxbi7u",
+              "flowControlType": "CLARIFICATION",
+              "Description": "$MCQ_MANDATORY_DETAIL3$ = '1' : MCQ_MANDATORY_DETAIL3CL",
+              "Expression": "$MCQ_MANDATORY_DETAIL3$ = '1'",
+              "IfTrue": "mhox6a66"
+            }
+          ],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mhox6ksg",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "mhow6bul"
+            },
+            {
+              "id": "mhoxcnd2",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "mhow2soc"
+            },
+            {
+              "id": "mhoxh8eu",
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "mhowa0xr"
+            }
+          ],
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "NON_DYNAMIC",
+                "CodeListReference": "m9joihim"
+              },
+              {
+                "dimensionType": "MEASURE"
+              }
+            ],
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "mhox6ksg",
+                "MappingTarget": "1"
+              },
+              {
+                "MappingSource": "mhoxcnd2",
+                "MappingTarget": "2"
+              },
+              {
+                "MappingSource": "mhoxh8eu",
+                "MappingTarget": "3"
+              }
+            ]
+          },
+          "ClarificationQuestion": [
+            {
+              "id": "mhox6a66",
+              "questionType": "SIMPLE",
+              "Name": "MCQ_MANDATORY_DETAIL3CL",
+              "Label": [
+                "\"Please, specify: \""
+              ],
+              "TargetMode": [
+                "CAPI",
+                "CAWI",
+                "CATI",
+                "PAPI"
+              ],
+              "Response": [
+                {
+                  "id": "mhox403f",
+                  "mandatory": false,
+                  "Datatype": {
+                    "typeName": "TEXT",
+                    "type": "TextDatatypeType",
+                    "MaxLength": 249
+                  },
+                  "CollectedVariableReference": "mhow5hct"
+                }
+              ]
+            }
+          ],
+          "codeFilters": []
+        }
+      ]
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": []
+    }
+  ],
   "DataCollection": [
     {
       "id": "s2106-dc",
       "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
     }
   ],
-  "genericName": "QUESTIONNAIRE",
   "ComponentGroup": [
     {
       "id": "m9imxhsu",
@@ -31,354 +621,11 @@
         "m9joc216",
         "m9jo28zy",
         "m9joa7yo",
+        "makxe3yi",
         "m9jojxfa",
+        "mhopzm84",
+        "mhowjfg4",
         "idendquest"
-      ]
-    }
-  ],
-  "agency": "fr.insee",
-  "TargetMode": [
-    "CAPI",
-    "CAWI",
-    "CATI",
-    "PAPI"
-  ],
-  "flowLogic": "FILTER",
-  "formulasLanguage": "VTL",
-  "childQuestionnaireRef": [],
-  "Child": [
-    {
-      "id": "m9imr8z2",
-      "depth": 1,
-      "Name": "S1",
-      "Label": [
-        "\"Sequence\""
-      ],
-      "Declaration": [],
-      "Control": [],
-      "FlowControl": [],
-      "TargetMode": [
-        "CAPI",
-        "CAWI",
-        "CATI",
-        "PAPI"
-      ],
-      "type": "SequenceType",
-      "genericName": "MODULE",
-      "Child": [
-        {
-          "id": "m9jobuny",
-          "depth": 2,
-          "Name": "CHECK_MANDATORY",
-          "Label": [
-            "\"Please check this checkbox (it's mandatory)\""
-          ],
-          "Declaration": [],
-          "Control": [],
-          "FlowControl": [],
-          "TargetMode": [
-            "CAPI",
-            "CAWI",
-            "CATI",
-            "PAPI"
-          ],
-          "type": "QuestionType",
-          "questionType": "SIMPLE",
-          "Response": [
-            {
-              "id": "m9jon2n5",
-              "Datatype": {
-                "typeName": "BOOLEAN",
-                "type": "BooleanDatatypeType"
-              },
-              "CollectedVariableReference": "m9jonnr1",
-              "mandatory": true
-            }
-          ]
-        },
-        {
-          "id": "m9ims2z4",
-          "depth": 2,
-          "Name": "Q_TEXT",
-          "Label": [
-            "\"Text question\""
-          ],
-          "Declaration": [],
-          "Control": [],
-          "FlowControl": [],
-          "TargetMode": [
-            "CAPI",
-            "CAWI",
-            "CATI",
-            "PAPI"
-          ],
-          "type": "QuestionType",
-          "questionType": "SIMPLE",
-          "Response": [
-            {
-              "id": "m9imyc69",
-              "Datatype": {
-                "typeName": "TEXT",
-                "type": "TextDatatypeType",
-                "MaxLength": 249
-              },
-              "CollectedVariableReference": "m9joh4f9",
-              "mandatory": false
-            }
-          ]
-        },
-        {
-          "id": "m9ina0zi",
-          "depth": 2,
-          "Name": "Q_TEXT1_MANDATORY",
-          "Label": [
-            "\"Mandatory text question (short)\""
-          ],
-          "Declaration": [],
-          "Control": [],
-          "FlowControl": [],
-          "TargetMode": [
-            "CAPI",
-            "CAWI",
-            "CATI",
-            "PAPI"
-          ],
-          "type": "QuestionType",
-          "questionType": "SIMPLE",
-          "Response": [
-            {
-              "id": "m9in4cvq",
-              "Datatype": {
-                "typeName": "TEXT",
-                "type": "TextDatatypeType",
-                "MaxLength": 249
-              },
-              "CollectedVariableReference": "m9johnha",
-              "mandatory": true
-            }
-          ]
-        },
-        {
-          "id": "m9jodzpb",
-          "depth": 2,
-          "Name": "Q_TEXT2_MANDATORY",
-          "Label": [
-            "\"Mandatory text question (long)\""
-          ],
-          "Declaration": [],
-          "Control": [],
-          "FlowControl": [],
-          "TargetMode": [
-            "CAPI",
-            "CAWI",
-            "CATI",
-            "PAPI"
-          ],
-          "type": "QuestionType",
-          "questionType": "SIMPLE",
-          "Response": [
-            {
-              "id": "m9joap68",
-              "Datatype": {
-                "typeName": "TEXT",
-                "type": "TextDatatypeType",
-                "MaxLength": 250
-              },
-              "CollectedVariableReference": "m9jo1zo7",
-              "mandatory": true
-            }
-          ]
-        },
-        {
-          "id": "m9joc1p8",
-          "depth": 2,
-          "Name": "Q_NUMBER_MANDATORY",
-          "Label": [
-            "\"Mandatory number question\""
-          ],
-          "Declaration": [],
-          "Control": [],
-          "FlowControl": [],
-          "TargetMode": [
-            "CAPI",
-            "CAWI",
-            "CATI",
-            "PAPI"
-          ],
-          "type": "QuestionType",
-          "questionType": "SIMPLE",
-          "Response": [
-            {
-              "id": "m9jonmvd",
-              "Datatype": {
-                "typeName": "NUMERIC",
-                "type": "NumericDatatypeType",
-                "Minimum": 0,
-                "Maximum": 100,
-                "IsDynamicUnit": false,
-                "Unit": "http://id.insee.fr/unit/percent"
-              },
-              "CollectedVariableReference": "m9jo4dlb",
-              "mandatory": true
-            }
-          ]
-        },
-        {
-          "id": "m9joc216",
-          "depth": 2,
-          "Name": "Q_DATE_MANDATORY",
-          "Label": [
-            "\"Mandatory date question\""
-          ],
-          "Declaration": [],
-          "Control": [],
-          "FlowControl": [],
-          "TargetMode": [
-            "CAPI",
-            "CAWI",
-            "CATI",
-            "PAPI"
-          ],
-          "type": "QuestionType",
-          "questionType": "SIMPLE",
-          "Response": [
-            {
-              "id": "m9jo6fc0",
-              "Datatype": {
-                "typeName": "DATE",
-                "type": "DateDatatypeType",
-                "Minimum": "1900",
-                "Maximum": "2100",
-                "Format": "YYYY"
-              },
-              "CollectedVariableReference": "m9joldio",
-              "mandatory": true
-            }
-          ]
-        },
-        {
-          "id": "m9jo28zy",
-          "depth": 2,
-          "Name": "Q_DURATION_MANDATORY",
-          "Label": [
-            "\"Mandatory duration question\""
-          ],
-          "Declaration": [],
-          "Control": [],
-          "FlowControl": [],
-          "TargetMode": [
-            "CAPI",
-            "CAWI",
-            "CATI",
-            "PAPI"
-          ],
-          "type": "QuestionType",
-          "questionType": "SIMPLE",
-          "Response": [
-            {
-              "id": "m9jo94jp",
-              "Datatype": {
-                "typeName": "DURATION",
-                "type": "DurationDatatypeType",
-                "Minimum": "PT0H0M",
-                "Maximum": "PT23H59M",
-                "Format": "PTnHnM"
-              },
-              "CollectedVariableReference": "m9jog9bv",
-              "mandatory": true
-            }
-          ]
-        },
-        {
-          "id": "m9joa7yo",
-          "depth": 2,
-          "Name": "Q_RADIO_MANDATORY",
-          "Label": [
-            "\"Mandatory unique choice question (radio)\""
-          ],
-          "Declaration": [],
-          "Control": [],
-          "FlowControl": [],
-          "TargetMode": [
-            "CAPI",
-            "CAWI",
-            "CATI",
-            "PAPI"
-          ],
-          "ClarificationQuestion": [],
-          "codeFilters": [],
-          "type": "QuestionType",
-          "questionType": "SINGLE_CHOICE",
-          "Response": [
-            {
-              "id": "m9jp3k1l",
-              "Datatype": {
-                "typeName": "TEXT",
-                "type": "TextDatatypeType",
-                "visualizationHint": "RADIO",
-                "MaxLength": 1
-              },
-              "CollectedVariableReference": "m9joev4j",
-              "CodeListReference": "m9joihim",
-              "mandatory": true
-            }
-          ]
-        },
-        {
-          "id": "m9jojxfa",
-          "depth": 2,
-          "Name": "Q_DROPDOWN_MANDATORY",
-          "Label": [
-            "\"Mandatory unique choice question (dropdown)\""
-          ],
-          "Declaration": [],
-          "Control": [],
-          "FlowControl": [],
-          "TargetMode": [
-            "CAPI",
-            "CAWI",
-            "CATI",
-            "PAPI"
-          ],
-          "ClarificationQuestion": [],
-          "codeFilters": [],
-          "type": "QuestionType",
-          "questionType": "SINGLE_CHOICE",
-          "Response": [
-            {
-              "id": "m9joqzgo",
-              "Datatype": {
-                "typeName": "TEXT",
-                "type": "TextDatatypeType",
-                "visualizationHint": "DROPDOWN",
-                "MaxLength": 1
-              },
-              "CollectedVariableReference": "m9jom50t",
-              "CodeListReference": "m9joihim",
-              "mandatory": true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "idendquest",
-      "depth": 1,
-      "Name": "QUESTIONNAIRE_END",
-      "Label": [
-        "QUESTIONNAIRE_END"
-      ],
-      "Declaration": [],
-      "genericName": "MODULE",
-      "Control": [],
-      "FlowControl": [],
-      "type": "SequenceType",
-      "Child": [],
-      "TargetMode": [
-        "CAPI",
-        "CAWI",
-        "CATI",
-        "PAPI"
       ]
     }
   ],
@@ -389,18 +636,18 @@
         "Label": "FOO_CODE_LIST",
         "Code": [
           {
-            "Label": "\"Foo\"",
             "Value": "1",
+            "Label": "\"Foo\"",
             "Parent": ""
           },
           {
-            "Label": "\"Bar\"",
             "Value": "2",
+            "Label": "\"Bar\"",
             "Parent": ""
           },
           {
-            "Label": "\"Baz\"",
             "Value": "3",
+            "Label": "\"Baz\"",
             "Parent": ""
           }
         ]
@@ -411,51 +658,49 @@
     "Variable": [
       {
         "id": "m9jonnr1",
-        "Name": "CHECK_MANDATORY",
-        "Label": "CHECK_MANDATORY label",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "BOOLEAN",
           "type": "BooleanDatatypeType"
-        }
+        },
+        "Name": "CHECK_MANDATORY",
+        "Label": "CHECK_MANDATORY label"
       },
       {
         "id": "m9joh4f9",
-        "Name": "Q_TEXT",
-        "Label": "Q_TEXT label",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "TEXT",
           "type": "TextDatatypeType",
           "MaxLength": 249
-        }
+        },
+        "Name": "Q_TEXT",
+        "Label": "Q_TEXT label"
       },
       {
         "id": "m9johnha",
-        "Name": "Q_TEXT1_MANDATORY",
-        "Label": "Q_TEXT1_MANDATORY label",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "TEXT",
           "type": "TextDatatypeType",
           "MaxLength": 249
-        }
+        },
+        "Name": "Q_TEXT1_MANDATORY",
+        "Label": "Q_TEXT1_MANDATORY label"
       },
       {
         "id": "m9jo1zo7",
-        "Name": "Q_TEXT2_MANDATORY",
-        "Label": "Q_TEXT2_MANDATORY label",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "TEXT",
           "type": "TextDatatypeType",
           "MaxLength": 250
-        }
+        },
+        "Name": "Q_TEXT2_MANDATORY",
+        "Label": "Q_TEXT2_MANDATORY label"
       },
       {
         "id": "m9jo4dlb",
-        "Name": "Q_NUMBER_MANDATORY",
-        "Label": "Q_NUMBER_MANDATORY label",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "NUMERIC",
@@ -464,12 +709,12 @@
           "Maximum": 100,
           "IsDynamicUnit": false,
           "Unit": "http://id.insee.fr/unit/percent"
-        }
+        },
+        "Name": "Q_NUMBER_MANDATORY",
+        "Label": "Q_NUMBER_MANDATORY label"
       },
       {
         "id": "m9joldio",
-        "Name": "Q_DATE_MANDATORY",
-        "Label": "Q_DATE_MANDATORY label",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "DATE",
@@ -477,12 +722,12 @@
           "Minimum": "1900",
           "Maximum": "2100",
           "Format": "YYYY"
-        }
+        },
+        "Name": "Q_DATE_MANDATORY",
+        "Label": "Q_DATE_MANDATORY label"
       },
       {
         "id": "m9jog9bv",
-        "Name": "Q_DURATION_MANDATORY",
-        "Label": "Q_DURATION_MANDATORY label",
         "type": "CollectedVariableType",
         "Datatype": {
           "typeName": "DURATION",
@@ -490,33 +735,129 @@
           "Minimum": "PT0H0M",
           "Maximum": "PT23H59M",
           "Format": "PTnHnM"
-        }
+        },
+        "Name": "Q_DURATION_MANDATORY",
+        "Label": "Q_DURATION_MANDATORY label"
       },
       {
         "id": "m9joev4j",
-        "Name": "Q_RADIO_MANDATORY",
-        "Label": "Q_RADIO_MANDATORY label",
         "type": "CollectedVariableType",
+        "CodeListReference": "m9joihim",
         "Datatype": {
           "typeName": "TEXT",
           "type": "TextDatatypeType",
           "MaxLength": 1
         },
-        "CodeListReference": "m9joihim"
+        "Name": "Q_RADIO_MANDATORY",
+        "Label": "Q_RADIO_MANDATORY label"
+      },
+      {
+        "id": "makxgnhr",
+        "type": "CollectedVariableType",
+        "CodeListReference": "m9joihim",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "Q_RADIO_MANDATORY_DETAIL",
+        "Label": "Q_RADIO_MANDATORY_DETAIL label"
+      },
+      {
+        "id": "makxh1t8",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Name": "Q_RADIO_MANDATORY_DETAIL3CL",
+        "Label": "Q_RADIO_MANDATORY_DETAIL3CL label"
       },
       {
         "id": "m9jom50t",
-        "Name": "Q_DROPDOWN_MANDATORY",
-        "Label": "Q_DROPDOWN_MANDATORY label",
         "type": "CollectedVariableType",
+        "CodeListReference": "m9joihim",
         "Datatype": {
           "typeName": "TEXT",
           "type": "TextDatatypeType",
           "MaxLength": 1
         },
-        "CodeListReference": "m9joihim"
+        "Name": "Q_DROPDOWN_MANDATORY",
+        "Label": "Q_DROPDOWN_MANDATORY label"
+      },
+      {
+        "id": "mhoqid4k",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "MCQ_MANDATORY1",
+        "Label": "1 - \"Foo\""
+      },
+      {
+        "id": "mhoqc4t7",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "MCQ_MANDATORY2",
+        "Label": "2 - \"Bar\""
+      },
+      {
+        "id": "mhoqdmfm",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "MCQ_MANDATORY3",
+        "Label": "3 - \"Baz\""
+      },
+      {
+        "id": "mhow6bul",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "MCQ_MANDATORY_DETAIL1",
+        "Label": "1 - \"Foo\""
+      },
+      {
+        "id": "mhow2soc",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "MCQ_MANDATORY_DETAIL2",
+        "Label": "2 - \"Bar\""
+      },
+      {
+        "id": "mhowa0xr",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "MCQ_MANDATORY_DETAIL3",
+        "Label": "3 - \"Baz\""
+      },
+      {
+        "id": "mhow5hct",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Name": "MCQ_MANDATORY_DETAIL3CL",
+        "Label": "MCQ_MANDATORY_DETAIL3CL label"
       }
     ]
   },
-  "FlowControl": []
+  "childQuestionnaireRef": []
 }
