@@ -6,6 +6,8 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -165,6 +167,8 @@ class LunaticAddControlMandatoryTest {
         // There is a bug in DDI mapping: the "please specify" makes the response domain be a
         // StructuredMixedResponseDomain object, so mapping gets incorrect in that case.
 
+        // Single response component tests
+
         @Test
         void mandatoryProp() {
             List.of(1,3,4,5,6,7,8,10).forEach(index ->
@@ -227,6 +231,34 @@ class LunaticAddControlMandatoryTest {
                 assertEquals("La réponse à cette question est obligatoire.", mandatoryControl.getErrorMessage().getValue());
                 assertEquals(LabelTypeEnum.TXT, mandatoryControl.getErrorMessage().getType());
             });
+        }
+
+        // Multiple choice question tests
+
+        @ParameterizedTest
+        @ValueSource(ints = {11, 12})
+        void mandatoryMultipleChoice(int index) {
+            CheckboxGroup checkboxGroup = (CheckboxGroup) getComponentAtIndex(lunaticQuestionnaire, index);
+            assertTrue(checkboxGroup.getMandatory());
+
+            assertEquals(1, checkboxGroup.getControls().size());
+            ControlType mandatoryControl = checkboxGroup.getControls().getFirst();
+            assertTrue(mandatoryControl.getId().contains("-mandatory-check"));
+            assertEquals(ControlContextType.SIMPLE, mandatoryControl.getType());
+            assertEquals(ControlTypeEnum.MANDATORY, mandatoryControl.getTypeOfControl());
+            assertEquals(ControlCriticalityEnum.ERROR, mandatoryControl.getCriticality());
+            assertEquals(LabelTypeEnum.VTL, mandatoryControl.getControl().getType());
+
+            if (index == 11) {
+                String expectedExpression = "not(nvl(MCQ_MANDATORY1, false) = false " +
+                        "and nvl(MCQ_MANDATORY2, false) = false and nvl(MCQ_MANDATORY2, false) = false)";
+                assertEquals(expectedExpression, mandatoryControl.getControl().getValue());
+            }
+            if (index == 12) {
+                String expectedExpression = "not(nvl(MCQ_MANDATORY_DETAIL1, false) = false " +
+                        "and nvl(MCQ_MANDATORY_DETAIL2, false) = false and nvl(MCQ_MANDATORY_DETAIL3, false) = false)";
+                assertEquals(expectedExpression, mandatoryControl.getControl().getValue());
+            }
         }
 
     }
