@@ -87,8 +87,8 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
             }
 
             case CHECKBOX_GROUP -> {
-                CheckboxGroup cg = (CheckboxGroup) lunaticComponent;
-                List<ResponseCheckboxGroup> responses = cg.getResponses();
+                CheckboxGroup checkboxGroup = (CheckboxGroup) lunaticComponent;
+                List<ResponseCheckboxGroup> responses = checkboxGroup.getResponses();
                 if (responses == null || responses.isEmpty()) yield Optional.empty();
 
                 String joined = responses.stream()

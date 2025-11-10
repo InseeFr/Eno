@@ -92,6 +92,47 @@ class LunaticAddControlMandatoryTest {
         assertEquals("This question is required.", mandatoryControl.getErrorMessage().getValue());
     }
 
+    @Test
+    @DisplayName("Checkbox group mandatory control.")
+    void checkboxGroupComponent() {
+
+        CheckboxGroup checkboxGroup = new CheckboxGroup();
+        checkboxGroup.setId("checkboxGroup-id");
+        checkboxGroup.setMandatory(true);
+
+        ResponseCheckboxGroup responseCheckboxGroup1 = new ResponseCheckboxGroup();
+        ResponseType responseType1 = new ResponseType();
+        responseType1.setName("CHOICE_1");
+        responseCheckboxGroup1.setResponse(responseType1);
+
+        ResponseCheckboxGroup responseCheckboxGroup2 = new ResponseCheckboxGroup();
+        ResponseType responseType2 = new ResponseType();
+        responseType2.setName("CHOICE_2");
+        responseCheckboxGroup2.setResponse(responseType2);
+
+        ResponseCheckboxGroup responseCheckboxGroup3 = new ResponseCheckboxGroup();
+        ResponseType responseType3 = new ResponseType();
+        responseType3.setName("CHOICE_3");
+        responseCheckboxGroup3.setResponse(responseType3);
+        responseCheckboxGroup3.setDetail(new DetailResponse());
+
+        checkboxGroup.setResponses(List.of(responseCheckboxGroup1, responseCheckboxGroup2, responseCheckboxGroup3));
+
+        lunaticQuestionnaire.getComponents().add(checkboxGroup);
+        new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
+
+        assertEquals(1, checkboxGroup.getControls().size());
+        ControlType control = checkboxGroup.getControls().getFirst();
+
+        assertEquals("checkboxGroup-id-mandatory-check", control.getId());
+        assertEquals(ControlTypeEnum.MANDATORY, control.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
+        assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
+        assertEquals(LabelTypeEnum.TXT, control.getErrorMessage().getType());
+        assertEquals("La réponse à cette question est obligatoire.", control.getErrorMessage().getValue());
+        assertEquals("(nvl(CHOICE_1, false) or nvl(CHOICE_2, false))", control.getControl().getValue());
+    }
+
     @Nested
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class IntegrationTest {
