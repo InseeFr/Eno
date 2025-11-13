@@ -81,4 +81,9 @@ public class SimpleMultipleChoiceQuestion extends MultipleResponseQuestion {
     @Pogues("getCodeFilters()")
     List<CodeFilter> codeFilters = new ArrayList<>();
 
+    /** Indicates whether the response is mandatory for this component. */
+    @Pogues("isMandatory() ?: false")
+    @Lunatic("setMandatory(#param)")
+    boolean mandatory;
+
 }
