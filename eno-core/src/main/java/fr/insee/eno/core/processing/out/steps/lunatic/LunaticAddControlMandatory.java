@@ -97,11 +97,11 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
                         .filter(Objects::nonNull)
                         .map(ResponseType::getName)
                         .filter(Objects::nonNull)
-                        .map(name -> String.format("nvl(%s, false)", name))
-                        .collect(Collectors.joining(" or "));
+                        .map(name -> String.format("nvl(%s, false) = false", name))
+                        .collect(Collectors.joining(" and "));
 
                 if (joined.isBlank()) yield Optional.empty();
-                yield Optional.of("(" + joined + ")");
+                yield Optional.of(String.format("not(%s)", joined));
             }
 
             case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, QUESTION, ROSTER_FOR_LOOP, LOOP, ROUNDABOUT,

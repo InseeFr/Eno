@@ -132,7 +132,7 @@ class LunaticAddControlMandatoryTest {
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.TXT, control.getErrorMessage().getType());
         assertEquals("La réponse à cette question est obligatoire.", control.getErrorMessage().getValue());
-        assertEquals("(nvl(CHOICE_1, false) or nvl(CHOICE_2, false))", control.getControl().getValue());
+        assertEquals("not(nvl(CHOICE_1, false) = false and nvl(CHOICE_2, false) = false)", control.getControl().getValue());
     }
 
     @Nested

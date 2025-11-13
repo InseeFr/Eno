@@ -82,8 +82,7 @@ public class SimpleMultipleChoiceQuestion extends MultipleResponseQuestion {
     List<CodeFilter> codeFilters = new ArrayList<>();
 
     /** Indicates whether the response is mandatory for this component. */
-    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
+    @Pogues("isMandatory() ?: false")
     @Lunatic("setMandatory(#param)")
     boolean mandatory;
 
