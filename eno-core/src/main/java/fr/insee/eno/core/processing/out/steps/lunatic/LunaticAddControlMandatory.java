@@ -92,7 +92,6 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
                 if (responses == null || responses.isEmpty()) yield Optional.empty();
 
                 String joined = responses.stream()
-                        .filter(r -> r.getDetail() == null)
                         .map(ResponseCheckboxGroup::getResponse)
                         .filter(Objects::nonNull)
                         .map(ResponseType::getName)

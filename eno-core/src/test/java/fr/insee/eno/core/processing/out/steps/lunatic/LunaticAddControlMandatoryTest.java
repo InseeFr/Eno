@@ -97,7 +97,7 @@ class LunaticAddControlMandatoryTest {
     @Test
     @DisplayName("Checkbox group mandatory control.")
     void checkboxGroupComponent() {
-        CheckboxGroup checkboxGroup = getCheckboxGroup();
+        CheckboxGroup checkboxGroup = createCheckboxGroup();
 
         lunaticQuestionnaire.getComponents().add(checkboxGroup);
         new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
@@ -117,7 +117,7 @@ class LunaticAddControlMandatoryTest {
         );
     }
 
-    private static CheckboxGroup getCheckboxGroup() {
+    private static CheckboxGroup createCheckboxGroup() {
         CheckboxGroup checkboxGroup = new CheckboxGroup();
         checkboxGroup.setId("checkboxGroup-id");
         checkboxGroup.setMandatory(true);
@@ -261,8 +261,9 @@ class LunaticAddControlMandatoryTest {
                 assertEquals(expectedExpression, mandatoryControl.getControl().getValue());
             }
             if (index == 12) {
-                String expectedExpression = "not(nvl(MCQ_MANDATORY_DETAIL1, false) = false " +
-                        "and nvl(MCQ_MANDATORY_DETAIL2, false) = false)";
+                String expectedExpression = "not(nvl(MCQ_MANDATORY_DETAIL1, false) = false and " +
+                        "nvl(MCQ_MANDATORY_DETAIL2, false) = false " +
+                        "and nvl(MCQ_MANDATORY_DETAIL3, false) = false)";
                 assertEquals(expectedExpression, mandatoryControl.getControl().getValue());
             }
         }
