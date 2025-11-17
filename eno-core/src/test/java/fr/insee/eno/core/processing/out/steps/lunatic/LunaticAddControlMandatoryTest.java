@@ -97,7 +97,27 @@ class LunaticAddControlMandatoryTest {
     @Test
     @DisplayName("Checkbox group mandatory control.")
     void checkboxGroupComponent() {
+        CheckboxGroup checkboxGroup = getCheckboxGroup();
 
+        lunaticQuestionnaire.getComponents().add(checkboxGroup);
+        new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
+
+        assertEquals(1, checkboxGroup.getControls().size());
+        ControlType control = checkboxGroup.getControls().getFirst();
+
+        assertEquals("checkboxGroup-id-mandatory-check", control.getId());
+        assertEquals(ControlTypeEnum.MANDATORY, control.getTypeOfControl());
+        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
+        assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
+        assertEquals(LabelTypeEnum.TXT, control.getErrorMessage().getType());
+        assertEquals("La réponse à cette question est obligatoire.", control.getErrorMessage().getValue());
+        assertEquals(
+                "not(nvl(CHOICE_1, false) = false and nvl(CHOICE_2, false) = false and nvl(CHOICE_3, false) = false)",
+                control.getControl().getValue()
+        );
+    }
+
+    private static CheckboxGroup getCheckboxGroup() {
         CheckboxGroup checkboxGroup = new CheckboxGroup();
         checkboxGroup.setId("checkboxGroup-id");
         checkboxGroup.setMandatory(true);
@@ -116,23 +136,9 @@ class LunaticAddControlMandatoryTest {
         ResponseType responseType3 = new ResponseType();
         responseType3.setName("CHOICE_3");
         responseCheckboxGroup3.setResponse(responseType3);
-        responseCheckboxGroup3.setDetail(new DetailResponse());
 
         checkboxGroup.setResponses(List.of(responseCheckboxGroup1, responseCheckboxGroup2, responseCheckboxGroup3));
-
-        lunaticQuestionnaire.getComponents().add(checkboxGroup);
-        new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
-
-        assertEquals(1, checkboxGroup.getControls().size());
-        ControlType control = checkboxGroup.getControls().getFirst();
-
-        assertEquals("checkboxGroup-id-mandatory-check", control.getId());
-        assertEquals(ControlTypeEnum.MANDATORY, control.getTypeOfControl());
-        assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
-        assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
-        assertEquals(LabelTypeEnum.TXT, control.getErrorMessage().getType());
-        assertEquals("La réponse à cette question est obligatoire.", control.getErrorMessage().getValue());
-        assertEquals("not(nvl(CHOICE_1, false) = false and nvl(CHOICE_2, false) = false)", control.getControl().getValue());
+        return checkboxGroup;
     }
 
     @Nested
