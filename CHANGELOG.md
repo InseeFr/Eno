@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.59.0] - 2025-11-25
+### :sparkles: New Features
+- [`b5b3b43`](https://github.com/InseeFr/Eno/commit/b5b3b43c3a3663456f66edb8419ee64257be78e5) - mandatory multiple choice questions *(PR [#1352](https://github.com/InseeFr/Eno/pull/1352) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+
 ## [3.58.4] - 2025-11-06
 ### :bug: Bug Fixes
 - [`cc98976`](https://github.com/InseeFr/Eno/commit/cc98976ce89eb2e414e401f76bb98251d85eee87) - **ddi**: update cell specifications *(PR [#1349](https://github.com/InseeFr/Eno/pull/1349) by [@nsenave](https://github.com/nsenave))*
@@ -739,3 +744,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.58.2]: https://github.com/InseeFr/Eno/compare/3.58.1...3.58.2
 [3.58.3]: https://github.com/InseeFr/Eno/compare/3.58.2...3.58.3
 [3.58.4]: https://github.com/InseeFr/Eno/compare/3.58.3...3.58.4
+[3.59.0]: https://github.com/InseeFr/Eno/compare/3.58.4...3.59.0
