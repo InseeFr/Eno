@@ -25,7 +25,7 @@
 
     <properties>
         <!-- Eno version -->
-        <revision>3.58.4</revision>
+        <revision>3.59.0</revision>
         <!-- Java version -->
         <java.version>21</java.version>
         <maven.compiler.source>21</maven.compiler.source>
@@ -38,8 +38,8 @@
         <!-- Plugin versions -->
         <jacoco.version>0.8.14</jacoco.version>
         <!-- Model versions -->
-        <poguesModel.version>1.11.0</poguesModel.version>
-        <lunaticModel.version>5.9.1</lunaticModel.version>
+        <poguesModel.version>1.12.2</poguesModel.version>
+        <lunaticModel.version>5.10.1</lunaticModel.version>
     </properties>
 
     <dependencies>

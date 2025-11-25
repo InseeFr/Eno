@@ -6,7 +6,9 @@ import fr.insee.lunatic.model.flat.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /** Processing step to add blocking checks for components marked as "mandatory". */
 public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire> {
@@ -47,12 +49,9 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
 
     private void addMandatoryControls(List<ComponentType> lunaticComponents) {
         lunaticComponents.stream()
-                .filter(ComponentSimpleResponseType.class::isInstance)
-                // use the "simple response" interface to get the mandatory prop
-                // TODO: having an interface for "mandatory" in Lunatic-Model would be better
-                .map(ComponentSimpleResponseType.class::cast)
-                .filter(ComponentSimpleResponseType::getMandatory)
-                // re-cast as a Lunatic component object
+                .filter(ComponentMandatory.class::isInstance)
+                .map(ComponentMandatory.class::cast)
+                .filter(c -> Boolean.TRUE.equals(c.getMandatory()))
                 .map(ComponentType.class::cast)
                 .forEach(this::addMandatoryControl);
     }
@@ -69,19 +68,43 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
     private Optional<String> generateMandatoryControlExpression(ComponentType lunaticComponent) {
         if (lunaticComponent.getComponentType() == null)
             throw new IllegalArgumentException("Component " + lunaticComponent.getId() + " has no type defined.");
-        String responseName = ((ComponentSimpleResponseType) lunaticComponent).getResponse().getName();
+
         return switch (lunaticComponent.getComponentType()) {
-            case INPUT, TEXTAREA ->
-                    Optional.of(String.format("not(trim(nvl(%s, \"\")) = \"\")", responseName));
-            case CHECKBOX_BOOLEAN ->
-                    Optional.of(String.format("not(nvl(%s, false) = false)", responseName));
-            case INPUT_NUMBER,
-                    DATEPICKER,
-                    DURATION,
-                    RADIO, DROPDOWN, CHECKBOX_ONE ->
-                    Optional.of(String.format("not(isnull(%s))", responseName));
-            case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, QUESTION, ROSTER_FOR_LOOP, LOOP, ROUNDABOUT, TABLE,
-                    PAIRWISE_LINKS, CHECKBOX_GROUP, SUGGESTER, TEXT, FILTER_DESCRIPTION, ACCORDION ->
+
+            case INPUT, TEXTAREA -> {
+                String responseName = ((ComponentSimpleResponseType) lunaticComponent).getResponse().getName();
+                yield Optional.of(String.format("not(trim(nvl(%s, \"\")) = \"\")", responseName));
+            }
+
+            case CHECKBOX_BOOLEAN -> {
+                String responseName = ((ComponentSimpleResponseType) lunaticComponent).getResponse().getName();
+                yield Optional.of(String.format("not(nvl(%s, false) = false)", responseName));
+            }
+
+            case INPUT_NUMBER, DATEPICKER, DURATION, RADIO, DROPDOWN, CHECKBOX_ONE -> {
+                String responseName = ((ComponentSimpleResponseType) lunaticComponent).getResponse().getName();
+                yield Optional.of(String.format("not(isnull(%s))", responseName));
+            }
+
+            case CHECKBOX_GROUP -> {
+                CheckboxGroup checkboxGroup = (CheckboxGroup) lunaticComponent;
+                List<ResponseCheckboxGroup> responses = checkboxGroup.getResponses();
+                if (responses == null || responses.isEmpty()) yield Optional.empty();
+
+                String joined = responses.stream()
+                        .map(ResponseCheckboxGroup::getResponse)
+                        .filter(Objects::nonNull)
+                        .map(ResponseType::getName)
+                        .filter(Objects::nonNull)
+                        .map(name -> String.format("nvl(%s, false) = false", name))
+                        .collect(Collectors.joining(" and "));
+
+                if (joined.isBlank()) yield Optional.empty();
+                yield Optional.of(String.format("not(%s)", joined));
+            }
+
+            case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, QUESTION, ROSTER_FOR_LOOP, LOOP, ROUNDABOUT,
+                 TABLE, PAIRWISE_LINKS, SUGGESTER, TEXT, FILTER_DESCRIPTION, ACCORDION ->
                     Optional.empty();
         };
     }

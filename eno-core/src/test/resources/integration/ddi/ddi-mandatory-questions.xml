@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.12.6. Generation date : 16/04/2025 - 8:39:27-->
+             isMaintainable="true"><!--Eno version : ${project.version}. Generation date : 07/11/2025 - 14:10:53-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-m9in873b</r:ID>
    <r:Version>1</r:Version>
@@ -111,7 +111,25 @@
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
+               <r:ID>makxe3yi-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
                <r:ID>m9jojxfa-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4-QC</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
             </d:ControlConstructReference>
@@ -230,6 +248,20 @@
          </d:QuestionConstruct>
          <d:QuestionConstruct>
             <r:Agency>fr.insee</r:Agency>
+            <r:ID>makxe3yi-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>makxe3yi</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
             <r:ID>m9jojxfa-QC</r:ID>
             <r:Version>1</r:Version>
             <d:ConstructName>
@@ -240,6 +272,34 @@
                <r:ID>m9jojxfa</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhopzm84-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+         </d:QuestionConstruct>
+         <d:QuestionConstruct>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhowjfg4-QC</r:ID>
+            <r:Version>1</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY_DETAIL</r:String>
+            </d:ConstructName>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
          </d:QuestionConstruct>
       </d:ControlConstructScheme>
@@ -592,7 +652,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m9joa7yo-QOP-m9jou3rb</r:ID>
+               <r:ID>m9joa7yo-QOP-m9jorr1u</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY</r:String>
@@ -601,13 +661,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9joa7yo-RDOP-m9jou3rb</r:ID>
+                  <r:ID>m9joa7yo-RDOP-m9jorr1u</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9joa7yo-QOP-m9jou3rb</r:ID>
+                  <r:ID>m9joa7yo-QOP-m9jorr1u</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -627,7 +687,7 @@
                </r:CodeListReference>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9joa7yo-RDOP-m9jou3rb</r:ID>
+                  <r:ID>m9joa7yo-RDOP-m9jorr1u</r:ID>
                   <r:Version>1</r:Version>
                   <r:CodeRepresentation>
                      <r:CodeListReference>
@@ -643,6 +703,114 @@
          </d:QuestionItem>
          <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
+            <r:ID>makxe3yi</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionItemName>
+               <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL</r:String>
+            </d:QuestionItemName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>makxe3yi-QOP-makxlt9f</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>makxvp2s-QOP-makxt8yr</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL3CL</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>makxe3yi-RDOP-makxlt9f</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>makxe3yi-QOP-makxlt9f</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>makxvp2s-RDOP-makxt8yr</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>makxvp2s-QOP-makxt8yr</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Mandatory unique choice question (radio), with 'please specify'"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:StructuredMixedResponseDomain>
+               <d:ResponseDomainInMixed attachmentBase="1">
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>m9joihim</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>makxe3yi-RDOP-makxlt9f</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>m9joihim</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+                  </d:CodeDomain>
+               </d:ResponseDomainInMixed>
+               <d:ResponseDomainInMixed>
+                  <d:TextDomain maxLength="249">
+                     <r:Label>
+                        <r:Content xml:lang="fr-FR">"Please specify: "</r:Content>
+                     </r:Label>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>makxvp2s-RDOP-makxt8yr</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TextRepresentation maxLength="249"/>
+                     </r:OutParameter>
+                  </d:TextDomain>
+                  <d:AttachmentLocation>
+                     <d:DomainSpecificValue attachmentDomain="1">
+                        <r:Value>3</r:Value>
+                     </d:DomainSpecificValue>
+                     <r:CodeReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>m9joihim-3</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>Code</r:TypeOfObject>
+                     </r:CodeReference>
+                  </d:AttachmentLocation>
+               </d:ResponseDomainInMixed>
+            </d:StructuredMixedResponseDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
             <r:ID>m9jojxfa</r:ID>
             <r:Version>1</r:Version>
             <d:QuestionItemName>
@@ -650,7 +818,7 @@
             </d:QuestionItemName>
             <r:OutParameter isArray="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m9jojxfa-QOP-m9jop7o1</r:ID>
+               <r:ID>m9jojxfa-QOP-m9joo13m</r:ID>
                <r:Version>1</r:Version>
                <r:ParameterName>
                   <r:String xml:lang="fr-FR">Q_DROPDOWN_MANDATORY</r:String>
@@ -659,13 +827,13 @@
             <r:Binding>
                <r:SourceParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9jojxfa-RDOP-m9jop7o1</r:ID>
+                  <r:ID>m9jojxfa-RDOP-m9joo13m</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:SourceParameterReference>
                <r:TargetParameterReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9jojxfa-QOP-m9jop7o1</r:ID>
+                  <r:ID>m9jojxfa-QOP-m9joo13m</r:ID>
                   <r:Version>1</r:Version>
                   <r:TypeOfObject>OutParameter</r:TypeOfObject>
                </r:TargetParameterReference>
@@ -685,7 +853,7 @@
                </r:CodeListReference>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>m9jojxfa-RDOP-m9jop7o1</r:ID>
+                  <r:ID>m9jojxfa-RDOP-m9joo13m</r:ID>
                   <r:Version>1</r:Version>
                   <r:CodeRepresentation>
                      <r:CodeListReference>
@@ -699,6 +867,402 @@
                <r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
             </d:CodeDomain>
          </d:QuestionItem>
+         <d:QuestionGrid>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhopzm84</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionGridName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY</r:String>
+            </d:QuestionGridName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84-QOP-mhoq84xh</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">MCQ_MANDATORY1</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84-QOP-mhoqiip3</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">MCQ_MANDATORY2</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84-QOP-mhoqd2n6</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">MCQ_MANDATORY3</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhopzm84-RDOP-mhoq84xh</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhopzm84-QOP-mhoq84xh</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhopzm84-RDOP-mhoqiip3</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhopzm84-QOP-mhoqiip3</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhopzm84-RDOP-mhoqd2n6</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhopzm84-QOP-mhoqd2n6</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Mandatory multiple choice question"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:GridDimension displayCode="false" displayLabel="false" rank="1">
+               <d:CodeDomain>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>m9joihim</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </d:CodeDomain>
+            </d:GridDimension>
+            <d:StructuredMixedGridResponseDomain>
+               <d:GridResponseDomainInMixed>
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mhopzm84-RDOP-mhoq84xh</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mhopzm84-RDOP-mhoqiip3</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mhopzm84-RDOP-mhoqd2n6</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+            </d:StructuredMixedGridResponseDomain>
+         </d:QuestionGrid>
+         <d:QuestionGrid>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhowjfg4</r:ID>
+            <r:Version>1</r:Version>
+            <d:QuestionGridName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY_DETAIL</r:String>
+            </d:QuestionGridName>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4-QOP-mhox6ksg</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">MCQ_MANDATORY_DETAIL1</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4-QOP-mhoxcnd2</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">MCQ_MANDATORY_DETAIL2</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4-QOP-mhoxh8eu</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">MCQ_MANDATORY_DETAIL3</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhox6a66-QOP-mhox403f</r:ID>
+               <r:Version>1</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="fr-FR">MCQ_MANDATORY_DETAIL3CL</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhowjfg4-RDOP-mhox6ksg</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhowjfg4-QOP-mhox6ksg</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhowjfg4-RDOP-mhoxcnd2</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhowjfg4-QOP-mhoxcnd2</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhowjfg4-RDOP-mhoxh8eu</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhowjfg4-QOP-mhoxh8eu</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhox6a66-RDOP-mhox403f</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mhox6a66-QOP-mhox403f</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR">"Mandatory multiple choice question, with 'please specify'"</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:GridDimension displayCode="false" displayLabel="false" rank="1">
+               <d:CodeDomain>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>m9joihim</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </d:CodeDomain>
+            </d:GridDimension>
+            <d:StructuredMixedGridResponseDomain>
+               <d:GridResponseDomainInMixed>
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mhowjfg4-RDOP-mhox6ksg</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mhowjfg4-RDOP-mhoxcnd2</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed attachmentBase="3">
+                  <d:NominalDomain>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mhowjfg4-RDOP-mhoxh8eu</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                    <r:Version>1</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
+                  <d:TextDomain maxLength="249">
+                     <r:Label>
+                        <r:Content xml:lang="fr-FR">"Please, specify: "</r:Content>
+                     </r:Label>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mhox6a66-RDOP-mhox403f</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TextRepresentation maxLength="249"/>
+                     </r:OutParameter>
+                  </d:TextDomain>
+                  <d:ResponseAttachmentLocation>
+                     <d:DomainSpecificValue attachmentDomain="3">
+                        <r:Value>1</r:Value>
+                     </d:DomainSpecificValue>
+                     <r:CodeReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>Code</r:TypeOfObject>
+                     </r:CodeReference>
+                  </d:ResponseAttachmentLocation>
+               </d:GridResponseDomainInMixed>
+            </d:StructuredMixedGridResponseDomain>
+         </d:QuestionGrid>
       </d:QuestionScheme>
       <l:CategoryScheme>
          <r:Agency>fr.insee</r:Agency>
@@ -1061,7 +1625,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m9joa7yo-QOP-m9jou3rb</r:ID>
+               <r:ID>m9joa7yo-QOP-m9jorr1u</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -1084,6 +1648,65 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
+            <r:ID>makxgnhr</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>makxe3yi-QOP-makxlt9f</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>makxe3yi</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>m9joihim</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>makxh1t8</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL3CL</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Q_RADIO_MANDATORY_DETAIL3CL label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>makxvp2s-QOP-makxt8yr</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>makxe3yi</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="249"/>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
             <r:ID>m9jom50t</r:ID>
             <r:Version>1</r:Version>
             <l:VariableName>
@@ -1094,7 +1717,7 @@
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m9jojxfa-QOP-m9jop7o1</r:ID>
+               <r:ID>m9jojxfa-QOP-m9joo13m</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
@@ -1113,6 +1736,254 @@
                      <r:TypeOfObject>CodeList</r:TypeOfObject>
                   </r:CodeListReference>
                </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhoqid4k</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY1</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">1 - "Foo"</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84-QOP-mhoq84xh</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhoqc4t7</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY2</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">2 - "Bar"</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84-QOP-mhoqiip3</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhoqdmfm</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY3</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">3 - "Baz"</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84-QOP-mhoqd2n6</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhopzm84</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhow6bul</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY_DETAIL1</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">1 - "Foo"</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4-QOP-mhox6ksg</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhow2soc</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY_DETAIL2</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">2 - "Bar"</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4-QOP-mhoxcnd2</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhowa0xr</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY_DETAIL3</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">3 - "Baz"</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4-QOP-mhoxh8eu</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mhow5hct</r:ID>
+            <r:Version>1</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="fr-FR">MCQ_MANDATORY_DETAIL3CL</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">MCQ_MANDATORY_DETAIL3CL label </r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhox6a66-QOP-mhox403f</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowjfg4</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="249"/>
             </l:VariableRepresentation>
          </l:Variable>
          <l:VariableGroup>
@@ -1181,7 +2052,61 @@
             </r:VariableReference>
             <r:VariableReference>
                <r:Agency>fr.insee</r:Agency>
+               <r:ID>makxgnhr</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>makxh1t8</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
                <r:ID>m9jom50t</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhoqid4k</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhoqc4t7</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhoqdmfm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhow6bul</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhow2soc</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhowa0xr</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mhow5hct</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
