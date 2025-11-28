@@ -21,8 +21,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticAddCleaningTest {
 
@@ -186,6 +185,22 @@ class LunaticAddCleaningTest {
 
         assertEquals("nvl(PAIRWISE_SOURCE, \"\") <> \"\"", cleaningExpression.getExpression());
         assertEquals("PAIRWISE_SOURCE", cleaningExpression.getShapeFrom());
+    }
+
+    @Test
+    void testNotCleaningItSelf() throws ParsingException {
+        // Given
+        mapQuestionnaireToLunatic(
+                "integration/pogues/pogues-self-cleaning.json", "integration/ddi/ddi-self-cleaning.xml");
+
+        // When
+        var cleaningProcessing = new LunaticAddCleaning(enoQuestionnaire, enoIndex);
+        cleaningProcessing.apply(lunaticQuestionnaire);
+
+        // Then : no self cleaning
+        assertNull(lunaticQuestionnaire.getCleaning()
+                .getCleaningEntry("PRENOM")
+                .getCleanedVariable("PRENOM"));
     }
 
 

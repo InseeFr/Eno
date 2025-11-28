@@ -99,30 +99,36 @@ public class CleaningUtils {
         removeCalculatedVariables(allVariablesThatInfluenceFilterExpression, variableIndex).forEach(
                 variableName -> {
                     boolean isExistCleaningVariableEntry = cleaning.getCleaningVariableNames().contains(variableName);
-                    if (!isExistCleaningVariableEntry){
+                    if (!isExistCleaningVariableEntry) {
                         CleaningVariableEntry cleaningVariableEntry = new CleaningVariableEntry(variableName);
-                        variablesCollectedInsideFilter.forEach(variableToClean -> {
-                            CleanedVariableEntry cleanedVariableEntry = new CleanedVariableEntry(variableToClean);
-                            addNewCleaningExpression(cleanedVariableEntry,
-                                    filterExpression,
-                                    shapeFromIndex.get(variableToClean),
-                                    isAggregatorUsedOfFilter);
-                            cleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
-                        });
+                        variablesCollectedInsideFilter.stream()
+                                // Prevent self cleaning: keep only those variables which are not the variable causing the change
+                                .filter(variableToClean -> !variableName.equals(variableToClean))
+                                .forEach(variableToClean -> {
+                                    CleanedVariableEntry cleanedVariableEntry = new CleanedVariableEntry(variableToClean);
+                                    addNewCleaningExpression(cleanedVariableEntry,
+                                            filterExpression,
+                                            shapeFromIndex.get(variableToClean),
+                                            isAggregatorUsedOfFilter);
+                                    cleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
+                                });
                         cleaning.addCleaningEntry(cleaningVariableEntry);
                     } else {
                         CleaningVariableEntry existingCleaningVariableEntry = cleaning.getCleaningEntry(variableName);
-                        variablesCollectedInsideFilter.forEach(variableToClean -> {
-                            boolean isExistCleanedVariableEntry = existingCleaningVariableEntry.getCleanedVariableNames().contains(variableToClean);
-                            CleanedVariableEntry cleanedVariableEntry = isExistCleanedVariableEntry
-                                    ? existingCleaningVariableEntry.getCleanedVariable(variableToClean)
-                                    : new CleanedVariableEntry(variableToClean);
-                            addNewCleaningExpression(cleanedVariableEntry,
-                                    filterExpression,
-                                    shapeFromIndex.get(variableToClean),
-                                    isAggregatorUsedOfFilter);
-                            existingCleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
-                        });
+                        variablesCollectedInsideFilter.stream()
+                                // Prevent self cleaning: keep only those variables which are not the variable causing the change
+                                .filter(variableToClean -> !variableName.equals(variableToClean))
+                                .forEach(variableToClean -> {
+                                    boolean isExistCleanedVariableEntry = existingCleaningVariableEntry.getCleanedVariableNames().contains(variableToClean);
+                                    CleanedVariableEntry cleanedVariableEntry = isExistCleanedVariableEntry
+                                            ? existingCleaningVariableEntry.getCleanedVariable(variableToClean)
+                                            : new CleanedVariableEntry(variableToClean);
+                                    addNewCleaningExpression(cleanedVariableEntry,
+                                            filterExpression,
+                                            shapeFromIndex.get(variableToClean),
+                                            isAggregatorUsedOfFilter);
+                                    existingCleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
+                                });
                     }
                 }
         );
