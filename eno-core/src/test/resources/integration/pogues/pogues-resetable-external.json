@@ -1,0 +1,158 @@
+{
+  "id": "miioxgag",
+  "genericName": "QUESTIONNAIRE",
+  "agency": "fr.insee",
+  "final": true,
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "lastUpdatedDate": "Fri Nov 28 2025 10:54:16 GMT+0100 (heure normale d’Europe centrale)",
+  "owner": "ENO-INTEGRATION-TESTS",
+  "Name": "ENO_RESETABLE_EXTERNAL",
+  "Label": [
+    "Eno - Resetable external variable"
+  ],
+  "Control": [],
+  "FlowControl": [],
+  "TargetMode": [
+    "CAPI",
+    "CAWI",
+    "CATI",
+    "PAPI"
+  ],
+  "Child": [
+    {
+      "id": "miip2hje",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "SEQUENCE",
+      "Label": [
+        "\"Sequence\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": [
+        {
+          "id": "miiozxuc",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "QUESTION",
+          "Label": [
+            "\"Question\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "miip94cy",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "miioxdni"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": []
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2193-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2193-dc",
+      "Name": "Enquête capacité à innover et stratégie 2024"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "id": "miip6wgo",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "idendquest",
+        "miip2hje",
+        "miiozxuc"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": []
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "miip3f6z",
+        "type": "ExternalVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Name": "EXTERNAL_VAR1",
+        "Label": "Regular external variable"
+      },
+      {
+        "id": "miipc1ha",
+        "type": "ExternalVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Name": "EXTERNAL_VAR2",
+        "Label": "Resetable external variable",
+        "isDeletedOnReset": true
+      },
+      {
+        "id": "miioxdni",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Name": "QUESTION",
+        "Label": "QUESTION label"
+      }
+    ]
+  },
+  "childQuestionnaireRef": []
+}
