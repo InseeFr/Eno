@@ -47,7 +47,7 @@ class LunaticInputNumberDescriptionTest {
         inputNumber.setMax(10d);
         inputNumber.setDecimals(BigInteger.ONE);
         inputNumber.setUnit(new LabelType());
-        inputNumber.getUnitLabel().setValue("\"€\"");
+        inputNumber.getUnit().setValue("\"€\"");
         lunaticQuestionnaire.getComponents().add(inputNumber);
         //
         LunaticInputNumberDescription processing = new LunaticInputNumberDescription(EnoParameters.Language.FR);
@@ -68,7 +68,7 @@ class LunaticInputNumberDescriptionTest {
         inputNumber.setMax(1000d);
         inputNumber.setDecimals(BigInteger.ZERO);
         inputNumber.setUnit(new LabelType());
-        inputNumber.getUnitLabel().setValue("\"k€\"");
+        inputNumber.getUnit().setValue("\"k€\"");
         lunaticQuestionnaire.getComponents().add(inputNumber);
         //
         LunaticInputNumberDescription processing = new LunaticInputNumberDescription(EnoParameters.Language.FR);
@@ -107,7 +107,7 @@ class LunaticInputNumberDescriptionTest {
         inputNumber.setMax(10_000_000_000d);
         inputNumber.setDecimals(BigInteger.ZERO);
         inputNumber.setUnit(new LabelType());
-        inputNumber.getUnitLabel().setValue("\"€\"");
+        inputNumber.getUnit().setValue("\"€\"");
         lunaticQuestionnaire.getComponents().add(inputNumber);
         //
         LunaticInputNumberDescription processing = new LunaticInputNumberDescription(EnoParameters.Language.FR);

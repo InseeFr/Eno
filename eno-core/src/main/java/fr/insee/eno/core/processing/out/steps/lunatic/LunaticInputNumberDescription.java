@@ -54,7 +54,7 @@ public class LunaticInputNumberDescription implements ProcessingStep<Questionnai
 
     private void generateInputNumberDescription(InputNumber inputNumber) {
         //
-        LabelType unitLabel = inputNumber.getUnitLabel();
+        LabelType unitLabel = inputNumber.getUnit();
         boolean noUnit = unitLabel == null;
         int decimals = inputNumber.getDecimals() != null ? inputNumber.getDecimals().intValue() : 0;
         DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(locale);

@@ -54,10 +54,10 @@ class NumberQuestionTest {
                 .findAny();
         // assertions
         assertEquals(3, inputNumbersNoUnit.size());
-        inputNumbersNoUnit.forEach(inputNumber -> assertNull(inputNumber.getUnitLabel()));
+        inputNumbersNoUnit.forEach(inputNumber -> assertNull(inputNumber.getUnit()));
         assertTrue(inputNumberWithUnit.isPresent());
-        assertNotNull(inputNumberWithUnit.get().getUnitLabel());
-        assertEquals("\"kg\"", inputNumberWithUnit.get().getUnitLabel().getValue());
+        assertNotNull(inputNumberWithUnit.get().getUnit());
+        assertEquals("\"kg\"", inputNumberWithUnit.get().getUnit().getValue());
     }
 
     private static Stream<Arguments> integrationTest_dynamicUnit() throws ParsingException {
@@ -89,18 +89,19 @@ class NumberQuestionTest {
         Table table = (Table) lunaticQuestionnaire.getComponents().get(5);
         RosterForLoop rosterForLoop = (RosterForLoop) lunaticQuestionnaire.getComponents().get(6);
 
-        assertNull(inputNumber0.getUnitWrapper());
-        testUnitContent("\"€\"", inputNumber1.getUnitLabel());
-        testUnitContent("WHICH_UNIT", inputNumber2.getUnitLabel());
+        assertNull(inputNumber0.getUnit());
+
+        testUnitContent("\"€\"", inputNumber1.getUnit());
+        testUnitContent("WHICH_UNIT", inputNumber2.getUnit());
 
         // Reminder: in Lunatic tables there is a left column so responses cells start at column of index 1
-        testUnitContent("\"%\"", table.getBodyLines().get(0).getBodyCells().get(1).getUnitLabel());
-        testUnitContent("\"%\"", table.getBodyLines().get(1).getBodyCells().get(1).getUnitLabel());
-        testUnitContent("WHICH_UNIT", table.getBodyLines().get(0).getBodyCells().get(2).getUnitLabel());
-        testUnitContent("WHICH_UNIT", table.getBodyLines().get(1).getBodyCells().get(2).getUnitLabel());
+        testUnitContent("\"%\"", table.getBodyLines().get(0).getBodyCells().get(1).getUnit());
+        testUnitContent("\"%\"", table.getBodyLines().get(1).getBodyCells().get(1).getUnit());
+        testUnitContent("WHICH_UNIT", table.getBodyLines().get(0).getBodyCells().get(2).getUnit());
+        testUnitContent("WHICH_UNIT", table.getBodyLines().get(1).getBodyCells().get(2).getUnit());
 
-        testUnitContent("\"€\"", rosterForLoop.getComponents().get(0).getUnitLabel());
-        testUnitContent("WHICH_UNIT", rosterForLoop.getComponents().get(1).getUnitLabel());
+        testUnitContent("\"€\"", rosterForLoop.getComponents().get(0).getUnit());
+        testUnitContent("WHICH_UNIT", rosterForLoop.getComponents().get(1).getUnit());
     }
     private void testUnitContent(String expectedValue, LabelType unitLabel) {
         assertEquals(expectedValue, unitLabel.getValue().trim());

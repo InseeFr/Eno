@@ -22,7 +22,7 @@ class LunaticPaginationAllModesTest {
         loop.getLines().getMax().setValue(expression);
         loop.getLines().getMin().setShapeFrom(shapeFrom);
         loop.getLines().getMax().setShapeFrom(shapeFrom);
-        Sequence sequence = new Sequence(); sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
+        Sequence sequence = new Sequence();
         loop.getComponents().add(sequence);
         loop.getComponents().add(new Input());
         lunaticQuestionnaire.getComponents().add(loop);

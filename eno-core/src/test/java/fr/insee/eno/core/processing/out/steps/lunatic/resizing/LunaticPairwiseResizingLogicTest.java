@@ -27,7 +27,6 @@ class LunaticPairwiseResizingLogicTest {
         lunaticPairwise.setYAxisIterations(new LabelType());
         lunaticPairwise.getYAxisIterations().setValue("count(LOOP_VAR)");
         Dropdown dropdown = new Dropdown();
-        dropdown.setComponentType(ComponentTypeEnum.DROPDOWN);
         dropdown.setResponse(new ResponseType());
         dropdown.getResponse().setName("LINKS_VAR");
         lunaticPairwise.getComponents().add(dropdown);

@@ -75,12 +75,7 @@ public class NumericQuestion extends SingleResponseQuestion {
     @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
             "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
     @Lunatic("setMandatory(#param)")
-    boolean mandatory;
-
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "INPUT_NUMBER";
+    boolean mandatory; // TODO: should probably be removed here
 
     /**
      * Creates a dynamic label object that fits the 'unit' property of numeric questions with the label value given.

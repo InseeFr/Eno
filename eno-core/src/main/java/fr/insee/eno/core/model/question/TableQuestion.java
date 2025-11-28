@@ -3,7 +3,6 @@ package fr.insee.eno.core.model.question;
 import fr.insee.ddi.lifecycle33.datacollection.QuestionGridType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.table.CellLabel;
@@ -42,15 +41,6 @@ import java.util.List;
 @Context(format = Format.DDI, type = QuestionGridType.class)
 @Context(format = Format.LUNATIC, type = Table.class)
 public class TableQuestion extends MultipleResponseQuestion implements EnoTable {
-
-    /** Parameter that exists in Lunatic but that has a fixed value for now. */
-    @Lunatic("setPositioning(#param)")
-    private String positioning = "HORIZONTAL";
-
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "TABLE";
 
     /** Reference of the code list that contains header info. */
     @DDI("getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +

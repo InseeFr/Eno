@@ -2,7 +2,6 @@ package fr.insee.eno.core.model.sequence;
 
 import fr.insee.ddi.lifecycle33.datacollection.SequenceType;
 import fr.insee.eno.core.annotations.Contexts.Context;
-import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.parameter.Format;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,11 +16,4 @@ import lombok.Setter;
 @Context(format = Format.POGUES, type = fr.insee.pogues.model.SequenceType.class)
 @Context(format = Format.DDI, type = SequenceType.class)
 @Context(format = Format.LUNATIC, type = fr.insee.lunatic.model.flat.Subsequence.class)
-public class Subsequence extends AbstractSequence {
-
-    /** Field specific to Lunatic.
-     * Note: maybe redundant with "type" field in Lunatic serialized documents. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    private String componentType = "SUBSEQUENCE";
-
-}
+public class Subsequence extends AbstractSequence {}

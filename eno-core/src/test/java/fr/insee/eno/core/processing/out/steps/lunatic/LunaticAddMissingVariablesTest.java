@@ -100,7 +100,6 @@ class LunaticAddMissingVariablesTest {
 
         // Add a non-response component to test if its presence doesn't generate a bug
         Subsequence subsequence = new Subsequence();
-        subsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
         subsequence.setId("subsequence-id");
 
         List<ComponentType> loopComponents = new ArrayList<>(List.of(subsequence, input, textarea, inputNumber, datepicker, checkboxBoolean, radio, checkboxOne, dropdown));
@@ -278,7 +277,6 @@ class LunaticAddMissingVariablesTest {
 
     private CheckboxGroup buildCheckboxGroup(String id, List<String> names) {
         CheckboxGroup input = new CheckboxGroup();
-        input.setComponentType(ComponentTypeEnum.CHECKBOX_GROUP);
         input.setId(id);
         List<ResponseCheckboxGroup> responses = names.stream()
                         .map(name -> {
@@ -294,7 +292,6 @@ class LunaticAddMissingVariablesTest {
 
     private CheckboxOne buildCheckboxOne(String id, String name) {
         CheckboxOne input = new CheckboxOne();
-        input.setComponentType(ComponentTypeEnum.CHECKBOX_ONE);
         input.setId(id);
         input.setResponse(buildResponse(name));
         buildEnoQuestion(id, name);
@@ -303,7 +300,6 @@ class LunaticAddMissingVariablesTest {
 
     private Dropdown buildDropdown(String id, String name) {
         Dropdown input = new Dropdown();
-        input.setComponentType(ComponentTypeEnum.DROPDOWN);
         input.setId(id);
         input.setResponse(buildResponse(name));
         buildEnoQuestion(id, name);
@@ -312,7 +308,6 @@ class LunaticAddMissingVariablesTest {
 
     private CheckboxBoolean buildCheckboxBoolean(String id, String name) {
         CheckboxBoolean input = new CheckboxBoolean();
-        input.setComponentType(ComponentTypeEnum.CHECKBOX_BOOLEAN);
         input.setId(id);
         input.setResponse(buildResponse(name));
         buildEnoQuestion(id, name);
@@ -321,7 +316,6 @@ class LunaticAddMissingVariablesTest {
 
     private Radio buildRadio(String id, String name) {
         Radio input = new Radio();
-        input.setComponentType(ComponentTypeEnum.RADIO);
         input.setId(id);
         input.setResponse(buildResponse(name));
         buildEnoQuestion(id, name);
@@ -330,7 +324,6 @@ class LunaticAddMissingVariablesTest {
 
     private Datepicker buildDatepicker(String id, String name) {
         Datepicker input = new Datepicker();
-        input.setComponentType(ComponentTypeEnum.DATEPICKER);
         input.setId(id);
         input.setResponse(buildResponse(name));
         buildEnoQuestion(id, name);
@@ -339,7 +332,6 @@ class LunaticAddMissingVariablesTest {
 
     private Input buildInput(String id, String name) {
         Input input = new Input();
-        input.setComponentType(ComponentTypeEnum.INPUT);
         input.setId(id);
         input.setResponse(buildResponse(name));
         buildEnoQuestion(id, name);
@@ -349,7 +341,6 @@ class LunaticAddMissingVariablesTest {
 
     private Textarea buildTextarea(String id, String name) {
         Textarea textarea = new Textarea();
-        textarea.setComponentType(ComponentTypeEnum.TEXTAREA);
         textarea.setId(id);
         textarea.setResponse(buildResponse(name));
         buildEnoQuestion(id, name);
@@ -358,7 +349,6 @@ class LunaticAddMissingVariablesTest {
 
     private InputNumber buildNumber(String id, String name) {
         InputNumber number = new InputNumber();
-        number.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         number.setId(id);
         number.setResponse(buildResponse(name));
         buildEnoQuestion(id, name);
@@ -368,13 +358,12 @@ class LunaticAddMissingVariablesTest {
     private Table buildTable(String id, List<String> responseNames) {
         Table input = new Table();
         input.setId(id);
-        input.setComponentType(ComponentTypeEnum.TABLE);
         List<BodyLine> bodyLines = input.getBodyLines();
 
         for(int cpt=0; cpt<responseNames.size(); cpt++) {
             List<BodyCell> bodyCells = new ArrayList<>();
             bodyCells.add(buildBodyCell(Integer.toString(cpt)));
-            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE));
+            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt)));
             buildEnoQuestion(id+"-"+"-"+cpt, responseNames.get(cpt));
             bodyLines.add(buildBodyLine(bodyCells));
         }
@@ -382,10 +371,9 @@ class LunaticAddMissingVariablesTest {
         return input;
     }
 
-    private BodyCell buildBodyCell(String id, String name, ComponentTypeEnum componentType) {
+    private BodyCell buildBodyCell(String id, String name) {
         BodyCell bodyCell = new BodyCell();
         bodyCell.setId(id);
-        bodyCell.setComponentType(componentType);
         bodyCell.setResponse(buildResponse(name));
         buildEnoQuestion(id, name);
         return bodyCell;
@@ -405,7 +393,6 @@ class LunaticAddMissingVariablesTest {
 
     private Loop buildLoop(String id, List<ComponentType>components, boolean isPaginatedLoop) {
         Loop loop = new Loop();
-        loop.setComponentType(ComponentTypeEnum.LOOP);
         loop.setId(id);
         loop.getComponents().addAll(components);
         loop.setPaginatedLoop(isPaginatedLoop);
@@ -415,12 +402,11 @@ class LunaticAddMissingVariablesTest {
     private RosterForLoop buildRosterForLoop(String id, List<String> responseNames) {
         RosterForLoop input = new RosterForLoop();
         input.setId(id);
-        input.setComponentType(ComponentTypeEnum.ROSTER_FOR_LOOP);
 
         List<BodyCell> bodyCells = input.getComponents();
         for(int cpt=0; cpt<responseNames.size(); cpt++) {
             bodyCells.add(buildBodyCell(Integer.toString(cpt)));
-            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt), ComponentTypeEnum.CHECKBOX_ONE));
+            bodyCells.add(buildBodyCell(id+"-"+"-"+cpt, responseNames.get(cpt)));
             buildEnoQuestion(id+"-"+"-"+cpt, responseNames.get(cpt));
         }
         buildEnoQuestion(id, "roster");
@@ -430,7 +416,6 @@ class LunaticAddMissingVariablesTest {
     private PairwiseLinks buildPairWiseLinks(String id, List<ComponentType>components) {
         PairwiseLinks pairwiseLinks = new PairwiseLinks();
         pairwiseLinks.setId(id);
-        pairwiseLinks.setComponentType(ComponentTypeEnum.PAIRWISE_LINKS);
         pairwiseLinks.getComponents().addAll(components);
         return pairwiseLinks;
     }

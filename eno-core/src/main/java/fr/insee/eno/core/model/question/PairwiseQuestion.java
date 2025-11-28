@@ -46,11 +46,6 @@ public class PairwiseQuestion extends SingleResponseQuestion {
     @Lunatic("getComponents()")
     List<UniqueChoiceQuestion> uniqueChoiceQuestions = new ArrayList<>();
 
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "PAIRWISE_LINKS";
-
     public static void computeLunaticAxes(PairwiseLinks lunaticPairwiseLinks, String loopVariableName) {
         LabelType xAxis = new LabelType();
         LabelType yAxis = new LabelType();

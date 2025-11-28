@@ -16,7 +16,6 @@ import fr.insee.eno.core.model.response.DetailResponse;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.CheckboxOne;
-import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Dropdown;
 import fr.insee.lunatic.model.flat.Radio;
 import fr.insee.pogues.model.QuestionType;
@@ -42,12 +41,6 @@ import java.util.Optional;
 @Context(format = Format.LUNATIC, type = {CheckboxOne.class, Radio.class, Dropdown.class})
 public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
-    /**
-     * DDI metadata to mark the content of a GenericOutputFormat as a unique choice question display format.
-     * (Unused yet but will be useful in DDI out mapping).
-     */
-    public static final String DDI_UCQ_VOCABULARY_ID = "INSEE-GOF-CV";
-
     /** DDI value for radio display format. */
     public static final String DDI_UCQ_RADIO_OUTPUT_FORMAT = "radio-button";
     /** DDI value for checkbox display format. */
@@ -69,8 +62,6 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(" +
             "#this.getResponse().getFirst())")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
-    @Lunatic("setComponentType(" +
-            "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     DisplayFormat displayFormat;
 
     /** Reference to the code list that contain the modalities of the question. */
@@ -152,19 +143,6 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
             case DDI_UCQ_CHECKBOX_OUTPUT_FORMAT -> Optional.of(DisplayFormat.CHECKBOX);
             case DDI_UCQ_DROPDOWN_OUTPUT_FORMAT -> Optional.of(DisplayFormat.DROPDOWN);
             default -> Optional.empty();
-        };
-    }
-
-    /**
-     * Uses display format given to return corresponding Lunatic component type.
-     * @param displayFormat A DisplayFormat value.
-     * @return Lunatic component type value.
-     */
-    public static ComponentTypeEnum convertDisplayFormatToLunatic(DisplayFormat displayFormat) {
-        return switch (displayFormat) {
-            case RADIO -> ComponentTypeEnum.RADIO;
-            case DROPDOWN -> ComponentTypeEnum.DROPDOWN;
-            case CHECKBOX -> ComponentTypeEnum.CHECKBOX_ONE;
         };
     }
 

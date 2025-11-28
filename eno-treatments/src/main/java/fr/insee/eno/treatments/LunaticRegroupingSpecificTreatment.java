@@ -19,7 +19,7 @@ public class LunaticRegroupingSpecificTreatment implements ProcessingStep<Questi
 
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        if (! Pagination.QUESTION.equals(lunaticQuestionnaire.getPaginationEnum()))
+        if (! Pagination.QUESTION.equals(lunaticQuestionnaire.getPagination()))
             throw new IllegalArgumentException(
                     "Regrouping questions is only possible for a questionnaire paginated in 'question' mode.");
         new LunaticPaginationRegrouping(regroupements).apply(lunaticQuestionnaire);

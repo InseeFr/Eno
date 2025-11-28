@@ -19,9 +19,7 @@ class LunaticAddMissingVariablesPairwiseTest {
         // Given
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         PairwiseLinks pairwiseLinks = new PairwiseLinks();
-        pairwiseLinks.setComponentType(ComponentTypeEnum.PAIRWISE_LINKS);
         Dropdown dropdown = new Dropdown();
-        dropdown.setComponentType(ComponentTypeEnum.DROPDOWN);
         ResponseType responseType = new ResponseType();
         responseType.setName("FOO_LINKS");
         dropdown.setResponse(responseType);

@@ -6,7 +6,6 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Input;
 import fr.insee.lunatic.model.flat.Textarea;
 import fr.insee.pogues.model.QuestionType;
@@ -44,15 +43,13 @@ public class TextQuestion extends SingleResponseQuestion {
             "#this.getResponse().getFirst().getDatatype().getMaxLength().intValue())")
     @DDI("T(fr.insee.eno.core.model.question.TextQuestion).qualifyLength(" +
             "#this.getResponseDomain()?.getMaxLength()?.intValue())")
-    @Lunatic("setComponentType(" +
-            "T(fr.insee.eno.core.model.question.TextQuestion).lengthTypeToLunatic(#param))")
     LengthType lengthType;
 
     /** Indicates whether the response is mandatory for this component. */
     @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
             "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
     @Lunatic("setMandatory(#param)")
-    boolean mandatory;
+    boolean mandatory; // TODO: should probably be removed here
 
     /**
      * Qualifies the length of the question using the dedicated enum.
@@ -61,13 +58,6 @@ public class TextQuestion extends SingleResponseQuestion {
      */
     public static LengthType qualifyLength(int maxLength) {
         return maxLength < LUNATIC_SMALL_TEXT_LIMIT ? LengthType.SHORT : LengthType.LONG;
-    }
-
-    public static ComponentTypeEnum lengthTypeToLunatic(LengthType lengthType) {
-        return switch (lengthType) {
-            case SHORT -> ComponentTypeEnum.INPUT;
-            case LONG -> ComponentTypeEnum.TEXTAREA;
-        };
     }
 
 }

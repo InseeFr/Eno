@@ -9,6 +9,7 @@ import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
+import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Orientation;
 import fr.insee.pogues.model.ResponseType;
 import lombok.Getter;
@@ -36,7 +37,7 @@ public class UniqueChoiceCell extends ResponseCell {
     @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(#this)")
     @DDI("T(fr.insee.eno.core.model.question.table.UniqueChoiceCell).convertDDIOutputFormat(#this)")
     @Lunatic("setComponentType(" +
-            "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
+            "T(fr.insee.eno.core.model.question.table.UniqueChoiceCell).convertDisplayFormatToLunatic(#param))")
     UniqueChoiceQuestion.DisplayFormat displayFormat;
 
     /** Lunatic property for the orientation of modalities.
@@ -60,6 +61,19 @@ public class UniqueChoiceCell extends ResponseCell {
             throw new MappingException(
                     "Unknown output format '" + ddiOutputFormat + "' found in DDI 'GridResponseDomainInMixed' object.");
         return convertedDisplayFormat.get();
+    }
+
+    /**
+     * Uses display format given to return corresponding Lunatic component type.
+     * @param displayFormat A DisplayFormat value.
+     * @return Lunatic component type value.
+     */
+    public static ComponentTypeEnum convertDisplayFormatToLunatic(UniqueChoiceQuestion.DisplayFormat displayFormat) {
+        return switch (displayFormat) {
+            case RADIO -> ComponentTypeEnum.RADIO;
+            case DROPDOWN -> ComponentTypeEnum.DROPDOWN;
+            case CHECKBOX -> ComponentTypeEnum.CHECKBOX_ONE;
+        };
     }
 
 }

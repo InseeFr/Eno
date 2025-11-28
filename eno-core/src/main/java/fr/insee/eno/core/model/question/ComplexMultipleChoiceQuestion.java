@@ -31,15 +31,6 @@ import java.util.List;
 @Context(format = Format.LUNATIC, type = Table.class)
 public class ComplexMultipleChoiceQuestion extends MultipleResponseQuestion {
 
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "TABLE";
-
-    /** Parameter that exists in Lunatic but that has a fixed value for now. */
-    @Lunatic("setPositioning(#param)")
-    private String positioning = "HORIZONTAL";
-
     @Pogues("getResponseStructure().getDimension().getFirst().getCodeListReference()")
     @DDI("#this.getGridDimensionList().?[#this.getRank().intValue() == 1].get(0)" +
             ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue()")

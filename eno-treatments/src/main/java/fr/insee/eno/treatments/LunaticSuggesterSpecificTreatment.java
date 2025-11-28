@@ -40,7 +40,11 @@ public class LunaticSuggesterSpecificTreatment implements ProcessingStep<Questio
     private void transformComponentsToSuggesters(List<ComponentType> components) {
         enoSuggesters.forEach(enoSuggester -> {
 
-            components.forEach(component -> applySuggesterProperties(component, enoSuggester));
+            components.replaceAll(component ->
+                    component instanceof Question question ?
+                            turnIntoSuggester(question.getComponents().getFirst(), enoSuggester) :
+                            turnIntoSuggester(component, enoSuggester)
+                    );
 
             components.stream()
                     .filter(Loop.class::isInstance)
@@ -53,25 +57,33 @@ public class LunaticSuggesterSpecificTreatment implements ProcessingStep<Questio
         });
     }
 
-
-    /**
-     * Checks if suggester can be applied to specific component,
-     * and sets suggester properties to this component if so.
-     * @param component component to check
-     * @param enoSuggester suggester to apply
-     */
-    private static void applySuggesterProperties(ComponentType component, EnoSuggesterType enoSuggester) {
-        // Component to be replaced by a suggester component must be a simple response component
+    private static ComponentType turnIntoSuggester(ComponentType component, EnoSuggesterType enoSuggester) {
         if (component instanceof ComponentSimpleResponseType simpleResponse) {
             String responseName = simpleResponse.getResponse().getName();
-            if (enoSuggester.responseNames().contains(responseName)) {
-                component.setComponentType(ComponentTypeEnum.SUGGESTER);
-                component.setStoreName(enoSuggester.name());
-            }
+            if (enoSuggester.responseNames().contains(responseName))
+                return copyToSuggester(component, enoSuggester);
         }
-        // If Lunatic V3 question processing has been applied, look at the component within the question
-        if (component instanceof Question question)
-            applySuggesterProperties(question.getComponents().getFirst(), enoSuggester);
+        return component;
+    }
+
+    private static ComponentType copyToSuggester(ComponentType component, EnoSuggesterType enoSuggester) {
+        Suggester suggesterComponent = new Suggester();
+        // copy general component properties
+        suggesterComponent.setId(component.getId());
+        suggesterComponent.setPage(component.getPage());
+        suggesterComponent.setLabel(component.getLabel());
+        suggesterComponent.setDescription(component.getDescription());
+        suggesterComponent.setDeclarations(component.getDeclarations());
+        suggesterComponent.setConditionFilter(component.getConditionFilter());
+        suggesterComponent.setControls(component.getControls());
+        // copy simple response component properties
+        if (! (component instanceof ComponentSimpleResponseType componentSimpleResponse))
+            throw new IllegalArgumentException("Only simple response components can be turned into suggesters.");
+        suggesterComponent.setMandatory(componentSimpleResponse.getMandatory());
+        suggesterComponent.setResponse(componentSimpleResponse.getResponse());
+        // set suggester store name
+        suggesterComponent.setStoreName(enoSuggester.name());
+        return suggesterComponent;
     }
 
 }

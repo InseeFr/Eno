@@ -18,11 +18,9 @@ class LunaticQuestionComponentTest {
         //
         Sequence sequence = new Sequence();
         sequence.setId("sequence-id");
-        sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
         questionnaire.getComponents().add(sequence);
         //
         InputNumber inputNumber = new InputNumber();
-        inputNumber.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         inputNumber.setPage("1");
         inputNumber.setMin(0d);
         inputNumber.setMax(10d);
@@ -86,15 +84,12 @@ class LunaticQuestionComponentTest {
         //
         Questionnaire questionnaire = new Questionnaire();
         Loop loop = new Loop();
-        loop.setComponentType(ComponentTypeEnum.LOOP);
         //
         Sequence sequence = new Sequence();
         sequence.setId("sequence-id");
-        sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
         loop.getComponents().add(sequence);
         //
         InputNumber inputNumber = new InputNumber();
-        inputNumber.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         inputNumber.setPage("1");
         inputNumber.setMin(0d);
         inputNumber.setMax(10d);

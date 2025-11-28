@@ -121,7 +121,7 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
             expression.setValue(pairwiseName);
             calculatedAxis.setExpression(expression);
             calculatedAxis.setBindingDependencies(List.of(pairwiseName));
-            calculatedAxis.getShapeFromList().add(pairwiseName);
+            calculatedAxis.getShapeFrom().add(pairwiseName);
             variables.add(calculatedAxis);
         }
         return variables;

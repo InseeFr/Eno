@@ -18,11 +18,4 @@ import lombok.Setter;
 @Setter
 @Context(format = Format.DDI, type = QuestionItemType.class)
 @Context(format = Format.LUNATIC, type = CheckboxBoolean.class)
-public class BooleanQuestion extends SingleResponseQuestion {
-
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "CHECKBOX_BOOLEAN";
-
-}
+public class BooleanQuestion extends SingleResponseQuestion {}
