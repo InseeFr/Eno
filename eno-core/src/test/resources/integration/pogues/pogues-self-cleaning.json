@@ -1,0 +1,635 @@
+{
+  "id" : "mht5sgsn",
+  "genericName" : "QUESTIONNAIRE",
+  "agency" : "fr.insee",
+  "final" : false,
+  "flowLogic" : "FILTER",
+  "formulasLanguage" : "VTL",
+  "lastUpdatedDate" : "Mon Nov 10 2025 14:12:20 GMT+0100 (heure normale d’Europe centrale)",
+  "owner" : "DG75-L501",
+  "Name" : "BUG_RD_PT_VISIBL",
+  "Label" : [ "BUG - Rond Point Affiché à tort" ],
+  "Control" : [ ],
+  "FlowControl" : [ {
+    "id" : "mhoxbq6u",
+    "Description" : "tets filtre avec rond-point dedans - 2",
+    "Expression" : "cast(cast(nvl($FILTRE$,\"0\"),integer),boolean)",
+    "IfTrue" : "mhlrmoai-m4qtvjda"
+  }, {
+    "id" : "mht5lzdi",
+    "Description" : "",
+    "Expression" : "$AGE$<10",
+    "IfTrue" : "mhm3iny1-mhomyz25"
+  }, {
+    "id" : "mhome7ny",
+    "Description" : "",
+    "Expression" : "$F$",
+    "IfTrue" : "mhomyz25-mhomyz25"
+  } ],
+  "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+  "Child" : [ {
+    "id" : "lst6jn38",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S1",
+    "Label" : [ "S1" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+    "Child" : [ {
+      "id" : "mhlryzjn",
+      "questionType" : "SINGLE_CHOICE",
+      "type" : "QuestionType",
+      "Name" : "FILTRE",
+      "Label" : [ "\"Afficher le contenu de S2 -> FIN ?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "mhlsbr7h",
+        "mandatory" : false,
+        "CodeListReference" : "mhls968c",
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "visualizationHint" : "RADIO",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 1
+        },
+        "CollectedVariableReference" : "mhls4sqa"
+      } ],
+      "ClarificationQuestion" : [ ],
+      "codeFilters" : [ ]
+    } ]
+  }, {
+    "id" : "mhlrmoai",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S2",
+    "Label" : [ "S2" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+    "Child" : [ {
+      "id" : "lst71avf",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "NBHAB",
+      "Label" : [ "Combien de personnes ?" ],
+      "Declaration" : [ ],
+      "Control" : [ {
+        "id" : "lvqgmk7g",
+        "criticity" : "WARN",
+        "scope" : "occurrence",
+        "Description" : "Controle sur CA export >  CA",
+        "Expression" : "nvl($TAB13$,0) > 0 and nvl($TAB12$,0) > 0 and nvl($TAB13$,0) > nvl($TAB12$,0)",
+        "FailMessage" : "Le CA export doit être inférieur au CA"
+      } ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "lyojic5j",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "NUMERIC",
+          "type" : "NumericDatatypeType",
+          "Minimum" : 1,
+          "Maximum" : 10,
+          "IsDynamicUnit" : false,
+          "Unit" : ""
+        },
+        "CollectedVariableReference" : "mhlvq3ji"
+      } ]
+    }, {
+      "id" : "lt72wmbk",
+      "depth" : 2,
+      "genericName" : "SUBMODULE",
+      "type" : "SequenceType",
+      "Name" : "LISTEPRENOMS",
+      "Label" : [ "Lister les prénoms" ],
+      "Declaration" : [ {
+        "id" : "m8h2dr71",
+        "declarationType" : "HELP",
+        "position" : "AFTER_QUESTION_TEXT",
+        "Text" : "\"On n'interrogera pas les prénoms AA\"",
+        "DeclarationMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ]
+      } ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+      "Child" : [ {
+        "id" : "lt72y80j",
+        "questionType" : "SIMPLE",
+        "type" : "QuestionType",
+        "Name" : "PRENOM",
+        "Label" : [ "\"Prénom de l'individu \" || cast(GLOBAL_ITERATION_INDEX,string)  || \" qui habite à \" || $ADR$" ],
+        "Declaration" : [ ],
+        "Control" : [ ],
+        "FlowControl" : [ ],
+        "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+        "Response" : [ {
+          "id" : "lt737u95",
+          "mandatory" : false,
+          "Datatype" : {
+            "typeName" : "TEXT",
+            "type" : "TextDatatypeType",
+            "MaxLength" : 249
+          },
+          "CollectedVariableReference" : "lyoicq8b"
+        } ]
+      } ]
+    } ]
+  }, {
+    "id" : "lypxwut2",
+    "type" : "RoundaboutType",
+    "Name" : "TESTDEROND",
+    "Label" : [ "Test de rond point" ],
+    "Declaration" : [ {
+      "id" : "lyr863xb",
+      "declarationType" : "HELP",
+      "position" : "AFTER_QUESTION_TEXT",
+      "Text" : "On n'interroge pas les prénoms A",
+      "DeclarationMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ]
+    } ],
+    "Control" : [ {
+      "id" : "m4mxnj1u",
+      "criticity" : "ERROR",
+      "scope" : "occurrence",
+      "Description" : "age sup 35 ans",
+      "Expression" : "$AGE_N$ > 35",
+      "FailMessage" : "\"L'individu \" || $PRENOM$ || \" a plus de 35 ans. (bloquant)\""
+    }, {
+      "id" : "m4mxh4a1",
+      "criticity" : "ERROR",
+      "scope" : "whole",
+      "Description" : "in",
+      "Expression" : "5 in $AGE_N$",
+      "FailMessage" : "\"quelqu'un a 5 ans !!! (bloquant)\""
+    }, {
+      "id" : "m4qu4exi",
+      "criticity" : "WARN",
+      "scope" : "whole",
+      "Description" : "Total age",
+      "Expression" : "$SUM_AGE$ > 20",
+      "FailMessage" : "\"la somme des ages des individus est supérieure à 20 ans.\""
+    } ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+    "OccurrenceLabel" : "$PRENOM$ || \", qui est l'individu n°\" || cast(GLOBAL_ITERATION_INDEX,string) || \" \"",
+    "OccurrenceDescription" : "if $PRENOM$=\"AA\" then \"Individu non interrogé car s'appelle AA\" else \"\"",
+    "Locked" : false,
+    "Loop" : {
+      "Name" : "TEST_RP",
+      "MemberReference" : [ "lyoiu1hr", "mct877m7" ],
+      "IterableReference" : "lyoigdda",
+      "Filter" : "$PRENOM$ = \"AA\""
+    }
+  }, {
+    "id" : "lyoiu1hr",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S2PRENOM",
+    "Label" : [ "\"S2 \" || $PRENOM$" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+    "Child" : [ {
+      "id" : "lyoir96l",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "AGE",
+      "Label" : [ "\"Age de \" || nvl($PRENOM$,\"cet individu sans prénom\")" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "lyojhyun",
+        "mandatory" : true,
+        "Datatype" : {
+          "typeName" : "NUMERIC",
+          "type" : "NumericDatatypeType",
+          "Minimum" : 1,
+          "Maximum" : 99,
+          "IsDynamicUnit" : false,
+          "Unit" : ""
+        },
+        "CollectedVariableReference" : "mbuj3xoy"
+      } ]
+    } ]
+  }, {
+    "id" : "mhm3iny1",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S1",
+    "Label" : [ "\"S1\"" ],
+    "Declaration" : [ {
+      "id" : "mhm5br6z",
+      "declarationType" : "HELP",
+      "position" : "AFTER_QUESTION_TEXT",
+      "Text" : "\"Adresse du domicile : \" || $ADRESSE$",
+      "DeclarationMode" : [ "CAWI", "CATI", "CAPI", "PAPI" ]
+    } ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CATI", "PAPI", "CAPI" ],
+    "Child" : [ {
+      "id" : "mhom5g3k",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "F",
+      "Label" : [ "F" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CATI", "CAPI", "PAPI" ],
+      "Response" : [ {
+        "id" : "mhon0dgf",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "BOOLEAN",
+          "type" : "BooleanDatatypeType"
+        },
+        "CollectedVariableReference" : "mhomceia"
+      } ]
+    } ]
+  }, {
+    "id" : "mhomyz25",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S2",
+    "Label" : [ "S2" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CATI", "CAPI", "PAPI" ],
+    "Child" : [ {
+      "id" : "mhm3vkiz",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "AGE",
+      "Label" : [ "\"Quel est votre âge ?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CATI", "CAPI", "PAPI" ],
+      "Response" : [ {
+        "id" : "mhm3nncb",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "NUMERIC",
+          "type" : "NumericDatatypeType",
+          "Minimum" : 1,
+          "Maximum" : 200,
+          "IsDynamicUnit" : false,
+          "Unit" : "http://id.insee.fr/unit/an"
+        },
+        "CollectedVariableReference" : "mhm425x6"
+      } ]
+    }, {
+      "id" : "mhm3mawu",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "PRENOM",
+      "Label" : [ "\"Quel est votre prénom ?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CATI", "CAPI", "PAPI" ],
+      "Response" : [ {
+        "id" : "mhm41ubw",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 249
+        },
+        "CollectedVariableReference" : "mhm3scbw"
+      } ]
+    }, {
+      "id" : "mhm4xbcm",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "DNAIS",
+      "Label" : [ "\"Quelle est votre date de naissance ?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CATI", "CAPI", "PAPI" ],
+      "Response" : [ {
+        "id" : "mhm53ifp",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "DATE",
+          "type" : "DateDatatypeType",
+          "Minimum" : "1900-01-01",
+          "Maximum" : "2025-12-31",
+          "Format" : "YYYY-MM-DD"
+        },
+        "CollectedVariableReference" : "mhm4yu7i"
+      } ]
+    } ]
+  }, {
+    "id" : "mct877m7",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S_FINRDPT",
+    "Label" : [ "Fin Rd-Pt" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+    "Child" : [ {
+      "id" : "mct84zko",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "QFINRDPT",
+      "Label" : [ "Q fin rd pt" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "mct8c04z",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 249
+        },
+        "CollectedVariableReference" : "mct849jh"
+      } ]
+    } ]
+  }, {
+    "id" : "m4qtvjda",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "FIN",
+    "Label" : [ "FIN" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+    "Child" : [ {
+      "id" : "m4qtkzve",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "TESTCONTRO",
+      "Label" : [ "\"test Controle - \" || cast($SUM_AGE$,string)" ],
+      "Declaration" : [ ],
+      "Control" : [ {
+        "id" : "m4qtsxa7",
+        "criticity" : "WARN",
+        "scope" : "whole",
+        "Description" : "test controle niv questionnaire",
+        "Expression" : "sum($AGE$) > 10",
+        "FailMessage" : "\"la somme des ages des individus est supérieure à 10 ans.\""
+      } ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+      "Response" : [ {
+        "id" : "m4qtpkgv",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 249
+        },
+        "CollectedVariableReference" : "m4qtyb8s"
+      } ]
+    } ]
+  }, {
+    "id" : "idendquest",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "QUESTIONNAIRE_END",
+    "Label" : [ "QUESTIONNAIRE_END" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "PAPI", "CATI" ],
+    "Child" : [ ]
+  } ],
+  "DataCollection" : [ {
+    "id" : "s2193-dc",
+    "uri" : "http://ddi:fr.insee:DataCollection.s2193-dc",
+    "Name" : "Enquête capacité à innover et stratégie 2024"
+  } ],
+  "ComponentGroup" : [ {
+    "id" : "lst6n2zp",
+    "Name" : "PAGE_1",
+    "Label" : [ "Components for page 1" ],
+    "MemberReference" : [ "lst6jn38", "mhlryzjn", "mhlrmoai", "lst71avf", "lt72wmbk", "lt72y80j", "lyoiu1hr", "lyoir96l", "mhm3m6kj", "mct877m7", "mct84zko", "m4qtvjda", "m4qtkzve", "idendquest" ]
+  } ],
+  "CodeLists" : {
+    "CodeList" : [ {
+      "id" : "mhls968c",
+      "Label" : "L_OUI_NON",
+      "Code" : [ {
+        "Value" : "1",
+        "Label" : "OUI",
+        "Parent" : ""
+      }, {
+        "Value" : "0",
+        "Label" : "NON",
+        "Parent" : ""
+      } ]
+    } ]
+  },
+  "Variables" : {
+    "Variable" : [ {
+      "id" : "m4qu30b1",
+      "type" : "CalculatedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 1,
+        "Maximum" : 10000,
+        "Unit" : ""
+      },
+      "Name" : "SUM_AGE",
+      "Label" : "tes var calc",
+      "Formula" : "sum($AGE_N$)"
+    }, {
+      "id" : "mbuj8jrd",
+      "type" : "CalculatedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 0,
+        "Maximum" : 100,
+        "IsDynamicUnit" : false,
+        "Unit" : ""
+      },
+      "Name" : "AGE_N",
+      "Label" : "AGE_N",
+      "Scope" : "lyoigdda",
+      "Formula" : "nvl($AGE$,0)"
+    }, {
+      "id" : "mht01r7c",
+      "type" : "ExternalVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "ADR",
+      "Label" : "ADR"
+    }, {
+      "id" : "mhls4sqa",
+      "type" : "CollectedVariableType",
+      "CodeListReference" : "mhls968c",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 1
+      },
+      "Name" : "FILTRE",
+      "Label" : "FILTRE label"
+    }, {
+      "id" : "mhlvq3ji",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 1,
+        "Maximum" : 10,
+        "IsDynamicUnit" : false,
+        "Unit" : ""
+      },
+      "Name" : "NBHAB",
+      "Label" : "NBHAB label"
+    }, {
+      "id" : "lyoicq8b",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "PRENOM",
+      "Label" : "PRENOM label",
+      "Scope" : "lyoigdda"
+    }, {
+      "id" : "mbuj3xoy",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 1,
+        "Maximum" : 99,
+        "IsDynamicUnit" : false,
+        "Unit" : ""
+      },
+      "Name" : "AGE",
+      "Label" : "AGE label",
+      "Scope" : "lyoigdda"
+    }, {
+      "id" : "mct849jh",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "QFINRDPT",
+      "Label" : "QFINRDPT label",
+      "Scope" : "lyoigdda"
+    }, {
+      "id" : "m4qtyb8s",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "TESTCONTRO",
+      "Label" : "TESTCONTRO label"
+    }, {
+      "id" : "mhm5mit0",
+      "type" : "ExternalVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "ADRESSE",
+      "Label" : "Adresse du domicile enquêté",
+      "Scope" : "lyoigdda"
+    }, {
+      "id" : "mhm3scbw",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "PRENOM",
+      "Label" : "PRENOM label",
+      "Scope" : "lyoigdda"
+    }, {
+      "id" : "mhm4yu7i",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "DATE",
+        "type" : "DateDatatypeType",
+        "Minimum" : "1900-01-01",
+        "Maximum" : "2025-12-31",
+        "Format" : "YYYY-MM-DD"
+      },
+      "Name" : "DNAIS",
+      "Label" : "Date de naissance",
+      "Scope" : "lyoigdda"
+    }, {
+      "id" : "mhm425x6",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "NUMERIC",
+        "type" : "NumericDatatypeType",
+        "Minimum" : 1,
+        "Maximum" : 200,
+        "IsDynamicUnit" : false,
+        "Unit" : "http://id.insee.fr/unit/an"
+      },
+      "Name" : "AGE",
+      "Label" : "AGE label",
+      "Scope" : "lyoigdda"
+    }, {
+      "id" : "mhomceia",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "BOOLEAN",
+        "type" : "BooleanDatatypeType"
+      },
+      "Name" : "F",
+      "Label" : "F label",
+      "Scope" : "lyoigdda"
+    } ]
+  },
+  "Iterations" : {
+    "Iteration" : [ {
+      "id" : "lyoigdda",
+      "type" : "DynamicIterationType",
+      "Name" : "BOUCLE_PRENOMS",
+      "MemberReference" : [ "lt72wmbk", "lt72wmbk" ],
+      "Minimum" : "nvl($NBHAB$,1) ",
+      "Maximum" : "nvl($NBHAB$,1)",
+      "isFixedLength" : false,
+      "minimum" : "nvl($NBHAB$,1) ",
+      "maximum" : "nvl($NBHAB$,1)",
+      "Step" : 1
+    } ]
+  },
+  "childQuestionnaireRef" : [ "mhm3m6kj" ]
+}
