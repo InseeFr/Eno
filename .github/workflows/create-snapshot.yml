@@ -102,7 +102,7 @@ jobs:
         run: mvn package --no-transfer-progress
 
       - name: Publish to Docker Hub
-        uses: elgohr/Publish-Docker-Github-Action@v5
+        uses: elgohr/Publish-Docker-Github-Action@4feac4d53e4e55dcc5d3e2ad0ed2e0a76028ff7a # v5
         with:
           name: inseefr/eno-ws
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -129,6 +129,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-ecosystem/action-remove-labels@v1
+      - uses: actions-ecosystem/action-remove-labels@2ce5d41b4b6aa8503e285553f75ed56e0a40bae0 # v1.3.0
         with:
           labels: deploy-snapshot

@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.60.0] - 2025-12-22
+### :sparkles: New Features
+- [`838faf6`](https://github.com/InseeFr/Eno/commit/838faf668b199bda2efe6bd89a1ececbab78bba9) - resetable external variables *(PR [#1355](https://github.com/InseeFr/Eno/pull/1355) by [@nsenave](https://github.com/nsenave))*
+
+### :bug: Bug Fixes
+- [`6fafce6`](https://github.com/InseeFr/Eno/commit/6fafce6e2cc01fc18881b66c9465b49f129c101f) - prevent self cleaning by filtering *(PR [#1354](https://github.com/InseeFr/Eno/pull/1354) by [@laurentC35](https://github.com/laurentC35))*
+
+
 ## [3.59.0] - 2025-11-25
 ### :sparkles: New Features
 - [`b5b3b43`](https://github.com/InseeFr/Eno/commit/b5b3b43c3a3663456f66edb8419ee64257be78e5) - mandatory multiple choice questions *(PR [#1352](https://github.com/InseeFr/Eno/pull/1352) by [@RemiVerriez](https://github.com/RemiVerriez))*
@@ -745,3 +753,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.58.3]: https://github.com/InseeFr/Eno/compare/3.58.2...3.58.3
 [3.58.4]: https://github.com/InseeFr/Eno/compare/3.58.3...3.58.4
 [3.59.0]: https://github.com/InseeFr/Eno/compare/3.58.4...3.59.0
+[3.60.0]: https://github.com/InseeFr/Eno/compare/3.59.0...3.60.0

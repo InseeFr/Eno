@@ -71,7 +71,7 @@ jobs:
       - name: (Semantic version) Calculate release version
         if: ${{ steps.compare-step.outputs.hasVersionChanged == 'no' }}
         id: compute-version
-        #uses: TODO: find an action that does the job
+        #uses: <find an action that does the job>
         run: |
           echo "Semantic version is not implemented yet ❌️"
           echo "Bump the version to trigger the release workflow."
@@ -89,7 +89,7 @@ jobs:
 
       - name: Check tag existence
         id: check-tag-exists
-        uses: mukunku/tag-exists-action@v1.6.0
+        uses: mukunku/tag-exists-action@5c39604fe8aef7e65acb6fbcf96ec580f7680313 # v1.7.0
         with:
           tag: ${{ steps.version-step.outputs.version }}
 
@@ -137,7 +137,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_HOST_URL: "https://sonarcloud.io"
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean verify -Pcoverage sonar:sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr --no-transfer-progress
+        run: mvn clean verify -Pcoverage org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr --no-transfer-progress
 
   build-sources:
     needs: [ version, sonar ]
@@ -173,13 +173,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create tag
-        uses: rickstaa/action-create-tag@v1
+        uses: rickstaa/action-create-tag@a1c7777fcb2fee4f19b0f283ba888afa11678b72 # v1.7.2
         with:
           tag: ${{ needs.version.outputs.release-version }}
 
       - name: Create release note
         id: changelog
-        uses: requarks/changelog-action@v1
+        uses: requarks/changelog-action@b78a3354a01f4a1affb484b9264b506a815c46b1 # v1.10.3
         with:
           fromTag: ${{ needs.version.outputs.release-version }}
           toTag: ${{ needs.version.outputs.previous-version }}
@@ -195,14 +195,15 @@ jobs:
           path: eno-ws/target/
 
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
         with:
           tag_name: ${{ needs.version.outputs.release-version }}
-          target_commitish: ${{ github.head_ref || github.ref }}
+          target_commitish: "$COMMIT_REF"
           name: ${{ needs.version.outputs.release-version }}
           body: ${{ steps.changelog.outputs.changes }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMIT_REF: ${{ github.head_ref || github.ref }}
 
   # Separate job for committing in the changelog file since I got bored that auto commit action randomly fails
   commit-changelog:
@@ -219,7 +220,7 @@ jobs:
 
       - name: Create release note
         id: changelog
-        uses: requarks/changelog-action@v1
+        uses: requarks/changelog-action@b78a3354a01f4a1affb484b9264b506a815c46b1 # v1.10.3
         with:
           fromTag: ${{ needs.version.outputs.release-version }}
           toTag: ${{ needs.version.outputs.previous-version }}
@@ -229,7 +230,7 @@ jobs:
           changelogFilePath: 'CHANGELOG.md'
 
       - name: Commit changelog file
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7.1.0
         with:
           branch: 'main'
           commit_message: 'docs(changelog): ${{ needs.version.outputs.release-version }} update [skip ci]'
@@ -248,7 +249,7 @@ jobs:
           path: ./eno-ws/target
 
       - name: Publish to Docker Hub
-        uses: elgohr/Publish-Docker-Github-Action@v5
+        uses: elgohr/Publish-Docker-Github-Action@4feac4d53e4e55dcc5d3e2ad0ed2e0a76028ff7a # v5
         with:
           name: inseefr/eno-ws
           username: ${{ secrets.DOCKERHUB_USERNAME }}
