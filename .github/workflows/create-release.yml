@@ -71,7 +71,7 @@ jobs:
       - name: (Semantic version) Calculate release version
         if: ${{ steps.compare-step.outputs.hasVersionChanged == 'no' }}
         id: compute-version
-        #uses: TODO: find an action that does the job
+        #uses: <find an action that does the job>
         run: |
           echo "Semantic version is not implemented yet ❌️"
           echo "Bump the version to trigger the release workflow."
