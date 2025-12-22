@@ -140,7 +140,7 @@ jobs:
         run: mvn clean verify -Pcoverage org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr --no-transfer-progress
 
   build-sources:
-    needs: [ version, sonar ]
+    needs: version
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK
