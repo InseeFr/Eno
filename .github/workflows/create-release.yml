@@ -198,12 +198,11 @@ jobs:
         uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
         with:
           tag_name: ${{ needs.version.outputs.release-version }}
-          target_commitish: "$COMMIT_REF"
+          target_commitish: ${{ github.head_ref || github.ref }}
           name: ${{ needs.version.outputs.release-version }}
           body: ${{ steps.changelog.outputs.changes }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_REF: ${{ github.head_ref || github.ref }}
 
   # Separate job for committing in the changelog file since I got bored that auto commit action randomly fails
   commit-changelog:
