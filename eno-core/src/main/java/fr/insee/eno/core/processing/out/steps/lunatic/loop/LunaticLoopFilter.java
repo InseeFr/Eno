@@ -9,6 +9,25 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * La logique des filtres combinée à celles des boucles rend le calcul du filtre niveau "Racine de la boucle (ou du rond-point) " complexe.
+ * Après analyse du fonctionnement de Lunatic et amélioration de son fonctionnement,
+ * Nous pouvons désormais avoir les filtres qui fonctionnent dans tous les cas.
+ *
+ * Pseudo algo:
+ * Pour chacune des filtres du questionnaire
+ *      Si l'élément "début" de la boucle (ou du rond-point) est strictement inclus entre l'élément début et fin de filtre (strictement -> doit être différente)
+ *      Alors, on ajoute ce filtre dans la condition
+ *      Sinon, on ne fait rien
+ *
+ * Dans le cas où l'élément début de la boucle (ou du rond-point) et l'élément début du filtre coïncide,
+ * alors le filtre n'apparaitra que dans les éléments enfant de la boucle, et pas dans la condition du filtre de la boucle elle-même.
+ * C'est suffisant pour Lunatic pour filtrer les éléments si nécessaire.
+ *
+ * Cela permet d'éviter les erreurs de scope au niveau de la boucle, car aujourd'hui, il y a des questionnaires dont le filtre de la boucle contiennent des formules VTL
+ * qui ne sont valides qu'au niveau individu.
+ * Pourquoi ? Parce qu'on pensait qu'il fallait mettre toutes les formules de filtres des composants enfant de la boucle au niveau du filtre de composant Boucle (ou rond-point)
+ */
 public class LunaticLoopFilter {
 
     private LunaticLoopFilter(){
