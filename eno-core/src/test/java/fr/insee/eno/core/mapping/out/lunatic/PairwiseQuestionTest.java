@@ -93,6 +93,7 @@ class PairwiseQuestionTest {
         PairwiseLinks lunaticPairwise = assertInstanceOf(PairwiseLinks.class,
                 ((Question) lunaticQuestionnaire.getComponents().get(2)).getComponents().getFirst());
         assertEquals("PRENOM", lunaticPairwise.getSourceVariables().getName());
+        assertEquals("SEXE", lunaticPairwise.getSourceVariables().getGender());
     }
 
 }
