@@ -3,6 +3,8 @@ package fr.insee.eno.core.utils.vtl;
 import fr.insee.vtl.parser.VtlTokens;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.countVariable;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -70,6 +72,16 @@ class VtlSyntaxUtilsTest {
         assertEquals(expectedExpression, VtlSyntaxUtils.joinByANDLogicExpression(
                 VtlSyntaxUtils.surroundByParenthesis("FIRST_NAME = \"Laurent\""),
                 VtlSyntaxUtils.surroundByParenthesis("NB >= 15")));
+    }
+
+    @Test
+    void testJoinByANDLogicExpression_withList(){
+        String expectedExpression = "(FIRST_NAME = \"Laurent\") and (NB >= 15) and (TEST != 1) and (not(true))";
+        assertEquals(expectedExpression, VtlSyntaxUtils.joinByANDLogicExpression(List.of(
+                "(FIRST_NAME = \"Laurent\")",
+                "NB >= 15",
+                "TEST != 1",
+                "(not(true))")));
     }
 
     @Test

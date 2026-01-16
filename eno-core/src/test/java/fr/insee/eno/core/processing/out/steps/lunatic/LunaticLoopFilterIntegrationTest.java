@@ -33,7 +33,7 @@ public class LunaticLoopFilterIntegrationTest {
                 "integration/ddi/ddi-loop-filter.xml");
 
         // Then
-        assertEquals("(not(FILTRE))", findComponentById(lunaticQuestionnaire, "mf5etm57").get().getConditionFilter().getValue());
+        assertEquals("(nvl(COMBIEN, 0) >3)", findComponentById(lunaticQuestionnaire, "mf5etm57").get().getConditionFilter().getValue());
         assertThat(findComponentById(lunaticQuestionnaire, "mf5evs8l").get().getConditionFilter().getValue())
                 .doesNotContain("not(AGES2 <> 10)");
 

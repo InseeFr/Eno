@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.18.2. Generation date : 04/09/2025 - 12:57:06-->
+             isMaintainable="true"><!--Eno version : ${project.version}. Generation date : 16/01/2026 - 16:17:25-->
     <r:Agency>fr.insee</r:Agency>
     <r:ID>INSEE-mf5f1cfv</r:ID>
     <r:Version>1</r:Version>
@@ -51,7 +51,7 @@
                 </d:ControlConstructReference>
                 <d:ControlConstructReference>
                     <r:Agency>fr.insee</r:Agency>
-                    <r:ID>mf5f286m</r:ID>
+                    <r:ID>mkh345y0</r:ID>
                     <r:Version>1</r:Version>
                     <r:TypeOfObject>IfThenElse</r:TypeOfObject>
                 </d:ControlConstructReference>
@@ -88,13 +88,31 @@
             </d:Sequence>
             <d:Sequence>
                 <r:Agency>fr.insee</r:Agency>
+                <r:ID>mkh35fma</r:ID>
+                <r:Version>1</r:Version>
+                <d:ConstructName>
+                    <r:String xml:lang="fr-FR">S2</r:String>
+                </d:ConstructName>
+                <r:Label>
+                    <r:Content xml:lang="fr-FR">S2 - Simple Seq</r:Content>
+                </r:Label>
+                <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+                <d:ControlConstructReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mkh3614t-QC</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+                </d:ControlConstructReference>
+            </d:Sequence>
+            <d:Sequence>
+                <r:Agency>fr.insee</r:Agency>
                 <r:ID>mf5f3vpu</r:ID>
                 <r:Version>1</r:Version>
                 <d:ConstructName>
-                    <r:String xml:lang="fr-FR">S2LOOPOVER</r:String>
+                    <r:String xml:lang="fr-FR">S3LOOPOVER</r:String>
                 </d:ConstructName>
                 <r:Label>
-                    <r:Content xml:lang="fr-FR">S2 loop over</r:Content>
+                    <r:Content xml:lang="fr-FR">S3 loop over</r:Content>
                 </r:Label>
                 <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
                 <d:ControlConstructReference>
@@ -109,10 +127,10 @@
                 <r:ID>mf5faaef</r:ID>
                 <r:Version>1</r:Version>
                 <d:ConstructName>
-                    <r:String xml:lang="fr-FR">S3LOOPOVER</r:String>
+                    <r:String xml:lang="fr-FR">S4LOOPOVER</r:String>
                 </d:ConstructName>
                 <r:Label>
-                    <r:Content xml:lang="fr-FR">S3 Loop over</r:Content>
+                    <r:Content xml:lang="fr-FR">S4 Loop over</r:Content>
                 </r:Label>
                 <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
                 <d:ControlConstructReference>
@@ -146,7 +164,7 @@
                         <r:ProgramLanguage>vtl</r:ProgramLanguage>
                         <r:InParameter isArray="false">
                             <r:Agency>fr.insee</r:Agency>
-                            <r:ID>mf5etm57-MIN-IP-1</r:ID>
+                            <r:ID>mf5etm57-IP-1</r:ID>
                             <r:Version>1</r:Version>
                             <r:ParameterName>
                                 <r:String xml:lang="fr-FR">COMBIEN</r:String>
@@ -161,12 +179,12 @@
                             </r:SourceParameterReference>
                             <r:TargetParameterReference>
                                 <r:Agency>fr.insee</r:Agency>
-                                <r:ID>mf5etm57-MIN-IP-1</r:ID>
+                                <r:ID>mf5etm57-IP-1</r:ID>
                                 <r:Version>1</r:Version>
                                 <r:TypeOfObject>InParameter</r:TypeOfObject>
                             </r:TargetParameterReference>
                         </r:Binding>
-                        <r:CommandContent>mf5etm57-MIN-IP-1</r:CommandContent>
+                        <r:CommandContent>mf5etm57-IP-1</r:CommandContent>
                     </r:Command>
                 </d:InitialValue>
                 <d:LoopWhile>
@@ -272,7 +290,7 @@
                                 <r:TypeOfObject>InParameter</r:TypeOfObject>
                             </r:TargetParameterReference>
                         </r:Binding>
-                        <r:CommandContent>not(mf5evs8l-ITE-IP-1 &lt;&gt; 10)</r:CommandContent>
+                        <r:CommandContent>not(mf5evs8l-ITE-IP-1 = 10)</r:CommandContent>
                     </r:Command>
                 </d:IfCondition>
                 <d:ThenConstructReference>
@@ -295,6 +313,73 @@
                     <r:ID>mf5faaef</r:ID>
                     <r:Version>1</r:Version>
                     <r:TypeOfObject>Sequence</r:TypeOfObject>
+                </d:ControlConstructReference>
+            </d:Sequence>
+            <d:IfThenElse>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>mkh345y0</r:ID>
+                <r:Version>1</r:Version>
+                <r:Label>
+                    <r:Content xml:lang="fr-FR">A définir</r:Content>
+                </r:Label>
+                <r:Description>
+                    <r:Content xml:lang="fr-FR">"Si Combien &gt; 3, filtre qui englobe la boucle sur S3 strictement"</r:Content>
+                </r:Description>
+                <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
+                <d:IfCondition>
+                    <r:Command>
+                        <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                        <r:InParameter isArray="false">
+                            <r:Agency>fr.insee</r:Agency>
+                            <r:ID>mkh345y0-IP-1</r:ID>
+                            <r:Version>1</r:Version>
+                            <r:ParameterName>
+                                <r:String xml:lang="fr-FR">COMBIEN</r:String>
+                            </r:ParameterName>
+                        </r:InParameter>
+                        <r:Binding>
+                            <r:SourceParameterReference>
+                                <r:Agency>fr.insee</r:Agency>
+                                <r:ID>mf5erc7y-QOP-mf5fbimz</r:ID>
+                                <r:Version>1</r:Version>
+                                <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                            </r:SourceParameterReference>
+                            <r:TargetParameterReference>
+                                <r:Agency>fr.insee</r:Agency>
+                                <r:ID>mkh345y0-IP-1</r:ID>
+                                <r:Version>1</r:Version>
+                                <r:TypeOfObject>InParameter</r:TypeOfObject>
+                            </r:TargetParameterReference>
+                        </r:Binding>
+                        <r:CommandContent>nvl(mkh345y0-IP-1, 0) &gt;3</r:CommandContent>
+                    </r:Command>
+                </d:IfCondition>
+                <d:ThenConstructReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mkh345y0-THEN</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:TypeOfObject>Sequence</r:TypeOfObject>
+                </d:ThenConstructReference>
+            </d:IfThenElse>
+            <d:Sequence>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>mkh345y0-THEN</r:ID>
+                <r:Version>1</r:Version>
+                <r:Label>
+                    <r:Content xml:lang="fr-FR"/>
+                </r:Label>
+                <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">filterContent</d:TypeOfSequence>
+                <d:ControlConstructReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mkh35fma</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:TypeOfObject>Sequence</r:TypeOfObject>
+                </d:ControlConstructReference>
+                <d:ControlConstructReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mf5f286m</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:TypeOfObject>IfThenElse</r:TypeOfObject>
                 </d:ControlConstructReference>
             </d:Sequence>
             <d:IfThenElse>
@@ -333,7 +418,7 @@
                                 <r:TypeOfObject>InParameter</r:TypeOfObject>
                             </r:TargetParameterReference>
                         </r:Binding>
-                        <r:CommandContent>not(mf5f286m-IP-1)</r:CommandContent>
+                        <r:CommandContent>not(nvl(mf5f286m-IP-1, false))</r:CommandContent>
                     </r:Command>
                 </d:IfCondition>
                 <d:ThenConstructReference>
@@ -388,6 +473,20 @@
                 <r:QuestionReference>
                     <r:Agency>fr.insee</r:Agency>
                     <r:ID>mf5f1qxy</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+                </r:QuestionReference>
+            </d:QuestionConstruct>
+            <d:QuestionConstruct>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>mkh3614t-QC</r:ID>
+                <r:Version>1</r:Version>
+                <d:ConstructName>
+                    <r:String xml:lang="fr-FR">SATISIFAIT</r:String>
+                </d:ConstructName>
+                <r:QuestionReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mkh3614t</r:ID>
                     <r:Version>1</r:Version>
                     <r:TypeOfObject>QuestionItem</r:TypeOfObject>
                 </r:QuestionReference>
@@ -530,6 +629,49 @@
                     </r:OutParameter>
                     <r:ResponseCardinality maximumResponses="1"/>
                 </d:NominalDomain>
+            </d:QuestionItem>
+            <d:QuestionItem>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>mkh3614t</r:ID>
+                <r:Version>1</r:Version>
+                <d:QuestionItemName>
+                    <r:String xml:lang="fr-FR">SATISIFAIT</r:String>
+                </d:QuestionItemName>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mkh3614t-QOP-mkh37kvf</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="fr-FR">SATISIFAIT</r:String>
+                    </r:ParameterName>
+                </r:OutParameter>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mkh3614t-RDOP-mkh37kvf</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mkh3614t-QOP-mkh37kvf</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <d:QuestionText>
+                    <d:LiteralText>
+                        <d:Text xml:lang="fr-FR">"Satisifait ?"</d:Text>
+                    </d:LiteralText>
+                </d:QuestionText>
+                <d:TextDomain maxLength="249">
+                    <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mkh3614t-RDOP-mkh37kvf</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TextRepresentation maxLength="249"/>
+                    </r:OutParameter>
+                </d:TextDomain>
             </d:QuestionItem>
             <d:QuestionItem>
                 <r:Agency>fr.insee</r:Agency>
@@ -683,6 +825,38 @@
             </r:Label>
             <l:Variable>
                 <r:Agency>fr.insee</r:Agency>
+                <r:ID>mf5f00nf</r:ID>
+                <r:Version>1</r:Version>
+                <l:VariableName>
+                    <r:String xml:lang="fr-FR">COMBIEN</r:String>
+                </l:VariableName>
+                <r:Label>
+                    <r:Content xml:lang="fr-FR">COMBIEN label </r:Content>
+                </r:Label>
+                <r:SourceParameterReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mf5erc7y-QOP-mf5fbimz</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                </r:SourceParameterReference>
+                <r:QuestionReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mf5erc7y</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+                </r:QuestionReference>
+                <l:VariableRepresentation>
+                    <r:NumericRepresentation>
+                        <r:NumberRange>
+                            <r:Low isInclusive="true">1</r:Low>
+                            <r:High isInclusive="true">5</r:High>
+                        </r:NumberRange>
+                        <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                    </r:NumericRepresentation>
+                </l:VariableRepresentation>
+            </l:Variable>
+            <l:Variable>
+                <r:Agency>fr.insee</r:Agency>
                 <r:ID>mf5exhg2</r:ID>
                 <r:Version>1</r:Version>
                 <l:VariableName>
@@ -716,38 +890,6 @@
                             </r:IncludedCode>
                         </r:CodeSubsetInformation>
                     </r:CodeRepresentation>
-                </l:VariableRepresentation>
-            </l:Variable>
-            <l:Variable>
-                <r:Agency>fr.insee</r:Agency>
-                <r:ID>mf5f00nf</r:ID>
-                <r:Version>1</r:Version>
-                <l:VariableName>
-                    <r:String xml:lang="fr-FR">COMBIEN</r:String>
-                </l:VariableName>
-                <r:Label>
-                    <r:Content xml:lang="fr-FR">COMBIEN label </r:Content>
-                </r:Label>
-                <r:SourceParameterReference>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID>mf5erc7y-QOP-mf5fbimz</r:ID>
-                    <r:Version>1</r:Version>
-                    <r:TypeOfObject>OutParameter</r:TypeOfObject>
-                </r:SourceParameterReference>
-                <r:QuestionReference>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID>mf5erc7y</r:ID>
-                    <r:Version>1</r:Version>
-                    <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-                </r:QuestionReference>
-                <l:VariableRepresentation>
-                    <r:NumericRepresentation>
-                        <r:NumberRange>
-                            <r:Low isInclusive="true">1</r:Low>
-                            <r:High isInclusive="true">5</r:High>
-                        </r:NumberRange>
-                        <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                    </r:NumericRepresentation>
                 </l:VariableRepresentation>
             </l:Variable>
             <l:Variable>
@@ -816,6 +958,32 @@
                     </r:NumericRepresentation>
                 </l:VariableRepresentation>
             </l:Variable>
+            <l:Variable>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>mkh32ilp</r:ID>
+                <r:Version>1</r:Version>
+                <l:VariableName>
+                    <r:String xml:lang="fr-FR">SATISIFAIT</r:String>
+                </l:VariableName>
+                <r:Label>
+                    <r:Content xml:lang="fr-FR">SATISIFAIT label </r:Content>
+                </r:Label>
+                <r:SourceParameterReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mkh3614t-QOP-mkh37kvf</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                </r:SourceParameterReference>
+                <r:QuestionReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mkh3614t</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+                </r:QuestionReference>
+                <l:VariableRepresentation>
+                    <r:TextRepresentation maxLength="249"/>
+                </l:VariableRepresentation>
+            </l:Variable>
             <l:VariableGroup>
                 <r:Agency>fr.insee</r:Agency>
                 <r:ID>mf5etm57-vg</r:ID>
@@ -869,13 +1037,19 @@
                 </l:VariableGroupName>
                 <r:VariableReference>
                     <r:Agency>fr.insee</r:Agency>
+                    <r:ID>mf5f00nf</r:ID>
+                    <r:Version>1</r:Version>
+                    <r:TypeOfObject>Variable</r:TypeOfObject>
+                </r:VariableReference>
+                <r:VariableReference>
+                    <r:Agency>fr.insee</r:Agency>
                     <r:ID>mf5exhg2</r:ID>
                     <r:Version>1</r:Version>
                     <r:TypeOfObject>Variable</r:TypeOfObject>
                 </r:VariableReference>
                 <r:VariableReference>
                     <r:Agency>fr.insee</r:Agency>
-                    <r:ID>mf5f00nf</r:ID>
+                    <r:ID>mkh32ilp</r:ID>
                     <r:Version>1</r:Version>
                     <r:TypeOfObject>Variable</r:TypeOfObject>
                 </r:VariableReference>
