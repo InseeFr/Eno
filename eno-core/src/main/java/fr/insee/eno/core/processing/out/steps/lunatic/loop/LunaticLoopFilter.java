@@ -1,13 +1,15 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.loop;
 
-import fr.insee.eno.core.exceptions.business.LunaticLoopException;
+import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.calculated.BindingReference;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
+import fr.insee.eno.core.model.navigation.Filter;
+import fr.insee.eno.core.model.navigation.Loop;
+import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * La logique des filtres combinée à celles des boucles rend le calcul du filtre niveau "Racine de la boucle (ou du rond-point) " complexe.
@@ -34,74 +36,77 @@ public class LunaticLoopFilter {
         throw new IllegalStateException("Utility class");
     }
 
-    public static void computeAndSetConditionFilter(Loop lunaticLoop) {
-        Class<? extends ComponentType> loopStructureType = determineLoopStructure(lunaticLoop);
-        List<ConditionFilterType> loopStructureFilters = lunaticLoop.getComponents().stream()
-                .filter(loopStructureType::isInstance)
-                .map(loopStructureType::cast)
-                .map(ComponentType::getConditionFilter)
+
+    public static ConditionFilterType computeConditionFilter(Loop enoLoop, EnoQuestionnaire enoQuestionnaire) {
+
+        List<Filter> filtersForLoop = enoQuestionnaire.getFilters().stream()
+                .filter(filter -> isIncludingLoopFilter(filter, enoLoop))
                 .toList();
-        Optional<ConditionFilterType> computedFilter = computeLoopFilterExpression(loopStructureFilters);
-        if (computedFilter.isEmpty())
-            return;
-        lunaticLoop.setConditionFilter(computedFilter.get());
+
+        if(filtersForLoop.isEmpty()) {
+            ConditionFilterType defaultConditionFilterType = new ConditionFilterType();
+            defaultConditionFilterType.setValue("true");
+            defaultConditionFilterType.setType(LabelTypeEnum.VTL);
+            return defaultConditionFilterType;
+        };
+        return computeLoopFilterExpression(filtersForLoop);
     }
 
-    public static void removeOccurrenceFilterExpression(Loop lunaticLoop, String occurrenceFilterExpression) {
-        if (occurrenceFilterExpression.isEmpty())
-            return;
-        String expression = lunaticLoop.getConditionFilter().getValue();
-        lunaticLoop.getConditionFilter().setValue(
-                VtlSyntaxUtils.replaceByTrue(expression, occurrenceFilterExpression)
-        );
-    }
+    /**
+     * Compute if the filter include strictly the Loop.
+     * i.e if start and the end element of loop are inside strictly loop
+     * @param filter: enoFilter to check
+     * @param enoLoop: enoLoop
+     * @return boolean
+     */
+    private static boolean isIncludingLoopFilter(Filter filter, Loop enoLoop){
+        String occurrenceFilterId = enoLoop.getOccurrenceFilterId();
 
-    private static Class<? extends ComponentType> determineLoopStructure(Loop lunaticLoop) {
-        if (isLoopOfSequence(lunaticLoop))
-            return Sequence.class;
-        if (isLoopOfSubsequence(lunaticLoop)) {
-            safetyCheck(lunaticLoop);
-            return Subsequence.class;
+
+        // do not include occurrence filter
+        if(occurrenceFilterId != null && occurrenceFilterId.equals(filter.getId())) return false;
+        String startLoopElementId = enoLoop.getLoopScope().getFirst().getId();
+        String endLoopElementId = enoLoop.getLoopScope().getLast().getId();
+
+        String startFilterElementId = filter.getFilterScope().getFirst().getId();
+        String endFilterElementId = filter.getFilterScope().getLast().getId();
+
+        // prevent scope calculating error
+        if(startLoopElementId.equals(startFilterElementId) || endLoopElementId.equals(endFilterElementId)) return false;
+
+        boolean isStartOfLoopInsideFilter = false;
+        boolean isEndOfLoopInsideFilter = false;
+        for(StructureItemReference structureItemReference : filter.getFilterScope()){
+            String referenceId = structureItemReference.getId();
+            if(startLoopElementId.equals(referenceId)) isStartOfLoopInsideFilter = true;
+            if(endLoopElementId.equals(referenceId)) isEndOfLoopInsideFilter = true;
+            if(isStartOfLoopInsideFilter && isEndOfLoopInsideFilter) return true;
         }
-        throw new LunaticLoopException(
-                "First element of loop " + lunaticLoop + " is neither a sequence or a subsequence.");
-    }
+        return false;
+    };
 
-    private static boolean isLoopOfSequence(Loop lunaticLoop) {
-        return lunaticLoop.getComponents().getFirst() instanceof Sequence;
-    }
 
-    private static boolean isLoopOfSubsequence(Loop lunaticLoop) {
-        return lunaticLoop.getComponents().getFirst() instanceof Subsequence;
-    }
-
-    private static void safetyCheck(Loop lunaticLoop) {
-        if (lunaticLoop.getComponents().stream().anyMatch(Sequence.class::isInstance))
-            throw new LunaticLoopException(
-                    "Loop " + lunaticLoop + " starts on a subsequence, shouldn't contain a sequence.");
-    }
-
-    private static Optional<ConditionFilterType> computeLoopFilterExpression(List<ConditionFilterType> loopStructureFilters) {
-        // If any structure component is not filtered, the whole loop will never be filtered.
-        if (loopStructureFilters.stream().anyMatch(Objects::isNull))
-            return Optional.empty();
-
+    /**
+     * Join by and logic all found expression and filter
+     * @param loopStructureFilters instance of EnoFilter
+     * @return Lunatic ConditionFilter with bindingDependencies
+     */
+    private static ConditionFilterType computeLoopFilterExpression(List<Filter> loopStructureFilters) {
         ConditionFilterType loopFilter = new ConditionFilterType();
-        String expression = loopStructureFilters.stream()// concatenate VTL expressions
-                .map(LabelType::getValue)
-                .distinct() // don't put the same expression twice
-                .map(VtlSyntaxUtils::removeExtraParenthesis) // to not have double parentheses
-                .map(VtlSyntaxUtils::surroundByParenthesis)
-                .collect(Collectors.joining(" " + VtlSyntaxUtils.OR_KEYWORD + " "));
+        String expression = VtlSyntaxUtils.joinByANDLogicExpression(
+                loopStructureFilters.stream()
+                        .map(Filter::getExpression)
+                        .map(CalculatedExpression::getValue)
+                        .toList()
+        );
         loopFilter.setValue(expression);
         loopFilter.setType(LabelTypeEnum.VTL);
-        loopFilter.setShapeFrom(loopStructureFilters.getFirst().getShapeFrom());
-        List<String> bindingDependencies = loopStructureFilters.stream() // concatenate binding dependencies
-                .flatMap(filter -> filter.getBindingDependencies().stream())
+        List<String> bindingDependencies = loopStructureFilters.stream()
+                .flatMap(filter -> filter.getExpression().getBindingReferences().stream().map(BindingReference::getVariableName))
                 .distinct()
                 .toList();
         loopFilter.setBindingDependencies(bindingDependencies);
-        return Optional.of(loopFilter);
+        return loopFilter;
     }
 
 }

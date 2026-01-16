@@ -9,7 +9,10 @@ import org.antlr.v4.runtime.CodePointCharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Utility class that provide methods for analyzing/writing VTL expressions.
@@ -22,7 +25,6 @@ public class VtlSyntaxUtils {
 
     public static final String LEFT_JOIN_OPERATOR = getVTLTokenName(VtlTokens.LEFT_JOIN);
     public static final String USING_KEYWORD = getVTLTokenName(VtlTokens.USING);
-    public static final String OR_KEYWORD = getVTLTokenName(VtlTokens.OR);
 
     // ----- VTL syntax methods used in Eno
 
@@ -36,16 +38,24 @@ public class VtlSyntaxUtils {
         return vtlString1 + " " + getVTLTokenName(VtlTokens.CONCAT) + " " + vtlString2;
     }
 
+    public static String joinByANDLogicExpression(List<String> vtlStrings) {
+        if (vtlStrings == null || vtlStrings.isEmpty()) return "";
+
+        return vtlStrings.stream()
+                .filter(Objects::nonNull)
+                .map(VtlSyntaxUtils::removeExtraParenthesis)
+                .map(VtlSyntaxUtils::surroundByParenthesis)
+                .collect(Collectors.joining(" " + getVTLTokenName(VtlTokens.AND) + " "));
+    }
+
+
     /**
      *
-     * @param vtlString1
-     * @param vtlString2
+     * @param vtlStrings
      * @return (vtlString1) and (vtlString2)
      */
-    public static String joinByANDLogicExpression(String vtlString1, String vtlString2){
-        return surroundByParenthesis(removeExtraParenthesis(vtlString1))
-                + " "  + getVTLTokenName(VtlTokens.AND) + " "
-                + surroundByParenthesis(removeExtraParenthesis(vtlString2));
+    public static String joinByANDLogicExpression(String... vtlStrings) {
+        return joinByANDLogicExpression(Arrays.asList(vtlStrings));
     }
 
     /**
