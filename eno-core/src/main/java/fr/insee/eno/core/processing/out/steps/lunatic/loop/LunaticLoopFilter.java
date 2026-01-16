@@ -48,7 +48,7 @@ public class LunaticLoopFilter {
             defaultConditionFilterType.setValue("true");
             defaultConditionFilterType.setType(LabelTypeEnum.VTL);
             return defaultConditionFilterType;
-        };
+        }
         return computeLoopFilterExpression(filtersForLoop);
     }
 
@@ -83,7 +83,7 @@ public class LunaticLoopFilter {
             if(isStartOfLoopInsideFilter && isEndOfLoopInsideFilter) return true;
         }
         return false;
-    };
+    }
 
 
     /**
