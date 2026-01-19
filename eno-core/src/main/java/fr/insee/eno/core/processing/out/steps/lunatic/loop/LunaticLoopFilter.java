@@ -40,7 +40,7 @@ public class LunaticLoopFilter {
     public static ConditionFilterType computeConditionFilter(Loop enoLoop, EnoQuestionnaire enoQuestionnaire) {
 
         List<Filter> filtersForLoop = enoQuestionnaire.getFilters().stream()
-                .filter(filter -> isIncludingLoopFilter(filter, enoLoop))
+                .filter(filter -> isFilterIncludingLoop(filter, enoLoop))
                 .toList();
 
         if(filtersForLoop.isEmpty()) {
@@ -59,7 +59,7 @@ public class LunaticLoopFilter {
      * @param enoLoop: enoLoop
      * @return boolean
      */
-    private static boolean isIncludingLoopFilter(Filter filter, Loop enoLoop){
+    private static boolean isFilterIncludingLoop(Filter filter, Loop enoLoop){
         String occurrenceFilterId = enoLoop.getOccurrenceFilterId();
 
 
