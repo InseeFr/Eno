@@ -22,7 +22,7 @@ import java.util.List;
 @Context(format = Format.LUNATIC, type = ConditionFilterType.class)
 public class ComponentFilter extends EnoObject {
 
-    public static final String DEFAULT_FILTER_VALUE = "true";
+    public static final String DEFAULT_FILTER_VALUE = VtlSyntaxUtils.VTL_TRUE;
 
     /** Expression initialized with the default value. */
     @Getter @Setter

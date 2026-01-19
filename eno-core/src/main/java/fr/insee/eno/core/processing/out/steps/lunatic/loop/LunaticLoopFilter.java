@@ -45,7 +45,7 @@ public class LunaticLoopFilter {
 
         if(filtersForLoop.isEmpty()) {
             ConditionFilterType defaultConditionFilterType = new ConditionFilterType();
-            defaultConditionFilterType.setValue("true");
+            defaultConditionFilterType.setValue(VtlSyntaxUtils.VTL_TRUE);
             defaultConditionFilterType.setType(LabelTypeEnum.VTL);
             return defaultConditionFilterType;
         }

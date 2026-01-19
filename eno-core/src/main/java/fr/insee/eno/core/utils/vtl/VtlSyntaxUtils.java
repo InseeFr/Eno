@@ -25,6 +25,7 @@ public class VtlSyntaxUtils {
 
     public static final String LEFT_JOIN_OPERATOR = getVTLTokenName(VtlTokens.LEFT_JOIN);
     public static final String USING_KEYWORD = getVTLTokenName(VtlTokens.USING);
+    public static final String VTL_TRUE = "true";
 
     // ----- VTL syntax methods used in Eno
 
@@ -138,7 +139,7 @@ public class VtlSyntaxUtils {
      * @return VTL expression updated
      */
     public static String replaceByTrue(String expression, String expressionToReplace) {
-        return expression.replace(expressionToReplace, "true");
+        return expression.replace(expressionToReplace, VTL_TRUE);
     }
 
     /** List of Trevas token ids for VTL aggregation operators. */
