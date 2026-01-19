@@ -11,24 +11,43 @@ import fr.insee.lunatic.model.flat.*;
 
 import java.util.List;
 
+
 /**
- * La logique des filtres combinée à celles des boucles rend le calcul du filtre niveau "Racine de la boucle (ou du rond-point) " complexe.
- * Après analyse du fonctionnement de Lunatic et amélioration de son fonctionnement,
- * Nous pouvons désormais avoir les filtres qui fonctionnent dans tous les cas.
+ * {@code LunaticLoopFilter} is a utility class that handles the calculation of filters
+ * applicable to loops (or roundabouts) in a questionnaire, considering the specific rules
+ * of the Lunatic framework.
  *
- * Pseudo algo:
- * Pour chacune des filtres du questionnaire
- *      Si l'élément "début" de la boucle (ou du rond-point) est strictement inclus entre l'élément début et fin de filtre (strictement -> doit être différente)
- *      Alors, on ajoute ce filtre dans la condition
- *      Sinon, on ne fait rien
+ * <p>This class addresses a complex issue related to the combination of filters and loops:
+ * filters must be correctly applied to loops to avoid scope errors, especially when VTL expressions
+ * are only valid at the individual level or within a subset of the loop. The implemented logic ensures
+ * that only filters strictly included within the loop's scope are considered.</p>
  *
- * Dans le cas où l'élément début de la boucle (ou du rond-point) et l'élément début du filtre coïncide,
- * alors le filtre n'apparaitra que dans les éléments enfant de la boucle, et pas dans la condition du filtre de la boucle elle-même.
- * C'est suffisant pour Lunatic pour filtrer les éléments si nécessaire.
+ * <h2>General Algorithm</h2>
+ * <ol>
+ *   <li>For each filter in the questionnaire:
+ *     <ul>
+ *       <li>Check if the start and end elements of the loop are strictly included within the filter's scope
+ *           (without coinciding with the filter's boundaries).</li>
+ *       <li>If so, add this filter to the list of filters applicable to the loop.</li>
+ *     </ul>
+ *   </li>
+ *   <li>If no filters are applicable, return a default VTL condition ({@code true}).</li>
+ *   <li>Otherwise, combine the expressions of the applicable filters using AND logic.</li>
+ * </ol>
  *
- * Cela permet d'éviter les erreurs de scope au niveau de la boucle, car aujourd'hui, il y a des questionnaires dont le filtre de la boucle contiennent des formules VTL
- * qui ne sont valides qu'au niveau individu.
- * Pourquoi ? Parce qu'on pensait qu'il fallait mettre toutes les formules de filtres des composants enfant de la boucle au niveau du filtre de composant Boucle (ou rond-point)
+ * <h2>Special Cases</h2>
+ * <ul>
+ *   <li>If the start of the loop coincides with the start of the filter, the filter is not applied
+ *       directly to the loop, but only to its child elements.</li>
+ *   <li>Occurrence filters (whose ID matches the loop's filter ID) are excluded.</li>
+ * </ul>
+ *
+ * <h2>Example Usage</h2>
+ * <pre>
+ *   Loop enoLoop = ...; // Loop to process
+ *   EnoQuestionnaire enoQuestionnaire = ...; // Questionnaire containing the filters
+ *   ConditionFilterType condition = LunaticLoopFilter.computeConditionFilter(enoLoop, enoQuestionnaire);
+ * </pre>
  */
 public class LunaticLoopFilter {
 
@@ -37,6 +56,23 @@ public class LunaticLoopFilter {
     }
 
 
+    /**
+     * Computes the filter condition to apply to a given loop, based on the filters
+     * defined in the questionnaire.
+     *
+     * <p>This method:
+     * <ol>
+     *   <li>Filters the list of questionnaire filters to retain only those strictly included
+     *       within the loop's scope.</li>
+     *   <li>If no filters are applicable, returns a default VTL condition ({@code true}).</li>
+     *   <li>Otherwise, combines the expressions of the applicable filters using AND logic.</li>
+     * </ol>
+     *
+     * @param enoLoop The loop for which to compute the filter condition.
+     * @param enoQuestionnaire The questionnaire containing the filters to evaluate.
+     * @return An instance of {@code ConditionFilterType} representing the combined filter condition,
+     *         or a default condition if no filters are applicable.
+     */
     public static ConditionFilterType computeConditionFilter(Loop enoLoop, EnoQuestionnaire enoQuestionnaire) {
 
         List<Filter> filtersForLoop = enoQuestionnaire.getFilters().stream()
@@ -53,11 +89,18 @@ public class LunaticLoopFilter {
     }
 
     /**
-     * Compute if the filter include strictly the Loop.
-     * i.e if start and the end element of loop are inside strictly loop
-     * @param filter: enoFilter to check
-     * @param enoLoop: enoLoop
-     * @return boolean
+     * Checks if a given filter strictly includes a loop.
+     *
+     * <p>A filter strictly includes a loop if:
+     * <ul>
+     *   <li>The start and end elements of the loop are present within the filter's scope.</li>
+     *   <li>The start and end elements of the loop do not coincide with the filter's boundaries.</li>
+     *   <li>The filter is not an occurrence filter (whose ID matches the loop's filter ID).</li>
+     * </ul>
+     *
+     * @param filter The filter to check.
+     * @param enoLoop The loop to verify.
+     * @return {@code true} if the filter strictly includes the loop, {@code false} otherwise.
      */
     private static boolean isFilterIncludingLoop(Filter filter, Loop enoLoop){
         String occurrenceFilterId = enoLoop.getOccurrenceFilterId();
@@ -87,9 +130,18 @@ public class LunaticLoopFilter {
 
 
     /**
-     * Join by and logic all found expression and filter
-     * @param loopStructureFilters instance of EnoFilter
-     * @return Lunatic ConditionFilter with bindingDependencies
+     * Combines the VTL expressions of the filters applicable to a loop into a single expression,
+     * using AND logic.
+     *
+     * <p>This method:
+     * <ol>
+     *   <li>Concatenates the VTL expressions of the filters with the {@code AND} operator.</li>
+     *   <li>Extracts the binding dependencies (VTL variables) from the filters and adds them to the resulting condition.</li>
+     * </ol>
+     *
+     * @param loopStructureFilters List of filters applicable to the loop.
+     * @return An instance of {@code ConditionFilterType} containing the combined VTL expression
+     *         and its binding dependencies.
      */
     private static ConditionFilterType computeLoopFilterExpression(List<Filter> loopStructureFilters) {
         ConditionFilterType loopFilter = new ConditionFilterType();
