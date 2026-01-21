@@ -17,6 +17,7 @@ import fr.insee.eno.core.model.navigation.Control;
 import fr.insee.eno.core.model.navigation.EnoArticulation;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.*;
+import fr.insee.eno.core.model.question.pairwise.PairwiseVariables;
 import fr.insee.eno.core.model.question.table.CellLabel;
 import fr.insee.eno.core.model.question.table.TableCell;
 import fr.insee.eno.core.model.response.ArbitraryResponse;
@@ -86,6 +87,8 @@ public class LunaticConverter {
             return instantiateFrom(multipleResponseQuestion);
         if (enoObject instanceof TableCell)
             return new BodyCell();
+        if (enoObject instanceof PairwiseVariables)
+            return new PairwiseLinks.SourceVariables();
         if (enoObject instanceof Response)
             return new ResponseType();
         if (enoObject instanceof ArbitraryResponse)
