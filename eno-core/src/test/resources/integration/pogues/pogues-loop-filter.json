@@ -2,10 +2,10 @@
   "id" : "mf5f1cfv",
   "genericName" : "QUESTIONNAIRE",
   "agency" : "fr.insee",
-  "final" : true,
+  "final" : false,
   "flowLogic" : "FILTER",
   "formulasLanguage" : "VTL",
-  "lastUpdatedDate" : "Thu Sep 04 2025 14:56:44 GMT+0200 (heure d’été d’Europe centrale)",
+  "lastUpdatedDate" : "Fri Jan 16 2026 17:17:20 GMT+0100 (heure normale d’Europe centrale)",
   "owner" : "DR59-SNDI59",
   "Name" : "INTEGRATIO",
   "Label" : [ "Integration Eno" ],
@@ -13,8 +13,13 @@
   "FlowControl" : [ {
     "id" : "mf5f286m",
     "Description" : "Si filtre",
-    "Expression" : "not($FILTRE$)",
+    "Expression" : "not(nvl($FILTRE$, false))",
     "IfTrue" : "mf5f3vpu-mf5faaef"
+  }, {
+    "id" : "mkh345y0",
+    "Description" : "\"Si Combien > 3, filtre qui englobe la boucle sur S3 strictement\"",
+    "Expression" : "nvl($COMBIEN$, 0) >3",
+    "IfTrue" : "mkh35fma-mf5faaef"
   } ],
   "TargetMode" : [ "CAWI", "CAPI" ],
   "Child" : [ {
@@ -72,12 +77,44 @@
       } ]
     } ]
   }, {
+    "id" : "mkh35fma",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S2",
+    "Label" : [ "S2 - Simple Seq" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAWI", "CAPI" ],
+    "Child" : [ {
+      "id" : "mkh3614t",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "SATISIFAIT",
+      "Label" : [ "\"Satisifait ?\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAWI", "CAPI" ],
+      "Response" : [ {
+        "id" : "mkh37kvf",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 249
+        },
+        "CollectedVariableReference" : "mkh32ilp"
+      } ]
+    } ]
+  }, {
     "id" : "mf5f3vpu",
     "depth" : 1,
     "genericName" : "MODULE",
     "type" : "SequenceType",
-    "Name" : "S2LOOPOVER",
-    "Label" : [ "S2 loop over" ],
+    "Name" : "S3LOOPOVER",
+    "Label" : [ "S3 loop over" ],
     "Declaration" : [ ],
     "Control" : [ ],
     "FlowControl" : [ ],
@@ -111,8 +148,8 @@
     "depth" : 1,
     "genericName" : "MODULE",
     "type" : "SequenceType",
-    "Name" : "S3LOOPOVER",
-    "Label" : [ "S3 Loop over" ],
+    "Name" : "S4LOOPOVER",
+    "Label" : [ "S4 Loop over" ],
     "Declaration" : [ ],
     "Control" : [ ],
     "FlowControl" : [ ],
@@ -171,22 +208,13 @@
     "id" : "mf5fddaa",
     "Name" : "PAGE_1",
     "Label" : [ "Components for page 1" ],
-    "MemberReference" : [ "idendquest", "mf5f4ida", "mf5erc7y", "mf5f1qxy", "mf5f3vpu", "mf5f47qh", "mf5faaef", "mf5et8wj", "mf5eyeyk" ]
+    "MemberReference" : [ "mf5f4ida", "mf5erc7y", "mf5f1qxy", "mkh35fma", "mkh3614t", "mf5f3vpu", "mf5f47qh", "mf5faaef", "mf5et8wj", "mf5eyeyk", "idendquest" ]
   } ],
   "CodeLists" : {
     "CodeList" : [ ]
   },
   "Variables" : {
     "Variable" : [ {
-      "id" : "mf5exhg2",
-      "type" : "CollectedVariableType",
-      "Datatype" : {
-        "typeName" : "BOOLEAN",
-        "type" : "BooleanDatatypeType"
-      },
-      "Name" : "FILTRE",
-      "Label" : "FILTRE label"
-    }, {
       "id" : "mf5f00nf",
       "type" : "CollectedVariableType",
       "Datatype" : {
@@ -199,6 +227,15 @@
       },
       "Name" : "COMBIEN",
       "Label" : "COMBIEN label"
+    }, {
+      "id" : "mf5exhg2",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "BOOLEAN",
+        "type" : "BooleanDatatypeType"
+      },
+      "Name" : "FILTRE",
+      "Label" : "FILTRE label"
     }, {
       "id" : "mf5fcdqt",
       "type" : "CollectedVariableType",
@@ -227,6 +264,16 @@
       "Name" : "AGES3",
       "Label" : "AGES3 label",
       "Scope" : "mf5etm57"
+    }, {
+      "id" : "mkh32ilp",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "SATISIFAIT",
+      "Label" : "SATISIFAIT label"
     } ]
   },
   "Iterations" : {
@@ -247,7 +294,7 @@
       "Name" : "boucle-s3",
       "MemberReference" : [ "mf5faaef", "mf5faaef" ],
       "IterableReference" : "mf5etm57",
-      "Filter" : "$AGES2$ <> 10"
+      "Filter" : "$AGES2$ = 10"
     } ]
   },
   "childQuestionnaireRef" : [ ]
