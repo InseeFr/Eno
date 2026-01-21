@@ -17,11 +17,11 @@ import lombok.Setter;
 @Setter
 public class PairwiseVariables extends EnoObject {
 
-    @Pogues("#poguesIndex.get(#root.getName()).getName()")
+    @Pogues("#poguesIndex.get(#root.getName())?.getName()")
     @Lunatic("setName(#param)")
     private String name;
 
-    @Pogues("#poguesIndex.get(#root.getGender()).getName()")
+    @Pogues("#poguesIndex.get(#root.getGender())?.getName()")
     @Lunatic("setGender(#param)")
     private String gender;
 

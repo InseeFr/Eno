@@ -1,0 +1,418 @@
+{
+  "id": "mbuvc1zp",
+  "genericName": "QUESTIONNAIRE",
+  "agency": "fr.insee",
+  "final": false,
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "lastUpdatedDate": "Fri Jan 09 2026 16:47:10 GMT+0100 (heure normale d’Europe centrale)",
+  "owner": "DR59-SNDI59",
+  "Name": "MAGIC_PAIRWISE",
+  "Label": [
+    "FEAT: MAGIC variable pairwise"
+  ],
+  "Control": [],
+  "FlowControl": [],
+  "TargetMode": [
+    "CAPI"
+  ],
+  "Child": [
+    {
+      "id": "m8ob2mc8",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S1",
+      "Label": [
+        "\"S1\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI"
+      ],
+      "Child": [
+        {
+          "id": "m8ob76sn",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "PRENOM",
+          "Label": [
+            "\"Prénom du lien 2 à 2\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI"
+          ],
+          "Response": [
+            {
+              "id": "m8oazh55",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 249
+              },
+              "CollectedVariableReference": "mk5jao4c"
+            }
+          ]
+        },
+        {
+          "id": "mk5iabdt",
+          "questionType": "SINGLE_CHOICE",
+          "type": "QuestionType",
+          "Name": "SEXE",
+          "Label": [
+            "\"Sexe du lien 2 à 2\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI"
+          ],
+          "Response": [
+            {
+              "id": "mk5j9fzx",
+              "mandatory": false,
+              "CodeListReference": "mk5jhvxn",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mk5j3fy9"
+            }
+          ],
+          "ClarificationQuestion": [],
+          "codeFilters": []
+        }
+      ]
+    },
+    {
+      "id": "m8obbjkd",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S2",
+      "Label": [
+        "Liens entre les habitants du logement"
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI"
+      ],
+      "Child": [
+        {
+          "id": "m8ob5u9l",
+          "questionType": "PAIRWISE",
+          "type": "QuestionType",
+          "Name": "PAIRWISE",
+          "Label": [
+            "\"Qui est \" || yAxis || \" pour \" || xAxis || \" ?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI"
+          ],
+          "Response": [
+            {
+              "id": "m8obc119",
+              "CodeListReference": "m8oau2gs",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "m8obdtif"
+            }
+          ],
+          "Scope": "mk5jao4c",
+          "sourceVariableReferences": {
+          }
+        }
+      ]
+    },
+    {
+      "id": "mk720xpu",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "VARIABLESM",
+      "Label": [
+        "Variables magiques"
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI"
+      ],
+      "Child": [
+        {
+          "id": "mk71w7pq",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "Q_PARENT1_PRENOM",
+          "Label": [
+            "\"Votre premier parent est bien \" || $GLOBAL_PARENT1_PRENOM$ || \" ?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI"
+          ],
+          "Response": [
+            {
+              "id": "mk727yby",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "BOOLEAN",
+                "type": "BooleanDatatypeType"
+              },
+              "CollectedVariableReference": "mk7209ln"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI"
+      ],
+      "Child": []
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2106-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2106-dc"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "id": "m8oawlen",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "m8ob2mc8",
+        "m8ob76sn",
+        "mk5iabdt",
+        "m8obbjkd",
+        "m8ob5u9l",
+        "idendquest",
+        "mk720xpu",
+        "mk71w7pq"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "m8oau2gs",
+        "Label": "LISTE_LIENS",
+        "Code": [
+          {
+            "Value": "1",
+            "Label": "\"Son conjoint, sa conjointe\"",
+            "Parent": ""
+          },
+          {
+            "Value": "2",
+            "Label": "\"Sa mère, son père\"",
+            "Parent": ""
+          },
+          {
+            "Value": "3",
+            "Label": "\"Sa fille, son fils\"",
+            "Parent": ""
+          },
+          {
+            "Value": "4",
+            "Label": "\"Sa soeur, son frère (y compris demi et quasi)\"",
+            "Parent": ""
+          },
+          {
+            "Value": "5",
+            "Label": "\"Le ou la conjoint(e) d'un de ses parents (belle-mère, beau-père)\"",
+            "Parent": ""
+          },
+          {
+            "Value": "6",
+            "Label": "\"L'enfant de son ou sa conjoint(e) (belle-fille, beau-fils)\"",
+            "Parent": ""
+          },
+          {
+            "Value": "7",
+            "Label": "\"Le parent de son ou sa conjoint(e) (belle-mère, beau-père)\"",
+            "Parent": ""
+          },
+          {
+            "Value": "8",
+            "Label": "\"Le ou la conjoint(e) de son enfant (belle-fille, beau-fils)\"",
+            "Parent": ""
+          },
+          {
+            "Value": "9",
+            "Label": "\"Sa grand-mère, son grand-père\"",
+            "Parent": ""
+          },
+          {
+            "Value": "10",
+            "Label": "\"Sa petite-fille, petit-fils\"",
+            "Parent": ""
+          },
+          {
+            "Value": "11",
+            "Label": "\"Sa tante, son oncle\"",
+            "Parent": ""
+          },
+          {
+            "Value": "12",
+            "Label": "\"Sa cousine, son cousin\"",
+            "Parent": ""
+          },
+          {
+            "Value": "13",
+            "Label": "\"Sa nièce, son neveu\"",
+            "Parent": ""
+          },
+          {
+            "Value": "14",
+            "Label": "\"Un enfant placé en famille d'accueil\"",
+            "Parent": ""
+          },
+          {
+            "Value": "15",
+            "Label": "\"Sa belle-soeur, son beau-frère\"",
+            "Parent": ""
+          },
+          {
+            "Value": "16",
+            "Label": "\"Un autre lien familial\"",
+            "Parent": ""
+          },
+          {
+            "Value": "17",
+            "Label": "\"Son ou sa colocataire, sous-locataire\"",
+            "Parent": ""
+          },
+          {
+            "Value": "18",
+            "Label": "\"Autre lien (employé de maison, salarié logé, jeune au pair …)\"",
+            "Parent": ""
+          }
+        ]
+      },
+      {
+        "id": "mk5jhvxn",
+        "Label": "Genre",
+        "Code": [
+          {
+            "Value": "1",
+            "Label": "\"Homme\"",
+            "Parent": ""
+          },
+          {
+            "Value": "2",
+            "Label": "\"Femme\"",
+            "Parent": ""
+          }
+        ]
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "mk5jao4c",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 249
+        },
+        "Name": "PRENOM",
+        "Label": "PRENOM label",
+        "Scope": "m8ob7c76"
+      },
+      {
+        "id": "mk5j3fy9",
+        "type": "CollectedVariableType",
+        "CodeListReference": "mk5jhvxn",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "SEXE",
+        "Label": "SEXE label",
+        "Scope": "m8ob7c76"
+      },
+      {
+        "id": "m8obdtif",
+        "type": "CollectedVariableType",
+        "CodeListReference": "m8oau2gs",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "PAIRWISE",
+        "Label": "PAIRWISE label"
+      },
+      {
+        "id": "mk7209ln",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "BOOLEAN",
+          "type": "BooleanDatatypeType"
+        },
+        "Name": "Q_PARENT1_PRENOM",
+        "Label": "Q_PARENT1_PRENOM label"
+      }
+    ]
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "id": "m8ob7c76",
+        "type": "DynamicIterationType",
+        "Name": "loop",
+        "MemberReference": [
+          "m8ob2mc8",
+          "m8ob2mc8"
+        ],
+        "Minimum": "1",
+        "Maximum": "5",
+        "minimum": "1",
+        "maximum": "5",
+        "Step": 1
+      }
+    ]
+  },
+  "childQuestionnaireRef": []
+}

@@ -96,4 +96,19 @@ class PairwiseQuestionTest {
         assertEquals("SEXE", lunaticPairwise.getSourceVariables().getGender());
     }
 
+    @Test
+    void pairwiseSourceVariables_not_defined_integrationTest() throws ParsingException {
+        // Given + When
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        Questionnaire lunaticQuestionnaire = PoguesDDIToLunatic.fromInputStreams(
+                        classLoader.getResourceAsStream("integration/pogues/pogues-pairwise-variables-not-defined.json"),
+                        classLoader.getResourceAsStream("integration/ddi/ddi-pairwise-variables.xml"))
+                .transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC));
+        // Then
+        PairwiseLinks lunaticPairwise = assertInstanceOf(PairwiseLinks.class,
+                ((Question) lunaticQuestionnaire.getComponents().get(2)).getComponents().getFirst());
+        assertNull(lunaticPairwise.getSourceVariables().getName());
+        assertNull(lunaticPairwise.getSourceVariables().getGender());
+    }
+
 }
