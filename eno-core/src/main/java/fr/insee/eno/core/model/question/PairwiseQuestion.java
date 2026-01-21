@@ -3,11 +3,14 @@ package fr.insee.eno.core.model.question;
 import fr.insee.ddi.lifecycle33.datacollection.QuestionItemType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
+import fr.insee.eno.core.model.question.pairwise.PairwiseVariables;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.lunatic.model.flat.PairwiseLinks;
+import fr.insee.pogues.model.QuestionType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +23,7 @@ import static fr.insee.eno.core.annotations.Contexts.Context;
  * For now, this corresponds to a DDI QuestionItem object (could be QuestionGrid later on). */
 @Getter
 @Setter
+@Context(format = Format.POGUES, type = QuestionType.class)
 @Context(format = Format.DDI, type = QuestionItemType.class)
 @Context(format = Format.LUNATIC, type = PairwiseLinks.class)
 public class PairwiseQuestion extends SingleResponseQuestion {
@@ -35,6 +39,11 @@ public class PairwiseQuestion extends SingleResponseQuestion {
     @DDI("getInParameterArray(0).getParameterNameArray(0).getStringArray(0).getStringValue()")
     @Lunatic("T(fr.insee.eno.core.model.question.PairwiseQuestion).computeLunaticAxes(#this, #param)")
     String loopVariableName;
+
+    /** Variables associated with the pairwise question. */
+    @Pogues("getSourceVariableReferences()")
+    @Lunatic("setSourceVariables(#param)")
+    PairwiseVariables pairwiseVariables;
 
     /**
      * The pairwise question object encapsulates a unique choice question.

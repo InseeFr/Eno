@@ -1,13 +1,16 @@
 package fr.insee.eno.core.mapping.out.lunatic;
 
 import fr.insee.eno.core.DDIToEno;
+import fr.insee.eno.core.PoguesDDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
+import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
+import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -16,8 +19,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PairwiseQuestionTest {
 
@@ -77,6 +79,21 @@ class PairwiseQuestionTest {
         assertEquals(List.of("linkA", "linkB", "linkC", "linkD"),
                 lunaticPairwiseDropDown.getOptions().stream().map(Option::getValue).toList());
         // Note: for now the symLinks property is added (hard-coded values) by Lunatic-Model
+    }
+
+    @Test
+    void pairwiseSourceVariables_integrationTest() throws ParsingException {
+        // Given + When
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        Questionnaire lunaticQuestionnaire = PoguesDDIToLunatic.fromInputStreams(
+                classLoader.getResourceAsStream("integration/pogues/pogues-pairwise-variables.json"),
+                classLoader.getResourceAsStream("integration/ddi/ddi-pairwise-variables.xml"))
+                .transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC));
+        // Then
+        PairwiseLinks lunaticPairwise = assertInstanceOf(PairwiseLinks.class,
+                ((Question) lunaticQuestionnaire.getComponents().get(2)).getComponents().getFirst());
+        assertEquals("PRENOM", lunaticPairwise.getSourceVariables().getName());
+        assertEquals("SEXE", lunaticPairwise.getSourceVariables().getGender());
     }
 
 }
