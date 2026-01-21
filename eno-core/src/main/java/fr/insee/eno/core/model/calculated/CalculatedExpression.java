@@ -7,6 +7,7 @@ import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.reference.VariableIndex;
+import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.LabelType;
 import fr.insee.lunatic.model.flat.LabelTypeEnum;
 import fr.insee.pogues.model.ExpressionType;
@@ -38,7 +39,7 @@ public class CalculatedExpression extends EnoObject {
 
     public static CalculatedExpression defaultExpression() {
         CalculatedExpression res = new CalculatedExpression();
-        res.setValue("true");
+        res.setValue(VtlSyntaxUtils.VTL_TRUE);
         res.setType(LabelTypeEnum.VTL.value());
         return res;
     }

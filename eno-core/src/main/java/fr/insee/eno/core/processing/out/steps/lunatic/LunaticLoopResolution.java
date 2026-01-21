@@ -5,7 +5,6 @@ import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.EnoIdentifiableObject;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.navigation.Filter;
 import fr.insee.eno.core.model.navigation.LinkedLoop;
 import fr.insee.eno.core.model.navigation.StandaloneLoop;
 import fr.insee.eno.core.model.question.DynamicTableQuestion;
@@ -153,22 +152,7 @@ public class LunaticLoopResolution implements ProcessingStep<Questionnaire> {
                     "Loop '%s' is empty. This means something went wrong during the mapping or loop resolution.",
                     lunaticLoop.getId()));
         }
-        LunaticLoopFilter.computeAndSetConditionFilter(lunaticLoop);
-        Optional<String> occurrenceFilterExpression = occurrenceFilterExpression(enoLoop);
-        occurrenceFilterExpression.ifPresent(value ->
-                LunaticLoopFilter.removeOccurrenceFilterExpression(lunaticLoop, value));
-    }
-
-    private Optional<String> occurrenceFilterExpression(fr.insee.eno.core.model.navigation.Loop enoLoop) {
-        String filterId = enoLoop.getOccurrenceFilterId();
-        if (filterId == null)
-            return Optional.empty();
-        EnoIdentifiableObject occurrenceFilter = enoIndex.get(filterId);
-        if (!(occurrenceFilter instanceof Filter)) {
-            log.warn("Item if id {} should be a Filter object and not a {}", filterId, occurrenceFilter != null ? occurrenceFilter.getClass().getName() : null);
-            return Optional.empty();
-        }
-        return Optional.of(((Filter) occurrenceFilter).getExpression().getValue());
+        lunaticLoop.setConditionFilter(LunaticLoopFilter.computeConditionFilter(enoLoop, enoQuestionnaire));
     }
 
     /** Lunatic linked loops have an "iterations" property.
