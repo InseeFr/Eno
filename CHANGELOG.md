@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.61.1] - 2026-01-30
+### :construction_worker: Build System
+- [`5f4de46`](https://github.com/InseeFr/Eno/commit/5f4de46a55231cace7b248c7250a41fd193ce972) - upgrade docker (fix cves on base image) *(PR [#1366](https://github.com/InseeFr/Eno/pull/1366) by [@laurentC35](https://github.com/laurentC35))*
+
+
 ## [3.61.0] - 2026-01-30
 ### :sparkles: New Features
 - [`1b89e27`](https://github.com/InseeFr/Eno/commit/1b89e27879ebe8339408e0c9ff6f47f891ceb705) - pairwise source variables *(PR [#1364](https://github.com/InseeFr/Eno/pull/1364) by [@laurentC35](https://github.com/laurentC35))*
@@ -767,3 +772,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.59.0]: https://github.com/InseeFr/Eno/compare/3.58.4...3.59.0
 [3.60.0]: https://github.com/InseeFr/Eno/compare/3.59.0...3.60.0
 [3.61.0]: https://github.com/InseeFr/Eno/compare/3.60.0...3.61.0
+[3.61.1]: https://github.com/InseeFr/Eno/compare/3.61.0...3.61.1
