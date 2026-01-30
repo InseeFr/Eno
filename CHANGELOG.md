@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.61.0] - 2026-01-30
+### :sparkles: New Features
+- [`1b89e27`](https://github.com/InseeFr/Eno/commit/1b89e27879ebe8339408e0c9ff6f47f891ceb705) - pairwise source variables *(PR [#1364](https://github.com/InseeFr/Eno/pull/1364) by [@laurentC35](https://github.com/laurentC35))*
+
+### :bug: Bug Fixes
+- [`739b7c7`](https://github.com/InseeFr/Eno/commit/739b7c730ecafb0c09744f4722dc4aea809bac21) - loop filter scope *(PR [#1363](https://github.com/InseeFr/Eno/pull/1363) by [@laurentC35](https://github.com/laurentC35))*
+- [`99aec58`](https://github.com/InseeFr/Eno/commit/99aec58222116393039af9236afcf368dd2abe95) - pairwise with gender or name empty for source variables *(commit by [@laurentC35](https://github.com/laurentC35))*
+
+### :construction_worker: Build System
+- [`7a1192b`](https://github.com/InseeFr/Eno/commit/7a1192bae83cd634b8b8efb02e467fafcd016b1f) - fix release step *(PR [#1359](https://github.com/InseeFr/Eno/pull/1359) by [@nsenave](https://github.com/nsenave))*
+
+
 ## [3.60.0] - 2025-12-22
 ### :sparkles: New Features
 - [`838faf6`](https://github.com/InseeFr/Eno/commit/838faf668b199bda2efe6bd89a1ececbab78bba9) - resetable external variables *(PR [#1355](https://github.com/InseeFr/Eno/pull/1355) by [@nsenave](https://github.com/nsenave))*
@@ -754,3 +766,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.58.4]: https://github.com/InseeFr/Eno/compare/3.58.3...3.58.4
 [3.59.0]: https://github.com/InseeFr/Eno/compare/3.58.4...3.59.0
 [3.60.0]: https://github.com/InseeFr/Eno/compare/3.59.0...3.60.0
+[3.61.0]: https://github.com/InseeFr/Eno/compare/3.60.0...3.61.0
