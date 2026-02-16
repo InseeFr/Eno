@@ -74,7 +74,11 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     DisplayFormat displayFormat;
 
-    /** Reference to the code list that contain the modalities of the question. */
+    /**
+     * Reference to the code list that contain the modalities of the question.
+     * Used only for static questions (i.e., when choice type is not VARIABLE).
+     * For dynamic questions based on a variable, this field is null.
+     */
     @Pogues(
             "#this.getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
                     "#this.getResponse().getFirst().getCodeListReference() : null"
@@ -133,7 +137,9 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
     /**
      * List of conditions for the modalities to be filtered by previous responses or external data.
-     * In Lunatic, they are inserted in option through a processing. */
+     * Used only for static questions (i.e., when choice type is not VARIABLE).
+     * In Lunatic, they are inserted in option through a processing.
+     */
     @Pogues(
             "#this.getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
                     "#this.getCodeFilters() : null"
