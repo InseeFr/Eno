@@ -19,6 +19,7 @@ import fr.insee.lunatic.model.flat.CheckboxOne;
 import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.lunatic.model.flat.Dropdown;
 import fr.insee.lunatic.model.flat.Radio;
+import fr.insee.lunatic.model.flat.OptionFilter;
 import fr.insee.pogues.model.QuestionType;
 import fr.insee.pogues.model.ResponseType;
 import lombok.Getter;
@@ -74,9 +75,36 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     DisplayFormat displayFormat;
 
     /** Reference to the code list that contain the modalities of the question. */
-    @Pogues("getResponse().getFirst().getCodeListReference()")
+    @Pogues(
+            "#this.getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+                    "#this.getResponse().getFirst().getCodeListReference() : null"
+    )
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDDICodeListReference(#this)")
     String codeListReference;
+
+
+    /**
+     * Variable providing the dynamic response options (QCU based on a loop).
+     */
+    @Pogues(
+            "#this.getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+                    "#this.getResponse().getFirst().getVariableReference() : null"
+    )
+    @Lunatic("setOptionSource(#param)")
+    String optionSource;
+
+    /**
+     * Filter applied to dynamic response options (VTL expression).
+     */
+    @Pogues(
+            "#this.getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE " +
+                    "&& #this.getOptionFilter() != null ? " +
+                    "new fr.insee.lunatic.model.flat.OptionFilter(" +
+                    "'VTL', #this.getOptionFilter(), #this.getResponse().getFirst().getVariableReference()" +
+                    ") : null"
+    )
+    @Lunatic("setOptionFilter(#param)")
+    OptionFilter optionFilter;
 
     /**
      * List of modalities of the unique choice question.
@@ -106,7 +134,10 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     /**
      * List of conditions for the modalities to be filtered by previous responses or external data.
      * In Lunatic, they are inserted in option through a processing. */
-    @Pogues("getCodeFilters()")
+    @Pogues(
+            "#this.getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+                    "#this.getCodeFilters() : null"
+    )
     List<CodeFilter> codeFilters = new ArrayList<>();
 
     /** Indicates whether the response is mandatory for this component. */
