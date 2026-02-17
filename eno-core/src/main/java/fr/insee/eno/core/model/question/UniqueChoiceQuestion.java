@@ -15,11 +15,7 @@ import fr.insee.eno.core.model.response.CodeFilter;
 import fr.insee.eno.core.model.response.DetailResponse;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.CheckboxOne;
-import fr.insee.lunatic.model.flat.ComponentTypeEnum;
-import fr.insee.lunatic.model.flat.Dropdown;
-import fr.insee.lunatic.model.flat.Radio;
-import fr.insee.lunatic.model.flat.OptionFilter;
+import fr.insee.lunatic.model.flat.*;
 import fr.insee.pogues.model.QuestionType;
 import fr.insee.pogues.model.ResponseType;
 import lombok.Getter;
@@ -108,7 +104,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
                     ") : null"
     )
     @Lunatic("setOptionFilter(#param)")
-    OptionFilter optionFilter;
+    LabelType optionFilter;
 
     /**
      * List of modalities of the unique choice question.
