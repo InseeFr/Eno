@@ -9,6 +9,7 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.response.CodeFilter;
@@ -104,7 +105,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
                     ") : null"
     )
     @Lunatic("setOptionFilter(#param)")
-    LabelType optionFilter;
+    CalculatedExpression optionFilter;
 
     /**
      * List of modalities of the unique choice question.
