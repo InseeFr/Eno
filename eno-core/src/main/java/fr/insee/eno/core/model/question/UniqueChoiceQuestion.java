@@ -77,7 +77,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * For dynamic questions based on a variable, this field is null.
      */
     @Pogues(
-            "#this.getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+            "#this.getResponse().getFirst().getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
                     "#this.getResponse().getFirst().getCodeListReference() : null"
     )
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDDICodeListReference(#this)")
@@ -88,7 +88,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * Variable providing the dynamic response options (QCU based on a loop).
      */
     @Pogues(
-            "#this.getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+            "#this.getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
                     "#this.getResponse().getFirst().getVariableReference() : null"
     )
     @Lunatic("setOptionSource(#param)")
@@ -98,7 +98,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * Filter applied to dynamic response options (VTL expression).
      */
     @Pogues(
-            "#this.getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE " +
+            "#this.getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE " +
                     "&& #this.getOptionFilter() != null ? " +
                     "new fr.insee.lunatic.model.flat.OptionFilter(" +
                     "'VTL', #this.getOptionFilter(), #this.getResponse().getFirst().getVariableReference()" +
@@ -138,7 +138,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * In Lunatic, they are inserted in option through a processing.
      */
     @Pogues(
-            "#this.getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+            "#this.getResponse().getFirst().getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
                     "#this.getCodeFilters() : null"
     )
     List<CodeFilter> codeFilters = new ArrayList<>();
