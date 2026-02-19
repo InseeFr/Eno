@@ -11,6 +11,7 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
+import fr.insee.eno.core.serialize.LunaticSerializer;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -109,6 +110,19 @@ class PairwiseQuestionTest {
                 ((Question) lunaticQuestionnaire.getComponents().get(2)).getComponents().getFirst());
         assertNull(lunaticPairwise.getSourceVariables().getName());
         assertNull(lunaticPairwise.getSourceVariables().getGender());
+    }
+
+
+    @Test
+    void pairwiseQuestionInLoop_integrationTest() throws ParsingException {
+        // Given + When
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        Questionnaire lunaticQuestionnaire = PoguesDDIToLunatic.fromInputStreams(
+                        classLoader.getResourceAsStream("integration/pogues/pogues-pairwise-in-loop.json"),
+                        classLoader.getResourceAsStream("integration/ddi/ddi-pairwise-in-loop.xml"))
+                .transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC));
+        // Then
+        System.out.println(LunaticSerializer.serializeToJson(lunaticQuestionnaire));
     }
 
 }

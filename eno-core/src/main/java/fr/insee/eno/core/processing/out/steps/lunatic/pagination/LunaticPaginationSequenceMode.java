@@ -72,7 +72,7 @@ public class LunaticPaginationSequenceMode extends LunaticPaginationAllModes {
     }
 
     @Override
-    public void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount, boolean isParentPaginated) {
+    public void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount, boolean isParentPaginated, boolean isNextComponentPairwise) {
         String numPage = numPagePrefix + pageCount;
         subsequence.setPage(numPage);
     }
