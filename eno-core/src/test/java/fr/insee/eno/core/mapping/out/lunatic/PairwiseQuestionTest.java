@@ -121,8 +121,7 @@ class PairwiseQuestionTest {
                         classLoader.getResourceAsStream("integration/pogues/pogues-pairwise-in-loop.json"),
                         classLoader.getResourceAsStream("integration/ddi/ddi-pairwise-in-loop.xml"))
                 .transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC));
-        // Then
-        System.out.println(LunaticSerializer.serializeToJson(lunaticQuestionnaire));
+        // Then : TODO
     }
 
 }
