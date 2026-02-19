@@ -39,6 +39,13 @@ public class LunaticUniqueChoiceQuestionCleaning {
         if(uniqueChoiceQuestion.isEmpty()){
             throw new MappingException("Cannot find Lunatic component for " + enoUniqueChoiceQuestion + ".");
         }
+        String responseVariable = enoUniqueChoiceQuestion.getResponse().getVariableName();
+        if (enoUniqueChoiceQuestion.getOptionSource() != null) {
+            processCleaningOptionSource(
+                    responseVariable,
+                    enoUniqueChoiceQuestion.getOptionSource()
+            );
+        }
         if (uniqueChoiceQuestion.get() instanceof Radio radio)
             radio.getOptions().forEach(option -> processCleaningOption(option, radio.getResponse().getName()));
         if (uniqueChoiceQuestion.get() instanceof CheckboxOne checkboxOne)
@@ -105,6 +112,19 @@ public class LunaticUniqueChoiceQuestionCleaning {
         allVariablesThatInfluenceExpression.add(variableName);
         extraConditionFilter.setBindingDependencies(allVariablesThatInfluenceExpression);
         return extraConditionFilter;
+    }
+
+    private void processCleaningOptionSource(String responseVariableName, String optionSourceVariable) {
+        CleaningType cleaning = lunaticQuestionnaire.getCleaning();
+
+        processCleaningForFilterExpression(
+                cleaning,
+                variableIndex,
+                variableShapeFromIndex,
+                "true",
+                List.of(optionSourceVariable),
+                List.of(responseVariableName)
+        );
     }
 
 }
