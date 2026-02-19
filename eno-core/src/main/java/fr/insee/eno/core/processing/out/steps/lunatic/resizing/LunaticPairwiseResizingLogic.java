@@ -52,11 +52,10 @@ public class LunaticPairwiseResizingLogic {
         String pairwiseSourceVariableName = enoPairwiseQuestion.getLoopVariableName();
 
         // Expressions that resize the concerned (pairwise) variable
-        String xSizeExpression = "count("+pairwiseSourceVariableName+")";
-        String ySizeExpression = "count("+pairwiseSourceVariableName+")";
+        String sizeVTLExpression =  "count("+pairwiseSourceVariableName+")";
 
         resizingVariableNames.forEach(variableName -> insertPairwiseEntry(
-                lunaticResizing, variableName, xSizeExpression, ySizeExpression, pairwiseVariableName));
+                lunaticResizing, variableName, sizeVTLExpression, sizeVTLExpression, pairwiseVariableName));
     }
 
     private Set<String> findResizingVariablesForPairwise(PairwiseLinks pairwiseLinks, PairwiseQuestion enoPairwiseQuestion) {
