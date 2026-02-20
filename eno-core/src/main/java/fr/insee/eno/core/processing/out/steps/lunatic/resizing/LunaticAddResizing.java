@@ -45,10 +45,10 @@ public class LunaticAddResizing implements ProcessingStep<Questionnaire> {
             }
         });
 
-        // handle pairwise by finding them before
-        searchForPairwiseLinks(lunaticQuestionnaire.getComponents()).forEach(pairwiseLinks -> {
-            pairwiseResizingLogic.buildPairwiseResizingEntries(pairwiseLinks, resizingType);
-        });
+        // handling resizing pairwise logic by finding them
+        searchForPairwiseLinks(lunaticQuestionnaire.getComponents()).forEach(pairwiseLinks ->
+            pairwiseResizingLogic.buildPairwiseResizingEntries(pairwiseLinks, resizingType)
+        );
         lunaticQuestionnaire.setResizing(resizingType);
     }
 

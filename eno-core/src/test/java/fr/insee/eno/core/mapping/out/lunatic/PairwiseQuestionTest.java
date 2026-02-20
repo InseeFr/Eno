@@ -11,7 +11,6 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.serialize.LunaticSerializer;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 import org.junit.jupiter.api.BeforeEach;

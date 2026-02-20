@@ -56,6 +56,8 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
         }
 
         // if parent paginated and next component is a Pairwise, we want to display the subsequence regardless of the declarations & descriptions
+        // this is used to have a kind of "pairwise title" in the pairwise page, like 'The links of John'
+        // "Question component" can't be used in the case, so Subsequence is used for that. So we need to display it regardless of the declarations & descriptions
         if(isParentPaginated && isNextComponentPairwise){
             subsequence.setPage(numPage);
             return;

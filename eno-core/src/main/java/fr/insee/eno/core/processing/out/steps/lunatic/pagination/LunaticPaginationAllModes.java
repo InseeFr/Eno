@@ -110,9 +110,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
                     applyNumPageOnSequence(sequence, numPagePrefix + pageCount);
                 }
                 case SUBSEQUENCE -> {
-                    int nextIndex = componentIndex + 1;
-                    ComponentTypeEnum nextComponentType = nextIndex < components.size() ? components.get(nextIndex).getComponentType() : null;
-                    boolean isNextComponentPairwise = ComponentTypeEnum.PAIRWISE_LINKS.equals(nextComponentType);
+                    boolean isNextComponentPairwise = isNextComponentPairwise(components, componentIndex);
                     Subsequence subsequence = (Subsequence) component;
                     applyNumPageOnSubsequence(subsequence, numPagePrefix, pageCount, isParentPaginated, isNextComponentPairwise);
                 }
@@ -127,6 +125,12 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
                 default -> component.setPage(numPagePrefix + pageCount);
             }
         }
+    }
+
+    public static boolean isNextComponentPairwise(List<ComponentType> components, int currentComponentIndex){
+        int nextIndex = currentComponentIndex + 1;
+        ComponentTypeEnum nextComponentType = nextIndex < components.size() ? components.get(nextIndex).getComponentType() : null;
+        return ComponentTypeEnum.PAIRWISE_LINKS.equals(nextComponentType);
     }
 
     /**

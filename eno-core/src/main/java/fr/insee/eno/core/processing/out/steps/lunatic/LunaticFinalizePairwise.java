@@ -67,8 +67,9 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
     private static boolean isInLoop(List<ComponentType> components, ComponentType pairwise, boolean inLoop){
         for(ComponentType component: components) {
             if(pairwise.getId().equals(component.getId())) return inLoop;
-            if(ComponentTypeEnum.LOOP.equals(component.getComponentType())){
-                if(isInLoop(((Loop) component).getComponents(), pairwise, true)) return true;
+            if(ComponentTypeEnum.LOOP.equals(component.getComponentType()) &&
+                    isInLoop(((Loop) component).getComponents(), pairwise, true)) {
+                return true;
             }
         }
         return false;
