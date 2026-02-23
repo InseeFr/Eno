@@ -65,7 +65,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * In DDI, there are conventional values in the "generic output format" property.
      * In Lunatic, it is used by the converter to create the right object, and to set the component type property. */
     @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(" +
-            "#this.getResponse().getFirst())")
+            "getResponse().getFirst())")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
     @Lunatic("setComponentType(" +
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
@@ -77,19 +77,18 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * For dynamic questions based on a variable, this field is null.
      */
     @Pogues(
-            "#this.getResponse().getFirst().getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
-                    "#this.getResponse().getFirst().getCodeListReference() : null"
+            "getResponse().getFirst().getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+                    "getResponse().getFirst().getCodeListReference() : null"
     )
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDDICodeListReference(#this)")
     String codeListReference;
-
 
     /**
      * Variable providing the dynamic response options (QCU based on a loop).
      */
     @Pogues(
-            "#this.getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
-                    "#this.getResponse().getFirst().getVariableReference() : null"
+            "getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+                    "getResponse().getFirst().getVariableReference() : null"
     )
     @Lunatic("setOptionSource(#param)")
     String optionSource;
@@ -98,10 +97,10 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * Filter applied to dynamic response options (VTL expression).
      */
     @Pogues(
-            "#this.getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE " +
-                    "&& #this.getOptionFilter() != null ? " +
+            "getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE " +
+                    "&& getOptionFilter() != null ? " +
                     "new fr.insee.lunatic.model.flat.OptionFilter(" +
-                    "'VTL', #this.getOptionFilter(), #this.getResponse().getFirst().getVariableReference()" +
+                    "'VTL', getOptionFilter(), getResponse().getFirst().getVariableReference()" +
                     ") : null"
     )
     @Lunatic("setOptionFilter(#param)")
@@ -138,8 +137,8 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * In Lunatic, they are inserted in option through a processing.
      */
     @Pogues(
-            "#this.getResponse().getFirst().getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
-                    "#this.getCodeFilters() : null"
+            "getResponse().getFirst().getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+                    "getCodeFilters() : null"
     )
     List<CodeFilter> codeFilters = new ArrayList<>();
 
