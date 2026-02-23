@@ -1,0 +1,306 @@
+{
+  "id" : "mls9blwb",
+  "genericName" : "QUESTIONNAIRE",
+  "agency" : "fr.insee",
+  "final" : false,
+  "flowLogic" : "FILTER",
+  "formulasLanguage" : "VTL",
+  "lastUpdatedDate" : "2026-02-19T16:56:14.551+0100",
+  "owner" : "DR59-SNDI59",
+  "Name" : "PAIRWISEPAGE",
+  "Label" : [ "Liens 2 à 2 paginé" ],
+  "Control" : [ ],
+  "FlowControl" : [ ],
+  "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+  "Child" : [ {
+    "id" : "mkdumm9l",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S1",
+    "Label" : [ "Habitants du logement" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+    "Child" : [ {
+      "id" : "mkduvzxm",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "PRENOM",
+      "Label" : [ "\"Prénom:\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+      "Response" : [ {
+        "id" : "mkduuxls",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 249
+        },
+        "CollectedVariableReference" : "mkdupx40"
+      } ]
+    }, {
+      "id" : "mkdujzn9",
+      "questionType" : "SINGLE_CHOICE",
+      "type" : "QuestionType",
+      "Name" : "SEXE",
+      "Label" : [ "\"Sexe:\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+      "Response" : [ {
+        "id" : "mkdv3ynt",
+        "mandatory" : false,
+        "CodeListReference" : "mkdux3h5",
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "visualizationHint" : "RADIO",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 1
+        },
+        "CollectedVariableReference" : "mkduvvvq"
+      } ],
+      "ClarificationQuestion" : [ ],
+      "codeFilters" : [ ]
+    } ]
+  }, {
+    "id" : "mkdus3wr",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S2",
+    "Label" : [ "Liens entre les habitants du logement" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+    "Child" : [ {
+      "id" : "mls9jp7o",
+      "depth" : 2,
+      "genericName" : "SUBMODULE",
+      "type" : "SequenceType",
+      "Name" : "LIENS",
+      "Label" : [ "\"Les liens de \" || PRENOM || \"\"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+      "Child" : [ {
+        "id" : "mkdv8ihy",
+        "questionType" : "PAIRWISE",
+        "type" : "QuestionType",
+        "Name" : "LIENS_HABITANTS",
+        "Label" : [ "\"Qui est \" || yAxis || \" pour \" || xAxis || \" ?\"" ],
+        "Declaration" : [ ],
+        "Control" : [ ],
+        "FlowControl" : [ ],
+        "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+        "Response" : [ {
+          "id" : "mlsap7bb",
+          "CodeListReference" : "mkdv7h5q",
+          "Datatype" : {
+            "typeName" : "TEXT",
+            "visualizationHint" : "DROPDOWN",
+            "type" : "TextDatatypeType",
+            "MaxLength" : 1
+          },
+          "CollectedVariableReference" : "mlsavfrk"
+        } ],
+        "Scope" : "mkdupx40",
+        "sourceVariableReferences" : {
+          "name" : "mkdupx40",
+          "gender" : "mkduvvvq",
+          "age" : ""
+        }
+      } ]
+    } ]
+  }, {
+    "id" : "mkdusamd",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S3",
+    "Label" : [ "Variables globales" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+    "Child" : [ {
+      "id" : "mkdvcykn",
+      "questionType" : "SIMPLE",
+      "type" : "QuestionType",
+      "Name" : "VERIF",
+      "Label" : [ "\" \" || PRENOM || \": votre premier parent est \" || GLOBAL_PARENT1_PRENOM || \" (\" || GLOBAL_PARENT1_SEXE || \"), votre second parent est \" || GLOBAL_PARENT2_PRENOM || \" (\" || GLOBAL_PARENT2_SEXE || \"), votre partenaire est \" || GLOBAL_CONJOINT_PRENOM || \", vos enfants sont \" || GLOBAL_ENFANTS_PRENOMS || \" \"" ],
+      "Declaration" : [ ],
+      "Control" : [ ],
+      "FlowControl" : [ ],
+      "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+      "Response" : [ {
+        "id" : "mkdv0ium",
+        "mandatory" : false,
+        "Datatype" : {
+          "typeName" : "TEXT",
+          "type" : "TextDatatypeType",
+          "MaxLength" : 249
+        },
+        "CollectedVariableReference" : "mkgp7fkv"
+      } ]
+    } ]
+  }, {
+    "id" : "mkdvgmn0",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "S4",
+    "Label" : [ "Fin" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+    "Child" : [ ]
+  }, {
+    "id" : "idendquest",
+    "depth" : 1,
+    "genericName" : "MODULE",
+    "type" : "SequenceType",
+    "Name" : "QUESTIONNAIRE_END",
+    "Label" : [ "QUESTIONNAIRE_END" ],
+    "Declaration" : [ ],
+    "Control" : [ ],
+    "FlowControl" : [ ],
+    "TargetMode" : [ "CAPI", "CAWI", "CATI", "PAPI" ],
+    "Child" : [ ]
+  } ],
+  "DataCollection" : [ {
+    "id" : "s2193-dc",
+    "uri" : "http://ddi:fr.insee:DataCollection.s2193-dc",
+    "Name" : "Enquête capacité à innover et stratégie 2024"
+  } ],
+  "ComponentGroup" : [ {
+    "id" : "mkduyz84",
+    "Name" : "PAGE_1",
+    "Label" : [ "Components for page 1" ],
+    "MemberReference" : [ "mkdumm9l", "mkduvzxm", "mkdujzn9", "mkdus3wr", "mls9jp7o", "mkdv8ihy", "mkdusamd", "mkdvcykn", "mkdvgmn0", "idendquest" ]
+  } ],
+  "CodeLists" : {
+    "CodeList" : [ {
+      "id" : "mkdux3h5",
+      "Label" : "Sexe",
+      "Code" : [ {
+        "Value" : "1",
+        "Label" : "Homme",
+        "Parent" : ""
+      }, {
+        "Value" : "2",
+        "Label" : "Femme",
+        "Parent" : ""
+      } ]
+    }, {
+      "id" : "mkdv7h5q",
+      "Label" : "Liens",
+      "Code" : [ {
+        "Value" : "1",
+        "Label" : "Conjoint",
+        "Parent" : ""
+      }, {
+        "Value" : "2",
+        "Label" : "Parent",
+        "Parent" : ""
+      }, {
+        "Value" : "3",
+        "Label" : "Enfant",
+        "Parent" : ""
+      }, {
+        "Value" : "4",
+        "Label" : "Autre",
+        "Parent" : ""
+      } ]
+    }, {
+      "id" : "",
+      "Label" : "",
+      "Code" : [ ]
+    } ]
+  },
+  "Variables" : {
+    "Variable" : [ {
+      "id" : "mkdupx40",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "PRENOM",
+      "Label" : "PRENOM label",
+      "Scope" : "mkdulmx2"
+    }, {
+      "id" : "mkduvvvq",
+      "type" : "CollectedVariableType",
+      "CodeListReference" : "mkdux3h5",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 1
+      },
+      "Name" : "SEXE",
+      "Label" : "SEXE label",
+      "Scope" : "mkdulmx2"
+    }, {
+      "id" : "mlsavfrk",
+      "type" : "CollectedVariableType",
+      "CodeListReference" : "mkdv7h5q",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 1
+      },
+      "Name" : "LIENS_HABITANTS",
+      "Label" : "LIENS_HABITANTS label",
+      "Scope" : "mkdulmx2"
+    }, {
+      "id" : "mkgp7fkv",
+      "type" : "CollectedVariableType",
+      "Datatype" : {
+        "typeName" : "TEXT",
+        "type" : "TextDatatypeType",
+        "MaxLength" : 249
+      },
+      "Name" : "VERIF",
+      "Label" : "VERIF label",
+      "Scope" : "mkdulmx2"
+    } ]
+  },
+  "Iterations" : {
+    "Iteration" : [ {
+      "id" : "mkdulmx2",
+      "type" : "DynamicIterationType",
+      "Name" : "HABITANTS",
+      "Label" : "\"Ajouter un habitant\"",
+      "MemberReference" : [ "mkdumm9l", "mkdumm9l" ],
+      "Minimum" : "1",
+      "Maximum" : "10",
+      "isFixedLength" : false,
+      "minimum" : "1",
+      "maximum" : "10",
+      "Step" : 1
+    }, {
+      "id" : "mkduz03e",
+      "type" : "DynamicIterationType",
+      "Name" : "HABITANTS3",
+      "MemberReference" : [ "mkdusamd", "mkdusamd" ],
+      "IterableReference" : "mkdulmx2"
+    }, {
+      "id" : "mls97zse",
+      "type" : "DynamicIterationType",
+      "Name" : "HABITANTS_LIENS",
+      "MemberReference" : [ "mls9jp7o", "mls9jp7o" ],
+      "IterableReference" : "mkdulmx2"
+    } ]
+  },
+  "childQuestionnaireRef" : [ ]
+}
