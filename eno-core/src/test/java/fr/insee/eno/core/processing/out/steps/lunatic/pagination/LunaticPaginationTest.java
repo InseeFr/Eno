@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
+import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +40,7 @@ class LunaticPaginationTest {
         @Test
         void questionMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
             assertEquals("question", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
@@ -55,7 +56,7 @@ class LunaticPaginationTest {
         @Test
         void sequenceMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
             assertEquals("sequence", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
@@ -98,7 +99,7 @@ class LunaticPaginationTest {
         @Test
         void questionMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
             assertEquals("question", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
@@ -114,7 +115,7 @@ class LunaticPaginationTest {
         @Test
         void sequenceMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
             assertEquals("sequence", questionnaire.getPaginationEnum().value());
             assertEquals("1", questionnaire.getMaxPage());
@@ -160,7 +161,7 @@ class LunaticPaginationTest {
         @Test
         void questionMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
             assertEquals("question", questionnaire.getPaginationEnum().value());
             Loop loop = (Loop) questionnaire.getComponents().getFirst();
@@ -176,7 +177,7 @@ class LunaticPaginationTest {
         @Test
         void sequenceMode() {
             //
-            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE).apply(questionnaire);
+            new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
             assertEquals("sequence", questionnaire.getPaginationEnum().value());
             Loop loop = (Loop) questionnaire.getComponents().getFirst();
