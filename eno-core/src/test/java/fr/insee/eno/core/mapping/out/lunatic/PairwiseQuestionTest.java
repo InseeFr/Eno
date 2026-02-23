@@ -12,6 +12,7 @@ import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.*;
+import fr.insee.lunatic.model.flat.variable.VariableType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -109,6 +110,31 @@ class PairwiseQuestionTest {
                 ((Question) lunaticQuestionnaire.getComponents().get(2)).getComponents().getFirst());
         assertNull(lunaticPairwise.getSourceVariables().getName());
         assertNull(lunaticPairwise.getSourceVariables().getGender());
+    }
+
+
+    @Test
+    void pairwiseQuestionInLoop_integrationTest() throws ParsingException {
+        // Given + When
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        Questionnaire lunaticQuestionnaire = PoguesDDIToLunatic.fromInputStreams(
+                        classLoader.getResourceAsStream("integration/pogues/pogues-pairwise-in-loop.json"),
+                        classLoader.getResourceAsStream("integration/ddi/ddi-pairwise-in-loop.xml"))
+                .transform(EnoParameters.of(Context.HOUSEHOLD, ModeParameter.CAWI, Format.LUNATIC));
+        Subsequence lunaticSubSequence = assertInstanceOf(Subsequence.class, ((Loop)
+                lunaticQuestionnaire.getComponents().get(2)).getComponents().getFirst());
+        PairwiseLinks lunaticPairwise = assertInstanceOf(PairwiseLinks.class, ((Question) ((Loop)
+                lunaticQuestionnaire.getComponents().get(2)).getComponents().get(1)).getComponents().getFirst());
+        // Then : correct page for subsequence and pairwise
+        assertEquals("3.1", lunaticSubSequence.getPage());
+        assertNull(lunaticSubSequence.getGoToPage());
+        assertEquals("3.1", lunaticPairwise.getPage());
+
+        Optional<VariableType> pairwiseVariable = lunaticQuestionnaire.getVariables().stream()
+                .filter(v -> "LIENS_HABITANTS".equals(v.getName()))
+                .findFirst();
+        assertTrue(pairwiseVariable.isPresent(), "Variable 'LIENS_HABITANTS' doesn't exist in questionnaire.");
+        assertEquals(2, pairwiseVariable.get().getDimension().value());
     }
 
 }

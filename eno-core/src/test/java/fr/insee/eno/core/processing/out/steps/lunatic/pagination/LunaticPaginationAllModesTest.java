@@ -3,8 +3,9 @@ package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 import fr.insee.lunatic.model.flat.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticPaginationAllModesTest {
 
@@ -36,6 +37,39 @@ class LunaticPaginationAllModesTest {
         assertEquals("LOOP_SIZE_VAR", loop.getIterations().getValue());
         assertEquals(LabelTypeEnum.VTL, loop.getIterations().getType());
         assertEquals("SOME_VAR", loop.getIterations().getShapeFrom());
+    }
+
+    @Test
+    void isNextComponentPairwise_shouldReturnTrue(){
+        // Given
+        List<ComponentType> components = List.of(
+                new Subsequence(),
+                new PairwiseLinks()
+        );
+        // When
+        boolean isPairwise = LunaticPaginationAllModes.isNextComponentPairwise(components, 0);
+        // Then
+        assertTrue(isPairwise);
+    }
+
+    @Test
+    void isNextComponentPairwise_shouldReturnFalse(){
+        // Given
+        List<ComponentType> components1 = List.of(
+                new Subsequence(),
+                new PairwiseLinks()
+        );
+        List<ComponentType> components2 = List.of(
+                new Subsequence(),
+                new PairwiseLinks(),
+                new Subsequence()
+        );
+        // When
+        boolean isPairwise1 = LunaticPaginationAllModes.isNextComponentPairwise(components1, 1);
+        boolean isPairwise2 = LunaticPaginationAllModes.isNextComponentPairwise(components2, 2);
+        // Then
+        assertFalse(isPairwise1);
+        assertFalse(isPairwise2);
     }
 
 }

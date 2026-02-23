@@ -121,7 +121,9 @@ public class LunaticUtils {
                 case CHECKBOX_BOOLEAN, INPUT_NUMBER, INPUT, TEXTAREA, SUGGESTER, DATEPICKER, DURATION, RADIO,
                         CHECKBOX_ONE, DROPDOWN, CHECKBOX_GROUP, TABLE ->
                         result.addAll(getDirectResponseNames(component));
-                case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, TEXT, FILTER_DESCRIPTION, ACCORDION ->
+                case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, TEXT, FILTER_DESCRIPTION, ACCORDION,
+                     // this function is used for resizing logic, for Pairwise we use LunaticPairwiseResizingLogic processing
+                     PAIRWISE_LINKS ->
                         doNothing();
                 case QUESTION ->
                         throw new IllegalStateException("This method does not support the question component.");
@@ -132,10 +134,6 @@ public class LunaticUtils {
                 case LOOP, ROUNDABOUT ->
                         throw new LunaticLoopException(String.format(
                                 "Nested loop are forbidden: loop '%s' contains an other loop.",
-                                loop.getId()));
-                case PAIRWISE_LINKS ->
-                        throw new LunaticLoopException(String.format(
-                                "Pairwise components are forbidden in loops: loop '%s' contains a pairwise component.",
                                 loop.getId()));
             }
         });
@@ -295,6 +293,27 @@ public class LunaticUtils {
 
                 });
         return questionCollectedVarIndex;
+    }
+
+    /**
+     * retrieve pairwise links
+     * @param components components to search
+     * @return pairwise links list
+     */
+    public static List<PairwiseLinks> searchForPairwiseLinks(List<ComponentType> components) {
+        List<PairwiseLinks> pairwiseLinksList = new ArrayList<>();
+        pairwiseLinksList.addAll(components.stream()
+                .filter(componentType -> ComponentTypeEnum.PAIRWISE_LINKS.equals(componentType.getComponentType()))
+                .map(PairwiseLinks.class::cast)
+                .toList());
+
+        pairwiseLinksList.addAll(components.stream()
+                .filter(componentType -> ComponentTypeEnum.LOOP.equals(componentType.getComponentType()))
+                .map(Loop.class::cast)
+                .map(loop -> searchForPairwiseLinks(loop.getComponents()))
+                .flatMap(Collection::stream)
+                .toList());
+        return pairwiseLinksList;
     }
 
     public static boolean isConditionFilterActive(String expression){
