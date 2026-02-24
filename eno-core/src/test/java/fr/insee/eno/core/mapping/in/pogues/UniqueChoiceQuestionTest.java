@@ -18,7 +18,7 @@ class UniqueChoiceQuestionTest {
 
     /** Creates a Pogues unique choice question object with 'basic' properties. */
     @BeforeEach
-    void createPoguesUCQ() {
+    void createPoguesUniqueChoiceQuestion() {
         poguesUCQ = new QuestionType();
         poguesUCQ.setQuestionType(QuestionTypeEnum.SINGLE_CHOICE);
         poguesUCQ.setName("UCQ_NAME");
