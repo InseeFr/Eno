@@ -57,18 +57,21 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
         subsequence.setGoToPage(null);
 
         String numPage = numPagePrefix + pageCount;
-        // special case where a subsequence has no declarations (so no page attribute set) and must link to next component
-        if (isParentPaginated && !hasDeclarationOrDescription(subsequence)) {
-            int pageSequence = pageCount + 1;
-            numPage = numPagePrefix + pageSequence;
-        }
 
         // if parent paginated and next component is a Pairwise, we want to display the subsequence regardless of the declarations & descriptions
         // this is used to have a kind of "pairwise title" in the pairwise page, like 'The links of John'
         // "Question component" can't be used in the case, so Subsequence is used for that. So we need to display it regardless of the declarations & descriptions, only if mode is not CAPI or CATI
         if(isParentPaginated && isNextComponentPairwise && !isCAPIOrCATI()){
+            int pageSequence = pageCount + 1;
+            numPage = numPagePrefix + pageSequence;
             subsequence.setPage(numPage);
             return;
+        }
+
+        // special case where a subsequence has no declarations (so no page attribute set) and must link to next component
+        if (isParentPaginated && !hasDeclarationOrDescription(subsequence)) {
+            int pageSequence = pageCount + 1;
+            numPage = numPagePrefix + pageSequence;
         }
 
         // if parent paginated or empty declarations
