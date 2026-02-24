@@ -86,10 +86,8 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     /**
      * Variable providing the dynamic response options (QCU based on a loop).
      */
-    @Pogues(
-            "getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
-                    "getResponse().getFirst().getVariableReference() : null"
-    )
+    @Pogues("getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+            "getResponse().getFirst().getVariableReference() : null")
     @Lunatic("setOptionSource(#param)")
     String optionSource;
 
