@@ -2,7 +2,6 @@ package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 
 import fr.insee.eno.core.exceptions.technical.MappingException;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
-import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
@@ -20,23 +19,13 @@ import static fr.insee.eno.core.utils.LunaticUtils.isConditionFilterActive;
 import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.*;
 
 @Slf4j
-public class LunaticUniqueChoiceQuestionCleaning {
+public record LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionnaire,
+                                                  Map<String, VariableType> variableIndex,
+                                                  Map<String, String> variableShapeFromIndex) {
 
-    private final Questionnaire lunaticQuestionnaire;
-    private final Map<String, VariableType> variableIndex;
-    private final Map<String, String> variableShapeFromIndex;
-
-    public LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionnaire,
-                                               Map<String, VariableType> variableIndex,
-                                               Map<String, String> variableShapeFromIndex){
-        this.lunaticQuestionnaire = lunaticQuestionnaire;
-        this.variableIndex = variableIndex;
-        this.variableShapeFromIndex = variableShapeFromIndex;
-    }
-
-    public void processCleaningUniqueChoiceQuestion(UniqueChoiceQuestion enoUniqueChoiceQuestion){
+    public void processCleaningUniqueChoiceQuestion(UniqueChoiceQuestion enoUniqueChoiceQuestion) {
         Optional<ComponentType> uniqueChoiceQuestion = findComponentById(lunaticQuestionnaire, enoUniqueChoiceQuestion.getId());
-        if(uniqueChoiceQuestion.isEmpty()){
+        if (uniqueChoiceQuestion.isEmpty()) {
             throw new MappingException("Cannot find Lunatic component for " + enoUniqueChoiceQuestion + ".");
         }
         String responseVariable = enoUniqueChoiceQuestion.getResponse().getVariableName();
@@ -54,31 +43,32 @@ public class LunaticUniqueChoiceQuestionCleaning {
             dropdown.getOptions().forEach(option -> processCleaningOption(option, dropdown.getResponse().getName()));
     }
 
-    /** Add a cleaning for clarification question that are displayed only when a specific option is checked. */
-    public void processCleaningUniqueChoiceQuestionClarification(UniqueChoiceQuestion enoUniqueChoiceQuestion){
+    /**
+     * Add a cleaning for clarification question that are displayed only when a specific option is checked.
+     */
+    public void processCleaningUniqueChoiceQuestionClarification(UniqueChoiceQuestion enoUniqueChoiceQuestion) {
         enoUniqueChoiceQuestion.getDetailResponses().forEach(detailResponse -> {
             String responseVariable = enoUniqueChoiceQuestion.getResponse().getVariableName();
             String clarificationVariable = detailResponse.getResponse().getVariableName();
             String clarificationValue = detailResponse.getValue();
 
             processCleaningForFilterExpression(lunaticQuestionnaire.getCleaning(), variableIndex, variableShapeFromIndex,
-                VtlSyntaxUtils.expressionEqualToOther(responseVariable, VtlSyntaxUtils.surroundByDoubleQuotes(clarificationValue)),
-                List.of(responseVariable),
-                List.of(clarificationVariable));
-            });
+                    expressionEqualToOther(responseVariable, surroundByDoubleQuotes(clarificationValue)),
+                    List.of(responseVariable),
+                    List.of(clarificationVariable));
+        });
     }
 
 
-
-    private Optional<String> getResponseNameOfDetailResponse(Option option){
-        if(option.getDetail() != null) option.getDetail().getResponse().getName();
+    private Optional<String> getResponseNameOfDetailResponse(Option option) {
+        if (option.getDetail() != null) option.getDetail().getResponse().getName();
         return Optional.empty();
     }
 
-    private void processCleaningOption(Option option, String uniqueResponseVariableName){
+    private void processCleaningOption(Option option, String uniqueResponseVariableName) {
         CleaningType cleaning = lunaticQuestionnaire.getCleaning();
         ConditionFilterType conditionFilter = option.getConditionFilter();
-        if(isConditionFilterActive(conditionFilter)){
+        if (isConditionFilterActive(conditionFilter)) {
             Optional<String> detailResponseNameOfOption = getResponseNameOfDetailResponse(option);
             // cleaning detail response
             detailResponseNameOfOption.ifPresent(detailResponse -> processCleaningForFilterExpression(
@@ -97,7 +87,7 @@ public class LunaticUniqueChoiceQuestionCleaning {
         }
     }
 
-    private ConditionFilterType buildExpressionForCleaningQCU(Option option, String variableName){
+    private ConditionFilterType buildExpressionForCleaningQCU(Option option, String variableName) {
         // special step, add cleaning condition of Variable:
         // We have to clean if the variable if the codeValue is filtered and this coodeValue is selected
         // The new condition is ( conditionFilter OR optionValue is not selected  i.e variable <> optionValue)
@@ -121,7 +111,7 @@ public class LunaticUniqueChoiceQuestionCleaning {
                 cleaning,
                 variableIndex,
                 variableShapeFromIndex,
-                "true",
+                "false",
                 List.of(optionSourceVariable),
                 List.of(responseVariableName)
         );
