@@ -57,7 +57,7 @@ class UniqueChoiceQuestionTest {
     }
 
     @Test
-    void dynamic_qcu_sets_option_source_dropdown() {
+    void dynamic_ucq_sets_option_source_dropdown() {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         UniqueChoiceQuestion enoUniqueChoiceQuestion = new UniqueChoiceQuestion();
         enoUniqueChoiceQuestion.setDisplayFormat(UniqueChoiceQuestion.DisplayFormat.DROPDOWN);
@@ -73,7 +73,7 @@ class UniqueChoiceQuestionTest {
     }
 
     @Test
-    void dynamic_qcu_sets_option_source_radio() {
+    void dynamic_ucq_sets_option_source_radio() {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         UniqueChoiceQuestion enoUniqueChoiceQuestion = new UniqueChoiceQuestion();
         enoUniqueChoiceQuestion.setDisplayFormat(UniqueChoiceQuestion.DisplayFormat.RADIO);
@@ -89,7 +89,7 @@ class UniqueChoiceQuestionTest {
     }
 
     @Test
-    void dynamic_qcu_sets_option_source_checkboxOne() {
+    void dynamic_ucq_sets_option_source_checkboxOne() {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         UniqueChoiceQuestion enoUniqueChoiceQuestion = new UniqueChoiceQuestion();
         enoUniqueChoiceQuestion.setDisplayFormat(UniqueChoiceQuestion.DisplayFormat.CHECKBOX);
@@ -105,7 +105,7 @@ class UniqueChoiceQuestionTest {
     }
 
     @Test
-    void dynamic_qcu_has_no_static_options() {
+    void dynamic_ucq_has_no_static_options() {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         UniqueChoiceQuestion enoUniqueChoiceQuestion = new UniqueChoiceQuestion();
         enoUniqueChoiceQuestion.setDisplayFormat(UniqueChoiceQuestion.DisplayFormat.RADIO);
@@ -120,7 +120,7 @@ class UniqueChoiceQuestionTest {
     }
 
     @Test
-    void dynamic_qcu_sets_option_filter() {
+    void dynamic_ucq_sets_option_filter() {
         EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
         UniqueChoiceQuestion enoUniqueChoiceQuestion = new UniqueChoiceQuestion();
         enoUniqueChoiceQuestion.setDisplayFormat(UniqueChoiceQuestion.DisplayFormat.DROPDOWN);
