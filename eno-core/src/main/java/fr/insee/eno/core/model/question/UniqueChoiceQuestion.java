@@ -96,13 +96,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     /**
      * Filter applied to dynamic response options (VTL expression).
      */
-    @Pogues(
-            "getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE " +
-                    "&& getOptionFilter() != null ? " +
-                    "new fr.insee.lunatic.model.flat.OptionFilter(" +
-                    "'VTL', getOptionFilter(), getResponse().getFirst().getVariableReference()" +
-                    ") : null"
-    )
+    @Pogues("getOptionFilter()")
     @Lunatic("setOptionFilter(#param)")
     CalculatedExpression optionFilter;
 
