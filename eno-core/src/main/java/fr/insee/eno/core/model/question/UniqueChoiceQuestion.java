@@ -82,7 +82,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     String codeListReference;
 
     /**
-     * Variable providing the dynamic response options (QCU based on a loop).
+     * Variable providing the dynamic response options (QCU based on an iteration (e.g. a loop)).
      */
     @Pogues("getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
             "#poguesIndex.get(getResponse().getFirst().getVariableReference()).getName() : null")
