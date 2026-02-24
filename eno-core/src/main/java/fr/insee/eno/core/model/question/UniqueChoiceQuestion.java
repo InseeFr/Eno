@@ -76,10 +76,8 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * Used only for static questions (i.e., when choice type is not VARIABLE).
      * For dynamic questions based on a variable, this field is null.
      */
-    @Pogues(
-            "getResponse().getFirst().getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
-                    "getResponse().getFirst().getCodeListReference() : null"
-    )
+    @Pogues("getResponse().getFirst().getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+            "getResponse().getFirst().getCodeListReference() : null")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDDICodeListReference(#this)")
     String codeListReference;
 
@@ -134,10 +132,7 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * Used only for static questions (i.e., when choice type is not VARIABLE).
      * In Lunatic, they are inserted in option through a processing.
      */
-    @Pogues(
-            "getResponse().getFirst().getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
-                    "getCodeFilters() : null"
-    )
+    @Pogues("getCodeFilters()")
     List<CodeFilter> codeFilters = new ArrayList<>();
 
     /** Indicates whether the response is mandatory for this component. */
