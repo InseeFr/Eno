@@ -5,6 +5,7 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.technical.MappingException;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.parameter.Format;
@@ -47,6 +48,21 @@ public class UniqueChoiceCell extends ResponseCell {
     @Pogues("getCodeListReference()")
     @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
     String codeListReference;
+
+    /**
+     * Variable providing the dynamic response options (QCU based on an iteration (e.g. a loop)).
+     */
+    @Pogues("getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+            "#poguesIndex.get(getResponse().getFirst().getVariableReference()).getName() : null")
+    @Lunatic("setOptionSource(#param)")
+    String optionSource;
+
+    /**
+     * Filter applied to dynamic response options (VTL expression).
+     */
+    @Pogues("getOptionFilter()")
+    @Lunatic("setOptionFilter(#param)")
+    CalculatedExpression optionFilter;
 
     @Lunatic("getOptions()")
     List<CodeItem> codeItems = new ArrayList<>();
