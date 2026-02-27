@@ -98,7 +98,8 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * @param isParentPaginated is the parent component is paginated or not
      */
     public void applyNumPageOnComponents(List<ComponentType> components, String numPagePrefix, int pageCount, boolean isParentPaginated) {
-        for (ComponentType component : components) {
+        for (int componentIndex = 0; componentIndex < components.size(); componentIndex++) {
+            ComponentType component = components.get(componentIndex);
             if (canIncrementPageCount(component, isParentPaginated)) {
                 pageCount++;
             }
@@ -109,8 +110,9 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
                     applyNumPageOnSequence(sequence, numPagePrefix + pageCount);
                 }
                 case SUBSEQUENCE -> {
+                    boolean isNextComponentPairwise = isNextComponentPairwise(components, componentIndex);
                     Subsequence subsequence = (Subsequence) component;
-                    applyNumPageOnSubsequence(subsequence, numPagePrefix, pageCount, isParentPaginated);
+                    applyNumPageOnSubsequence(subsequence, numPagePrefix, pageCount, isParentPaginated, isNextComponentPairwise);
                 }
                 case FILTER_DESCRIPTION -> {
                     FilterDescription filterDescription = (FilterDescription) component;
@@ -123,6 +125,12 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
                 default -> component.setPage(numPagePrefix + pageCount);
             }
         }
+    }
+
+    public static boolean isNextComponentPairwise(List<ComponentType> components, int currentComponentIndex){
+        int nextIndex = currentComponentIndex + 1;
+        ComponentTypeEnum nextComponentType = nextIndex < components.size() ? components.get(nextIndex).getComponentType() : null;
+        return ComponentTypeEnum.PAIRWISE_LINKS.equals(nextComponentType);
     }
 
     /**
@@ -143,7 +151,7 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * @param pageCount         page count of the sequence in his parent component
      * @param isParentPaginated is the parent component paginated or not
      */
-    public abstract void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount, boolean isParentPaginated);
+    public abstract void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount, boolean isParentPaginated, boolean isNextComponentPairwise);
 
     /**
      * Apply the numpage of a filter description component
@@ -274,8 +282,6 @@ public abstract class LunaticPaginationAllModes implements ProcessingStep<Questi
      * @param pageCount     page count of the pairwise link in his parent component
      */
     public void applyNumPageOnPairwiseLinks(PairwiseLinks links, String currentPrefix, int pageCount) {
-        rootLevelCheck(currentPrefix, "Pairwise are not allowed inside an iteration.");
-
         // Set the page number on the pairwise component
         links.setPage(currentPrefix + pageCount);
 

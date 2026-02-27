@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static fr.insee.eno.core.utils.LunaticUtils.searchForPairwiseLinks;
+
 /**
  * Processing to finalize pairwise (handle symlinks/conditionFilter/calculated axis variables),
  */
@@ -41,6 +43,13 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
 
         PairwiseLinks pairwiseLinks = pairwiseLinksList.getFirst();
 
+        boolean isPairwiseInLoop = isInLoop(lunaticQuestionnaire.getComponents(), pairwiseLinks, false);
+
+        // should delete `xAxisIterations` & `yAxisIterations` (useless and cause scope issue where pairwise is insideLoop)
+        if(isPairwiseInLoop){
+            pairwiseLinks.setXAxisIterations(null);
+            pairwiseLinks.setYAxisIterations(null);
+        }
         // Label is in the pairwise subcomponent
         pairwiseLinks.setLabel(null);
 
@@ -52,51 +61,19 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
         pairwiseLinks.setSymLinks(PairwiseLinks.createDefaultSymLinks(simpleResponseComponent.getResponse().getName()));
 
         // Filter is hold by the pairwise component only
-        ComponentType pairwiseSubComponent = pairwiseLinks.getComponents().getFirst();
-        pairwiseSubComponent.setConditionFilter(buildConditionFilterForSimpleComponent());
         lunaticQuestionnaire.getVariables().addAll(createCalculatedAxisVariables(pairwiseLinks));
     }
 
-    /**
-     * This method create filter to avoid asking unnecessary questions to people who aren't concerned.
-     *
-     * The expression must be equal (replacing variableSource with X_AXIS/Y_AXIS) to the Pairwise cleaning expression.
-     * (see LunaticPairwiseQuestionCleaning)
-     * @return the conditionFilter for inner component
-     */
-    private ConditionFilterType buildConditionFilterForSimpleComponent(){
-        ConditionFilterType conditionFilter = new ConditionFilterType();
-        conditionFilter.setType(LabelTypeEnum.VTL);
-        String nvlXAxisNotEqualEmpty = VtlSyntaxUtils.expressionNotEqualToOther(
-                VtlSyntaxUtils.nvlDefaultValue(X_AXIS, "\"\""),
-                "\"\"");
-        String nvlYAxisNotEqualEmpty = VtlSyntaxUtils.expressionNotEqualToOther(
-                VtlSyntaxUtils.nvlDefaultValue(Y_AXIS, "\"\""),
-                "\"\"");
-        conditionFilter.setValue(VtlSyntaxUtils.joinByANDLogicExpression(nvlXAxisNotEqualEmpty, nvlYAxisNotEqualEmpty));
-        conditionFilter.setBindingDependencies(List.of(X_AXIS, Y_AXIS));
-        return conditionFilter;
-    }
+    private static boolean isInLoop(List<ComponentType> components, ComponentType pairwise, boolean inLoop){
+        for(ComponentType component: components) {
+            if(pairwise.getId().equals(component.getId())) return inLoop;
+            if(ComponentTypeEnum.LOOP.equals(component.getComponentType()) &&
+                    isInLoop(((Loop) component).getComponents(), pairwise, true)) {
+                return true;
+            }
+        }
+        return false;
 
-    /**
-     * retrieve pairwise links
-     * @param components components to search
-     * @return pairwise links list
-     */
-    private List<PairwiseLinks> searchForPairwiseLinks(List<ComponentType> components) {
-        List<PairwiseLinks> pairwiseLinksList = new ArrayList<>();
-        pairwiseLinksList.addAll(components.stream()
-                .filter(componentType -> ComponentTypeEnum.PAIRWISE_LINKS.equals(componentType.getComponentType()))
-                .map(PairwiseLinks.class::cast)
-                .toList());
-
-        pairwiseLinksList.addAll(components.stream()
-                .filter(componentType -> ComponentTypeEnum.LOOP.equals(componentType.getComponentType()))
-                .map(Loop.class::cast)
-                .map(loop -> searchForPairwiseLinks(loop.getComponents()))
-                .flatMap(Collection::stream)
-                .toList());
-        return pairwiseLinksList;
     }
 
     /**

@@ -72,7 +72,7 @@ class LunaticPaginationQuestionModeTest {
         new LunaticLoopResolution(enoQuestionnaire).apply(lunaticQuestionnaire);
 
         // When
-        new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION).apply(lunaticQuestionnaire);
+        new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION, EnoParameters.ModeParameter.CAWI).apply(lunaticQuestionnaire);
 
         // Then
         assertEquals("1", lunaticQuestionnaire.getComponents().get(0).getPage());

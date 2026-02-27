@@ -74,7 +74,7 @@ class LunaticFinalizePairwiseTest {
         lunaticQuestionnaire.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
         assertEquals(
-                "(nvl(xAxis, \"\") <> \"\") and (nvl(yAxis, \"\") <> \"\")",
+                "true",
                 radioComponent.getConditionFilter().getValue());
     }
 
@@ -94,7 +94,7 @@ class LunaticFinalizePairwiseTest {
         loop.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
         assertEquals(
-                "(nvl(xAxis, \"\") <> \"\") and (nvl(yAxis, \"\") <> \"\")",
+                "true",
                 radioComponent.getConditionFilter().getValue());
     }
 
