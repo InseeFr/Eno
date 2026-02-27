@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.62.0] - 2026-02-27
+### :sparkles: New Features
+- [`f4c870f`](https://github.com/InseeFr/Eno/commit/f4c870f95a9f559c758122eed2687122b65a95ab) - handle generation for pairwise in loop *(PR [#1367](https://github.com/InseeFr/Eno/pull/1367) by [@laurentC35](https://github.com/laurentC35))*
+
+### :bug: Bug Fixes
+- [`bea7389`](https://github.com/InseeFr/Eno/commit/bea73892b4d8a25031989c94149d63922cda07dd) - do not dispay subsequence with paiwise in capi or cati mode *(PR [#1370](https://github.com/InseeFr/Eno/pull/1370) by [@laurentC35](https://github.com/laurentC35))*
+
+
 ## [3.61.1] - 2026-01-30
 ### :construction_worker: Build System
 - [`5f4de46`](https://github.com/InseeFr/Eno/commit/5f4de46a55231cace7b248c7250a41fd193ce972) - upgrade docker (fix cves on base image) *(PR [#1366](https://github.com/InseeFr/Eno/pull/1366) by [@laurentC35](https://github.com/laurentC35))*
@@ -773,3 +781,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.60.0]: https://github.com/InseeFr/Eno/compare/3.59.0...3.60.0
 [3.61.0]: https://github.com/InseeFr/Eno/compare/3.60.0...3.61.0
 [3.61.1]: https://github.com/InseeFr/Eno/compare/3.61.0...3.61.1
+[3.62.0]: https://github.com/InseeFr/Eno/compare/3.61.1...3.62.0
