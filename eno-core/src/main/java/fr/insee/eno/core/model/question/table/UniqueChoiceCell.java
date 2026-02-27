@@ -49,11 +49,9 @@ public class UniqueChoiceCell extends ResponseCell {
     @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
     String codeListReference;
 
-    /**
-    * Variable providing the dynamic response options (QCU based on an iteration (e.g. a loop)).
-    */
+    /** Variable providing the dynamic response options (UCQ based on an iteration (e.g. a loop)). */
     @Pogues("getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
-            "#poguesIndex.get(getVariableReference()).getName() : null")
+            "#poguesIndex.get(#root.getVariableReference()).getName() : null")
     @Lunatic("setOptionSource(#param)")
     String optionSource;
 
