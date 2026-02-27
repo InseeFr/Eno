@@ -50,19 +50,12 @@ public class UniqueChoiceCell extends ResponseCell {
     String codeListReference;
 
     /**
-     * Variable providing the dynamic response options (QCU based on an iteration (e.g. a loop)).
-     */
-    @Pogues("getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
-            "#poguesIndex.get(getResponse().getFirst().getVariableReference()).getName() : null")
+    * Variable providing the dynamic response options (QCU based on an iteration (e.g. a loop)).
+    */
+    @Pogues("getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+            "#poguesIndex.get(getVariableReference()).getName() : null")
     @Lunatic("setOptionSource(#param)")
     String optionSource;
-
-    /**
-     * Filter applied to dynamic response options (VTL expression).
-     */
-    @Pogues("getOptionFilter()")
-    @Lunatic("setOptionFilter(#param)")
-    CalculatedExpression optionFilter;
 
     @Lunatic("getOptions()")
     List<CodeItem> codeItems = new ArrayList<>();
