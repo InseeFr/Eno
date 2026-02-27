@@ -1,5 +1,6 @@
 package fr.insee.eno.core.processing.out.steps.lunatic.pagination;
 
+import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.LunaticParameters;
 import fr.insee.lunatic.model.flat.*;
 
@@ -8,8 +9,15 @@ import fr.insee.lunatic.model.flat.*;
  */
 public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
 
+    private EnoParameters.ModeParameter collectMode = EnoParameters.ModeParameter.CAWI;
+
     public LunaticPaginationQuestionMode() {
         super(true, LunaticParameters.LunaticPaginationMode.QUESTION);
+    }
+
+    public LunaticPaginationQuestionMode(EnoParameters.ModeParameter collectMode) {
+        super(true, LunaticParameters.LunaticPaginationMode.QUESTION);
+        this.collectMode = collectMode;
     }
 
     /**
@@ -43,7 +51,7 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
     }
 
     @Override
-    public void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount, boolean isParentPaginated) {
+    public void applyNumPageOnSubsequence(Subsequence subsequence, String numPagePrefix, int pageCount, boolean isParentPaginated, boolean isNextComponentPairwise) {
         // Clear page attributes in case of previous pagination
         subsequence.setPage(null);
         subsequence.setGoToPage(null);
@@ -53,6 +61,14 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
         if (isParentPaginated && !hasDeclarationOrDescription(subsequence)) {
             int pageSequence = pageCount + 1;
             numPage = numPagePrefix + pageSequence;
+        }
+
+        // if parent paginated and next component is a Pairwise, we want to display the subsequence regardless of the declarations & descriptions
+        // this is used to have a kind of "pairwise title" in the pairwise page, like 'The links of John'
+        // "Question component" can't be used in the case, so Subsequence is used for that. So we need to display it regardless of the declarations & descriptions, only if mode is not CAPI or CATI
+        if(isParentPaginated && isNextComponentPairwise && !isCAPIOrCATI()){
+            subsequence.setPage(numPage);
+            return;
         }
 
         // if parent paginated or empty declarations
@@ -94,5 +110,9 @@ public class LunaticPaginationQuestionMode extends LunaticPaginationAllModes {
     private boolean isLinkedLoop(Loop loop) {
         // if lines != null loop is a main loop
         return loop.getLines() == null;
+    }
+
+    private boolean isCAPIOrCATI(){
+        return EnoParameters.ModeParameter.CATI.equals(collectMode) || EnoParameters.ModeParameter.CAPI.equals(collectMode);
     }
 }
