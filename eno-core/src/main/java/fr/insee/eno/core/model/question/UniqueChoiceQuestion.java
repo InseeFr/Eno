@@ -189,7 +189,18 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     }
 
     public static String mapDDICodeListReference(QuestionItemType questionItemType) {
-        return getDDICodeDomain(questionItemType).getCodeListReference().getIDArray(0).getStringValue();
+
+        CodeDomainType codeDomain = getDDICodeDomain(questionItemType);
+
+        if (codeDomain.getCodeListReference() == null) {
+            // Dynamic UCQ based on a variable → no CodeList
+            return null;
+        }
+
+        return codeDomain
+                .getCodeListReference()
+                .getIDArray(0)
+                .getStringValue();
     }
 
     public static List<ResponseDomainInMixedType> mapDetailResponses(QuestionItemType questionItemType) {
