@@ -46,7 +46,8 @@ public class UniqueChoiceCell extends ResponseCell {
     String orientation = Orientation.HORIZONTAL.toString();
 
     @Pogues("getCodeListReference()")
-    @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    @DDI("getResponseDomain().getCodeListReference() != null ? " +
+            "getResponseDomain().getCodeListReference().getIDArray(0).getStringValue() : null")
     String codeListReference;
 
     /** Variable providing the dynamic response options (UCQ based on an iteration (e.g. a loop)). */
