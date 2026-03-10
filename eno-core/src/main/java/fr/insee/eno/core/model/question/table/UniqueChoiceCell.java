@@ -40,7 +40,7 @@ public class UniqueChoiceCell extends ResponseCell {
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     UniqueChoiceQuestion.DisplayFormat displayFormat;
 
-    /** Lunatic property for the orientation of modalities.
+    /** Lunatic property for the orientation of options.
      * Horizontal for table cells. */
     @Lunatic("setOrientation(T(fr.insee.lunatic.model.flat.Orientation).valueOf(#param))")
     String orientation = Orientation.HORIZONTAL.toString();
