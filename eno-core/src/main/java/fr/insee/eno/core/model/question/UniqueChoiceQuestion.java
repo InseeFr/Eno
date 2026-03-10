@@ -9,16 +9,14 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.response.CodeFilter;
 import fr.insee.eno.core.model.response.DetailResponse;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.lunatic.model.flat.CheckboxOne;
-import fr.insee.lunatic.model.flat.ComponentTypeEnum;
-import fr.insee.lunatic.model.flat.Dropdown;
-import fr.insee.lunatic.model.flat.Radio;
+import fr.insee.lunatic.model.flat.*;
 import fr.insee.pogues.model.QuestionType;
 import fr.insee.pogues.model.ResponseType;
 import lombok.Getter;
@@ -67,16 +65,36 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
      * In DDI, there are conventional values in the "generic output format" property.
      * In Lunatic, it is used by the converter to create the right object, and to set the component type property. */
     @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(" +
-            "#this.getResponse().getFirst())")
+            "getResponse().getFirst())")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
     @Lunatic("setComponentType(" +
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     DisplayFormat displayFormat;
 
-    /** Reference to the code list that contain the modalities of the question. */
-    @Pogues("getResponse().getFirst().getCodeListReference()")
+    /**
+     * Reference to the code list that contain the modalities of the question.
+     * Used only for static questions (i.e., when choice type is not VARIABLE).
+     * For dynamic questions based on a variable, this field is null.
+     */
+    @Pogues("getResponse().getFirst().getChoiceType() != T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+            "getResponse().getFirst().getCodeListReference() : null")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).mapDDICodeListReference(#this)")
     String codeListReference;
+
+    /**
+     * Variable providing the dynamic response options (QCU based on an iteration (e.g. a loop)).
+     */
+    @Pogues("getResponse().getFirst().getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+            "#poguesIndex.get(getResponse().getFirst().getVariableReference()).getName() : null")
+    @Lunatic("setOptionSource(#param)")
+    String optionSource;
+
+    /**
+     * Filter applied to dynamic response options (VTL expression).
+     */
+    @Pogues("getOptionFilter()")
+    @Lunatic("setOptionFilter(#param)")
+    CalculatedExpression optionFilter;
 
     /**
      * List of modalities of the unique choice question.
@@ -105,7 +123,9 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
     /**
      * List of conditions for the modalities to be filtered by previous responses or external data.
-     * In Lunatic, they are inserted in option through a processing. */
+     * Used only for static questions (i.e., when choice type is not VARIABLE).
+     * In Lunatic, they are inserted in option through a processing.
+     */
     @Pogues("getCodeFilters()")
     List<CodeFilter> codeFilters = new ArrayList<>();
 
@@ -169,7 +189,18 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     }
 
     public static String mapDDICodeListReference(QuestionItemType questionItemType) {
-        return getDDICodeDomain(questionItemType).getCodeListReference().getIDArray(0).getStringValue();
+
+        CodeDomainType codeDomain = getDDICodeDomain(questionItemType);
+
+        if (codeDomain.getCodeListReference() == null) {
+            // Dynamic UCQ based on a variable → no CodeList
+            return null;
+        }
+
+        return codeDomain
+                .getCodeListReference()
+                .getIDArray(0)
+                .getStringValue();
     }
 
     public static List<ResponseDomainInMixedType> mapDetailResponses(QuestionItemType questionItemType) {
