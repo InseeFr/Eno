@@ -15,6 +15,8 @@ class PoguesTableCellConversion {
     static EnoObject instantiateFrom(ResponseType poguesResponse) {
         DatatypeTypeEnum typeName = poguesResponse.getDatatype().getTypeName();
         switch (poguesResponse.getDatatype().getTypeName()){
+            case DURATION ->
+                throw new UnsupportedOperationException("Duration cell in tables is not supported.");
             case NUMERIC -> {
                 return new NumericCell();
             }
