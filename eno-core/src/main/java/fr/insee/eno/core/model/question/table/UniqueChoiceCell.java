@@ -5,6 +5,7 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.technical.MappingException;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.parameter.Format;
@@ -45,7 +46,8 @@ public class UniqueChoiceCell extends ResponseCell {
     String orientation = Orientation.HORIZONTAL.toString();
 
     @Pogues("getCodeListReference()")
-    @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
+    @DDI("getResponseDomain().getCodeListReference() != null ? " +
+            "getResponseDomain().getCodeListReference().getIDArray(0).getStringValue() : null")
     String codeListReference;
 
     /** Variable providing the dynamic response options (UCQ based on an iteration (e.g. a loop)). */
