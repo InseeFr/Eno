@@ -21,7 +21,7 @@ class PoguesTableCellConversion {
                 return new NumericCell();
             }
             case TEXT -> {
-                if (poguesResponse.getCodeListReference() != null) {
+                if (isAChoiceResponse(poguesResponse)) {
                     if (VisualizationHintEnum.SUGGESTER.equals(poguesResponse.getDatatype().getVisualizationHint())) {
                         return new SuggesterCell();
                     }
@@ -37,6 +37,14 @@ class PoguesTableCellConversion {
             }
         }
         throw new ConversionException("Conversion of Pogues table cell of type " + typeName + " not implemented.");
+    }
+
+    private static boolean isAChoiceResponse(ResponseType poguesResponse) {
+        // Note:
+        // With the introduction of 'choiceType' in Pogues-Model, the condition "choiceType isn't null" is sufficient.
+        // Yet, the 'codeListReference' condition ensures backwards compatibility with old questionnaires.
+        return poguesResponse.getCodeListReference() != null
+                || poguesResponse.getChoiceType() != null;
     }
 
 }
