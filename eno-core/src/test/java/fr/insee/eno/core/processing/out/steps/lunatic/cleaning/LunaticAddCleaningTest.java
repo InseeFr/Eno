@@ -5,6 +5,8 @@ import fr.insee.eno.core.PoguesDDIToEno;
 import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
+import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.eno.core.processing.ProcessingPipeline;
@@ -15,6 +17,7 @@ import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
 import fr.insee.lunatic.model.flat.Questionnaire;
 import fr.insee.lunatic.model.flat.cleaning.CleaningExpression;
+import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.cleaning.CleaningVariableEntry;
 import org.junit.jupiter.api.Test;
 
@@ -98,7 +101,7 @@ class LunaticAddCleaningTest {
                 .getCleanedVariable("UCQ_codeC_RADIO")
                 .getCleaningExpressions())
                 .hasSize(1);
-        CleaningExpression cleaningExpression1 =  cleaningEntryUCQ
+        CleaningExpression cleaningExpression1 = cleaningEntryUCQ
                 .getCleanedVariable("UCQ_codeC_RADIO")
                 .getCleaningExpressions().getFirst();
         assertEquals("UCQ_RADIO = \"codeC\"", cleaningExpression1.getExpression());
@@ -106,7 +109,7 @@ class LunaticAddCleaningTest {
                 .getCleanedVariable("UCQ_codeD_RADIO")
                 .getCleaningExpressions())
                 .hasSize(1);
-        CleaningExpression cleaningExpression2 =  cleaningEntryUCQ
+        CleaningExpression cleaningExpression2 = cleaningEntryUCQ
                 .getCleanedVariable("UCQ_codeD_RADIO")
                 .getCleaningExpressions().getFirst();
         assertEquals("UCQ_RADIO = \"codeD\"", cleaningExpression2.getExpression());
@@ -118,7 +121,7 @@ class LunaticAddCleaningTest {
                 .getCleanedVariable("MCQ_codeC")
                 .getCleaningExpressions())
                 .hasSize(1);
-        CleaningExpression cleaningExpressionQCM2 =  cleaningEntryMCQ3
+        CleaningExpression cleaningExpressionQCM2 = cleaningEntryMCQ3
                 .getCleanedVariable("MCQ_codeC")
                 .getCleaningExpressions().getFirst();
         assertEquals("nvl(MCQ3, false)", cleaningExpressionQCM2.getExpression());
@@ -130,7 +133,7 @@ class LunaticAddCleaningTest {
                 .getCleanedVariable("MCQ_codeD")
                 .getCleaningExpressions())
                 .hasSize(1);
-        CleaningExpression cleaningExpressionQCM3 =  cleaningEntryMCQ4
+        CleaningExpression cleaningExpressionQCM3 = cleaningEntryMCQ4
                 .getCleanedVariable("MCQ_codeD")
                 .getCleaningExpressions().getFirst();
         assertEquals("nvl(MCQ4, false)", cleaningExpressionQCM3.getExpression());
@@ -156,7 +159,7 @@ class LunaticAddCleaningTest {
                 .getCleanedVariable("DYNAMIC_TABLE2")
                 .getCleaningExpressions();
         assertThat(cleaningExpressions).hasSize(1);
-        CleaningExpression cleaningExpression =  cleaningExpressions.getFirst();
+        CleaningExpression cleaningExpression = cleaningExpressions.getFirst();
         assertEquals("DYNAMIC_TABLE1", cleaningExpression.getExpression());
         assertEquals("DYNAMIC_TABLE1", cleaningExpression.getShapeFrom());
     }
@@ -231,4 +234,39 @@ class LunaticAddCleaningTest {
                 .then(new LunaticVariablesDimension(enoQuestionnaire));
     }
 
+    @Test
+    void cleaning_is_created_for_dynamic_qcu_option_source() {
+        // GIVEN
+        UniqueChoiceQuestion qcu = new UniqueChoiceQuestion();
+        qcu.setId("Q1");
+        qcu.setDisplayFormat(UniqueChoiceQuestion.DisplayFormat.RADIO);
+
+        Response response = new Response();
+        response.setVariableName("Q1_VAR");
+        qcu.setResponse(response);
+
+        qcu.setOptionSource("LOOP_VAR");
+
+        EnoQuestionnaire enoQuestionnaire1 = new EnoQuestionnaire();
+        enoQuestionnaire1.getSingleResponseQuestions().add(qcu);
+
+        Questionnaire lunaticQuestionnaire1 = new Questionnaire();
+        new LunaticMapper().mapQuestionnaire(enoQuestionnaire1, lunaticQuestionnaire1);
+
+        LunaticAddCleaning cleaningStep =
+                new LunaticAddCleaning(enoQuestionnaire1, enoQuestionnaire1.getIndex());
+
+        // WHEN
+        cleaningStep.preProcessCleaning(lunaticQuestionnaire1);
+        cleaningStep.processCodeFiltered(lunaticQuestionnaire1);
+
+        // THEN
+        CleaningType cleaning = lunaticQuestionnaire1.getCleaning();
+        assertNotNull(cleaning);
+
+        CleaningVariableEntry entry = cleaning.getCleaningEntry("LOOP_VAR");
+        assertNotNull(entry);
+
+        assertNotNull(entry.getCleanedVariable("Q1_VAR"));
+    }
 }
