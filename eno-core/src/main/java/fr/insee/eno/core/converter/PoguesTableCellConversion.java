@@ -40,11 +40,11 @@ class PoguesTableCellConversion {
     }
 
     private static boolean isAChoiceResponse(ResponseType poguesResponse) {
-        // Note:
-        // With the introduction of 'choiceType' in Pogues-Model, the condition "choiceType isn't null" is sufficient.
-        // Yet, the 'codeListReference' condition ensures backwards compatibility with old questionnaires.
-        return poguesResponse.getCodeListReference() != null
-                || poguesResponse.getChoiceType() != null;
+        // Note: (!!!) With current Pogues-Model implementation (classes generated from xsd), there is a default value
+        // on the 'choiceType' getter, that returns 'CODE_LIST' if the property is null.
+        // Thus, the 'choiceType' property cannot be used in the condition here.
+        return poguesResponse.getCodeListReference() != null // 'regular' choice response
+                || poguesResponse.getVariableReference() != null; // choice response with variable options
     }
 
 }
