@@ -79,7 +79,7 @@ public class TableQuestion extends MultipleResponseQuestion implements EnoTable 
     List<Binding> bindings = new ArrayList<>();
 
     /** Response cells. */
-    @Pogues("getResponse()")
+    @Pogues("T(fr.insee.eno.core.utils.PoguesUtils).getPoguesTableResponseCells(#this)")
     @DDI("getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
     List<ResponseCell> responseCells = new ArrayList<>();
 
