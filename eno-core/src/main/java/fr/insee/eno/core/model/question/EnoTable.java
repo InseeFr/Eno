@@ -4,7 +4,6 @@ import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.question.table.CellLabel;
 import fr.insee.eno.core.model.question.table.NoDataCell;
 import fr.insee.eno.core.model.question.table.ResponseCell;
-import fr.insee.eno.core.model.question.table.TableCell;
 
 import java.util.List;
 
