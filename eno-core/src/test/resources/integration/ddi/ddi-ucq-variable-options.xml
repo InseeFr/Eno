@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : ${project.version}. Generation date : 11/03/2026 - 13:37:09-->
+             isMaintainable="true"><!--Eno version : ${project.version}. Generation date : 12/03/2026 - 15:10:11-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-mm97n770</r:ID>
    <r:Version>1</r:Version>
@@ -644,11 +644,24 @@
             </d:QuestionText>
             <d:CodeDomain>
                <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mm9a2cvw-CL</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>mmemqwtp-RDOP-mmemw8sw</r:ID>
                   <r:Version>1</r:Version>
-                  <r:CodeRepresentation/>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mm9a2cvw-CL</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
                </r:OutParameter>
                <r:ResponseCardinality maximumResponses="1"/>
             </d:CodeDomain>
@@ -689,11 +702,24 @@
             </d:QuestionText>
             <d:CodeDomain>
                <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mm9a2cvw-CL</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>mmen6swi-RDOP-mmenxi7l</r:ID>
                   <r:Version>1</r:Version>
-                  <r:CodeRepresentation/>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mm9a2cvw-CL</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
                </r:OutParameter>
                <r:ResponseCardinality maximumResponses="1"/>
             </d:CodeDomain>
@@ -734,11 +760,24 @@
             </d:QuestionText>
             <d:CodeDomain>
                <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mm9a2cvw-CL</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>mmenjez3-RDOP-mmeo263o</r:ID>
                   <r:Version>1</r:Version>
-                  <r:CodeRepresentation/>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mm9a2cvw-CL</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
                </r:OutParameter>
                <r:ResponseCardinality maximumResponses="1"/>
             </d:CodeDomain>
@@ -779,11 +818,24 @@
             </d:QuestionText>
             <d:CodeDomain>
                <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mm9a2cvw-CL</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>mmenf17r-RDOP-mmenwozv</r:ID>
                   <r:Version>1</r:Version>
-                  <r:CodeRepresentation/>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mm9a2cvw-CL</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
                </r:OutParameter>
                <r:ResponseCardinality maximumResponses="1"/>
             </d:CodeDomain>
@@ -844,6 +896,29 @@
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
                <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mm9a2cvw-CL</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mmemwzli-RDOP-mmeo1pq4</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>mm9a2cvw-CL</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
                   <d:GridAttachment>
                      <d:CellCoordinatesAsDefined>
                         <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
@@ -909,6 +984,29 @@
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
                <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mm9a2cvw-CL</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mmenb9oq-RDOP-mmenlggw</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>mm9a2cvw-CL</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
                   <d:GridAttachment>
                      <d:CellCoordinatesAsDefined>
                         <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
@@ -996,6 +1094,29 @@
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
                <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mm9a2cvw-CL</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mmeno1jk-RDOP-mmensvva</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>mm9a2cvw-CL</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
                   <d:GridAttachment>
                      <d:CellCoordinatesAsDefined>
                         <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
@@ -1004,6 +1125,29 @@
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
                <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mm9a2cvw-CL</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mmeno1jk-RDOP-mmenrrub</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>mm9a2cvw-CL</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
                   <d:GridAttachment>
                      <d:CellCoordinatesAsDefined>
                         <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
@@ -1087,6 +1231,29 @@
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
                <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mm9a2cvw-CL</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mmeo9nak-RDOP-mmeog5eb</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>mm9a2cvw-CL</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
                   <d:GridAttachment>
                      <d:CellCoordinatesAsDefined>
                         <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
@@ -1095,6 +1262,29 @@
                   </d:GridAttachment>
                </d:GridResponseDomainInMixed>
                <d:GridResponseDomainInMixed>
+                  <d:CodeDomain>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mm9a2cvw-CL</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mmeo9nak-RDOP-mmeobjjd</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeListReference>
+                              <r:Agency>fr.insee</r:Agency>
+                              <r:ID>mm9a2cvw-CL</r:ID>
+                              <r:Version>1</r:Version>
+                              <r:TypeOfObject>CodeList</r:TypeOfObject>
+                           </r:CodeListReference>
+                        </r:CodeRepresentation>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:CodeDomain>
                   <d:GridAttachment>
                      <d:CellCoordinatesAsDefined>
                         <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
@@ -1390,6 +1580,26 @@
          </l:CodeList>
          <l:CodeList>
             <r:Agency>fr.insee</r:Agency>
+            <r:ID>mm9a2cvw-CL</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Liste basée sur les valeurs de NAME</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <r:BasedOnObject>
+               <r:BasedOnReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>mm9a2cvw</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Variable</r:TypeOfObject>
+               </r:BasedOnReference>
+            </r:BasedOnObject>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
             <r:ID>INSEE-COMMUN-CL-Booleen</r:ID>
             <r:Version>1</r:Version>
             <l:CodeListName>
@@ -1500,7 +1710,16 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mm9a2cvw-CL</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -1524,7 +1743,16 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mm9a2cvw-CL</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -1548,7 +1776,16 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mm9a2cvw-CL</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -1572,7 +1809,16 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mm9a2cvw-CL</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -1596,7 +1842,16 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mm9a2cvw-CL</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -1620,7 +1875,16 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mm9a2cvw-CL</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -1644,7 +1908,16 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mm9a2cvw-CL</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -1668,7 +1941,16 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mm9a2cvw-CL</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -1692,7 +1974,16 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mm9a2cvw-CL</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -1716,7 +2007,16 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mm9a2cvw-CL</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:VariableGroup>
             <r:Agency>fr.insee</r:Agency>
