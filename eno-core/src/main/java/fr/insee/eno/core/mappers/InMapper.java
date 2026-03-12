@@ -143,9 +143,11 @@ public abstract class InMapper extends Mapper {
         // Get the value in the input object by evaluating mapping expression
         Object inputValue = spelEngine.evaluate(expression, inputObject, modelContextType, propertyName);
         // It is allowed to have null values (a property can be present or not depending on the case)
-        if (inputValue == null && debug) {
-            log.debug("null expression got from evaluating {} annotation expression {}",
-                    format, propertyDescription(propertyName, modelContextType.getSimpleName()));
+        if (inputValue == null) {
+            if (debug)
+                log.debug("null expression got from evaluating {} annotation expression {}",
+                        format, propertyDescription(propertyName, modelContextType.getSimpleName()));
+            return;
         }
         // Simply set the expression in the field
         beanWrapper.setPropertyValue(propertyName, inputValue);
@@ -186,7 +188,7 @@ public abstract class InMapper extends Mapper {
         if (inputCollection == null && !allowNullList) {
             log.error("Incoherent expression in field of {} annotation {}", format,
                     propertyDescription(propertyName, enoContextType.getName()));
-            log.error("If the {} collection can actually be null, use the annotation property to allow it.", format);
+            log.debug("If the {} collection can actually be null, use the annotation property to allow it.", format);
             throw new MappingException(format+" collection mapped by the annotation is null "
                     + propertyDescription(propertyName, enoContextType.getName()));
         }
