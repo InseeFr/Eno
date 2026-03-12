@@ -193,7 +193,11 @@ class PoguesDDIToEnoTest {
             loop.setPoguesEndReference(null);
             loop.setOccurrencePagination(null);
         });
-        enoQuestionnaire.getRoundaboutSequences().forEach(roundaboutSequence -> roundaboutSequence.setInnerLoop(null));
+        enoQuestionnaire.getRoundaboutSequences().forEach(roundaboutSequence -> {
+            roundaboutSequence.setInnerLoop(null);
+            // mapped in Pogues, for some reason this piece of data isn't written in DDI, it's unused anyway:
+            roundaboutSequence.setName(null);
+        });
     }
     private void removeCodeItemParentValues(CodeItem codeItem) {
         codeItem.setParentValue(null);
