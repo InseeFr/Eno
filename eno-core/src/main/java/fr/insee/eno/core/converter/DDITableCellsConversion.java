@@ -31,7 +31,12 @@ public class DDITableCellsConversion {
                 return new SuggesterCell();
             return new UniqueChoiceCell();
         }
-        //
+        // There is no DDI modeling for choice questions with options defined by a variable,
+        // hence the null representationType in that case.
+        // It is the only case that have a null representation type (at least for now...).
+        if (representationType == null) {
+            return new UniqueChoiceCell();
+        }
         throw new ConversionException(
                 "Unable to identify cell type in DDI GridResponseDomainInMixed object " +
                         "with response domain of type "+representationType.getClass()+".");
