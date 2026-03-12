@@ -4,6 +4,7 @@ import fr.insee.ddi.lifecycle33.datacollection.QuestionGridType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
+import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.model.code.CodeList;
 import fr.insee.eno.core.model.navigation.Binding;
 import fr.insee.eno.core.model.question.table.CellLabel;
@@ -78,6 +79,7 @@ public class TableQuestion extends MultipleResponseQuestion implements EnoTable 
     List<Binding> bindings = new ArrayList<>();
 
     /** Response cells. */
+    @Pogues("T(fr.insee.eno.core.utils.PoguesUtils).getPoguesTableResponseCells(#this)")
     @DDI("getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
     List<ResponseCell> responseCells = new ArrayList<>();
 

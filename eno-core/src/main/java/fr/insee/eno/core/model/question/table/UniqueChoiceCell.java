@@ -5,7 +5,6 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.technical.MappingException;
-import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.parameter.Format;
@@ -40,7 +39,7 @@ public class UniqueChoiceCell extends ResponseCell {
             "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     UniqueChoiceQuestion.DisplayFormat displayFormat;
 
-    /** Lunatic property for the orientation of modalities.
+    /** Lunatic property for the orientation of options.
      * Horizontal for table cells. */
     @Lunatic("setOrientation(T(fr.insee.lunatic.model.flat.Orientation).valueOf(#param))")
     String orientation = Orientation.HORIZONTAL.toString();

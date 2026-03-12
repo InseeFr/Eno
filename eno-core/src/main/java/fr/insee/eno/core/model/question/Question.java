@@ -38,7 +38,7 @@ public abstract class Question extends EnoIdentifiableObject implements EnoCompo
      * but DDI mapping is done in subclasses since DDI classes are different. */
     private String name;
 
-    @Pogues("getLabel().getFirst()")
+    @Pogues("!getLabel().isEmpty() ? getLabel().getFirst() : null")
     @DDI("getQuestionTextArray(0)")
     @Lunatic("setLabel(#param)")
     private DynamicLabel label;
