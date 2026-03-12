@@ -1,5 +1,6 @@
 package fr.insee.eno.core.model.question.table;
 
+import fr.insee.ddi.lifecycle33.datacollection.GridResponseDomainInMixedType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
@@ -18,6 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Context(format = Format.POGUES, type = ResponseType.class)
+@Context(format = Format.DDI, type = GridResponseDomainInMixedType.class)
 @Context(format = Format.LUNATIC, type = BodyCell.class)
 public abstract class ResponseCell extends EnoObject implements TableCell, EnoObjectWithId {
 
