@@ -1,0 +1,882 @@
+{
+  "id": "mm97n770",
+  "genericName": "QUESTIONNAIRE",
+  "agency": "fr.insee",
+  "final": false,
+  "flowLogic": "FILTER",
+  "formulasLanguage": "VTL",
+  "lastUpdatedDate": "Fri Mar 06 2026 09:57:31 GMT+0100 (heure normale d’Europe centrale)",
+  "owner": "ENO-INTEGRATION-TESTS",
+  "Name": "ENO_UCQ_VARIABLE_OPTIONS",
+  "Label": [
+    "Eno - UCQ variable options"
+  ],
+  "Control": [],
+  "FlowControl": [],
+  "TargetMode": [
+    "CAPI",
+    "CAWI",
+    "CATI",
+    "PAPI"
+  ],
+  "Child": [
+    {
+      "id": "mm9a71qn",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S1",
+      "Label": [
+        "\"Introduction\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": [
+        {
+          "id": "mm9ac28z",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "HOW_MANY",
+          "Label": [
+            "\"How many people?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mm9dra7p",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "NUMERIC",
+                "type": "NumericDatatypeType",
+                "Minimum": 1,
+                "Maximum": 20,
+                "IsDynamicUnit": false,
+                "Unit": ""
+              },
+              "CollectedVariableReference": "mm99vp0j"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mm9aa243",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S2",
+      "Label": [
+        "\"People\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": [
+        {
+          "id": "mm9a5vkz",
+          "questionType": "SIMPLE",
+          "type": "QuestionType",
+          "Name": "NAME",
+          "Label": [
+            "\"What's your name?\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mm9dkr21",
+              "mandatory": false,
+              "Datatype": {
+                "typeName": "TEXT",
+                "type": "TextDatatypeType",
+                "MaxLength": 50
+              },
+              "CollectedVariableReference": "mm9a2cvw"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mm9cx8xc",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S3",
+      "Label": [
+        "\"Sequence (linked loop)\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": [
+        {
+          "id": "mmemqwtp",
+          "questionType": "SINGLE_CHOICE",
+          "type": "QuestionType",
+          "Name": "UCQ_VARIABLE1",
+          "Label": [
+            "\"UCQ with variable options (in a linked loop).\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mmemw8sw",
+              "mandatory": false,
+              "choiceType": "VARIABLE",
+              "VariableReference": "mm9a2cvw",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mmemqlys"
+            }
+          ],
+          "ClarificationQuestion": [],
+          "codeFilters": []
+        },
+        {
+          "id": "mmemwzli",
+          "questionType": "TABLE",
+          "type": "QuestionType",
+          "Name": "STATIC_TABLE1",
+          "Label": [
+            "\"Static table with variable UCQ (in a linked loop).\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mmeo1pq4",
+              "choiceType": "VARIABLE",
+              "VariableReference": "mm9a2cvw",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mmemynph"
+            }
+          ],
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "NON_DYNAMIC",
+                "CodeListReference": "mmenbe92"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Variable UCQ column.\""
+              }
+            ],
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "mmeo1pq4",
+                "MappingTarget": "1 1"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmenef7n",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S4",
+      "Label": [
+        "\"Sequence (independent loop)\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": [
+        {
+          "id": "mmen6swi",
+          "questionType": "SINGLE_CHOICE",
+          "type": "QuestionType",
+          "Name": "UCQ_VARIABLE2",
+          "Label": [
+            "\"UCQ with variable options (in a standalone loop).\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mmenxi7l",
+              "mandatory": false,
+              "choiceType": "VARIABLE",
+              "VariableReference": "mm9a2cvw",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mmen5ohr"
+            }
+          ],
+          "ClarificationQuestion": [],
+          "codeFilters": []
+        },
+        {
+          "id": "mmenb9oq",
+          "questionType": "TABLE",
+          "type": "QuestionType",
+          "Name": "STATIC_TABLE2",
+          "Label": [
+            "\"Static table with variable UCQ (in a standalone loop).\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mmenlggw",
+              "choiceType": "VARIABLE",
+              "VariableReference": "mm9a2cvw",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mmens73a"
+            }
+          ],
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "NON_DYNAMIC",
+                "CodeListReference": "mmenbe92"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Variable UCQ column.\""
+              }
+            ],
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "mmenlggw",
+                "MappingTarget": "1 1"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmen9dkd",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S5",
+      "Label": [
+        "\"Sequence (no loop)\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": [
+        {
+          "id": "mmenjez3",
+          "questionType": "SINGLE_CHOICE",
+          "type": "QuestionType",
+          "Name": "UCQ_VARIABLE3_RADIO",
+          "Label": [
+            "\"UCQ (radio) with variable options.\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mmeo263o",
+              "mandatory": false,
+              "choiceType": "VARIABLE",
+              "VariableReference": "mm9a2cvw",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mmenjenw"
+            }
+          ],
+          "ClarificationQuestion": [],
+          "codeFilters": []
+        },
+        {
+          "id": "mmenf17r",
+          "questionType": "SINGLE_CHOICE",
+          "type": "QuestionType",
+          "Name": "UCQ_VARIABLE3_DROPDOWN",
+          "Label": [
+            "\"UCQ (dropdown) with variable options.\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mmenwozv",
+              "mandatory": false,
+              "choiceType": "VARIABLE",
+              "VariableReference": "mm9a2cvw",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mmenk18h"
+            }
+          ],
+          "ClarificationQuestion": [],
+          "codeFilters": []
+        },
+        {
+          "id": "mmeno1jk",
+          "questionType": "TABLE",
+          "type": "QuestionType",
+          "Name": "STATIC_TABLE3",
+          "Label": [
+            "\"Static table with variable UCQs.\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mmensvva",
+              "choiceType": "VARIABLE",
+              "VariableReference": "mm9a2cvw",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mmeo1fz0"
+            },
+            {
+              "id": "mmenrrub",
+              "choiceType": "VARIABLE",
+              "VariableReference": "mm9a2cvw",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mmenyjbh"
+            }
+          ],
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "NON_DYNAMIC",
+                "CodeListReference": "mmenbe92"
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Variable UCQ (radio) column.\""
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Variable UCQ (dropdown) column.\""
+              }
+            ],
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "mmensvva",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "mmenrrub",
+                "MappingTarget": "1 2"
+              }
+            ]
+          }
+        },
+        {
+          "id": "mmeo9nak",
+          "questionType": "TABLE",
+          "type": "QuestionType",
+          "Name": "DYNAMIC_TABLE",
+          "Label": [
+            "\"Dynamic table with variable UCQs.\""
+          ],
+          "Declaration": [],
+          "Control": [],
+          "FlowControl": [],
+          "TargetMode": [
+            "CAPI",
+            "CAWI",
+            "CATI",
+            "PAPI"
+          ],
+          "Response": [
+            {
+              "id": "mmeog5eb",
+              "choiceType": "VARIABLE",
+              "VariableReference": "mm9a2cvw",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "RADIO",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mmenzdna"
+            },
+            {
+              "id": "mmeobjjd",
+              "choiceType": "VARIABLE",
+              "VariableReference": "mm9a2cvw",
+              "Datatype": {
+                "typeName": "TEXT",
+                "visualizationHint": "DROPDOWN",
+                "type": "TextDatatypeType",
+                "MaxLength": 1
+              },
+              "CollectedVariableReference": "mmeo1nxa"
+            }
+          ],
+          "ResponseStructure": {
+            "Dimension": [
+              {
+                "dimensionType": "PRIMARY",
+                "dynamic": "DYNAMIC",
+                "minimum": {
+                  "type": "number",
+                  "value": "1"
+                },
+                "maximum": {
+                  "type": "number",
+                  "value": "5"
+                }
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Variable UCQ (radio) dynamic column.\""
+              },
+              {
+                "dimensionType": "MEASURE",
+                "Label": "\"Variable UCQ (dropdown) dynamic dropdown.\""
+              }
+            ],
+            "Attribute": [],
+            "Mapping": [
+              {
+                "MappingSource": "mmeog5eb",
+                "MappingTarget": "1 1"
+              },
+              {
+                "MappingSource": "mmeobjjd",
+                "MappingTarget": "1 2"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmeoehxf",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "S_END",
+      "Label": [
+        "\"The end.\""
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": []
+    },
+    {
+      "id": "idendquest",
+      "depth": 1,
+      "genericName": "MODULE",
+      "type": "SequenceType",
+      "Name": "QUESTIONNAIRE_END",
+      "Label": [
+        "QUESTIONNAIRE_END"
+      ],
+      "Declaration": [],
+      "Control": [],
+      "FlowControl": [],
+      "TargetMode": [
+        "CAPI",
+        "CAWI",
+        "CATI",
+        "PAPI"
+      ],
+      "Child": []
+    }
+  ],
+  "DataCollection": [
+    {
+      "id": "s2193-dc",
+      "uri": "http://ddi:fr.insee:DataCollection.s2193-dc"
+    }
+  ],
+  "ComponentGroup": [
+    {
+      "id": "mm99yj75",
+      "Name": "PAGE_1",
+      "Label": [
+        "Components for page 1"
+      ],
+      "MemberReference": [
+        "mm9a71qn",
+        "mm9ac28z",
+        "mm9aa243",
+        "mm9a5vkz",
+        "mm9cx8xc",
+        "mmemqwtp",
+        "mmemwzli",
+        "mmenef7n",
+        "mmen6swi",
+        "mmenb9oq",
+        "mmen9dkd",
+        "mmenjez3",
+        "mmenf17r",
+        "mmeno1jk",
+        "mmeo9nak",
+        "idendquest",
+        "mmeoehxf"
+      ]
+    }
+  ],
+  "CodeLists": {
+    "CodeList": [
+      {
+        "id": "mmenbe92",
+        "Label": "FOO_CODE_LIST",
+        "Code": [
+          {
+            "Value": "1",
+            "Label": "\"Foo\"",
+            "Parent": ""
+          }
+        ]
+      },
+      {
+        "id": "",
+        "Label": "",
+        "Code": []
+      }
+    ]
+  },
+  "Variables": {
+    "Variable": [
+      {
+        "id": "mm99vp0j",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "NUMERIC",
+          "type": "NumericDatatypeType",
+          "Minimum": 1,
+          "Maximum": 20,
+          "IsDynamicUnit": false,
+          "Unit": ""
+        },
+        "Name": "HOW_MANY",
+        "Label": "HOW_MANY label"
+      },
+      {
+        "id": "mm9a2cvw",
+        "type": "CollectedVariableType",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 50
+        },
+        "Name": "NAME",
+        "Label": "NAME label",
+        "Scope": "mm9djdds"
+      },
+      {
+        "id": "mmemqlys",
+        "type": "CollectedVariableType",
+        "VariableReference": "mm9a2cvw",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "UCQ_VARIABLE1",
+        "Label": "UCQ_VARIABLE1 label",
+        "Scope": "mm9djdds"
+      },
+      {
+        "id": "mmemynph",
+        "type": "CollectedVariableType",
+        "VariableReference": "mm9a2cvw",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "STATIC_TABLE111",
+        "Label": "Foo-Variable UCQ column.",
+        "Scope": "mm9djdds"
+      },
+      {
+        "id": "mmen5ohr",
+        "type": "CollectedVariableType",
+        "VariableReference": "mm9a2cvw",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "UCQ_VARIABLE2",
+        "Label": "UCQ_VARIABLE2 label",
+        "Scope": "mmeni1ys"
+      },
+      {
+        "id": "mmens73a",
+        "type": "CollectedVariableType",
+        "VariableReference": "mm9a2cvw",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "STATIC_TABLE211",
+        "Label": "Foo-Variable UCQ column.",
+        "Scope": "mmeni1ys"
+      },
+      {
+        "id": "mmenjenw",
+        "type": "CollectedVariableType",
+        "VariableReference": "mm9a2cvw",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "UCQ_VARIABLE3_RADIO",
+        "Label": "UCQ_VARIABLE3_RADIO label"
+      },
+      {
+        "id": "mmenk18h",
+        "type": "CollectedVariableType",
+        "VariableReference": "mm9a2cvw",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "UCQ_VARIABLE3_DROPDOWN",
+        "Label": "UCQ_VARIABLE3_DROPDOWN label"
+      },
+      {
+        "id": "mmeo1fz0",
+        "type": "CollectedVariableType",
+        "VariableReference": "mm9a2cvw",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "STATIC_TABLE311",
+        "Label": "Foo-Variable UCQ (radio) column."
+      },
+      {
+        "id": "mmenyjbh",
+        "type": "CollectedVariableType",
+        "VariableReference": "mm9a2cvw",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "STATIC_TABLE312",
+        "Label": "Foo-Variable UCQ (dropdown) column."
+      },
+      {
+        "id": "mmenzdna",
+        "type": "CollectedVariableType",
+        "VariableReference": "mm9a2cvw",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "DYNAMIC_TABLE1",
+        "Label": "Variable UCQ (radio) dynamic column.",
+        "Scope": "mmeo9nak"
+      },
+      {
+        "id": "mmeo1nxa",
+        "type": "CollectedVariableType",
+        "VariableReference": "mm9a2cvw",
+        "Datatype": {
+          "typeName": "TEXT",
+          "type": "TextDatatypeType",
+          "MaxLength": 1
+        },
+        "Name": "DYNAMIC_TABLE2",
+        "Label": "Variable UCQ (dropdown) dynamic dropdown.",
+        "Scope": "mmeo9nak"
+      }
+    ]
+  },
+  "Iterations": {
+    "Iteration": [
+      {
+        "id": "mm9djdds",
+        "type": "DynamicIterationType",
+        "Name": "LOOP1",
+        "MemberReference": [
+          "mm9aa243",
+          "mm9aa243"
+        ],
+        "Minimum": "$HOW_MANY$ ",
+        "Maximum": "$HOW_MANY$ ",
+        "isFixedLength": true,
+        "size": "$HOW_MANY$ ",
+        "shouldSplitIterations": true,
+        "Step": 1
+      },
+      {
+        "id": "mmen6j7b",
+        "type": "DynamicIterationType",
+        "Name": "LINKED_LOOP1",
+        "MemberReference": [
+          "mm9cx8xc",
+          "mm9cx8xc"
+        ],
+        "IterableReference": "mm9djdds"
+      },
+      {
+        "id": "mmeni1ys",
+        "type": "DynamicIterationType",
+        "Name": "LOOP2",
+        "MemberReference": [
+          "mmenef7n",
+          "mmenef7n"
+        ],
+        "Minimum": "2",
+        "Maximum": "2",
+        "isFixedLength": true,
+        "size": "2",
+        "shouldSplitIterations": false,
+        "Step": 1
+      }
+    ]
+  },
+  "childQuestionnaireRef": []
+}
