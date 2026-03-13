@@ -3,6 +3,7 @@ package fr.insee.eno.core.converter;
 import fr.insee.ddi.lifecycle33.datacollection.*;
 import fr.insee.ddi.lifecycle33.reusable.RepresentationType;
 import fr.insee.ddi.lifecycle33.reusable.TextDomainType;
+import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.exceptions.technical.ConversionException;
 import fr.insee.eno.core.model.EnoObject;
 import fr.insee.eno.core.model.question.table.*;
@@ -13,33 +14,32 @@ public class DDITableCellsConversion {
 
     static EnoObject instantiateFrom(GridResponseDomainInMixedType gridResponseDomainInMixedType) {
         RepresentationType representationType = gridResponseDomainInMixedType.getResponseDomain();
-        if (representationType instanceof NominalDomainType) {
-            return new BooleanCell();
+        switch (representationType) {
+            case null ->
+                    throw new IllegalDDIElementException("Response domain is null in a table cell.");
+            case NominalDomainType nominalDomainType -> {
+                return new BooleanCell();
+            }
+            case TextDomainType textDomainType -> {
+                return new TextCell();
+            }
+            case NumericDomainType numericDomainType -> {
+                return new NumericCell();
+            }
+            case DateTimeDomainType dateTimeDomainType -> {
+                return new DateCell();
+            }
+            case CodeDomainType codeDomainType -> {
+                String ddiOutputFormat = gridResponseDomainInMixedType.getResponseDomain().getGenericOutputFormat().getStringValue();
+                if (DDIQuestionItemConversion.DDI_SUGGESTER_OUTPUT_FORMAT.equals(ddiOutputFormat))
+                    return new SuggesterCell();
+                return new UniqueChoiceCell();
+            }
+            default ->
+                    throw new ConversionException(
+                            "Unable to identify cell type in DDI GridResponseDomainInMixed object " +
+                                    "with response domain of type "+representationType.getClass()+".");
         }
-        if (representationType instanceof TextDomainType) {
-            return new TextCell();
-        }
-        if (representationType instanceof NumericDomainType) {
-            return new NumericCell();
-        }
-        if (representationType instanceof DateTimeDomainType) {
-            return new DateCell();
-        }
-        if (representationType instanceof CodeDomainType) {
-            String ddiOutputFormat = gridResponseDomainInMixedType.getResponseDomain().getGenericOutputFormat().getStringValue();
-            if (DDIQuestionItemConversion.DDI_SUGGESTER_OUTPUT_FORMAT.equals(ddiOutputFormat))
-                return new SuggesterCell();
-            return new UniqueChoiceCell();
-        }
-        // There is no DDI modeling for choice questions with options defined by a variable,
-        // hence the null representationType in that case.
-        // It is the only case that have a null representation type (at least for now...).
-        if (representationType == null) {
-            return new UniqueChoiceCell();
-        }
-        throw new ConversionException(
-                "Unable to identify cell type in DDI GridResponseDomainInMixed object " +
-                        "with response domain of type "+representationType.getClass()+".");
     }
 
 }
