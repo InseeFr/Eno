@@ -38,7 +38,7 @@
         <!-- Plugin versions -->
         <jacoco.version>0.8.14</jacoco.version>
         <!-- Model versions -->
-        <poguesModel.version>1.15.1</poguesModel.version>
+        <poguesModel.version>1.15.3</poguesModel.version>
         <lunaticModel.version>5.14.0</lunaticModel.version>
     </properties>
 
