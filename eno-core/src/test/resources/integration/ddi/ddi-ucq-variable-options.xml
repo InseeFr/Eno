@@ -1448,18 +1448,6 @@
          </l:CodeList>
          <l:CodeList>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID/>
-            <r:Version>1</r:Version>
-            <r:Label>
-               <r:Content xml:lang="fr-FR"/>
-            </r:Label>
-            <l:HierarchyType>Regular</l:HierarchyType>
-            <l:Level levelNumber="1">
-               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
-            </l:Level>
-         </l:CodeList>
-         <l:CodeList>
-            <r:Agency>fr.insee</r:Agency>
             <r:ID>mmemwzli-secondDimension-fakeCL-1</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
