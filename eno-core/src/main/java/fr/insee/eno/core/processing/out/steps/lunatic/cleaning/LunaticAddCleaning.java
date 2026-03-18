@@ -230,6 +230,7 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance)
                 .map(UniqueChoiceQuestion.class::cast)
+                // keep only UCU with dynamic code list (i.e optionSource defined) or codeFilters (kind of filters)
                 .filter(uniqueChoiceQuestion ->
                         !uniqueChoiceQuestion.getCodeFilters().isEmpty()
                                 || uniqueChoiceQuestion.getOptionSource() != null
@@ -239,6 +240,7 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(SimpleMultipleChoiceQuestion.class::isInstance)
                 .map(SimpleMultipleChoiceQuestion.class::cast)
+                // keep only MCQ with codeFilters (kind of filters)
                 .filter(simpleMultipleChoiceQuestion -> !simpleMultipleChoiceQuestion.getCodeFilters().isEmpty())
                 .forEach(multipleChoiceQuestionCleaning::processCleaningMultipleChoiceQuestion);
     }

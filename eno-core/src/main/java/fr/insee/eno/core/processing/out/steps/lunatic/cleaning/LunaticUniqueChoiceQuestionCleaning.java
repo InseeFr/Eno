@@ -61,7 +61,7 @@ public record LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionn
 
 
     private Optional<String> getResponseNameOfDetailResponse(Option option) {
-        if (option.getDetail() != null) option.getDetail().getResponse().getName();
+        if (option.getDetail() != null) return Optional.of(option.getDetail().getResponse().getName());
         return Optional.empty();
     }
 
@@ -89,7 +89,7 @@ public record LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionn
 
     private ConditionFilterType buildExpressionForCleaningQCU(Option option, String variableName) {
         // special step, add cleaning condition of Variable:
-        // We have to clean if the variable if the codeValue is filtered and this coodeValue is selected
+        // We have to clean if the variable if the codeValue is filtered and this codeValue is selected
         // The new condition is ( conditionFilter OR optionValue is not selected  i.e variable <> optionValue)
         // why ? expression of cleaning: if at least one is false -> should clean variable (brain fuck)
         ConditionFilterType extraConditionFilter = new ConditionFilterType();
