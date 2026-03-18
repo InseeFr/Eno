@@ -268,5 +268,10 @@ class LunaticAddCleaningTest {
         assertNotNull(entry);
 
         assertNotNull(entry.getCleanedVariable("Q1_VAR"));
+
+        CleaningExpression cleaningExpression = entry.getCleanedVariable("Q1_VAR").getCleaningExpressions().getFirst();
+
+        assertEquals("false", cleaningExpression.getExpression());
+        assertTrue(cleaningExpression.getShouldCheckAllIterations());
     }
 }
