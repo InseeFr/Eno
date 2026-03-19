@@ -3,10 +3,7 @@ package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.Filter;
-import fr.insee.eno.core.model.question.DynamicTableQuestion;
-import fr.insee.eno.core.model.question.PairwiseQuestion;
-import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
-import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
+import fr.insee.eno.core.model.question.*;
 import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.ItemReference;
@@ -14,8 +11,7 @@ import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.LunaticUtils;
-import fr.insee.lunatic.model.flat.ComponentType;
-import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
 import lombok.Getter;
@@ -69,6 +65,8 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         processQuestionLevelFilter(lunaticQuestionnaire);
         // filter of code (item of codeList)
         processCodeFiltered(lunaticQuestionnaire);
+        // dynamic option cleaning
+        processDynamicUCQ(lunaticQuestionnaire);
         // filter in cell level in dynamicTable/rosterForLoop
         processCellsFiltered(lunaticQuestionnaire);
         // filter of clarification questions
@@ -220,23 +218,20 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
     void processCodeFiltered(Questionnaire lunaticQuestionnaire){
         LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         LunaticMultipleChoiceQuestionCleaning multipleChoiceQuestionCleaning = new LunaticMultipleChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
-        // 1. retrieve all codeFilters
-        // 2. retrieve collectedVariable inside
-        //   - UniqueChoiceQuestion: only DetailResponse Question variable
-        //   - MultipleChoiceQuestion: DetailResponse Question variable and response.name
-        // 3. retrieve formula
-        // 4. retrieve variables that influencesExpression
-        // 5. update existing Cleaning, to add new cleaning entry
+
+        // classic code Filter for UCQ
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance)
                 .map(UniqueChoiceQuestion.class::cast)
-                // keep only UCU with dynamic code list (i.e optionSource defined) or codeFilters (kind of filters)
-                .filter(uniqueChoiceQuestion ->
-                        !uniqueChoiceQuestion.getCodeFilters().isEmpty()
-                                || uniqueChoiceQuestion.getOptionSource() != null
-                )
-                .forEach(uniqueChoiceQuestionCleaning::processCleaningUniqueChoiceQuestion);
+                // keep only UCU with dynamic code list (i.e optionSource defined)
+                .filter(uniqueChoiceQuestion -> !uniqueChoiceQuestion.getCodeFilters().isEmpty())
+                .forEach(uniqueChoiceQuestionCleaning::processCleaningUniqueChoiceQuestionOptionFilters);
 
+        // UCQ deep inside Table -> use Lunatic BodyCell instead of (eno UniqueChoiceQuestion)
+        findAllBodyCell(lunaticQuestionnaire)
+                .forEach(uniqueChoiceQuestionCleaning::processCleaningUniqueChoiceQuestionOptionFiltersBodyCell);
+
+        // classic code Filter for MCQ
         enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(SimpleMultipleChoiceQuestion.class::isInstance)
                 .map(SimpleMultipleChoiceQuestion.class::cast)
@@ -273,12 +268,65 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .forEach(dynamicTableQuestionCleaning::processCleaningDynamicTableQuestion);
     }
 
-    public void processPairwiseCleaning(Questionnaire lunaticQuestionnaire){
+    void processPairwiseCleaning(Questionnaire lunaticQuestionnaire){
         LunaticPairwiseQuestionCleaning pairwiseQuestionCleaning = new LunaticPairwiseQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(PairwiseQuestion.class::isInstance)
                 .map(PairwiseQuestion.class::cast)
                 .forEach(pairwiseQuestionCleaning::processCleaningPairwiseQuestion);
+    }
+
+    /**
+     *
+     * @param lunaticQuestionnaire
+     */
+    void processDynamicUCQ(Questionnaire lunaticQuestionnaire){
+        LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
+        // Classic UCQ
+        enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(UniqueChoiceQuestion.class::isInstance)
+                .map(UniqueChoiceQuestion.class::cast)
+                // keep only UCU with dynamic code list (i.e optionSource defined)
+                .filter(uniqueChoiceQuestion -> uniqueChoiceQuestion.getOptionSource() != null)
+                .forEach(uniqueChoiceQuestionCleaning::processCleaningUniqueChoiceQuestionDynamicOption);
+
+        // UCQ deep inside Table or  DynamicTable -> use Lunatic BodyCell instead of (eno UniqueChoiceQuestion)
+        findAllBodyCell(lunaticQuestionnaire).forEach(uniqueChoiceQuestionCleaning::processCleaningDynamicOptionBodyCell);
+    }
+
+    private List<BodyCell> findAllBodyCell(Questionnaire lunaticQuestionnaire){
+        List<TableQuestion> tableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(TableQuestion.class::isInstance)
+                .map(TableQuestion.class::cast)
+                .toList();
+        List<BodyCell> bodyCells = tableQuestions.stream()
+                .map(tableQuestion -> LunaticUtils.findComponentById(lunaticQuestionnaire, tableQuestion.getId()))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(Table.class::isInstance)
+                .map(Table.class::cast)
+                .map(Table::getBodyLines)
+                .flatMap(Collection::stream)
+                .map(BodyLine::getBodyCells)
+                .flatMap(Collection::stream)
+                .toList();
+        List<DynamicTableQuestion> dynamicTableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(DynamicTableQuestion.class::isInstance)
+                .map(DynamicTableQuestion.class::cast)
+                .toList();
+        List<BodyCell> dynamicBodyCelles = dynamicTableQuestions.stream()
+                .map(tableQuestion -> LunaticUtils.findComponentById(lunaticQuestionnaire, tableQuestion.getId()))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(RosterForLoop.class::isInstance)
+                .map(RosterForLoop.class::cast)
+                .map(RosterForLoop::getComponents)
+                .flatMap(Collection::stream)
+                .toList();
+        List<BodyCell> result = new ArrayList<>();
+        result.addAll(bodyCells);
+        result.addAll(dynamicBodyCelles);
+        return result;
     }
 
 }

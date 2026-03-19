@@ -23,17 +23,13 @@ public record LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionn
                                                   Map<String, VariableType> variableIndex,
                                                   Map<String, String> variableShapeFromIndex) {
 
-    public void processCleaningUniqueChoiceQuestion(UniqueChoiceQuestion enoUniqueChoiceQuestion) {
+    /**
+     * Add a cleaning for filtered option
+     */
+    public void processCleaningUniqueChoiceQuestionOptionFilters(UniqueChoiceQuestion enoUniqueChoiceQuestion){
         Optional<ComponentType> uniqueChoiceQuestion = findComponentById(lunaticQuestionnaire, enoUniqueChoiceQuestion.getId());
         if (uniqueChoiceQuestion.isEmpty()) {
             throw new MappingException("Cannot find Lunatic component for " + enoUniqueChoiceQuestion + ".");
-        }
-        String responseVariable = enoUniqueChoiceQuestion.getResponse().getVariableName();
-        if (enoUniqueChoiceQuestion.getOptionSource() != null) {
-            processCleaningOptionSource(
-                    responseVariable,
-                    enoUniqueChoiceQuestion.getOptionSource()
-            );
         }
         if (uniqueChoiceQuestion.get() instanceof Radio radio)
             radio.getOptions().forEach(option -> processCleaningOption(option, radio.getResponse().getName()));
@@ -41,6 +37,51 @@ public record LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionn
             checkboxOne.getOptions().forEach(option -> processCleaningOption(option, checkboxOne.getResponse().getName()));
         if (uniqueChoiceQuestion.get() instanceof Dropdown dropdown)
             dropdown.getOptions().forEach(option -> processCleaningOption(option, dropdown.getResponse().getName()));
+    }
+
+    /**
+     * Add a cleaning for filtered option, case of bodyCell (UCQ inside Table or RosterForLoop)
+     */
+    public void processCleaningUniqueChoiceQuestionOptionFiltersBodyCell(BodyCell bodyCell){
+        if(bodyCell.getOptions() == null) return;
+        bodyCell.getOptions().forEach(option -> processCleaningOption(option, bodyCell.getResponse().getName()));
+    }
+
+
+    /**
+     * Add a cleaning for dynamic option (option based on variable in Loop)
+     */
+    public void processCleaningUniqueChoiceQuestionDynamicOption(UniqueChoiceQuestion enoUniqueChoiceQuestion){
+        Optional<ComponentType> uniqueChoiceQuestion = findComponentById(lunaticQuestionnaire, enoUniqueChoiceQuestion.getId());
+        if (uniqueChoiceQuestion.isEmpty()) {
+            throw new MappingException("Cannot find Lunatic component for " + enoUniqueChoiceQuestion + ".");
+        }
+        if(enoUniqueChoiceQuestion.getOptionSource() == null) return;
+
+        if (uniqueChoiceQuestion.get() instanceof Radio radio) {
+            radio.getOptions().forEach(option -> processCleaningOptionSource(
+                    radio.getResponse().getName(),
+                    radio.getOptionSource()));
+        }
+        if (uniqueChoiceQuestion.get() instanceof CheckboxOne checkboxOne) {
+            checkboxOne.getOptions().forEach(option -> processCleaningOptionSource(
+                    checkboxOne.getResponse().getName(),
+                    checkboxOne.getOptionSource()));
+        }
+        if (uniqueChoiceQuestion.get() instanceof Dropdown dropdown) {
+            dropdown.getOptions().forEach(option -> processCleaningOptionSource(
+                    dropdown.getResponse().getName(),
+                    dropdown.getOptionSource()));
+        }
+    }
+
+    /**
+     * Add a cleaning for dynamic option (option based on variable in Loop), case of bodyCell (UCQ inside Table or RosterForLoop)
+     */
+    public void processCleaningDynamicOptionBodyCell(BodyCell bodyCell){
+        String optionSourceVariable = bodyCell.getOptionSource();
+        if(optionSourceVariable == null) return;
+        processCleaningOptionSource(bodyCell.getResponse().getName(), optionSourceVariable);
     }
 
     /**
