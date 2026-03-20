@@ -258,7 +258,7 @@ class LunaticAddCleaningTest {
 
         // WHEN
         cleaningStep.preProcessCleaning(lunaticQuestionnaire1);
-        cleaningStep.processCodeFiltered(lunaticQuestionnaire1);
+        cleaningStep.processDynamicUCQ(lunaticQuestionnaire1);
 
         // THEN
         CleaningType cleaning = lunaticQuestionnaire1.getCleaning();

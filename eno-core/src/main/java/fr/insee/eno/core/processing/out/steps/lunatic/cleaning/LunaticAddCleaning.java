@@ -219,7 +219,7 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         LunaticMultipleChoiceQuestionCleaning multipleChoiceQuestionCleaning = new LunaticMultipleChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
 
-        // classic code Filter for UCQ
+        // code Filter for UCQ
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance)
                 .map(UniqueChoiceQuestion.class::cast)
@@ -228,10 +228,10 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .forEach(uniqueChoiceQuestionCleaning::processCleaningUniqueChoiceQuestionOptionFilters);
 
         // UCQ deep inside Table -> use Lunatic BodyCell instead of (eno UniqueChoiceQuestion)
-        findAllBodyCell(lunaticQuestionnaire)
+        findAllUCQBodyCell(lunaticQuestionnaire)
                 .forEach(uniqueChoiceQuestionCleaning::processCleaningUniqueChoiceQuestionOptionFiltersBodyCell);
 
-        // classic code Filter for MCQ
+        // code Filter for MCQ, notice that MCQ is not allowed inside Table
         enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(SimpleMultipleChoiceQuestion.class::isInstance)
                 .map(SimpleMultipleChoiceQuestion.class::cast)
@@ -245,12 +245,14 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         LunaticMultipleChoiceQuestionCleaning multipleChoiceQuestionCleaning = new LunaticMultipleChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
 
+        // clarification cleaning for UCQ, notice that clarification Question is not allowed in UCQ inside Table
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance)
                 .map(UniqueChoiceQuestion.class::cast)
                 .filter(uniqueChoiceQuestion -> !uniqueChoiceQuestion.getDetailResponses().isEmpty())
                 .forEach(uniqueChoiceQuestionCleaning::processCleaningUniqueChoiceQuestionClarification);
 
+        // clarification cleaning for MCQ, notice that MCQ is not allowed inside Table
         enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(SimpleMultipleChoiceQuestion.class::isInstance)
                 .map(SimpleMultipleChoiceQuestion.class::cast)
@@ -291,10 +293,15 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .forEach(uniqueChoiceQuestionCleaning::processCleaningUniqueChoiceQuestionDynamicOption);
 
         // UCQ deep inside Table or  DynamicTable -> use Lunatic BodyCell instead of (eno UniqueChoiceQuestion)
-        findAllBodyCell(lunaticQuestionnaire).forEach(uniqueChoiceQuestionCleaning::processCleaningDynamicOptionBodyCell);
+        findAllUCQBodyCell(lunaticQuestionnaire).forEach(uniqueChoiceQuestionCleaning::processCleaningDynamicOptionBodyCell);
     }
 
-    private List<BodyCell> findAllBodyCell(Questionnaire lunaticQuestionnaire){
+    /**
+     * This private methode retrieve all Lunatic BodyCell. It keeps only cell used as UniqueChoiceQuestion
+     * @param lunaticQuestionnaire
+     * @return
+     */
+    private List<BodyCell> findAllUCQBodyCell(Questionnaire lunaticQuestionnaire){
         List<TableQuestion> tableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(TableQuestion.class::isInstance)
                 .map(TableQuestion.class::cast)
@@ -309,6 +316,7 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .flatMap(Collection::stream)
                 .map(BodyLine::getBodyCells)
                 .flatMap(Collection::stream)
+                .filter(this::isUCQCell) // keep only UCQ Cells
                 .toList();
         List<DynamicTableQuestion> dynamicTableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(DynamicTableQuestion.class::isInstance)
@@ -322,11 +330,24 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .map(RosterForLoop.class::cast)
                 .map(RosterForLoop::getComponents)
                 .flatMap(Collection::stream)
+                .filter(this::isUCQCell) // keep only UCQ Cells
                 .toList();
         List<BodyCell> result = new ArrayList<>();
         result.addAll(bodyCells);
         result.addAll(dynamicBodyCelles);
         return result;
+    }
+
+    /**
+     * Check if bodyCell is a UniqueChoiceQuestion, ignore suggester.
+     * @param bodyCell
+     * @return
+     */
+    private boolean isUCQCell(BodyCell bodyCell){
+        ComponentTypeEnum cellComponentType = bodyCell.getComponentType();
+        return ComponentTypeEnum.RADIO.equals(cellComponentType)
+                || ComponentTypeEnum.DROPDOWN.equals(cellComponentType)
+                || ComponentTypeEnum.CHECKBOX_ONE.equals(cellComponentType);
     }
 
 }

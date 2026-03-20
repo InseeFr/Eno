@@ -51,28 +51,11 @@ public record LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionn
     /**
      * Add a cleaning for dynamic option (option based on variable in Loop)
      */
-    public void processCleaningUniqueChoiceQuestionDynamicOption(UniqueChoiceQuestion enoUniqueChoiceQuestion){
-        Optional<ComponentType> uniqueChoiceQuestion = findComponentById(lunaticQuestionnaire, enoUniqueChoiceQuestion.getId());
-        if (uniqueChoiceQuestion.isEmpty()) {
-            throw new MappingException("Cannot find Lunatic component for " + enoUniqueChoiceQuestion + ".");
-        }
-        if(enoUniqueChoiceQuestion.getOptionSource() == null) return;
-
-        if (uniqueChoiceQuestion.get() instanceof Radio radio) {
-            radio.getOptions().forEach(option -> processCleaningOptionSource(
-                    radio.getResponse().getName(),
-                    radio.getOptionSource()));
-        }
-        if (uniqueChoiceQuestion.get() instanceof CheckboxOne checkboxOne) {
-            checkboxOne.getOptions().forEach(option -> processCleaningOptionSource(
-                    checkboxOne.getResponse().getName(),
-                    checkboxOne.getOptionSource()));
-        }
-        if (uniqueChoiceQuestion.get() instanceof Dropdown dropdown) {
-            dropdown.getOptions().forEach(option -> processCleaningOptionSource(
-                    dropdown.getResponse().getName(),
-                    dropdown.getOptionSource()));
-        }
+    public void processCleaningUniqueChoiceQuestionDynamicOption(UniqueChoiceQuestion enoUniqueChoiceQuestion) {
+        String optionSource = enoUniqueChoiceQuestion.getOptionSource();
+        if (optionSource == null) return;
+        String responseName = enoUniqueChoiceQuestion.getResponse().getVariableName();
+        processCleaningOptionSource(responseName, optionSource);
     }
 
     /**
