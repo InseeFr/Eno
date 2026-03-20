@@ -5,16 +5,11 @@ import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.*;
-import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.cleaning.CleaningVariableEntry;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 /** Integration test for the "unique choice with variable options" feature. */
 class UniqueChoiceQuestionVariableCleaningIT {
