@@ -250,21 +250,21 @@ class LunaticAddCleaningTest {
 
         qcu.setOptionSource("LOOP_VAR");
 
-        EnoQuestionnaire enoQuestionnaire1 = new EnoQuestionnaire();
-        enoQuestionnaire1.getSingleResponseQuestions().add(qcu);
+        enoQuestionnaire = new EnoQuestionnaire();
+        enoQuestionnaire.getSingleResponseQuestions().add(qcu);
 
-        Questionnaire lunaticQuestionnaire1 = new Questionnaire();
-        new LunaticMapper().mapQuestionnaire(enoQuestionnaire1, lunaticQuestionnaire1);
+        lunaticQuestionnaire = new Questionnaire();
+        new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
 
         LunaticAddCleaning cleaningStep =
-                new LunaticAddCleaning(enoQuestionnaire1, enoQuestionnaire1.getIndex());
+                new LunaticAddCleaning(enoQuestionnaire, enoQuestionnaire.getIndex());
 
         // WHEN
-        cleaningStep.preProcessCleaning(lunaticQuestionnaire1);
-        cleaningStep.processDynamicUCQ(lunaticQuestionnaire1);
+        cleaningStep.preProcessCleaning(lunaticQuestionnaire);
+        cleaningStep.processDynamicUCQ(lunaticQuestionnaire);
 
         // THEN
-        CleaningType cleaning = lunaticQuestionnaire1.getCleaning();
+        CleaningType cleaning = lunaticQuestionnaire.getCleaning();
         assertNotNull(cleaning);
 
         CleaningVariableEntry entry = cleaning.getCleaningEntry("LOOP_VAR");
@@ -282,7 +282,7 @@ class LunaticAddCleaningTest {
         DynamicTableQuestion enoDynamicTable = new DynamicTableQuestion();
         enoDynamicTable.setId("DYNAMIC_TABLE");
 
-        EnoQuestionnaire enoQuestionnaire = new EnoQuestionnaire();
+        enoQuestionnaire = new EnoQuestionnaire();
         enoQuestionnaire.getMultipleResponseQuestions().addAll(List.of(enoTable, enoDynamicTable));
 
         // Init Lunatic Table
@@ -309,7 +309,7 @@ class LunaticAddCleaningTest {
         lunaticDynamicTable.setId("DYNAMIC_TABLE");
         lunaticDynamicTable.getComponents().add(ucqDynamicCell);
 
-        Questionnaire lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().addAll(List.of(lunaticTable, lunaticDynamicTable));
 
         LunaticAddCleaning cleaningStep =
