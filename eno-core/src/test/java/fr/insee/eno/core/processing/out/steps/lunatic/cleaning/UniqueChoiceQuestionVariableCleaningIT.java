@@ -1,4 +1,4 @@
-package fr.insee.eno.core.mapping.out.lunatic;
+package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 
 import fr.insee.eno.core.PoguesDDIToLunatic;
 import fr.insee.eno.core.exceptions.business.ParsingException;

@@ -18,6 +18,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.getFinalBindingReferencesWithCalculatedVariables;
 import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.processCleaningForFilterExpression;
@@ -296,17 +297,12 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
         findAllUCQBodyCell(lunaticQuestionnaire).forEach(uniqueChoiceQuestionCleaning::processCleaningDynamicOptionBodyCell);
     }
 
-    /**
-     * This private methode retrieve all Lunatic BodyCell. It keeps only cell used as UniqueChoiceQuestion
-     * @param lunaticQuestionnaire
-     * @return
-     */
+    /** This method retrieves all Lunatic unique choice cells across all table components. */
     private List<BodyCell> findAllUCQBodyCell(Questionnaire lunaticQuestionnaire){
-        List<TableQuestion> tableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
+        Stream<TableQuestion> tableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(TableQuestion.class::isInstance)
-                .map(TableQuestion.class::cast)
-                .toList();
-        List<BodyCell> bodyCells = tableQuestions.stream()
+                .map(TableQuestion.class::cast);
+        Stream<BodyCell> lunaticCells = tableQuestions
                 .map(tableQuestion -> LunaticUtils.findComponentById(lunaticQuestionnaire, tableQuestion.getId()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
@@ -316,13 +312,11 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .flatMap(Collection::stream)
                 .map(BodyLine::getBodyCells)
                 .flatMap(Collection::stream)
-                .filter(this::isUCQCell) // keep only UCQ Cells
-                .toList();
-        List<DynamicTableQuestion> dynamicTableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
+                .filter(this::isUCQCell); // keep only UCQ Cells
+        Stream<DynamicTableQuestion> dynamicTableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
                 .filter(DynamicTableQuestion.class::isInstance)
-                .map(DynamicTableQuestion.class::cast)
-                .toList();
-        List<BodyCell> dynamicBodyCelles = dynamicTableQuestions.stream()
+                .map(DynamicTableQuestion.class::cast);
+        Stream<BodyCell> lunaticDynamicCells = dynamicTableQuestions
                 .map(tableQuestion -> LunaticUtils.findComponentById(lunaticQuestionnaire, tableQuestion.getId()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
@@ -330,19 +324,12 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .map(RosterForLoop.class::cast)
                 .map(RosterForLoop::getComponents)
                 .flatMap(Collection::stream)
-                .filter(this::isUCQCell) // keep only UCQ Cells
-                .toList();
-        List<BodyCell> result = new ArrayList<>();
-        result.addAll(bodyCells);
-        result.addAll(dynamicBodyCelles);
-        return result;
+                .filter(this::isUCQCell); // keep only UCQ Cells
+
+        return Stream.concat(lunaticCells, lunaticDynamicCells).toList();
     }
 
-    /**
-     * Check if bodyCell is a UniqueChoiceQuestion, ignore suggester.
-     * @param bodyCell
-     * @return
-     */
+    /** Checks if the Lunatic cell is a unique choice component (suggester excluded). */
     private boolean isUCQCell(BodyCell bodyCell){
         ComponentTypeEnum cellComponentType = bodyCell.getComponentType();
         return ComponentTypeEnum.RADIO.equals(cellComponentType)
