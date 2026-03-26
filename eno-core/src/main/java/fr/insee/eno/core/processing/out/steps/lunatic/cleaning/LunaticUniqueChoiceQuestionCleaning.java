@@ -113,7 +113,8 @@ public record LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionn
                 variableShapeFromIndex,
                 "false",
                 List.of(optionSourceVariable),
-                List.of(responseVariableName)
+                List.of(responseVariableName),
+                true
         );
     }
 
