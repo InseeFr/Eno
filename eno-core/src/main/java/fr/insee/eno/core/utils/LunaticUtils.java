@@ -212,7 +212,7 @@ public class LunaticUtils {
     private static Optional<ComponentType> findComponentInList(String id, List<ComponentType> componentList) {
         return componentList.stream().filter(component -> id.equals(component.getId())).findAny();
     }
-    public static List<String> getCollectedVariablesByComponent(ComponentType componentType){
+    private static List<String> getCollectedVariablesByComponent(ComponentType componentType){
         List<String> collectedVars = new ArrayList<>();
         if (componentType instanceof ComponentSimpleResponseType simpleResponseType) {
             collectedVars.add(simpleResponseType.getResponse().getName());
@@ -293,27 +293,6 @@ public class LunaticUtils {
 
                 });
         return questionCollectedVarIndex;
-    }
-
-    /**
-     * retrieve pairwise links
-     * @param components components to search
-     * @return pairwise links list
-     */
-    public static List<PairwiseLinks> searchForPairwiseLinks(List<ComponentType> components) {
-        List<PairwiseLinks> pairwiseLinksList = new ArrayList<>();
-        pairwiseLinksList.addAll(components.stream()
-                .filter(componentType -> ComponentTypeEnum.PAIRWISE_LINKS.equals(componentType.getComponentType()))
-                .map(PairwiseLinks.class::cast)
-                .toList());
-
-        pairwiseLinksList.addAll(components.stream()
-                .filter(componentType -> ComponentTypeEnum.LOOP.equals(componentType.getComponentType()))
-                .map(Loop.class::cast)
-                .map(loop -> searchForPairwiseLinks(loop.getComponents()))
-                .flatMap(Collection::stream)
-                .toList());
-        return pairwiseLinksList;
     }
 
     public static boolean isConditionFilterActive(String expression){
