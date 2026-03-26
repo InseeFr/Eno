@@ -41,8 +41,9 @@ public class CleaningUtils {
     private static void addNewCleaningExpression(CleanedVariableEntry cleanedVariable,
                                                  String filterExpression,
                                                  String shapeFrom,
-                                                 boolean isAggregatorUsed){
-        cleanedVariable.getCleaningExpressions().add(new CleaningExpression(filterExpression, shapeFrom, isAggregatorUsed) );
+                                                 Boolean isAggregatorUsed,
+                                                 Boolean shouldCheckAllIterations){
+        cleanedVariable.getCleaningExpressions().add(new CleaningExpression(filterExpression, shapeFrom, isAggregatorUsed, shouldCheckAllIterations));
     }
 
     public static List<String> removeCalculatedVariables(List<String> variableNames, Map<String, VariableType> variableIndex){
@@ -87,6 +88,7 @@ public class CleaningUtils {
      * @param filterExpression, the expression of filter (as string expression)
      * @param allVariablesThatInfluenceFilterExpression, list of all variables that influence the filter
      * @param variablesCollectedInsideFilter, list of all variable that collected inside filter i.e that should be cleaned
+     * @param shouldCheckAllIterations, determines if filterExpression needs to be evaluated for all iterations (business rules)
      */
     public static void processCleaningForFilterExpression(
             CleaningType cleaning,
@@ -94,7 +96,8 @@ public class CleaningUtils {
             Map<String, String> shapeFromIndex,
             String filterExpression,
             List<String> allVariablesThatInfluenceFilterExpression,
-            List<String> variablesCollectedInsideFilter){
+            List<String> variablesCollectedInsideFilter,
+            Boolean shouldCheckAllIterations){
         boolean isAggregatorUsedOfFilter = isAggregatorUsedInFilter(filterExpression, allVariablesThatInfluenceFilterExpression, variableIndex);
         removeCalculatedVariables(allVariablesThatInfluenceFilterExpression, variableIndex).forEach(
                 variableName -> {
@@ -109,7 +112,8 @@ public class CleaningUtils {
                                     addNewCleaningExpression(cleanedVariableEntry,
                                             filterExpression,
                                             shapeFromIndex.get(variableToClean),
-                                            isAggregatorUsedOfFilter);
+                                            isAggregatorUsedOfFilter,
+                                            shouldCheckAllIterations);
                                     cleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
                                 });
                         cleaning.addCleaningEntry(cleaningVariableEntry);
@@ -126,11 +130,30 @@ public class CleaningUtils {
                                     addNewCleaningExpression(cleanedVariableEntry,
                                             filterExpression,
                                             shapeFromIndex.get(variableToClean),
-                                            isAggregatorUsedOfFilter);
+                                            isAggregatorUsedOfFilter,
+                                            shouldCheckAllIterations);
                                     existingCleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
                                 });
                     }
                 }
         );
     }
+
+    public static void processCleaningForFilterExpression(
+            CleaningType cleaning,
+            Map<String, VariableType> variableIndex,
+            Map<String, String> shapeFromIndex,
+            String filterExpression,
+            List<String> allVariablesThatInfluenceFilterExpression,
+            List<String> variablesCollectedInsideFilter){
+        processCleaningForFilterExpression(
+                cleaning,
+                variableIndex,
+                shapeFromIndex,
+                filterExpression,
+                allVariablesThatInfluenceFilterExpression,
+                variablesCollectedInsideFilter,
+                false);
+    }
+
 }

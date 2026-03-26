@@ -39,7 +39,7 @@
         <jacoco.version>0.8.14</jacoco.version>
         <!-- Model versions -->
         <poguesModel.version>1.15.3</poguesModel.version>
-        <lunaticModel.version>5.14.0</lunaticModel.version>
+        <lunaticModel.version>5.15.0</lunaticModel.version>
     </properties>
 
     <dependencies>
