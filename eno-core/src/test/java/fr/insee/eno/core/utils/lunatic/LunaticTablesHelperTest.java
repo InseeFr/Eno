@@ -14,4 +14,9 @@ class LunaticTablesHelperTest {
         // TODO
     }
 
+    @Test
+    void findAllCellsTest() {
+        // TODO
+    }
+
 }
