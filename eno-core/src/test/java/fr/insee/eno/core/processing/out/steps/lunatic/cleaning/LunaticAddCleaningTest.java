@@ -5,6 +5,8 @@ import fr.insee.eno.core.PoguesDDIToEno;
 import fr.insee.eno.core.exceptions.business.ParsingException;
 import fr.insee.eno.core.mappers.LunaticMapper;
 import fr.insee.eno.core.model.EnoQuestionnaire;
+import fr.insee.eno.core.model.question.DynamicTableQuestion;
+import fr.insee.eno.core.model.question.TableQuestion;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.model.response.Response;
 import fr.insee.eno.core.parameter.EnoParameters;
@@ -15,10 +17,11 @@ import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessi
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.serialize.DDIDeserializer;
 import fr.insee.eno.core.serialize.PoguesDeserializer;
-import fr.insee.lunatic.model.flat.Questionnaire;
+import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleaningExpression;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.cleaning.CleaningVariableEntry;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -247,21 +250,21 @@ class LunaticAddCleaningTest {
 
         qcu.setOptionSource("LOOP_VAR");
 
-        EnoQuestionnaire enoQuestionnaire1 = new EnoQuestionnaire();
-        enoQuestionnaire1.getSingleResponseQuestions().add(qcu);
+        enoQuestionnaire = new EnoQuestionnaire();
+        enoQuestionnaire.getSingleResponseQuestions().add(qcu);
 
-        Questionnaire lunaticQuestionnaire1 = new Questionnaire();
-        new LunaticMapper().mapQuestionnaire(enoQuestionnaire1, lunaticQuestionnaire1);
+        lunaticQuestionnaire = new Questionnaire();
+        new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
 
         LunaticAddCleaning cleaningStep =
-                new LunaticAddCleaning(enoQuestionnaire1, enoQuestionnaire1.getIndex());
+                new LunaticAddCleaning(enoQuestionnaire, enoQuestionnaire.getIndex());
 
         // WHEN
-        cleaningStep.preProcessCleaning(lunaticQuestionnaire1);
-        cleaningStep.processCodeFiltered(lunaticQuestionnaire1);
+        cleaningStep.preProcessCleaning(lunaticQuestionnaire);
+        cleaningStep.processDynamicUCQ(lunaticQuestionnaire);
 
         // THEN
-        CleaningType cleaning = lunaticQuestionnaire1.getCleaning();
+        CleaningType cleaning = lunaticQuestionnaire.getCleaning();
         assertNotNull(cleaning);
 
         CleaningVariableEntry entry = cleaning.getCleaningEntry("LOOP_VAR");
@@ -273,5 +276,67 @@ class LunaticAddCleaningTest {
 
         assertEquals("false", cleaningExpression.getExpression());
         assertTrue(cleaningExpression.getShouldCheckAllIterations());
+    }
+
+    @Test
+    @DisplayName("Should compute cleaning for QCU inside table or DynamicTable dynamicOption")
+    void testCleaningForUCQInTable(){
+        // WHEN
+        TableQuestion enoTable = new TableQuestion();
+        enoTable.setId("TABLE");
+        DynamicTableQuestion enoDynamicTable = new DynamicTableQuestion();
+        enoDynamicTable.setId("DYNAMIC_TABLE");
+
+        enoQuestionnaire = new EnoQuestionnaire();
+        enoQuestionnaire.getMultipleResponseQuestions().addAll(List.of(enoTable, enoDynamicTable));
+
+        // Init Lunatic Table
+        BodyCell ucqCell = new BodyCell();
+        ucqCell.setComponentType(ComponentTypeEnum.DROPDOWN);
+        ucqCell.setOptionSource("LOOP_VAR");
+        ResponseType ucqResponse = new ResponseType();
+        ucqResponse.setName("UCQ_VAR");
+        ucqCell.setResponse(ucqResponse);
+        BodyLine bodyLine = new BodyLine();
+        bodyLine.setBodyCells(List.of(ucqCell));
+        Table lunaticTable = new Table();
+        lunaticTable.setId("TABLE");
+        lunaticTable.setBodyLines(List.of(bodyLine));
+
+        // Init Lunatic Dynamic Table
+        BodyCell ucqDynamicCell = new BodyCell();
+        ucqDynamicCell.setComponentType(ComponentTypeEnum.DROPDOWN);
+        ucqDynamicCell.setOptionSource("LOOP_VAR_2");
+        ResponseType ucqDynamicResponse = new ResponseType();
+        ucqDynamicResponse.setName("DYNAMIC_UCQ_VAR");
+        ucqDynamicCell.setResponse(ucqDynamicResponse);
+        RosterForLoop lunaticDynamicTable = new RosterForLoop();
+        lunaticDynamicTable.setId("DYNAMIC_TABLE");
+        lunaticDynamicTable.getComponents().add(ucqDynamicCell);
+
+        lunaticQuestionnaire = new Questionnaire();
+        lunaticQuestionnaire.getComponents().addAll(List.of(lunaticTable, lunaticDynamicTable));
+
+        LunaticAddCleaning cleaningStep =
+                new LunaticAddCleaning(enoQuestionnaire, enoQuestionnaire.getIndex());
+
+        // WHEN
+        cleaningStep.preProcessCleaning(lunaticQuestionnaire);
+        cleaningStep.processDynamicUCQ(lunaticQuestionnaire);
+
+        // THEN
+        CleaningType cleaning = lunaticQuestionnaire.getCleaning();
+
+        CleaningVariableEntry entry = cleaning.getCleaningEntry("LOOP_VAR");
+        assertNotNull(entry);
+        // UCQ_VAR should be cleanable
+        assertNotNull(entry.getCleanedVariable("UCQ_VAR"));
+
+        CleaningVariableEntry entryForDynamic = cleaning.getCleaningEntry("LOOP_VAR_2");
+        assertNotNull(entryForDynamic);
+        // UCQ_VAR should be cleanable
+        assertNotNull(entryForDynamic.getCleanedVariable("DYNAMIC_UCQ_VAR"));
+
+
     }
 }
