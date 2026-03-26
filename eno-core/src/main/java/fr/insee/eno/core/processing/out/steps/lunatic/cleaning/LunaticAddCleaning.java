@@ -3,7 +3,10 @@ package fr.insee.eno.core.processing.out.steps.lunatic.cleaning;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.navigation.Filter;
-import fr.insee.eno.core.model.question.*;
+import fr.insee.eno.core.model.question.DynamicTableQuestion;
+import fr.insee.eno.core.model.question.PairwiseQuestion;
+import fr.insee.eno.core.model.question.SimpleMultipleChoiceQuestion;
+import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.model.response.CodeResponse;
 import fr.insee.eno.core.model.sequence.AbstractSequence;
 import fr.insee.eno.core.model.sequence.ItemReference;
@@ -11,6 +14,8 @@ import fr.insee.eno.core.model.sequence.StructureItemReference;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
 import fr.insee.eno.core.utils.LunaticUtils;
+import fr.insee.eno.core.utils.lunatic.LunaticQuestionHelper;
+import fr.insee.eno.core.utils.lunatic.LunaticTablesHelper;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.cleaning.CleaningType;
 import fr.insee.lunatic.model.flat.variable.VariableType;
@@ -279,10 +284,7 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
                 .forEach(pairwiseQuestionCleaning::processCleaningPairwiseQuestion);
     }
 
-    /**
-     *
-     * @param lunaticQuestionnaire
-     */
+    /** Handle cleaning for unique choice components with variable (dynamic) options. */
     void processDynamicUCQ(Questionnaire lunaticQuestionnaire){
         LunaticUniqueChoiceQuestionCleaning uniqueChoiceQuestionCleaning = new LunaticUniqueChoiceQuestionCleaning(lunaticQuestionnaire, variableIndex, variableShapeFromIndex);
         // Classic UCQ
@@ -298,34 +300,13 @@ public class LunaticAddCleaning implements ProcessingStep<Questionnaire> {
     }
 
     /** This method retrieves all Lunatic unique choice cells across all table components. */
-    private List<BodyCell> findAllUCQBodyCell(Questionnaire lunaticQuestionnaire){
-        Stream<TableQuestion> tableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
-                .filter(TableQuestion.class::isInstance)
-                .map(TableQuestion.class::cast);
-        Stream<BodyCell> lunaticCells = tableQuestions
-                .map(tableQuestion -> LunaticUtils.findComponentById(lunaticQuestionnaire, tableQuestion.getId()))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .filter(Table.class::isInstance)
-                .map(Table.class::cast)
-                .map(Table::getBodyLines)
-                .flatMap(Collection::stream)
-                .map(BodyLine::getBodyCells)
-                .flatMap(Collection::stream)
-                .filter(this::isUCQCell); // keep only UCQ Cells
-        Stream<DynamicTableQuestion> dynamicTableQuestions = enoQuestionnaire.getMultipleResponseQuestions().stream()
-                .filter(DynamicTableQuestion.class::isInstance)
-                .map(DynamicTableQuestion.class::cast);
-        Stream<BodyCell> lunaticDynamicCells = dynamicTableQuestions
-                .map(tableQuestion -> LunaticUtils.findComponentById(lunaticQuestionnaire, tableQuestion.getId()))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .filter(RosterForLoop.class::isInstance)
-                .map(RosterForLoop.class::cast)
-                .map(RosterForLoop::getComponents)
-                .flatMap(Collection::stream)
-                .filter(this::isUCQCell); // keep only UCQ Cells
-
+    private List<BodyCell> findAllUCQBodyCell(Questionnaire lunaticQuestionnaire) {
+        Stream<BodyCell> lunaticCells = LunaticQuestionHelper.findAllInQuestionnaire(Table.class, lunaticQuestionnaire)
+                .flatMap(LunaticTablesHelper::getAllCells)
+                .filter(this::isUCQCell);
+        Stream<BodyCell> lunaticDynamicCells = LunaticQuestionHelper.findAllInQuestionnaire(RosterForLoop.class, lunaticQuestionnaire)
+                .flatMap(rosterForLoop -> rosterForLoop.getComponents().stream())
+                .filter(this::isUCQCell);
         return Stream.concat(lunaticCells, lunaticDynamicCells).toList();
     }
 
