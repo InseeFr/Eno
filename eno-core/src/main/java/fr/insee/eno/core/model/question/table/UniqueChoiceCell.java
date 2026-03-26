@@ -1,6 +1,7 @@
 package fr.insee.eno.core.model.question.table;
 
 import fr.insee.ddi.lifecycle33.datacollection.GridResponseDomainInMixedType;
+import fr.insee.ddi.lifecycle33.reusable.RepresentationType;
 import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
@@ -45,7 +46,7 @@ public class UniqueChoiceCell extends ResponseCell {
     String orientation = Orientation.HORIZONTAL.toString();
 
     @Pogues("getCodeListReference()")
-    @DDI("getResponseDomain().getCodeListReference() != null ? " +
+    @DDI("getResponseDomain()?.getCodeListReference() != null ? " +
             "getResponseDomain().getCodeListReference().getIDArray(0).getStringValue() : null")
     String codeListReference;
 
@@ -61,7 +62,12 @@ public class UniqueChoiceCell extends ResponseCell {
     /** Analog to the method in UniqueChoiceQuestion due to poor polymorphism in DDI. */
     public static UniqueChoiceQuestion.DisplayFormat convertDDIOutputFormat(
             GridResponseDomainInMixedType gridResponseDomainInMixedType) {
-        String ddiOutputFormat = gridResponseDomainInMixedType.getResponseDomain().getGenericOutputFormat().getStringValue();
+        RepresentationType responseDomain = gridResponseDomainInMixedType.getResponseDomain();
+        // trick here: returning null so that the mapper doesn't overwrite Pogues value
+        // (done due to variable-based UCQs not having a DDI modeling at some point)
+        if (responseDomain == null)
+            return null;
+        String ddiOutputFormat = responseDomain.getGenericOutputFormat().getStringValue();
         Optional<UniqueChoiceQuestion.DisplayFormat> convertedDisplayFormat = UniqueChoiceQuestion.ddiValueToDisplayFormat(ddiOutputFormat);
         if (convertedDisplayFormat.isEmpty())
             throw new MappingException(

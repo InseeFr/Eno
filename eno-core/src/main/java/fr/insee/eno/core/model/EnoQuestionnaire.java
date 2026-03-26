@@ -176,7 +176,8 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
     @Pogues("getCodeLists()?.getCodeList()")
     @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListList()" +
             ".?[#this.getIDArray(0).getStringValue() != 'INSEE-COMMUN-CL-Booleen']" +
-            ".?[! #this.getIDArray(0).getStringValue().contains('secondDimension-fakeCL')]")
+            ".?[! #this.getIDArray(0).getStringValue().contains('secondDimension-fakeCL')]" + // code lists added for tables
+            ".?[#this.getBasedOnObject() == null]") // code lists added for variable choice questions
     List<CodeList> codeLists = new ArrayList<>();
 
     /** In addition to the code lists defined in Pogues, there are 'fake' code lists added by Eno xml in the
@@ -184,7 +185,8 @@ public class EnoQuestionnaire extends EnoIdentifiableObject {
      */
     @DDI("getResourcePackageArray(0).getCodeListSchemeArray(0).getCodeListList()" +
             ".?[#this.getIDArray(0).getStringValue() != 'INSEE-COMMUN-CL-Booleen']" +
-            ".?[#this.getIDArray(0).getStringValue().contains('secondDimension-fakeCL')]")
+            ".?[#this.getIDArray(0).getStringValue().contains('secondDimension-fakeCL')]" +
+            ".?[#this.getBasedOnObject() == null]") // code lists added for variable choice questions
     List<CodeList> fakeCodeLists = new ArrayList<>();
 
     public static List<RoundaboutType> mapPoguesRoundabouts(Questionnaire poguesQuestionnaire) {
