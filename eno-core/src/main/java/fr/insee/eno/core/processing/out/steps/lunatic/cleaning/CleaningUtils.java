@@ -88,7 +88,7 @@ public class CleaningUtils {
      * @param filterExpression, the expression of filter (as string expression)
      * @param allVariablesThatInfluenceFilterExpression, list of all variables that influence the filter
      * @param variablesCollectedInsideFilter, list of all variable that collected inside filter i.e that should be cleaned
-     * @param shouldCheckAllIterations, determine if filterExpression need to be evaluated for all iterations (business rules)
+     * @param shouldCheckAllIterations, determines if filterExpression needs to be evaluated for all iterations (business rules)
      */
     public static void processCleaningForFilterExpression(
             CleaningType cleaning,
