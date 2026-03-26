@@ -40,12 +40,6 @@ import java.util.Optional;
 @Context(format = Format.LUNATIC, type = {CheckboxOne.class, Radio.class, Dropdown.class})
 public class UniqueChoiceQuestion extends SingleResponseQuestion {
 
-    /**
-     * DDI metadata to mark the content of a GenericOutputFormat as a unique choice question display format.
-     * (Unused yet but will be useful in DDI out mapping).
-     */
-    public static final String DDI_UCQ_VOCABULARY_ID = "INSEE-GOF-CV";
-
     /** DDI value for radio display format. */
     public static final String DDI_UCQ_RADIO_OUTPUT_FORMAT = "radio-button";
     /** DDI value for checkbox display format. */

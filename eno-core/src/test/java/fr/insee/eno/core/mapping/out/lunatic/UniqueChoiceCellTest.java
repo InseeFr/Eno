@@ -36,4 +36,17 @@ class UniqueChoiceCellTest {
 
         assertTrue(lunaticCell.getOptions().isEmpty());
     }
+
+    @Test
+    void ucqCellVariableOptions() {
+        UniqueChoiceCell enoCell = new UniqueChoiceCell();
+        enoCell.setOptionSource("SOME_ITERATION_VARIABLE");
+
+        BodyCell lunaticCell = new BodyCell();
+
+        new LunaticMapper().mapEnoObject(enoCell, lunaticCell);
+
+        assertEquals("SOME_ITERATION_VARIABLE", lunaticCell.getOptionSource());
+    }
+
 }

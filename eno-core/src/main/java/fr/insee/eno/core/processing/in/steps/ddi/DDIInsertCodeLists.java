@@ -28,6 +28,8 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
         enoQuestionnaire.getSingleResponseQuestions().stream()
                 .filter(UniqueChoiceQuestion.class::isInstance)
                 .map(UniqueChoiceQuestion.class::cast)
+                // filter UCQ based on a variable (not associated with a code list)
+                .filter(uniqueChoiceQuestion -> uniqueChoiceQuestion.getOptionSource() == null)
                 .forEach(this::insertCodeItems);
 
         // Insert code lists in pairwise questions
@@ -62,6 +64,8 @@ public class DDIInsertCodeLists implements ProcessingStep<EnoQuestionnaire> {
                 enoTable.getResponseCells().stream()
                         .filter(UniqueChoiceCell.class::isInstance)
                         .map(UniqueChoiceCell.class::cast)
+                        // filter choice cells based on a variable (not associated with a code list)
+                        .filter(uniqueChoiceCell -> uniqueChoiceCell.getOptionSource() == null)
                         .forEach(this::insertCodeItems));
         enoComplexMCQList.forEach(enoComplexMCQ -> enoComplexMCQ.getResponseCells().stream()
                 .map(UniqueChoiceCell.class::cast) // No filtering here since in complex MCQ cells are always UCQ
