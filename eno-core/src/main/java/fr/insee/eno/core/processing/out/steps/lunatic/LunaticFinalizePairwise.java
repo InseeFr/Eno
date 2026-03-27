@@ -5,15 +5,13 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
-import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
+import fr.insee.eno.core.utils.lunatic.LunaticQuestionHelper;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import static fr.insee.eno.core.utils.LunaticUtils.searchForPairwiseLinks;
 
 /**
  * Processing to finalize pairwise (handle symlinks/conditionFilter/calculated axis variables),
@@ -31,8 +29,9 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
 
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        List<PairwiseLinks> pairwiseLinksList = searchForPairwiseLinks(lunaticQuestionnaire.getComponents());
-        if(pairwiseLinksList.isEmpty()) {
+        List<PairwiseLinks> pairwiseLinksList = LunaticQuestionHelper.findAllInQuestionnaire(
+                PairwiseLinks.class, lunaticQuestionnaire).toList();
+        if (pairwiseLinksList.isEmpty()) {
             return;
         }
 
@@ -46,7 +45,7 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
         boolean isPairwiseInLoop = isInLoop(lunaticQuestionnaire.getComponents(), pairwiseLinks, false);
 
         // should delete `xAxisIterations` & `yAxisIterations` (useless and cause scope issue where pairwise is insideLoop)
-        if(isPairwiseInLoop){
+        if (isPairwiseInLoop) {
             pairwiseLinks.setXAxisIterations(null);
             pairwiseLinks.setYAxisIterations(null);
         }
