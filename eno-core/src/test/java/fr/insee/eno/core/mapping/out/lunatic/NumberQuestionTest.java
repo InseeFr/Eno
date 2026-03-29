@@ -13,7 +13,6 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.processing.out.steps.lunatic.LunaticEditLabelTypes;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.eno.core.serialize.DDIDeserializer;
@@ -80,7 +79,6 @@ class NumberQuestionTest {
         new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
         new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
         new LunaticTableProcessing(enoQuestionnaire).apply(lunaticQuestionnaire);
-        new LunaticEditLabelTypes().apply(lunaticQuestionnaire); // to set unit type to VTL
 
         // Then
         InputNumber inputNumber0 = (InputNumber) lunaticQuestionnaire.getComponents().get(1);
