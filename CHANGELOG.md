@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.63.0] - 2026-03-27
+### :sparkles: New Features
+- [`0544eb4`](https://github.com/InseeFr/Eno/commit/0544eb4deb2493156a8a604d5998bcbe511e2ce8) - qcu options based on loop response *(PR [#1368](https://github.com/InseeFr/Eno/pull/1368) by [@RemiVerriez](https://github.com/RemiVerriez))*
+- [`1c765cc`](https://github.com/InseeFr/Eno/commit/1c765ccc9a6fcbb7d0d3654a78762650bf9b6fb9) - add dynamic ucq in table *(PR [#1372](https://github.com/InseeFr/Eno/pull/1372) by [@RemiVerriez](https://github.com/RemiVerriez))*
+
+### :bug: Bug Fixes
+- [`716c4f8`](https://github.com/InseeFr/Eno/commit/716c4f881a1b798e2363422c37e80ef824c4b96c) - ucq with variable options in tables *(PR [#1374](https://github.com/InseeFr/Eno/pull/1374) by [@nsenave](https://github.com/nsenave))*
+- [`613e221`](https://github.com/InseeFr/Eno/commit/613e221f74de5fcecc719eac0a9ae5251d8e659f) - ddi mapping for ucq variable options *(PR [#1375](https://github.com/InseeFr/Eno/pull/1375) by [@nsenave](https://github.com/nsenave))*
+- [`5842bd8`](https://github.com/InseeFr/Eno/commit/5842bd888bc13aef9821f9a30a327210d9ec629b) - add shouldCheckAllIterations to handle special case of cleaning *(PR [#1376](https://github.com/InseeFr/Eno/pull/1376) by [@laurentC35](https://github.com/laurentC35))*
+- [`e97d05f`](https://github.com/InseeFr/Eno/commit/e97d05f9141ae3322f2d934e7aba651bcf65cf00) - merged :) *(PR [#1379](https://github.com/InseeFr/Eno/pull/1379) by [@laurentC35](https://github.com/laurentC35))*
+
+
 ## [3.62.0] - 2026-02-27
 ### :sparkles: New Features
 - [`f4c870f`](https://github.com/InseeFr/Eno/commit/f4c870f95a9f559c758122eed2687122b65a95ab) - handle generation for pairwise in loop *(PR [#1367](https://github.com/InseeFr/Eno/pull/1367) by [@laurentC35](https://github.com/laurentC35))*
@@ -782,3 +794,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.61.0]: https://github.com/InseeFr/Eno/compare/3.60.0...3.61.0
 [3.61.1]: https://github.com/InseeFr/Eno/compare/3.61.0...3.61.1
 [3.62.0]: https://github.com/InseeFr/Eno/compare/3.61.1...3.62.0
+[3.63.0]: https://github.com/InseeFr/Eno/compare/3.62.0...3.63.0
