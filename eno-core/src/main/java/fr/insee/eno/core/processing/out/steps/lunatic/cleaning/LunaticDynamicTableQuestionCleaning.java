@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.getFinalBindingReferencesWithCalculatedVariables;
-import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.processCleaningForFilterExpression;
-import static fr.insee.eno.core.utils.LunaticUtils.isConditionFilterActive;
+import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.*;
 
 public class LunaticDynamicTableQuestionCleaning {
 

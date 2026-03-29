@@ -295,20 +295,4 @@ public class LunaticUtils {
         return questionCollectedVarIndex;
     }
 
-    public static boolean isConditionFilterActive(String expression){
-        if(expression == null) return false;
-        if(expression.isEmpty()) return false;
-        return !DEFAULT_FILTER_VALUE.equals(expression);
-    }
-
-    public static boolean isConditionFilterActive(ComponentFilter componentFilter){
-        if(componentFilter == null) return false;
-        return isConditionFilterActive(componentFilter.getValue());
-    }
-
-    public static boolean isConditionFilterActive(ConditionFilterType conditionFilter){
-        if(conditionFilter == null) return false;
-        return isConditionFilterActive(conditionFilter.getValue());
-    }
-
 }

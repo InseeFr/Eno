@@ -15,7 +15,7 @@ import java.util.Optional;
 import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.getFinalBindingReferencesWithCalculatedVariables;
 import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.processCleaningForFilterExpression;
 import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
-import static fr.insee.eno.core.utils.LunaticUtils.isConditionFilterActive;
+import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.isConditionFilterActive;
 import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.*;
 
 @Slf4j

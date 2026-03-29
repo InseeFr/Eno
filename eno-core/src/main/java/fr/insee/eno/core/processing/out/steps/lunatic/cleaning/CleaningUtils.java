@@ -13,23 +13,20 @@ import fr.insee.lunatic.model.flat.variable.VariableType;
 
 import java.util.*;
 
+import static fr.insee.eno.core.model.navigation.ComponentFilter.DEFAULT_FILTER_VALUE;
 import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.isAggregatorUsedInsideExpression;
 
 public class CleaningUtils {
 
-    private CleaningUtils(){}
+    private CleaningUtils() {}
 
-    /**
-     *
-     * @param filterExpression
-     * @param allVariableNamesForFilter
-     * @return true if an aggregator function of VTL language is used in filter (or in its dependencies)
-     */
+    /** Returns true if an aggregator function of VTL language is used in filter (or in its dependencies). */
     private static boolean isAggregatorUsedInFilter(String filterExpression, List<String> allVariableNamesForFilter,
-            Map<String, VariableType> variableIndex){
-        if(isAggregatorUsedInsideExpression(filterExpression)) return true;
-        for(String vName: allVariableNamesForFilter){
-            VariableType variable = variableIndex.get(vName);
+            Map<String, VariableType> variableIndex) {
+        if (isAggregatorUsedInsideExpression(filterExpression))
+            return true;
+        for( String variableName : allVariableNamesForFilter) {
+            VariableType variable = variableIndex.get(variableName);
             if(variable instanceof CalculatedVariableType calculatedVariable &&
                     isAggregatorUsedInsideExpression(calculatedVariable.getExpression().getValue())) {
                 return true;
@@ -154,6 +151,22 @@ public class CleaningUtils {
                 allVariablesThatInfluenceFilterExpression,
                 variablesCollectedInsideFilter,
                 false);
+    }
+
+    public static boolean isConditionFilterActive(String expression){
+        if(expression == null) return false;
+        if(expression.isEmpty()) return false;
+        return !DEFAULT_FILTER_VALUE.equals(expression);
+    }
+
+    public static boolean isConditionFilterActive(ComponentFilter componentFilter){
+        if(componentFilter == null) return false;
+        return isConditionFilterActive(componentFilter.getValue());
+    }
+
+    public static boolean isConditionFilterActive(ConditionFilterType conditionFilter){
+        if(conditionFilter == null) return false;
+        return isConditionFilterActive(conditionFilter.getValue());
     }
 
 }
