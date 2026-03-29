@@ -3,14 +3,12 @@ package fr.insee.eno.core.utils;
 import fr.insee.eno.core.exceptions.business.LunaticLoopException;
 import fr.insee.eno.core.exceptions.technical.LunaticPairwiseException;
 import fr.insee.eno.core.exceptions.technical.MappingException;
-import fr.insee.eno.core.model.navigation.ComponentFilter;
 import fr.insee.lunatic.model.flat.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
-
-import static fr.insee.eno.core.model.navigation.ComponentFilter.DEFAULT_FILTER_VALUE;
+import java.util.stream.Stream;
 
 /**
  * Utility class that provide some methods for Lunatic-Model objects.
@@ -106,15 +104,13 @@ public class LunaticUtils {
         };
     }
 
-    // ----- Above method should be refactored within the Lunatic-Model lib
-    // ----- Below methods contain come Eno business rules and should stay here
-
     /**
+     * Similar to the <code>getResponseName</code> method with a few business rules check concerning loops.
      * From a Lunatic loop object given, returns the list of collected variable names that belong to this loop.
      * @param loop A Lunatic loop.
      * @return A list of collected variable names.
      */
-    public static List<String> getCollectedVariablesInLoop(Loop loop) {
+    public static List<String> getResponseNamesInLoop(Loop loop) {
         List<String> result = new ArrayList<>();
         loop.getComponents().forEach(component -> {
             switch (component.getComponentType()) {
@@ -270,19 +266,20 @@ public class LunaticUtils {
         return collectedVars;
     }
 
+    // Note (!): looking at the implementation, this method looks wrong (outdated: doesn't seem to consider the
+    // roundabout components for instance).
     /**
-     *
-     * @param lunaticQuestionnaire
-     * @return A map of QuestionName: List of collected variables in the question.
+     * Returns a map of collected variable names (response names) by question.
+     * @param lunaticQuestionnaire A Lunatic questionnaire.
+     * @return A map with keys = question identifier, values = list of response names.
      */
     public static Map<String, List<String>> getCollectedVariablesByQuestion(Questionnaire lunaticQuestionnaire) {
         Map<String, List<String>> questionCollectedVarIndex = new HashMap<>();
         lunaticQuestionnaire.getComponents().stream()
-                .map(componentType -> {
-                    if(componentType instanceof Loop loop) return loop.getComponents();
-                    return List.of(componentType);
+                .flatMap(componentType -> {
+                    if(componentType instanceof Loop loop) return loop.getComponents().stream();
+                    return Stream.of(componentType);
                 })
-                .flatMap(Collection::stream)
                 .forEach(componentType -> {
                     String questionId = componentType.getId();
                     if(componentType instanceof PairwiseLinks pairwiseLinks){

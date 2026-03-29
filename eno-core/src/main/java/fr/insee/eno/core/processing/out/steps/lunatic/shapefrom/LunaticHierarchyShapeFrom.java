@@ -116,7 +116,7 @@ public class LunaticHierarchyShapeFrom implements ProcessingStep<Questionnaire> 
             // Otherwise return first collected variable of question
             List<String> questionVariables = variablesByQuestion.get(itemReference.getId());
             if (questionVariables.isEmpty()) { // (should not happen)
-                log.warn("Question <ith id '{}' has no collected variable.", itemReference.getId());
+                log.warn("Question with id '{}' has no collected variable.", itemReference.getId());
                 continue;
             }
             return Optional.of(questionVariables.getFirst());
