@@ -83,6 +83,9 @@ class UniqueChoiceQuestionTest {
         poguesUCQ.getResponse().getFirst().setChoiceType(ChoiceTypeEnum.VARIABLE);
         poguesUCQ.getResponse().getFirst().setVariableReference("variable-id");
 
+        // option filter
+        poguesUCQ.getResponse().getFirst().setOptionFilter("my filter");
+
         poguesSequence.getChild().add(poguesUCQ);
         poguesQuestionnaire.getChild().add(poguesSequence);
 
@@ -103,6 +106,7 @@ class UniqueChoiceQuestionTest {
         // Then
         enoUCQ = assertInstanceOf(UniqueChoiceQuestion.class, enoQuestionnaire.getSingleResponseQuestions().getFirst());
         assertEquals("SOME_ITERATION_VARIABLE", enoUCQ.getOptionSource());
+        assertEquals("my filter", enoUCQ.getOptionFilter().getValue());
     }
 
 }

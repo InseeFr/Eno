@@ -6,6 +6,7 @@ import fr.insee.eno.core.annotations.DDI;
 import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.technical.MappingException;
+import fr.insee.eno.core.model.calculated.CalculatedExpression;
 import fr.insee.eno.core.model.code.CodeItem;
 import fr.insee.eno.core.model.question.UniqueChoiceQuestion;
 import fr.insee.eno.core.parameter.Format;
@@ -55,6 +56,14 @@ public class UniqueChoiceCell extends ResponseCell {
             "#poguesIndex.get(#root.getVariableReference()).getName() : null")
     @Lunatic("setOptionSource(#param)")
     String optionSource;
+
+    /**
+     * Filter applied to dynamic response options (VTL expression).
+     */
+    @Pogues("getChoiceType() == T(fr.insee.pogues.model.ChoiceTypeEnum).VARIABLE ? " +
+           "#root.getOptionFilter() : null")
+    @Lunatic("setOptionFilter(#param)")
+    CalculatedExpression optionFilter;
 
     @Lunatic("getOptions()")
     List<CodeItem> codeItems = new ArrayList<>();
