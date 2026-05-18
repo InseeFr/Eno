@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class LunaticPaginationRegroupingUnitTest {
 
@@ -15,9 +16,7 @@ class LunaticPaginationRegroupingUnitTest {
         //
         Questionnaire questionnaire = new Questionnaire();
         Sequence sequence = new Sequence();
-        sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
         Subsequence subsequence = new Subsequence();
-        subsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
         Question question = new Question();
         Input input = new Input();
         input.setResponse(new ResponseType());
@@ -40,9 +39,7 @@ class LunaticPaginationRegroupingUnitTest {
         //
         Questionnaire questionnaire = new Questionnaire();
         Sequence sequence = new Sequence();
-        sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
         Subsequence subsequence = new Subsequence();
-        subsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
         subsequence.setDescription(new LabelType());
         Question question = new Question();
         Input input = new Input();

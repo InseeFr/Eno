@@ -23,13 +23,9 @@ class LunaticPaginationTest {
         void createLoopWithSequence() {
             questionnaire = new Questionnaire();
             Sequence sequence = new Sequence();
-            sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
             Input input1 = new Input();
-            input1.setComponentType(ComponentTypeEnum.INPUT);
             Input input2 = new Input();
-            input2.setComponentType(ComponentTypeEnum.INPUT);
             Loop loop = new Loop();
-            loop.setComponentType(ComponentTypeEnum.LOOP);
             loop.setLines(new LinesLoop());
             loop.getComponents().add(sequence);
             loop.getComponents().add(input1);
@@ -42,7 +38,7 @@ class LunaticPaginationTest {
             //
             new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
-            assertEquals("question", questionnaire.getPaginationEnum().value());
+            assertEquals("question", questionnaire.getPagination().value());
             assertEquals("1", questionnaire.getMaxPage());
             Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertFalse(loop.getPaginatedLoop());
@@ -58,7 +54,7 @@ class LunaticPaginationTest {
             //
             new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
-            assertEquals("sequence", questionnaire.getPaginationEnum().value());
+            assertEquals(Pagination.SEQUENCE, questionnaire.getPagination());
             assertEquals("1", questionnaire.getMaxPage());
             Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertTrue(loop.getPaginatedLoop());
@@ -79,15 +75,10 @@ class LunaticPaginationTest {
         void createLoopWithTwoSequences() {
             questionnaire = new Questionnaire();
             Sequence sequence1 = new Sequence();
-            sequence1.setComponentType(ComponentTypeEnum.SEQUENCE);
             Input input1 = new Input();
-            input1.setComponentType(ComponentTypeEnum.INPUT);
             Sequence sequence2 = new Sequence();
-            sequence2.setComponentType(ComponentTypeEnum.SEQUENCE);
             Input input2 = new Input();
-            input2.setComponentType(ComponentTypeEnum.INPUT);
             Loop loop = new Loop();
-            loop.setComponentType(ComponentTypeEnum.LOOP);
             loop.setLines(new LinesLoop());
             loop.getComponents().add(sequence1);
             loop.getComponents().add(input1);
@@ -101,7 +92,7 @@ class LunaticPaginationTest {
             //
             new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
-            assertEquals("question", questionnaire.getPaginationEnum().value());
+            assertEquals("question", questionnaire.getPagination().value());
             assertEquals("1", questionnaire.getMaxPage());
             Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertFalse(loop.getPaginatedLoop());
@@ -117,7 +108,7 @@ class LunaticPaginationTest {
             //
             new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
-            assertEquals("sequence", questionnaire.getPaginationEnum().value());
+            assertEquals(Pagination.SEQUENCE, questionnaire.getPagination());
             assertEquals("1", questionnaire.getMaxPage());
             Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertTrue(loop.getPaginatedLoop());
@@ -141,11 +132,8 @@ class LunaticPaginationTest {
         void createLoopWithSequence() {
             questionnaire = new Questionnaire();
             Sequence sequence = new Sequence();
-            sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
             Input input1 = new Input();
-            input1.setComponentType(ComponentTypeEnum.INPUT);
             Loop loop = new Loop();
-            loop.setComponentType(ComponentTypeEnum.LOOP);
             LinesLoop linesLoop = new LinesLoop();
             LabelType minMax = new LabelType();
             minMax.setType(LabelTypeEnum.VTL);
@@ -163,7 +151,7 @@ class LunaticPaginationTest {
             //
             new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.QUESTION, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
-            assertEquals("question", questionnaire.getPaginationEnum().value());
+            assertEquals(Pagination.QUESTION, questionnaire.getPagination());
             Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertFalse(loop.getPaginatedLoop());
             assertNotNull(loop.getLines());
@@ -179,7 +167,7 @@ class LunaticPaginationTest {
             //
             new LunaticAddPageNumbers(LunaticParameters.LunaticPaginationMode.SEQUENCE, EnoParameters.ModeParameter.CAWI).apply(questionnaire);
             //
-            assertEquals("sequence", questionnaire.getPaginationEnum().value());
+            assertEquals(Pagination.SEQUENCE, questionnaire.getPagination());
             Loop loop = (Loop) questionnaire.getComponents().getFirst();
             assertTrue(loop.getPaginatedLoop());
             // Paginated loops have a "max page"

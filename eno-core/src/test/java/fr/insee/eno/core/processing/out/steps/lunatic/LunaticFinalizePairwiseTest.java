@@ -38,11 +38,9 @@ class LunaticFinalizePairwiseTest {
 
         pairwiseLinks1 = new PairwiseLinks();
         pairwiseLinks1.getDeclarations().add(declarationType);
-        pairwiseLinks1.setComponentType(ComponentTypeEnum.PAIRWISE_LINKS);
         pairwiseLinks1.setId(pairwiseId);
 
         pairwiseLinks2 = new PairwiseLinks();
-        pairwiseLinks2.setComponentType(ComponentTypeEnum.PAIRWISE_LINKS);
         processing = new LunaticFinalizePairwise(enoQuestionnaire);
 
         radioComponent = new Radio();
@@ -74,7 +72,7 @@ class LunaticFinalizePairwiseTest {
         lunaticQuestionnaire.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
         assertEquals(
-                "true",
+                "(nvl(xAxis, \"\") <> \"\") and (nvl(yAxis, \"\") <> \"\")",
                 radioComponent.getConditionFilter().getValue());
     }
 
@@ -89,12 +87,11 @@ class LunaticFinalizePairwiseTest {
     @Test
     void checkPairwiseInLoopIsProcessed() {
         Loop loop = new Loop();
-        loop.setComponentType(ComponentTypeEnum.LOOP);
         lunaticQuestionnaire.getComponents().add(loop);
         loop.getComponents().add(pairwiseLinks1);
         processing.apply(lunaticQuestionnaire);
         assertEquals(
-                "true",
+                "(nvl(xAxis, \"\") <> \"\") and (nvl(yAxis, \"\") <> \"\")",
                 radioComponent.getConditionFilter().getValue());
     }
 

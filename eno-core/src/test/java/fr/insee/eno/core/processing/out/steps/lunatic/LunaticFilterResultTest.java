@@ -46,13 +46,11 @@ class LunaticFilterResultTest {
         lunaticQuestionnaire = new Questionnaire();
 
         input = new Input();
-        input.setComponentType(ComponentTypeEnum.INPUT);
         input.setId("input-id");
         input.setResponse(new ResponseType());
         input.getResponse().setName("INPUT_QUESTION");
 
         table = new Table();
-        table.setComponentType(ComponentTypeEnum.TABLE);
         table.setId("table-id");
         table.getBodyLines().add(new BodyLine());
         BodyCell tableCell1 = new BodyCell();
@@ -150,12 +148,10 @@ class LunaticFilterResultTest {
     void whenApplyingShouldProcessNestingComponents() {
         Loop loop = new Loop();
         loop.setId("loop-id");
-        loop.setComponentType(ComponentTypeEnum.LOOP);
         loop.getComponents().add(input);
 
         PairwiseLinks pairwise = new PairwiseLinks();
         pairwise.setId("pairwise-id");
-        pairwise.setComponentType(ComponentTypeEnum.PAIRWISE_LINKS);
         pairwise.getComponents().add(table);
         // A table in a pairwise should not happen in practice, but the logic is the same
 

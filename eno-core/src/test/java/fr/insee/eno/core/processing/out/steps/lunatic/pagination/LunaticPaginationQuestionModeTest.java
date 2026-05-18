@@ -20,14 +20,14 @@ class LunaticPaginationQuestionModeTest {
     void loopPaginatedByOccurrence() {
         // Given
         Questionnaire lunaticQuestionnaire = new Questionnaire();
-        Sequence sequence = new Sequence(); sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
+        Sequence sequence = new Sequence();
         InputNumber inputNumber = new InputNumber();
-        Loop loop = new Loop(); loop.setComponentType(ComponentTypeEnum.LOOP);
+        Loop loop = new Loop();
         loop.setLines(new LinesLoop());
         loop.getLines().setMin(new LabelType());
         loop.getLines().setMax(new LabelType());
         loop.setIsPaginatedByIterations(true);
-        Subsequence subsequence = new Subsequence(); subsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
+        Subsequence subsequence = new Subsequence();
         Input input1 = new Input();
         Input input2 = new Input();
         loop.getComponents().add(subsequence);
@@ -36,7 +36,7 @@ class LunaticPaginationQuestionModeTest {
         lunaticQuestionnaire.getComponents().add(sequence);
         lunaticQuestionnaire.getComponents().add(inputNumber);
         lunaticQuestionnaire.getComponents().add(loop);
-        Sequence sequence2 = new Sequence(); sequence2.setComponentType(ComponentTypeEnum.SEQUENCE);
+        Sequence sequence2 = new Sequence();
         lunaticQuestionnaire.getComponents().add(sequence2);
 
         // When

@@ -275,7 +275,8 @@ class LunaticAddCleaningTest {
         CleaningExpression cleaningExpression = entry.getCleanedVariable("Q1_VAR").getCleaningExpressions().getFirst();
 
         assertEquals("false", cleaningExpression.getExpression());
-        assertTrue(cleaningExpression.getShouldCheckAllIterations());
+        assertFalse(cleaningExpression.getShouldCheckAllIterations()); // no shapeFrom -> false (collected variable not in Loop)
+        assertTrue(cleaningExpression.getShouldCheckDuringResizing()); // should check during resizing (or cleaned because expression is always false)
     }
 
     @Test

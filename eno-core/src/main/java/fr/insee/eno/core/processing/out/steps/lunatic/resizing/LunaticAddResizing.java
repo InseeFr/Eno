@@ -3,12 +3,11 @@ package fr.insee.eno.core.processing.out.steps.lunatic.resizing;
 import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.utils.lunatic.LunaticQuestionHelper;
 import fr.insee.lunatic.model.flat.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
-
-import static fr.insee.eno.core.utils.LunaticUtils.searchForPairwiseLinks;
 
 @Slf4j
 public class LunaticAddResizing implements ProcessingStep<Questionnaire> {
@@ -46,9 +45,9 @@ public class LunaticAddResizing implements ProcessingStep<Questionnaire> {
         });
 
         // handling resizing pairwise logic by finding them
-        searchForPairwiseLinks(lunaticQuestionnaire.getComponents()).forEach(pairwiseLinks ->
-            pairwiseResizingLogic.buildPairwiseResizingEntries(pairwiseLinks, resizingType)
-        );
+        LunaticQuestionHelper.findAllInQuestionnaire(PairwiseLinks.class, lunaticQuestionnaire)
+                .forEach(pairwiseLinks ->
+                        pairwiseResizingLogic.buildPairwiseResizingEntries(pairwiseLinks, resizingType));
         lunaticQuestionnaire.setResizing(resizingType);
     }
 

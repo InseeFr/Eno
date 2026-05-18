@@ -9,18 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class LunaticPaginationWithFilterDescriptionTest {
 
-    // Utility methods for these tests since component type is not set in constructor in Lunatic-Model yet.
-    private Sequence createSequence() {
-        Sequence sequence = new Sequence();
-        sequence.setComponentType(ComponentTypeEnum.SEQUENCE);
-        return sequence;
-    }
-    private Subsequence createSubsequence() {
-        Subsequence newSubsequence = new Subsequence();
-        newSubsequence.setComponentType(ComponentTypeEnum.SUBSEQUENCE);
-        return newSubsequence;
-    }
-
     private Questionnaire lunaticQuestionnaire;
     private Subsequence subsequence;
     private Subsequence loopSubsequence;
@@ -30,26 +18,26 @@ class LunaticPaginationWithFilterDescriptionTest {
         lunaticQuestionnaire = new Questionnaire();
         //
         lunaticQuestionnaire.getComponents().add(new FilterDescription());
-        lunaticQuestionnaire.getComponents().add(createSequence());
+        lunaticQuestionnaire.getComponents().add(new Sequence());
         lunaticQuestionnaire.getComponents().add(new FilterDescription());
         lunaticQuestionnaire.getComponents().add(new FilterDescription());
-        subsequence = createSubsequence();
+        subsequence = new Subsequence();
         lunaticQuestionnaire.getComponents().add(subsequence);
         lunaticQuestionnaire.getComponents().add(new FilterDescription());
         lunaticQuestionnaire.getComponents().add(new FilterDescription());
         lunaticQuestionnaire.getComponents().add(new FilterDescription());
         lunaticQuestionnaire.getComponents().add(new Question());
         //
-        Loop loop = new Loop(); loop.setComponentType(ComponentTypeEnum.LOOP);
+        Loop loop = new Loop();
         loop.setLines(new LinesLoop()); // current rule for non-linked (=> non-paginated) loops
         loop.getLines().setMin(new LabelType());
         loop.getLines().setMax(new LabelType());
         loop.getLines().getMin().setValue("1");
         loop.getLines().getMin().setValue("10");
         loop.getComponents().add(new FilterDescription());
-        loop.getComponents().add(createSequence());
+        loop.getComponents().add(new Sequence());
         loop.getComponents().add(new FilterDescription());
-        loopSubsequence = createSubsequence();
+        loopSubsequence = new Subsequence();
         loop.getComponents().add(loopSubsequence);
         loop.getComponents().add(new FilterDescription());
         loop.getComponents().add(new Question());

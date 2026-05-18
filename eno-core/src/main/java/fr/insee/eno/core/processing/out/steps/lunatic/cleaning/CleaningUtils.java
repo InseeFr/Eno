@@ -13,24 +13,21 @@ import fr.insee.lunatic.model.flat.variable.VariableType;
 
 import java.util.*;
 
+import static fr.insee.eno.core.model.navigation.ComponentFilter.DEFAULT_FILTER_VALUE;
 import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.isAggregatorUsedInsideExpression;
 
 public class CleaningUtils {
 
-    private CleaningUtils(){}
+    private CleaningUtils() {}
 
-    /**
-     *
-     * @param filterExpression
-     * @param allVariableNamesForFilter
-     * @return true if an aggregator function of VTL language is used in filter (or in its dependencies)
-     */
+    /** Returns true if an aggregator function of VTL language is used in filter (or in its dependencies). */
     private static boolean isAggregatorUsedInFilter(String filterExpression, List<String> allVariableNamesForFilter,
-            Map<String, VariableType> variableIndex){
-        if(isAggregatorUsedInsideExpression(filterExpression)) return true;
-        for(String vName: allVariableNamesForFilter){
-            VariableType variable = variableIndex.get(vName);
-            if(variable instanceof CalculatedVariableType calculatedVariable &&
+            Map<String, VariableType> variableIndex) {
+        if (isAggregatorUsedInsideExpression(filterExpression))
+            return true;
+        for (String variableName : allVariableNamesForFilter) {
+            VariableType variable = variableIndex.get(variableName);
+            if (variable instanceof CalculatedVariableType calculatedVariable &&
                     isAggregatorUsedInsideExpression(calculatedVariable.getExpression().getValue())) {
                 return true;
             }
@@ -41,9 +38,9 @@ public class CleaningUtils {
     private static void addNewCleaningExpression(CleanedVariableEntry cleanedVariable,
                                                  String filterExpression,
                                                  String shapeFrom,
-                                                 Boolean isAggregatorUsed,
+                                                 Boolean shouldCheckDuringResizing,
                                                  Boolean shouldCheckAllIterations){
-        cleanedVariable.getCleaningExpressions().add(new CleaningExpression(filterExpression, shapeFrom, isAggregatorUsed, shouldCheckAllIterations));
+        cleanedVariable.getCleaningExpressions().add(new CleaningExpression(filterExpression, shapeFrom, shouldCheckDuringResizing, shouldCheckAllIterations));
     }
 
     public static List<String> removeCalculatedVariables(List<String> variableNames, Map<String, VariableType> variableIndex){
@@ -89,6 +86,7 @@ public class CleaningUtils {
      * @param allVariablesThatInfluenceFilterExpression, list of all variables that influence the filter
      * @param variablesCollectedInsideFilter, list of all variable that collected inside filter i.e that should be cleaned
      * @param shouldCheckAllIterations, determines if filterExpression needs to be evaluated for all iterations (business rules)
+     * @param shouldCheckDuringResizing, determines if filterExpression needs to be evaluated during resizing operations
      */
     public static void processCleaningForFilterExpression(
             CleaningType cleaning,
@@ -97,7 +95,8 @@ public class CleaningUtils {
             String filterExpression,
             List<String> allVariablesThatInfluenceFilterExpression,
             List<String> variablesCollectedInsideFilter,
-            Boolean shouldCheckAllIterations){
+            Boolean shouldCheckAllIterations,
+            Boolean shouldCheckDuringResizing){
         boolean isAggregatorUsedOfFilter = isAggregatorUsedInFilter(filterExpression, allVariablesThatInfluenceFilterExpression, variableIndex);
         removeCalculatedVariables(allVariablesThatInfluenceFilterExpression, variableIndex).forEach(
                 variableName -> {
@@ -112,7 +111,7 @@ public class CleaningUtils {
                                     addNewCleaningExpression(cleanedVariableEntry,
                                             filterExpression,
                                             shapeFromIndex.get(variableToClean),
-                                            isAggregatorUsedOfFilter,
+                                            shouldCheckDuringResizing || isAggregatorUsedOfFilter,
                                             shouldCheckAllIterations);
                                     cleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
                                 });
@@ -130,7 +129,7 @@ public class CleaningUtils {
                                     addNewCleaningExpression(cleanedVariableEntry,
                                             filterExpression,
                                             shapeFromIndex.get(variableToClean),
-                                            isAggregatorUsedOfFilter,
+                                            shouldCheckDuringResizing || isAggregatorUsedOfFilter,
                                             shouldCheckAllIterations);
                                     existingCleaningVariableEntry.addCleanedVariable(cleanedVariableEntry);
                                 });
@@ -153,7 +152,43 @@ public class CleaningUtils {
                 filterExpression,
                 allVariablesThatInfluenceFilterExpression,
                 variablesCollectedInsideFilter,
+                false,
                 false);
+    }
+
+    public static void processCleaningForDynamicQCU(
+            CleaningType cleaning,
+            Map<String, VariableType> variableIndex,
+            Map<String, String> shapeFromIndex,
+            String filterExpression,
+            String optionSourceVariable,
+            String collectedVariable,
+            Boolean shouldCheckAllIterations){
+        processCleaningForFilterExpression(
+                cleaning,
+                variableIndex,
+                shapeFromIndex,
+                filterExpression,
+                List.of(optionSourceVariable),
+                List.of(collectedVariable),
+                shouldCheckAllIterations,
+                true);
+    }
+
+    public static boolean isConditionFilterActive(String expression){
+        if(expression == null) return false;
+        if(expression.isEmpty()) return false;
+        return !DEFAULT_FILTER_VALUE.equals(expression);
+    }
+
+    public static boolean isConditionFilterActive(ComponentFilter componentFilter){
+        if(componentFilter == null) return false;
+        return isConditionFilterActive(componentFilter.getValue());
+    }
+
+    public static boolean isConditionFilterActive(ConditionFilterType conditionFilter){
+        if(conditionFilter == null) return false;
+        return isConditionFilterActive(conditionFilter.getValue());
     }
 
 }

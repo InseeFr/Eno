@@ -14,7 +14,10 @@
     <name>Eno web-service app</name>
 
     <properties>
-        <springDoc.version>2.8.13</springDoc.version>
+        <!-- (!!!) Version properties that overwrite Spring managed dependencies -->
+        <netty.version>4.2.13.Final</netty.version>
+        <!-- Version properties (not managed by Spring dependencies) -->
+        <springDoc.version>2.8.17</springDoc.version>
     </properties>
 
     <dependencies>

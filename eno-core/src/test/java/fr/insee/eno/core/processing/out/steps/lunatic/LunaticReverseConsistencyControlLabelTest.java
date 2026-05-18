@@ -111,7 +111,6 @@ class LunaticReverseConsistencyControlLabelTest {
 
     private CheckboxGroup buildCheckboxGroup(String id, List<String> names) {
         CheckboxGroup input = new CheckboxGroup();
-        input.setComponentType(ComponentTypeEnum.CHECKBOX_GROUP);
         input.setId(id);
         List<ResponseCheckboxGroup> responses = names.stream()
                 .map(name -> {
@@ -125,28 +124,24 @@ class LunaticReverseConsistencyControlLabelTest {
 
     private CheckboxOne buildCheckboxOne(String id, String name) {
         CheckboxOne input = new CheckboxOne();
-        input.setComponentType(ComponentTypeEnum.CHECKBOX_ONE);
         input.setId(id);
         return input;
     }
 
     private Dropdown buildDropdown(String id, String name) {
         Dropdown input = new Dropdown();
-        input.setComponentType(ComponentTypeEnum.DROPDOWN);
         input.setId(id);
         return input;
     }
 
     private Input buildInput(String id, String name) {
         Input input = new Input();
-        input.setComponentType(ComponentTypeEnum.INPUT);
         input.setId(id);
         return input;
     }
 
     private InputNumber buildNumber(String id, String name) {
         InputNumber number = new InputNumber();
-        number.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         number.setId(id);
         return number;
     }
@@ -154,7 +149,6 @@ class LunaticReverseConsistencyControlLabelTest {
     private Table buildTable(String id, List<String> responseNames) {
         Table input = new Table();
         input.setId(id);
-        input.setComponentType(ComponentTypeEnum.TABLE);
         List<BodyLine> bodyLines = input.getBodyLines();
 
         for(int cpt=0; cpt<responseNames.size(); cpt++) {
@@ -187,7 +181,6 @@ class LunaticReverseConsistencyControlLabelTest {
 
     private Loop buildLoop(String id, List<ComponentType>components) {
         Loop loop = new Loop();
-        loop.setComponentType(ComponentTypeEnum.LOOP);
         loop.setId(id);
         loop.getComponents().addAll(components);
         return loop;

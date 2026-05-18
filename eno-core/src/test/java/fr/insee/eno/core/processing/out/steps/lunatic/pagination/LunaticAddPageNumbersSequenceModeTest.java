@@ -90,7 +90,7 @@ class LunaticAddPageNumbersSequenceModeTest {
 
     @Test
     void shouldQuestionnaireHavePaginationPropertySet() {
-        assertEquals(Pagination.SEQUENCE, questionnaire.getPaginationEnum());
+        assertEquals(Pagination.SEQUENCE, questionnaire.getPagination());
     }
 
     @Test

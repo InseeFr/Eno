@@ -12,10 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.getFinalBindingReferencesWithCalculatedVariables;
-import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.processCleaningForFilterExpression;
+import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.*;
 import static fr.insee.eno.core.utils.LunaticUtils.findComponentById;
-import static fr.insee.eno.core.utils.LunaticUtils.isConditionFilterActive;
+import static fr.insee.eno.core.processing.out.steps.lunatic.cleaning.CleaningUtils.isConditionFilterActive;
 import static fr.insee.eno.core.utils.vtl.VtlSyntaxUtils.*;
 
 @Slf4j
@@ -131,14 +130,16 @@ public record LunaticUniqueChoiceQuestionCleaning(Questionnaire lunaticQuestionn
     private void processCleaningOptionSource(String responseVariableName, String optionSourceVariable) {
         CleaningType cleaning = lunaticQuestionnaire.getCleaning();
 
-        processCleaningForFilterExpression(
+        Boolean shouldCheckAllIterations = variableShapeFromIndex.get(responseVariableName) != null;
+
+        processCleaningForDynamicQCU(
                 cleaning,
                 variableIndex,
                 variableShapeFromIndex,
                 "false",
-                List.of(optionSourceVariable),
-                List.of(responseVariableName),
-                true
+                optionSourceVariable,
+                responseVariableName,
+                shouldCheckAllIterations
         );
     }
 

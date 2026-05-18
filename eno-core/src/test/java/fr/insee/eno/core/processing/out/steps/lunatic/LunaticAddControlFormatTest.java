@@ -27,18 +27,15 @@ class LunaticAddControlFormatTest {
         processing = new LunaticAddControlFormat();
 
         datePicker = new Datepicker();
-        datePicker.setComponentType(ComponentTypeEnum.DATEPICKER);
         datePicker.setId("datepicker-id");
         datePicker.setResponse(buildResponse("DATE_VAR"));
 
         number = new InputNumber();
-        number.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         number.setId("number-id");
         number.setDecimals(BigInteger.ZERO);
         number.setResponse(buildResponse("NUMBER_VAR"));
 
         duration = new Duration();
-        duration.setComponentType(ComponentTypeEnum.DURATION);
         duration.setId("duration-id");
         duration.setResponse(buildResponse("DURATION_VAR"));
     }
@@ -277,7 +274,6 @@ class LunaticAddControlFormatTest {
     @Test
     void shouldLoopComponentsBeProcessed() {
         Loop loop = new Loop();
-        loop.setComponentType(ComponentTypeEnum.LOOP);
         loop.setId("loop-id");
         loop.getComponents().addAll(List.of(number, datePicker));
 
@@ -297,7 +293,6 @@ class LunaticAddControlFormatTest {
     @Test
     void shouldTableComponentsHaveSubComponentsControls() {
         Table table = new Table();
-        table.setComponentType(ComponentTypeEnum.TABLE);
         table.setId("table-id");
 
         List<BodyLine> bodyLines = table.getBodyLines();
@@ -331,7 +326,6 @@ class LunaticAddControlFormatTest {
     @Test
     void shouldRosterComponentsHaveSubComponentsControls() {
         RosterForLoop roster = new RosterForLoop();
-        roster.setComponentType(ComponentTypeEnum.ROSTER_FOR_LOOP);
         roster.setId("roster-id");
 
         List<BodyCell> bodyCells = roster.getComponents();

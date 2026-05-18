@@ -61,8 +61,6 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
     @Pogues("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertPoguesVisualizationHint(" +
             "getResponse().getFirst())")
     @DDI("T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDDIOutputFormat(#this)")
-    @Lunatic("setComponentType(" +
-            "T(fr.insee.eno.core.model.question.UniqueChoiceQuestion).convertDisplayFormatToLunatic(#param))")
     DisplayFormat displayFormat;
 
     /**
@@ -166,19 +164,6 @@ public class UniqueChoiceQuestion extends SingleResponseQuestion {
             case DDI_UCQ_CHECKBOX_OUTPUT_FORMAT -> Optional.of(DisplayFormat.CHECKBOX);
             case DDI_UCQ_DROPDOWN_OUTPUT_FORMAT -> Optional.of(DisplayFormat.DROPDOWN);
             default -> Optional.empty();
-        };
-    }
-
-    /**
-     * Uses display format given to return corresponding Lunatic component type.
-     * @param displayFormat A DisplayFormat value.
-     * @return Lunatic component type value.
-     */
-    public static ComponentTypeEnum convertDisplayFormatToLunatic(DisplayFormat displayFormat) {
-        return switch (displayFormat) {
-            case RADIO -> ComponentTypeEnum.RADIO;
-            case DROPDOWN -> ComponentTypeEnum.DROPDOWN;
-            case CHECKBOX -> ComponentTypeEnum.CHECKBOX_ONE;
         };
     }
 

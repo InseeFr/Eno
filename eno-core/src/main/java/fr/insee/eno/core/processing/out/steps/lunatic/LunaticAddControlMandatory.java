@@ -66,8 +66,6 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
     /** Generates a "mandatory" control expression in function of the component type.
      * If the component is not concerned by the "mandatory" property, the returned value is empty. */
     private Optional<String> generateMandatoryControlExpression(ComponentType lunaticComponent) {
-        if (lunaticComponent.getComponentType() == null)
-            throw new IllegalArgumentException("Component " + lunaticComponent.getId() + " has no type defined.");
 
         return switch (lunaticComponent.getComponentType()) {
 

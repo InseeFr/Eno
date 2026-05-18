@@ -13,7 +13,6 @@ import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.EnoParameters.Context;
 import fr.insee.eno.core.parameter.EnoParameters.ModeParameter;
 import fr.insee.eno.core.parameter.Format;
-import fr.insee.eno.core.processing.out.steps.lunatic.LunaticEditLabelTypes;
 import fr.insee.eno.core.processing.out.steps.lunatic.LunaticSortComponents;
 import fr.insee.eno.core.processing.out.steps.lunatic.table.LunaticTableProcessing;
 import fr.insee.eno.core.serialize.DDIDeserializer;
@@ -54,10 +53,10 @@ class NumberQuestionTest {
                 .findAny();
         // assertions
         assertEquals(3, inputNumbersNoUnit.size());
-        inputNumbersNoUnit.forEach(inputNumber -> assertNull(inputNumber.getUnitLabel()));
+        inputNumbersNoUnit.forEach(inputNumber -> assertNull(inputNumber.getUnit()));
         assertTrue(inputNumberWithUnit.isPresent());
-        assertNotNull(inputNumberWithUnit.get().getUnitLabel());
-        assertEquals("\"kg\"", inputNumberWithUnit.get().getUnitLabel().getValue());
+        assertNotNull(inputNumberWithUnit.get().getUnit());
+        assertEquals("\"kg\"", inputNumberWithUnit.get().getUnit().getValue());
     }
 
     private static Stream<Arguments> integrationTest_dynamicUnit() throws ParsingException {
@@ -80,7 +79,6 @@ class NumberQuestionTest {
         new LunaticMapper().mapQuestionnaire(enoQuestionnaire, lunaticQuestionnaire);
         new LunaticSortComponents(enoQuestionnaire).apply(lunaticQuestionnaire);
         new LunaticTableProcessing(enoQuestionnaire).apply(lunaticQuestionnaire);
-        new LunaticEditLabelTypes().apply(lunaticQuestionnaire); // to set unit type to VTL
 
         // Then
         InputNumber inputNumber0 = (InputNumber) lunaticQuestionnaire.getComponents().get(1);
@@ -89,18 +87,21 @@ class NumberQuestionTest {
         Table table = (Table) lunaticQuestionnaire.getComponents().get(5);
         RosterForLoop rosterForLoop = (RosterForLoop) lunaticQuestionnaire.getComponents().get(6);
 
-        assertNull(inputNumber0.getUnitWrapper());
-        testUnitContent("\"€\"", inputNumber1.getUnitLabel());
-        testUnitContent("WHICH_UNIT", inputNumber2.getUnitLabel());
+        assertNull(inputNumber0.getUnit());
+
+        String unitVariableName = "WHICH_UNIT";
+
+        testUnitContent("\"€\"", inputNumber1.getUnit());
+        testUnitContent(unitVariableName, inputNumber2.getUnit());
 
         // Reminder: in Lunatic tables there is a left column so responses cells start at column of index 1
-        testUnitContent("\"%\"", table.getBodyLines().get(0).getBodyCells().get(1).getUnitLabel());
-        testUnitContent("\"%\"", table.getBodyLines().get(1).getBodyCells().get(1).getUnitLabel());
-        testUnitContent("WHICH_UNIT", table.getBodyLines().get(0).getBodyCells().get(2).getUnitLabel());
-        testUnitContent("WHICH_UNIT", table.getBodyLines().get(1).getBodyCells().get(2).getUnitLabel());
+        testUnitContent("\"%\"", table.getBodyLines().get(0).getBodyCells().get(1).getUnit());
+        testUnitContent("\"%\"", table.getBodyLines().get(1).getBodyCells().get(1).getUnit());
+        testUnitContent(unitVariableName, table.getBodyLines().get(0).getBodyCells().get(2).getUnit());
+        testUnitContent(unitVariableName, table.getBodyLines().get(1).getBodyCells().get(2).getUnit());
 
-        testUnitContent("\"€\"", rosterForLoop.getComponents().get(0).getUnitLabel());
-        testUnitContent("WHICH_UNIT", rosterForLoop.getComponents().get(1).getUnitLabel());
+        testUnitContent("\"€\"", rosterForLoop.getComponents().get(0).getUnit());
+        testUnitContent(unitVariableName, rosterForLoop.getComponents().get(1).getUnit());
     }
     private void testUnitContent(String expectedValue, LabelType unitLabel) {
         assertEquals(expectedValue, unitLabel.getValue().trim());

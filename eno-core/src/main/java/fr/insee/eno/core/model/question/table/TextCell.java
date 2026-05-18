@@ -7,6 +7,7 @@ import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.model.question.TextQuestion;
 import fr.insee.eno.core.parameter.Format;
 import fr.insee.lunatic.model.flat.BodyCell;
+import fr.insee.lunatic.model.flat.ComponentTypeEnum;
 import fr.insee.pogues.model.ResponseType;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +28,14 @@ public class TextCell extends ResponseCell {
     @DDI("T(fr.insee.eno.core.model.question.TextQuestion).qualifyLength(" +
             "#this.getResponseDomain().getMaxLength().intValue())")
     @Lunatic("setComponentType(" +
-            "T(fr.insee.eno.core.model.question.TextQuestion).lengthTypeToLunatic(#param))")
+            "T(fr.insee.eno.core.model.question.table.TextCell).lengthTypeToLunatic(#param))")
     TextQuestion.LengthType lengthType;
+
+    public static ComponentTypeEnum lengthTypeToLunatic(TextQuestion.LengthType lengthType) {
+        return switch (lengthType) {
+            case SHORT -> ComponentTypeEnum.INPUT;
+            case LONG -> ComponentTypeEnum.TEXTAREA;
+        };
+    }
 
 }

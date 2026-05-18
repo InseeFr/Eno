@@ -49,11 +49,9 @@ class LunaticLoopResizingLogicTest {
         lunaticLoop.getLines().getMax().setValue("nvl(LOOP_SIZE_VAR, 1)");
         //
         Sequence lunaticSequence = new Sequence();
-        lunaticSequence.setComponentType(ComponentTypeEnum.SEQUENCE);
         lunaticLoop.getComponents().add(lunaticSequence);
         //
         CheckboxBoolean simpleResponseComponent = new CheckboxBoolean();
-        simpleResponseComponent.setComponentType(ComponentTypeEnum.CHECKBOX_BOOLEAN);
         simpleResponseComponent.setResponse(new ResponseType());
         simpleResponseComponent.getResponse().setName("RESPONSE_VAR");
         lunaticLoop.getComponents().add(simpleResponseComponent);
@@ -114,12 +112,10 @@ class LunaticLoopResizingLogicTest {
         lunaticLoop.getComponents().clear();
         //
         CheckboxBoolean checkboxBoolean = new CheckboxBoolean();
-        checkboxBoolean.setComponentType(ComponentTypeEnum.CHECKBOX_BOOLEAN);
         checkboxBoolean.setResponse(new ResponseType());
         checkboxBoolean.getResponse().setName("BOOLEAN_VAR");
         lunaticLoop.getComponents().add(checkboxBoolean);
         Input input = new Input();
-        input.setComponentType(ComponentTypeEnum.INPUT);
         input.setResponse(new ResponseType());
         input.getResponse().setName("INPUT_VAR");
         lunaticLoop.getComponents().add(input);
@@ -128,37 +124,30 @@ class LunaticLoopResizingLogicTest {
         suggester.getResponse().setName("SUGGESTER_VAR");
         lunaticLoop.getComponents().add(suggester);
         Textarea textarea = new Textarea();
-        textarea.setComponentType(ComponentTypeEnum.TEXTAREA);
         textarea.setResponse(new ResponseType());
         textarea.getResponse().setName("TEXT_VAR");
         lunaticLoop.getComponents().add(textarea);
         InputNumber inputNumber = new InputNumber();
-        inputNumber.setComponentType(ComponentTypeEnum.INPUT_NUMBER);
         inputNumber.setResponse(new ResponseType());
         inputNumber.getResponse().setName("NUMBER_VAR");
         lunaticLoop.getComponents().add(inputNumber);
         Datepicker datepicker = new Datepicker();
-        datepicker.setComponentType(ComponentTypeEnum.DATEPICKER);
         datepicker.setResponse(new ResponseType());
         datepicker.getResponse().setName("DATE_VAR");
         lunaticLoop.getComponents().add(datepicker);
         Duration duration = new Duration();
-        duration.setComponentType(ComponentTypeEnum.DURATION);
         duration.setResponse(new ResponseType());
         duration.getResponse().setName("DURATION_VAR");
         lunaticLoop.getComponents().add(duration);
         Dropdown dropdown = new Dropdown();
-        dropdown.setComponentType(ComponentTypeEnum.DROPDOWN);
         dropdown.setResponse(new ResponseType());
         dropdown.getResponse().setName("DROPDOWN_VAR");
         lunaticLoop.getComponents().add(dropdown);
         Radio radio = new Radio();
-        radio.setComponentType(ComponentTypeEnum.RADIO);
         radio.setResponse(new ResponseType());
         radio.getResponse().setName("RADIO_VAR");
         lunaticLoop.getComponents().add(radio);
         CheckboxOne checkboxOne = new CheckboxOne();
-        checkboxOne.setComponentType(ComponentTypeEnum.CHECKBOX_ONE);
         checkboxOne.setResponse(new ResponseType());
         checkboxOne.getResponse().setName("CHECKBOX_VAR");
         lunaticLoop.getComponents().add(checkboxOne);
@@ -181,7 +170,6 @@ class LunaticLoopResizingLogicTest {
         lunaticLoop.getComponents().clear();
         //
         CheckboxGroup checkboxGroup = new CheckboxGroup();
-        checkboxGroup.setComponentType(ComponentTypeEnum.CHECKBOX_GROUP);
         checkboxGroup.getResponses().add(new ResponseCheckboxGroup());
         checkboxGroup.getResponses().add(new ResponseCheckboxGroup());
         checkboxGroup.getResponses().forEach(responses -> responses.setResponse(new ResponseType()));
@@ -205,7 +193,6 @@ class LunaticLoopResizingLogicTest {
         lunaticLoop.getComponents().clear();
         //
         Table table = new Table();
-        table.setComponentType(ComponentTypeEnum.TABLE);
         table.getBodyLines().add(new BodyLine());
         table.getBodyLines().add(new BodyLine());
         table.getBodyLines().get(0).getBodyCells().add(new BodyCell());
@@ -348,7 +335,6 @@ class LunaticLoopResizingLogicTest {
         lunaticLinkedLoop.getIterations().setValue("count(RESPONSE_VAR)");
         //
         Input input = new Input();
-        input.setComponentType(ComponentTypeEnum.INPUT);
         input.setResponse(new ResponseType());
         input.getResponse().setName("LINKED_LOOP_RESPONSE");
         lunaticLinkedLoop.getComponents().add(input);
@@ -384,7 +370,6 @@ class LunaticLoopResizingLogicTest {
         lunaticLinkedLoop.getIterations().setValue("count(TABLE_RESPONSE1)");
         //
         Input input = new Input();
-        input.setComponentType(ComponentTypeEnum.INPUT);
         input.setResponse(new ResponseType());
         input.getResponse().setName("LINKED_LOOP_RESPONSE");
         lunaticLinkedLoop.getComponents().add(input);

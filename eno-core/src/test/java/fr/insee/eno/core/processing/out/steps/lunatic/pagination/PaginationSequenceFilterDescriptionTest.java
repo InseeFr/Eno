@@ -12,11 +12,9 @@ class PaginationSequenceFilterDescriptionTest {
         //
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         lunaticQuestionnaire.getComponents().add(new Sequence());
-        lunaticQuestionnaire.getComponents().getLast().setComponentType(ComponentTypeEnum.SEQUENCE);
         lunaticQuestionnaire.getComponents().add(new Input());
         lunaticQuestionnaire.getComponents().add(new FilterDescription());
         lunaticQuestionnaire.getComponents().add(new Sequence());
-        lunaticQuestionnaire.getComponents().getLast().setComponentType(ComponentTypeEnum.SEQUENCE);
         lunaticQuestionnaire.getComponents().add(new Input());
         //
         new LunaticPaginationSequenceMode().apply(lunaticQuestionnaire);
@@ -34,11 +32,9 @@ class PaginationSequenceFilterDescriptionTest {
         Questionnaire lunaticQuestionnaire = new Questionnaire();
         Loop loop = new Loop();
         loop.getComponents().add(new Sequence());
-        loop.getComponents().getLast().setComponentType(ComponentTypeEnum.SEQUENCE);
         loop.getComponents().add(new Input());
         loop.getComponents().add(new FilterDescription());
         loop.getComponents().add(new Sequence());
-        loop.getComponents().getLast().setComponentType(ComponentTypeEnum.SEQUENCE);
         loop.getComponents().add(new Input());
         lunaticQuestionnaire.getComponents().add(loop);
         //

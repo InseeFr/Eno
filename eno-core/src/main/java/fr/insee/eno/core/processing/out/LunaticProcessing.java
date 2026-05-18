@@ -45,7 +45,8 @@ public class LunaticProcessing {
                 .then(new LunaticTableProcessing(enoQuestionnaire))
                 .then(new LunaticInsertUniqueChoiceDetails(enoQuestionnaire))
                 .then(new LunaticInsertCodeFilters(enoQuestionnaire))
-                .then(new LunaticEditLabelTypes()) // this step should be temporary
+                .then(new LunaticSequenceLabels())
+                .then(new LunaticDropdownOptionLabels())
                 .then(new LunaticSuggestersConfiguration(enoQuestionnaire))
                 .then(new LunaticVariablesDimension(enoQuestionnaire))
                 .then(new LunaticSuggesterOptionResponses())

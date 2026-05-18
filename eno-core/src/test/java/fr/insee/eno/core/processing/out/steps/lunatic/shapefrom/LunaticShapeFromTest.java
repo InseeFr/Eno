@@ -29,15 +29,12 @@ class LunaticShapeFromTest {
         lunaticQuestionnaire.setId("questionnaire-id");
         Loop loop = new Loop();
         loop.setId("loop-id");
-        loop.setComponentType(ComponentTypeEnum.LOOP);
         Input input = new Input();
         input.setId("input-id");
-        input.setComponentType(ComponentTypeEnum.INPUT);
         input.setResponse(new ResponseType());
         input.getResponse().setName("FOO");
         CheckboxGroup checkboxGroup = new CheckboxGroup();
         checkboxGroup.setId("checkbox-group-id");
-        checkboxGroup.setComponentType(ComponentTypeEnum.CHECKBOX_GROUP);
         checkboxGroup.getResponses().add(new ResponseCheckboxGroup());
         checkboxGroup.getResponses().add(new ResponseCheckboxGroup());
         checkboxGroup.getResponses().get(0).setResponse(new ResponseType());
@@ -56,7 +53,7 @@ class LunaticShapeFromTest {
         new LunaticShapeFrom().apply(lunaticQuestionnaire);
 
         //
-        assertEquals(List.of("FOO", "BAR1", "BAR2"), calculatedVariable.getShapeFromList());
+        assertEquals(List.of("FOO", "BAR1", "BAR2"), calculatedVariable.getShapeFrom());
     }
 
     @Test
@@ -79,9 +76,9 @@ class LunaticShapeFromTest {
         CalculatedVariableType calc1 = getCalculatedFromName("CALC1", lunaticQuestionnaire);
         CalculatedVariableType calc2 = getCalculatedFromName("CALC2", lunaticQuestionnaire);
         CalculatedVariableType calc3 = getCalculatedFromName("CALC3", lunaticQuestionnaire);
-        assertTrue(calc1.getShapeFromList().isEmpty());
-        assertEquals(List.of("Q21"), calc2.getShapeFromList());
-        assertEquals(List.of("Q311", "Q312"), calc3.getShapeFromList());
+        assertTrue(calc1.getShapeFrom().isEmpty());
+        assertEquals(List.of("Q21"), calc2.getShapeFrom());
+        assertEquals(List.of("Q311", "Q312"), calc3.getShapeFrom());
     }
 
     private static CalculatedVariableType getCalculatedFromName(String name, Questionnaire lunaticQuestionnaire) {

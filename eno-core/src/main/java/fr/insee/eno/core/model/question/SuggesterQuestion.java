@@ -17,11 +17,6 @@ import lombok.Setter;
 @Context(format = Format.LUNATIC, type = Suggester.class)
 public class SuggesterQuestion extends SingleResponseQuestion {
 
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    private String lunaticComponentType = "SUGGESTER";
-
     @DDI("getResponseDomain().getCodeListReference().getIDArray(0).getStringValue()")
     @Lunatic("setStoreName(#param)")
     private String codeListReference;

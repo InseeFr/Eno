@@ -10,7 +10,7 @@
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
-             isMaintainable="true"><!--Eno version : 2.9.10. Generation date : 23/09/2024 - 8:23:48-->
+             isMaintainable="true"><!--Eno version : ${project.version}. Generation date : 17/04/2026 - 14:30:40-->
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-m16kx7hl</r:ID>
    <r:Version>1</r:Version>
@@ -69,9 +69,9 @@
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>m1adj8d6-QC</r:ID>
+               <r:ID>mo3095w8</r:ID>
                <r:Version>1</r:Version>
-               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+               <r:TypeOfObject>IfThenElse</r:TypeOfObject>
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
@@ -146,6 +146,67 @@
                <r:ID>m1ag6y3a</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:IfThenElse>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mo3095w8</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">A définir</r:Content>
+            </r:Label>
+            <r:Description>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Description>
+            <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
+            <d:IfCondition>
+               <r:Command>
+                  <r:ProgramLanguage>vtl</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>mo3095w8-IP-1</r:ID>
+                     <r:Version>1</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">CITY_OF_BIRTH</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>m16kjhib-QOP-m16kfwqf</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>mo3095w8-IP-1</r:ID>
+                        <r:Version>1</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>nvl(mo3095w8-IP-1, "") &lt;&gt; "750562024"</r:CommandContent>
+               </r:Command>
+            </d:IfCondition>
+            <d:ThenConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>mo3095w8-THEN</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ThenConstructReference>
+         </d:IfThenElse>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>mo3095w8-THEN</r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">filterContent</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>m1adj8d6-QC</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Sequence>
          <d:QuestionConstruct>
@@ -1321,7 +1382,7 @@
          <r:Version>1</r:Version>
          <r:Label>
             <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
-                            l'enquête</r:Content>
+               l'enquête</r:Content>
             <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey</r:Content>
          </r:Label>
       </r:ManagedRepresentationScheme>

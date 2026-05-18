@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.7</version>
+        <version>3.5.14</version>
         <relativePath/> <!-- lookup from repo -->
     </parent>
 
@@ -25,21 +25,23 @@
 
     <properties>
         <!-- Eno version -->
-        <revision>3.63.0</revision>
+        <revision>3.64.3</revision> <!-- version only managed with git tags -->
         <!-- Java version -->
-        <java.version>21</java.version>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <java.version>25</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <!-- Project encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- Sonar props -->
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.tests>src/test/java</sonar.tests>
         <sonar.java.binaries>target</sonar.java.binaries>
         <!-- Plugin versions -->
         <jacoco.version>0.8.14</jacoco.version>
         <!-- Model versions -->
         <poguesModel.version>1.15.3</poguesModel.version>
-        <lunaticModel.version>5.15.0</lunaticModel.version>
+        <lunaticModel.version>6.0.0</lunaticModel.version>
     </properties>
 
     <dependencies>

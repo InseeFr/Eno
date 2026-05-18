@@ -6,7 +6,6 @@ import fr.insee.ddi.lifecycle33.reusable.CommandCodeType;
 import fr.insee.ddi.lifecycle33.reusable.CommandType;
 import fr.insee.eno.core.annotations.Contexts.Context;
 import fr.insee.eno.core.annotations.DDI;
-import fr.insee.eno.core.annotations.Lunatic;
 import fr.insee.eno.core.annotations.Pogues;
 import fr.insee.eno.core.exceptions.business.IllegalDDIElementException;
 import fr.insee.eno.core.model.calculated.CalculatedExpression;
@@ -38,20 +37,11 @@ import java.util.List;
 @Context(format = Format.LUNATIC, type = RosterForLoop.class)
 public class DynamicTableQuestion extends MultipleResponseQuestion implements EnoTable {
 
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "ROSTER_FOR_LOOP";
-
     @DDI("#this.getGridDimensionList().?[#this.getRank().intValue() == 2].get(0)" +
             ".getCodeDomain().getCodeListReference().getIDArray(0).getStringValue()")
     String headerCodeListReference;
 
     CodeList header;
-
-    /** Parameter that exists in Lunatic but that has a fixed value for now. */
-    @Lunatic("setPositioning(#param)")
-    private String positioning = "HORIZONTAL";
 
     /** Maximum number of lines of the dynamic table.
      * Note: In DDI, for some reason, if this information is missing in the xml file, the default value is 1.

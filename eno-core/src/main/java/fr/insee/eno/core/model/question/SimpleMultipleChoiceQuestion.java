@@ -70,11 +70,6 @@ public class SimpleMultipleChoiceQuestion extends MultipleResponseQuestion {
     @DDI("getStructuredMixedGridResponseDomain().getGridResponseDomainInMixedList()")
     List<ModalityAttachment> modalityAttachments = new ArrayList<>();
 
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "CHECKBOX_GROUP";
-
     /**
      * List of conditions for the modalities to be filtered by previous responses or external data.
      *  In Lunatic, they are inserted in code response objects through a processing. */

@@ -5,15 +5,14 @@ import fr.insee.eno.core.model.EnoQuestionnaire;
 import fr.insee.eno.core.model.question.PairwiseQuestion;
 import fr.insee.eno.core.processing.ProcessingStep;
 import fr.insee.eno.core.reference.EnoIndex;
+import fr.insee.eno.core.utils.lunatic.LunaticQuestionHelper;
 import fr.insee.eno.core.utils.vtl.VtlSyntaxUtils;
 import fr.insee.lunatic.model.flat.*;
 import fr.insee.lunatic.model.flat.variable.CalculatedVariableType;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import static fr.insee.eno.core.utils.LunaticUtils.searchForPairwiseLinks;
 
 /**
  * Processing to finalize pairwise (handle symlinks/conditionFilter/calculated axis variables),
@@ -31,8 +30,9 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
 
     @Override
     public void apply(Questionnaire lunaticQuestionnaire) {
-        List<PairwiseLinks> pairwiseLinksList = searchForPairwiseLinks(lunaticQuestionnaire.getComponents());
-        if(pairwiseLinksList.isEmpty()) {
+        List<PairwiseLinks> pairwiseLinksList = LunaticQuestionHelper.findAllInQuestionnaire(
+                PairwiseLinks.class, lunaticQuestionnaire).toList();
+        if (pairwiseLinksList.isEmpty()) {
             return;
         }
 
@@ -46,7 +46,7 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
         boolean isPairwiseInLoop = isInLoop(lunaticQuestionnaire.getComponents(), pairwiseLinks, false);
 
         // should delete `xAxisIterations` & `yAxisIterations` (useless and cause scope issue where pairwise is insideLoop)
-        if(isPairwiseInLoop){
+        if (isPairwiseInLoop) {
             pairwiseLinks.setXAxisIterations(null);
             pairwiseLinks.setYAxisIterations(null);
         }
@@ -61,7 +61,30 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
         pairwiseLinks.setSymLinks(PairwiseLinks.createDefaultSymLinks(simpleResponseComponent.getResponse().getName()));
 
         // Filter is hold by the pairwise component only
+        ComponentType pairwiseSubComponent = pairwiseLinks.getComponents().getFirst();
+        pairwiseSubComponent.setConditionFilter(buildConditionFilterForSimpleComponent());
         lunaticQuestionnaire.getVariables().addAll(createCalculatedAxisVariables(pairwiseLinks));
+    }
+
+    /**
+     * This method create filter to avoid asking unnecessary questions to people who aren't concerned.
+     *
+     * The expression must be equal (replacing variableSource with X_AXIS/Y_AXIS) to the Pairwise cleaning expression.
+     * (see LunaticPairwiseQuestionCleaning)
+     * @return the conditionFilter for inner component
+     */
+    private ConditionFilterType buildConditionFilterForSimpleComponent(){
+        ConditionFilterType conditionFilter = new ConditionFilterType();
+        conditionFilter.setType(LabelTypeEnum.VTL);
+        String nvlXAxisNotEqualEmpty = VtlSyntaxUtils.expressionNotEqualToOther(
+                VtlSyntaxUtils.nvlDefaultValue(X_AXIS, "\"\""),
+                "\"\"");
+        String nvlYAxisNotEqualEmpty = VtlSyntaxUtils.expressionNotEqualToOther(
+                VtlSyntaxUtils.nvlDefaultValue(Y_AXIS, "\"\""),
+                "\"\"");
+        conditionFilter.setValue(VtlSyntaxUtils.joinByANDLogicExpression(nvlXAxisNotEqualEmpty, nvlYAxisNotEqualEmpty));
+        conditionFilter.setBindingDependencies(List.of(X_AXIS, Y_AXIS));
+        return conditionFilter;
     }
 
     private static boolean isInLoop(List<ComponentType> components, ComponentType pairwise, boolean inLoop){
@@ -98,7 +121,7 @@ public class LunaticFinalizePairwise implements ProcessingStep<Questionnaire> {
             expression.setValue(pairwiseName);
             calculatedAxis.setExpression(expression);
             calculatedAxis.setBindingDependencies(List.of(pairwiseName));
-            calculatedAxis.getShapeFromList().add(pairwiseName);
+            calculatedAxis.getShapeFrom().add(pairwiseName);
             variables.add(calculatedAxis);
         }
         return variables;

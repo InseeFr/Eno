@@ -71,17 +71,6 @@ public class NumericQuestion extends SingleResponseQuestion {
             "getResponse().getFirst().getDatatype().isIsDynamicUnit() : false")
     private Boolean isUnitDynamic;
 
-    /** Indicates whether the response is mandatory for this component. */
-    @DDI("getResponseDomain()?.getResponseCardinality()?.getMinimumResponses() != null ? " +
-            "getResponseDomain().getResponseCardinality().getMinimumResponses().intValue() > 0 : false")
-    @Lunatic("setMandatory(#param)")
-    boolean mandatory;
-
-    /** Lunatic component type property.
-     * This should be inserted by Lunatic-Model serializer later on. */
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    String lunaticComponentType = "INPUT_NUMBER";
-
     /**
      * Creates a dynamic label object that fits the 'unit' property of numeric questions with the label value given.
      * A number question doesn't necessarily have a unit, so the result can be null if the value given is null.

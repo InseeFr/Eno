@@ -80,7 +80,7 @@ class TextQuestionTest {
         assertEquals("\"Question label.\"", enoQuestion.getLabel().getValue());
         assertEquals(BigInteger.valueOf(249), enoQuestion.getMaxLength());
         assertEquals(TextQuestion.LengthType.SHORT, enoQuestion.getLengthType());
-        assertFalse(enoQuestion.isMandatory());
+        assertFalse(enoQuestion.getMandatory());
     }
 
 }

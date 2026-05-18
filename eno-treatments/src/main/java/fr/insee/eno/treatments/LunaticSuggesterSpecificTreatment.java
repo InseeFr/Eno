@@ -65,7 +65,7 @@ public class LunaticSuggesterSpecificTreatment implements ProcessingStep<Questio
         if (component instanceof ComponentSimpleResponseType simpleResponse) {
             String responseName = simpleResponse.getResponse().getName();
             if (enoSuggester.responseNames().contains(responseName)) {
-                component.setComponentType(ComponentTypeEnum.SUGGESTER);
+                component.modifyComponentType(ComponentTypeEnum.SUGGESTER);
                 component.setStoreName(enoSuggester.name());
             }
         }

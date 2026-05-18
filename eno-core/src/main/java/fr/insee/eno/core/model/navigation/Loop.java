@@ -32,9 +32,6 @@ import java.util.List;
 @Context(format = Format.POGUES, type = IterationType.class)
 public abstract class Loop extends EnoIdentifiableObject {
 
-    @Lunatic("setComponentType(T(fr.insee.lunatic.model.flat.ComponentTypeEnum).valueOf(#param))")
-    private String componentType = "LOOP";
-
     /** Loop business name.
      * Unused in Lunatic. */
     @Pogues("getName()")

@@ -1,7 +1,5 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", ":semanticCommits", ":disableRateLimiting"],
-  "baseBranches": ["main"],
   "packageRules": [
     {
       "matchPackagePatterns": ["*"],
@@ -13,7 +11,6 @@
       "groupName": "spring",
       "groupSlug": "spring",
       "matchPackagePatterns": ["org.springframework.*"],
-      "matchUpdateTypes": ["minor", "patch"],
       "bumpVersion": "minor",
       "dependencyDashboardApproval": true
     },
@@ -24,15 +21,6 @@
       "matchUpdateTypes": ["minor", "patch"],
       "bumpVersion": "patch",
       "dependencyDashboardApproval": false
-    },
-    {
-      "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["major"],
-      "separateMajorMinor": true,
-      "separateMultipleMajor": true,
-      "groupName": null,
-      "labels": ["dependencies", "major"],
-      "dependencyDashboardApproval": true
     }
   ],
   "vulnerabilityAlerts": {
@@ -44,3 +32,4 @@
   "schedule": ["every weekend"],
   "timezone": "Europe/Paris"
 }
+
