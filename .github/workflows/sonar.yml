@@ -4,14 +4,14 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore:
-      - 'logo/**'
-      - 'docs/**'
-      - 'CHANGELOG.md'
-      - 'README**.md'
-      - 'Dockerfile'
+      - "logo/**"
+      - "docs/**"
+      - "CHANGELOG.md"
+      - "README**.md"
+      - "Dockerfile"
 
 env:
-  JAVA_VERSION: '21'
+  JAVA_VERSION: "25"
 
 jobs:
   build:
@@ -23,11 +23,11 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'temurin'
+          distribution: "temurin"
 
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
@@ -44,7 +44,7 @@ jobs:
 
       - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_HOST_URL: "https://sonarcloud.io"
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn clean verify -Pcoverage org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr --no-transfer-progress

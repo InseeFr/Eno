@@ -3,30 +3,29 @@ name: Build release
 on:
   push:
     branches:
-      - 'main'
+      - "main"
     paths-ignore:
-      - 'logo/**'
-      - 'docs/**'
-      - 'CHANGELOG.md'
-      - 'README**.md'
-      - 'Dockerfile'
-      - '.github/**'
+      - "logo/**"
+      - "docs/**"
+      - "CHANGELOG.md"
+      - "README**.md"
+      - "Dockerfile"
+      - ".github/**"
 
 # TL;DR: Do conventional commits,
-# bump the version before pushing on main, 
+# bump the version before pushing on main,
 # the workflow will publish a release.
 
 # This workflow is triggered when changes are pushed on the main branch.
 # It checks that the version is valid, and has not already been released.
-# From the new version, if creates a tag, a GitHub release, a changelog 
+# From the new version, if creates a tag, a GitHub release, a changelog
 # (also based on conventional commits), and publishes an image on Docker Hub.
 
 env:
-  JAVA_VERSION: '21'
+  JAVA_VERSION: "25"
   RELEASE_NOTE_EXCLUDED_TYPES: docs,style,chore,other
 
 jobs:
-
   version:
     runs-on: ubuntu-latest
     outputs:
@@ -41,7 +40,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: "temurin"
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Get Eno Version
@@ -113,7 +112,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'temurin'
+          distribution: "temurin"
 
       - uses: actions/checkout@v4
         with:
@@ -134,7 +133,7 @@ jobs:
 
       - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_HOST_URL: "https://sonarcloud.io"
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn clean verify -Pcoverage org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=InseeFr_Eno -Dsonar.organization=inseefr --no-transfer-progress
@@ -146,7 +145,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: "temurin"
           java-version: ${{ env.JAVA_VERSION }}
 
       - uses: actions/checkout@v4
@@ -161,7 +160,7 @@ jobs:
           path: ./eno-ws/target/eno-ws-${{ needs.version.outputs.release-version }}.jar
 
   create-release:
-    needs: [ version, build-sources ]
+    needs: [version, build-sources]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -206,7 +205,7 @@ jobs:
 
   # Separate job for committing in the changelog file since I got bored that auto commit action randomly fails
   commit-changelog:
-    needs: [ version, create-release ]
+    needs: [version, create-release]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -226,17 +225,17 @@ jobs:
           excludeTypes: ${{ env.RELEASE_NOTE_EXCLUDED_TYPES }}
           token: ${{ secrets.GITHUB_TOKEN }}
           writeToFile: true
-          changelogFilePath: 'CHANGELOG.md'
+          changelogFilePath: "CHANGELOG.md"
 
       - name: Commit changelog file
         uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7.1.0
         with:
-          branch: 'main'
-          commit_message: 'docs(changelog): ${{ needs.version.outputs.release-version }} update [skip ci]'
-          file_pattern: 'CHANGELOG.md'
+          branch: "main"
+          commit_message: "docs(changelog): ${{ needs.version.outputs.release-version }} update [skip ci]"
+          file_pattern: "CHANGELOG.md"
 
   publish-docker:
-    needs: [ version, build-sources ]
+    needs: [version, build-sources]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
