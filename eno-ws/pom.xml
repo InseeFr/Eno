@@ -14,17 +14,18 @@
     <name>Eno web-service app</name>
 
     <properties>
-        <!-- (!!!) Version properties that overwrite Spring managed dependencies -->
+        <springDoc.version>3.0.3</springDoc.version>
+
+        <!-- !!! Version properties overridden from Spring Boot !!! -->
         <netty.version>4.2.13.Final</netty.version>
-        <!-- Version properties (not managed by Spring dependencies) -->
-        <springDoc.version>2.8.17</springDoc.version>
+        <tomcat.version>11.0.22</tomcat.version>
     </properties>
 
     <dependencies>
         <!-- Spring boot web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
 
         <!-- Eno modules -->
@@ -55,8 +56,9 @@
         <!-- since Spring MVC RestTemplate class is deprecated, the webflux dependency is added to import WebClient -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <artifactId>spring-boot-starter-webclient</artifactId>
         </dependency>
+
 
         <!-- Spring doc (swagger) -->
         <dependency>
@@ -66,9 +68,15 @@
         </dependency>
 
         <!-- Testing -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-webmvc-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webclient-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
