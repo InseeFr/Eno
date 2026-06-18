@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.6</version>
+        <version>4.1.0</version>
         <relativePath/> <!-- lookup from repo -->
     </parent>
 
@@ -25,7 +25,7 @@
 
     <properties>
         <!-- Eno version -->
-        <revision>3.64.4</revision> <!-- version only managed with git tags -->
+        <revision>3.64.6</revision> <!-- version only managed with git tags -->
         <!-- Java version -->
         <java.version>25</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -38,9 +38,9 @@
         <sonar.tests>src/test/java</sonar.tests>
         <sonar.java.binaries>target</sonar.java.binaries>
         <!-- Plugin versions -->
-        <jacoco.version>0.8.14</jacoco.version>
+        <jacoco.version>0.8.15</jacoco.version>
         <!-- Model versions -->
-        <poguesModel.version>1.15.3</poguesModel.version>
+        <poguesModel.version>1.15.6</poguesModel.version>
         <lunaticModel.version>6.0.0</lunaticModel.version>
     </properties>
 
@@ -93,7 +93,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.2.5</version>
+                <version>3.5.6</version>
                 <executions>
                     <execution>
                         <id>integration-tests</id>
