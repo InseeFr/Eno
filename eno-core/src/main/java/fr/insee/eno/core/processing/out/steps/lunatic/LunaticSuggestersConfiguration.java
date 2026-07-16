@@ -36,7 +36,7 @@ public class LunaticSuggestersConfiguration implements ProcessingStep<Questionna
     public SuggesterType createLunaticSuggester(CodeList enoCodeList) {
         SuggesterType lunaticSuggester = new SuggesterType();
 
-        lunaticSuggester.setName(enoCodeList.getName());
+        lunaticSuggester.setName(enoCodeList.getId());
 
         SuggesterConfigurationDTO enoSuggesterConfiguration = enoCodeList.getSuggesterConfiguration();
 

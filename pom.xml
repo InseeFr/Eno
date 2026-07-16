@@ -25,7 +25,7 @@
 
     <properties>
         <!-- Eno version -->
-        <revision>3.64.6</revision> <!-- version only managed with git tags -->
+        <revision>3.64.8</revision> <!-- version only managed with git tags -->
         <!-- Java version -->
         <java.version>25</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -40,7 +40,7 @@
         <!-- Plugin versions -->
         <jacoco.version>0.8.15</jacoco.version>
         <!-- Model versions -->
-        <poguesModel.version>1.15.6</poguesModel.version>
+        <poguesModel.version>1.17.0</poguesModel.version>
         <lunaticModel.version>6.0.0</lunaticModel.version>
     </properties>
 
