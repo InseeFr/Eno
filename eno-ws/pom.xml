@@ -14,10 +14,10 @@
     <name>Eno web-service app</name>
 
     <properties>
-        <springDoc.version>3.0.3</springDoc.version>
+        <springDoc.version>3.1.0</springDoc.version>
 
         <!-- !!! Version properties overridden from Spring Boot !!! -->
-        <netty.version>4.2.16.Final</netty.version>
+        <tomcat.version>11.0.25</tomcat.version>
     </properties>
 
     <dependencies>
