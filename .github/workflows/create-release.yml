@@ -194,7 +194,7 @@ jobs:
           path: eno-ws/target/
 
       - name: Create GitHub release
-        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
         with:
           tag_name: ${{ needs.version.outputs.release-version }}
           target_commitish: ${{ github.head_ref || github.ref }}
@@ -228,7 +228,7 @@ jobs:
           changelogFilePath: "CHANGELOG.md"
 
       - name: Commit changelog file
-        uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7.1.0
+        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
         with:
           branch: "main"
           commit_message: "docs(changelog): ${{ needs.version.outputs.release-version }} update [skip ci]"
