@@ -55,7 +55,6 @@ public class LunaticProcessing {
                 .then(new LunaticAddResizing(enoQuestionnaire))
                 .thenIf(lunaticParameters.isFilterDescription(), new LunaticAddFilterDescription(enoQuestionnaire.getFilters()))
                 .then(new LunaticAddPageNumbers(lunaticParameters.getLunaticPaginationMode(), enoParameters.getModeParameter()))
-                .then(new LunaticResponseTimeQuestionPagination())
                 .then(new LunaticInsertDynamicUCQOptionFilter(enoQuestionnaire))
                 .then(new LunaticAddCleaning(enoQuestionnaire, enoIndex))
                 .thenIf(lunaticParameters.isControls(), new LunaticAddControlFormat())

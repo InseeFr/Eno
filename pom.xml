@@ -25,7 +25,7 @@
 
     <properties>
         <!-- Eno version -->
-        <revision>3.65.1</revision> <!-- version only managed with git tags -->
+        <revision>3.66.1</revision> <!-- version only managed with git tags -->
         <!-- Java version -->
         <java.version>25</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -39,6 +39,9 @@
         <sonar.java.binaries>target</sonar.java.binaries>
         <!-- Plugin versions -->
         <jacoco.version>0.8.15</jacoco.version>
+        <!-- Jackson versions -->
+        <jackson-2-bom.version>2.22.3</jackson-2-bom.version>
+        <jackson-bom.version>3.2.3</jackson-bom.version>
         <!-- Model versions -->
         <poguesModel.version>1.17.0</poguesModel.version>
         <lunaticModel.version>6.0.0</lunaticModel.version>

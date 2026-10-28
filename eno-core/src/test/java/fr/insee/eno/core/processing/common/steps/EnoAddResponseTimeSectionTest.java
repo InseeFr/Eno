@@ -4,7 +4,7 @@ import fr.insee.eno.core.DDIToEno;
 import fr.insee.eno.core.DDIToLunatic;
 import fr.insee.eno.core.exceptions.business.DDIParsingException;
 import fr.insee.eno.core.model.EnoQuestionnaire;
-import fr.insee.eno.core.model.question.NumericQuestion;
+import fr.insee.eno.core.model.question.DurationQuestion;
 import fr.insee.eno.core.model.sequence.Sequence;
 import fr.insee.eno.core.parameter.EnoParameters;
 import fr.insee.eno.core.parameter.Format;
@@ -14,79 +14,97 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EnoAddResponseTimeSectionTest {
 
     @Test
-    void hoursQuestionLabel_noPrefix() {
+    void responseTimeQuestionLabelNoPrefix() {
         // Given + When
         EnoQuestionnaire enoQuestionnaire = applyResponseTimeQuestionStep(
                 false, EnoParameters.QuestionNumberingMode.NONE, null);
         // Then
-        Optional<NumericQuestion> hoursQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
-                .filter(NumericQuestion.class::isInstance)
-                .map(NumericQuestion.class::cast)
-                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.HOURS_QUESTION_ID.equals(singleResponseQuestion.getId()))
+        Optional<DurationQuestion> responseTimeQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(DurationQuestion.class::isInstance)
+                .map(DurationQuestion.class::cast)
+                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_ID.equals(singleResponseQuestion.getId()))
                 .findAny();
-        Optional<NumericQuestion> minutesQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
-                .filter(NumericQuestion.class::isInstance)
-                .map(NumericQuestion.class::cast)
-                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.MINUTES_QUESTION_ID.equals(singleResponseQuestion.getId()))
-                .findAny();
-        assertTrue(hoursQuestion.isPresent());
-        assertTrue(minutesQuestion.isPresent());
-        assertEquals(EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_LABEL, hoursQuestion.get().getLabel().getValue());
-        assertEquals("", minutesQuestion.get().getLabel().getValue());
+        assertTrue(responseTimeQuestion.isPresent());
+        assertEquals(EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_LABEL, responseTimeQuestion.get().getLabel().getValue());
     }
 
     @Test
-    void hoursQuestionLabel_arrowPrefix() {
+    void responseTimeQuestionDurationProperties() {
+        // Given + When
+        EnoQuestionnaire enoQuestionnaire = applyResponseTimeQuestionStep(
+                false, EnoParameters.QuestionNumberingMode.NONE, null);
+        // Then
+        Optional<DurationQuestion> responseTimeQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(DurationQuestion.class::isInstance)
+                .map(DurationQuestion.class::cast)
+                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_ID.equals(singleResponseQuestion.getId()))
+                .findAny();
+        assertTrue(responseTimeQuestion.isPresent());
+        DurationQuestion question = responseTimeQuestion.get();
+
+        assertEquals(EnoAddResponseTimeSection.RESPONSE_TIME_VARIABLE_NAME, question.getName());
+        assertEquals(EnoAddResponseTimeSection.RESPONSE_TIME_FORMAT, question.getFormat());
+        assertEquals(EnoAddResponseTimeSection.RESPONSE_TIME_MIN_VALUE, question.getMinValue());
+        assertEquals(EnoAddResponseTimeSection.RESPONSE_TIME_MAX_VALUE, question.getMaxValue());
+        assertEquals(EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_MANDATORY, question.isMandatory());
+        assertNotNull(question.getResponse());
+        assertEquals(EnoAddResponseTimeSection.RESPONSE_TIME_VARIABLE_NAME, question.getResponse().getVariableName());
+
+        assertTrue(enoQuestionnaire.getVariables().stream()
+                .anyMatch(variable -> EnoAddResponseTimeSection.RESPONSE_TIME_VARIABLE_NAME.equals(variable.getName())));
+    }
+
+    @Test
+    void responseTimeQuestionLabelArrowPrefix() {
         // Given + When
         EnoQuestionnaire enoQuestionnaire = applyResponseTimeQuestionStep(
                 true, EnoParameters.QuestionNumberingMode.NONE, null);
         // Then
-        Optional<NumericQuestion> hoursQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
-                .filter(NumericQuestion.class::isInstance)
-                .map(NumericQuestion.class::cast)
-                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.HOURS_QUESTION_ID.equals(singleResponseQuestion.getId()))
+        Optional<DurationQuestion> responseTimeQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(DurationQuestion.class::isInstance)
+                .map(DurationQuestion.class::cast)
+                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_ID.equals(singleResponseQuestion.getId()))
                 .findAny();
-        assertTrue(hoursQuestion.isPresent());
+        assertTrue(responseTimeQuestion.isPresent());
         String expected = "\"➡ \" || " + EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_LABEL;
-        assertEquals(expected, hoursQuestion.get().getLabel().getValue());
+        assertEquals(expected, responseTimeQuestion.get().getLabel().getValue());
     }
 
     @Test
-    void hoursQuestionLabel_arrowAndNumberPrefix() {
+    void responseTimeQuestionLabelArrowAndNumberPrefix() {
         // Given + When
         EnoQuestionnaire enoQuestionnaire = applyResponseTimeQuestionStep(
                 true, EnoParameters.QuestionNumberingMode.SEQUENCE, null);
         // Then
-        Optional<NumericQuestion> hoursQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
-                .filter(NumericQuestion.class::isInstance)
-                .map(NumericQuestion.class::cast)
-                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.HOURS_QUESTION_ID.equals(singleResponseQuestion.getId()))
+        Optional<DurationQuestion> responseTimeQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(DurationQuestion.class::isInstance)
+                .map(DurationQuestion.class::cast)
+                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_ID.equals(singleResponseQuestion.getId()))
                 .findAny();
-        assertTrue(hoursQuestion.isPresent());
+        assertTrue(responseTimeQuestion.isPresent());
         String expected = "\"➡ 1. \" || " + EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_LABEL;
-        assertEquals(expected, hoursQuestion.get().getLabel().getValue());
+        assertEquals(expected, responseTimeQuestion.get().getLabel().getValue());
     }
 
     @Test
-    void hoursQuestionLabel_numberPrefix_lunaticFormat() {
+    void responseTimeQuestionLabelNumberPrefixLunaticFormat() {
         // Given + When
         EnoQuestionnaire enoQuestionnaire = applyResponseTimeQuestionStep(
                 true, EnoParameters.QuestionNumberingMode.SEQUENCE, Format.LUNATIC);
         // Then
-        Optional<NumericQuestion> hoursQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
-                .filter(NumericQuestion.class::isInstance)
-                .map(NumericQuestion.class::cast)
-                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.HOURS_QUESTION_ID.equals(singleResponseQuestion.getId()))
+        Optional<DurationQuestion> responseTimeQuestion = enoQuestionnaire.getSingleResponseQuestions().stream()
+                .filter(DurationQuestion.class::isInstance)
+                .map(DurationQuestion.class::cast)
+                .filter(singleResponseQuestion -> EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_ID.equals(singleResponseQuestion.getId()))
                 .findAny();
-        assertTrue(hoursQuestion.isPresent());
+        assertTrue(responseTimeQuestion.isPresent());
         String expected = "\"➡ 1\\. \" || " + EnoAddResponseTimeSection.RESPONSE_TIME_QUESTION_LABEL;
-        assertEquals(expected, hoursQuestion.get().getLabel().getValue());
+        assertEquals(expected, responseTimeQuestion.get().getLabel().getValue());
     }
 
     private static EnoQuestionnaire applyResponseTimeQuestionStep(boolean arrowCharInQuestions,
@@ -122,7 +140,7 @@ class EnoAddResponseTimeSectionTest {
     }
 
     @Test
-    void integrationTest_lunaticOutput() throws DDIParsingException {
+    void integrationTestLunaticOutput() throws DDIParsingException {
         //
         EnoParameters enoParameters = EnoParameters.of(
                 EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC);
