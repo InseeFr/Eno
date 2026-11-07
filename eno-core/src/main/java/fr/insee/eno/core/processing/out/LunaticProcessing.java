@@ -62,6 +62,7 @@ public class LunaticProcessing {
                 .then(new LunaticReverseConsistencyControlLabel())
                 .then(new LunaticFinalizePairwise(enoQuestionnaire))
                 .thenIf(lunaticParameters.isFilterResult(), new LunaticFilterResult(enoIndex))
+                .then(new LunaticFilterVariablesDependencies(enoIndex))
                 .then(new LunaticShapeFrom())
                 .then(new LunaticHierarchyShapeFrom(enoQuestionnaire))
                 .thenIf(enoParameters.getModeParameter().equals(EnoParameters.ModeParameter.CAWI), new LunaticSequenceDescription())
