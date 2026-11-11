@@ -25,7 +25,7 @@
 
     <properties>
         <!-- Eno version -->
-        <revision>3.67.0</revision> <!-- version only managed with git tags -->
+        <revision>3.67.1</revision> <!-- version only managed with git tags -->
         <!-- Java version -->
         <java.version>25</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
