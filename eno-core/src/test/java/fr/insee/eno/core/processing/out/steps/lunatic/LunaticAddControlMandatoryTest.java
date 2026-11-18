@@ -15,11 +15,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LunaticAddControlMandatoryTest {
 
+    private static final String FOO_VAR = "FOO_VAR";
+    private static final String INPUT_ID = "input-id";
+    private static final String SUGGESTER_ID = "suggester-id";
+    private static final String CHECKBOX_GROUP_ID = "checkboxGroup-id";
+    private static final String MANDATORY_CHECK_SUFFIX = "-mandatory-check";
+    private static final String MANDATORY_MESSAGE_FR = "La réponse à cette question est obligatoire.";
+    private static final String FOO_VAR_TEXT_EXPRESSION = "not(trim(nvl(FOO_VAR, \"\")) = \"\")";
+
     private Questionnaire lunaticQuestionnaire;
 
     @BeforeEach
     void createLunaticQuestionnaire() {
         lunaticQuestionnaire = new Questionnaire();
+    }
+
+    /** Helper method for the integration tests to get the component of a question by index. */
+    private static ComponentType getComponentAtIndex(Questionnaire lunaticQuestionnaire, int index) {
+        Question lunaticQuestion = (Question) lunaticQuestionnaire.getComponents().get(index);
+        return lunaticQuestion.getComponents().getFirst();
     }
 
     @Test
@@ -40,23 +54,23 @@ class LunaticAddControlMandatoryTest {
     void shortTextComponent() {
         //
         Input lunaticInput = new Input();
-        lunaticInput.setId("input-id");
+        lunaticInput.setId(INPUT_ID);
         lunaticInput.setMandatory(true);
         lunaticInput.setResponse(new ResponseType());
-        lunaticInput.getResponse().setName("FOO_VAR");
+        lunaticInput.getResponse().setName(FOO_VAR);
         lunaticQuestionnaire.getComponents().add(lunaticInput);
         //
         new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
         //
         assertEquals(1, lunaticInput.getControls().size());
         ControlType mandatoryControl = lunaticInput.getControls().getFirst();
-        assertEquals("input-id-mandatory-check", mandatoryControl.getId());
+        assertEquals(INPUT_ID + MANDATORY_CHECK_SUFFIX, mandatoryControl.getId());
         assertEquals(ControlContextType.SIMPLE, mandatoryControl.getType());
         assertEquals(ControlTypeEnum.MANDATORY, mandatoryControl.getTypeOfControl());
         assertEquals(ControlCriticalityEnum.ERROR, mandatoryControl.getCriticality());
-        assertEquals("not(trim(nvl(FOO_VAR, \"\")) = \"\")", mandatoryControl.getControl().getValue());
+        assertEquals(FOO_VAR_TEXT_EXPRESSION, mandatoryControl.getControl().getValue());
         assertEquals(LabelTypeEnum.VTL, mandatoryControl.getControl().getType());
-        assertEquals("La réponse à cette question est obligatoire.", mandatoryControl.getErrorMessage().getValue());
+        assertEquals(MANDATORY_MESSAGE_FR, mandatoryControl.getErrorMessage().getValue());
         assertEquals(LabelTypeEnum.TXT, mandatoryControl.getErrorMessage().getType());
     }
 
@@ -68,7 +82,7 @@ class LunaticAddControlMandatoryTest {
         lunaticInputNumber.setId("input-number-id");
         lunaticInputNumber.setMandatory(true);
         lunaticInputNumber.setResponse(new ResponseType());
-        lunaticInputNumber.getResponse().setName("FOO_VAR");
+        lunaticInputNumber.getResponse().setName(FOO_VAR);
         lunaticQuestionnaire.getComponents().add(lunaticInputNumber);
         //
         new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
@@ -82,10 +96,10 @@ class LunaticAddControlMandatoryTest {
     void i18nErrorMessage() {
         //
         Input lunaticInput = new Input();
-        lunaticInput.setId("input-id");
+        lunaticInput.setId(INPUT_ID);
         lunaticInput.setMandatory(true);
         lunaticInput.setResponse(new ResponseType());
-        lunaticInput.getResponse().setName("FOO_VAR");
+        lunaticInput.getResponse().setName(FOO_VAR);
         lunaticQuestionnaire.getComponents().add(lunaticInput);
         //
         new LunaticAddControlMandatory(EnoParameters.Language.EN).apply(lunaticQuestionnaire);
@@ -105,21 +119,77 @@ class LunaticAddControlMandatoryTest {
         assertEquals(1, checkboxGroup.getControls().size());
         ControlType control = checkboxGroup.getControls().getFirst();
 
-        assertEquals("checkboxGroup-id-mandatory-check", control.getId());
+        assertEquals(CHECKBOX_GROUP_ID + MANDATORY_CHECK_SUFFIX, control.getId());
         assertEquals(ControlTypeEnum.MANDATORY, control.getTypeOfControl());
         assertEquals(ControlCriticalityEnum.ERROR, control.getCriticality());
         assertEquals(LabelTypeEnum.VTL, control.getControl().getType());
         assertEquals(LabelTypeEnum.TXT, control.getErrorMessage().getType());
-        assertEquals("La réponse à cette question est obligatoire.", control.getErrorMessage().getValue());
+        assertEquals(MANDATORY_MESSAGE_FR, control.getErrorMessage().getValue());
         assertEquals(
                 "not(nvl(CHOICE_1, false) = false and nvl(CHOICE_2, false) = false and nvl(CHOICE_3, false) = false)",
                 control.getControl().getValue()
         );
     }
 
+    @Test
+    @DisplayName("Suggester mandatory control.")
+    void suggesterComponent() {
+        //
+        Suggester suggester = new Suggester();
+        suggester.setId(SUGGESTER_ID);
+        suggester.setMandatory(true);
+        suggester.setResponse(new ResponseType());
+        suggester.getResponse().setName(FOO_VAR);
+        lunaticQuestionnaire.getComponents().add(suggester);
+        //
+        new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
+        //
+        assertEquals(1, suggester.getControls().size());
+        ControlType mandatoryControl = suggester.getControls().getFirst();
+        assertEquals(SUGGESTER_ID + MANDATORY_CHECK_SUFFIX, mandatoryControl.getId());
+        assertEquals(FOO_VAR_TEXT_EXPRESSION, mandatoryControl.getControl().getValue());
+    }
+
+    @Test
+    @DisplayName("Suggester with arbitrary response mandatory control.")
+    void suggesterWithArbitraryComponent() {
+        //
+        Suggester suggester = new Suggester();
+        suggester.setId(SUGGESTER_ID);
+        suggester.setMandatory(true);
+        suggester.setResponse(new ResponseType());
+        suggester.getResponse().setName(FOO_VAR);
+        ArbitraryType arbitrary = new ArbitraryType();
+        arbitrary.setResponse(new ResponseType());
+        arbitrary.getResponse().setName("FOO_ARBITRARY");
+        suggester.setArbitrary(arbitrary);
+        lunaticQuestionnaire.getComponents().add(suggester);
+        //
+        new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
+        //
+        assertEquals(
+                "not(trim(nvl(FOO_VAR, \"\")) = \"\" and trim(nvl(FOO_ARBITRARY, \"\")) = \"\")",
+                suggester.getControls().getFirst().getControl().getValue());
+    }
+
+    @Test
+    @DisplayName("Non mandatory suggester.")
+    void nonMandatorySuggester() {
+        //
+        Suggester suggester = new Suggester();
+        suggester.setMandatory(false);
+        suggester.setResponse(new ResponseType());
+        suggester.getResponse().setName(FOO_VAR);
+        lunaticQuestionnaire.getComponents().add(suggester);
+        //
+        new LunaticAddControlMandatory().apply(lunaticQuestionnaire);
+        //
+        assertTrue(suggester.getControls().isEmpty());
+    }
+
     private static CheckboxGroup createCheckboxGroup() {
         CheckboxGroup checkboxGroup = new CheckboxGroup();
-        checkboxGroup.setId("checkboxGroup-id");
+        checkboxGroup.setId(CHECKBOX_GROUP_ID);
         checkboxGroup.setMandatory(true);
 
         ResponseCheckboxGroup responseCheckboxGroup1 = new ResponseCheckboxGroup();
@@ -158,14 +228,9 @@ class LunaticAddControlMandatoryTest {
         }
 
         /** Helper method for the following tests to get a simple response component by index. */
-        private static ComponentSimpleResponseType getResponseComponentAtIndex(Questionnaire lunaticQuestionnaire, int index) {
-            Question lunaticQuestion = (Question) lunaticQuestionnaire.getComponents().get(index);
-            return (ComponentSimpleResponseType) lunaticQuestion.getComponents().getFirst();
-        }
-        /** Second method with return typed as a Lunatic component object. */
-        private static ComponentType getComponentAtIndex(Questionnaire lunaticQuestionnaire, int index) {
-            Question lunaticQuestion = (Question) lunaticQuestionnaire.getComponents().get(index);
-            return lunaticQuestion.getComponents().getFirst();
+        private static ComponentSimpleResponseType getResponseComponentAtIndex(
+                Questionnaire lunaticQuestionnaire, int index) {
+            return (ComponentSimpleResponseType) getComponentAtIndex(lunaticQuestionnaire, index);
         }
 
         // Note:
@@ -187,7 +252,7 @@ class LunaticAddControlMandatoryTest {
             List.of(1,3,4,5,6,7,8,10).forEach(index -> {
                 // Mandatory control is expected to be the first in the list
                 ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
-                assertTrue(mandatoryControl.getId().contains("-mandatory-check"));
+                assertTrue(mandatoryControl.getId().contains(MANDATORY_CHECK_SUFFIX));
             });
         }
 
@@ -231,10 +296,10 @@ class LunaticAddControlMandatoryTest {
         }
 
         @Test
-        void mandatoryControlsMessage_defaultLanguage() {
+        void mandatoryControlsMessageDefaultLanguage() {
             List.of(1,3,4,5,6,7,8,10).forEach(index -> {
                 ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
-                assertEquals("La réponse à cette question est obligatoire.", mandatoryControl.getErrorMessage().getValue());
+                assertEquals(MANDATORY_MESSAGE_FR, mandatoryControl.getErrorMessage().getValue());
                 assertEquals(LabelTypeEnum.TXT, mandatoryControl.getErrorMessage().getType());
             });
         }
@@ -249,7 +314,7 @@ class LunaticAddControlMandatoryTest {
 
             assertEquals(1, checkboxGroup.getControls().size());
             ControlType mandatoryControl = checkboxGroup.getControls().getFirst();
-            assertTrue(mandatoryControl.getId().contains("-mandatory-check"));
+            assertTrue(mandatoryControl.getId().contains(MANDATORY_CHECK_SUFFIX));
             assertEquals(ControlContextType.SIMPLE, mandatoryControl.getType());
             assertEquals(ControlTypeEnum.MANDATORY, mandatoryControl.getTypeOfControl());
             assertEquals(ControlCriticalityEnum.ERROR, mandatoryControl.getCriticality());
@@ -266,6 +331,69 @@ class LunaticAddControlMandatoryTest {
                         "and nvl(MCQ_MANDATORY_DETAIL3, false) = false)";
                 assertEquals(expectedExpression, mandatoryControl.getControl().getValue());
             }
+        }
+
+    }
+
+    @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class SuggesterIntegrationTest {
+
+        private Questionnaire lunaticQuestionnaire;
+
+        @BeforeAll
+        void poguesPlusDDIMapping() throws ParsingException {
+            ClassLoader classLoader = LunaticAddControlMandatoryTest.class.getClassLoader();
+            lunaticQuestionnaire = PoguesDDIToLunatic.fromInputStreams(
+                            classLoader.getResourceAsStream("integration/pogues/pogues-suggester-mandatory.json"),
+                            classLoader.getResourceAsStream("integration/ddi/ddi-suggester-mandatory.xml"))
+                    .transform(EnoParameters.of(
+                            EnoParameters.Context.DEFAULT, EnoParameters.ModeParameter.CAWI, Format.LUNATIC));
+        }
+
+        @Test
+        void mandatoryControlsId() {
+            List.of(1, 2).forEach(index -> {
+                ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
+                assertTrue(mandatoryControl.getId().contains(MANDATORY_CHECK_SUFFIX));
+            });
+        }
+
+        @Test
+        void mandatoryControlsTypology() {
+            List.of(1, 2).forEach(index -> {
+                ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
+                assertEquals(ControlContextType.SIMPLE, mandatoryControl.getType());
+                assertEquals(ControlTypeEnum.MANDATORY, mandatoryControl.getTypeOfControl());
+                assertEquals(ControlCriticalityEnum.ERROR, mandatoryControl.getCriticality());
+            });
+        }
+
+        @Test
+        void mandatoryControlsExpression() {
+            // Without arbitrary response
+            assertEquals("not(trim(nvl(COUNTRY, \"\")) = \"\")",
+                    getComponentAtIndex(lunaticQuestionnaire, 1).getControls().getFirst().getControl().getValue());
+            // With arbitrary response
+            assertEquals("not(trim(nvl(ACTIVITY, \"\")) = \"\" and trim(nvl(ACTIVITY_ARBITRARY, \"\")) = \"\")",
+                    getComponentAtIndex(lunaticQuestionnaire, 2).getControls().getFirst().getControl().getValue());
+        }
+
+        @Test
+        void mandatoryControlsExpressionType() {
+            List.of(1, 2).forEach(index -> {
+                ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
+                assertEquals(LabelTypeEnum.VTL, mandatoryControl.getControl().getType());
+            });
+        }
+
+        @Test
+        void mandatoryControlsMessageDefaultLanguage() {
+            List.of(1, 2).forEach(index -> {
+                ControlType mandatoryControl = getComponentAtIndex(lunaticQuestionnaire, index).getControls().getFirst();
+                assertEquals(MANDATORY_MESSAGE_FR, mandatoryControl.getErrorMessage().getValue());
+                assertEquals(LabelTypeEnum.TXT, mandatoryControl.getErrorMessage().getType());
+            });
         }
 
     }

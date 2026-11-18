@@ -101,8 +101,20 @@ public class LunaticAddControlMandatory implements ProcessingStep<Questionnaire>
                 yield Optional.of(String.format("not(%s)", joined));
             }
 
+            case SUGGESTER -> {
+                Suggester suggester = (Suggester) lunaticComponent;
+                String listVar = suggester.getResponse().getName();
+                ArbitraryType arbitrary = suggester.getArbitrary();
+                if (arbitrary == null || arbitrary.getResponse() == null) {
+                    yield Optional.of(String.format("not(trim(nvl(%s, \"\")) = \"\")", listVar));
+                }
+                String freeVar = arbitrary.getResponse().getName();
+                yield Optional.of(String.format(
+                        "not(trim(nvl(%s, \"\")) = \"\" and trim(nvl(%s, \"\")) = \"\")", listVar, freeVar));
+            }
+
             case QUESTIONNAIRE, SEQUENCE, SUBSEQUENCE, QUESTION, ROSTER_FOR_LOOP, LOOP, ROUNDABOUT,
-                 TABLE, PAIRWISE_LINKS, SUGGESTER, TEXT, FILTER_DESCRIPTION, ACCORDION ->
+                 TABLE, PAIRWISE_LINKS, TEXT, FILTER_DESCRIPTION, ACCORDION ->
                     Optional.empty();
         };
     }
